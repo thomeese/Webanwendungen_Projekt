@@ -1,0 +1,7 @@
+{
+  "name": "TrainSmarter",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
