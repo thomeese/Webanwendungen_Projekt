@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
-
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validator, Validators} from '@angular/forms';
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-login',
@@ -8,10 +8,52 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  public appPages = [
+    {title: 'Inbox', url: '/pages/Inbox', icon: 'mail'},
+    {title: 'Login', url: '/pages/login/', icon: 'mail'},
+    {title: 'Outbox', url: '/pages/Outbox', icon: 'paper-plane'},
+    {title: 'Favorites', url: '/pages/Favorites', icon: 'heart'},
+    {title: 'Archived', url: '/pages/Archived', icon: 'archive'},
+    {title: 'Trash', url: '/pages/Trash', icon: 'trash'},
+    {title: 'Spam', url: '/pages/Spam', icon: 'warning'},
+  ];
+  user: FormGroup;
+  register = false;
 
-  constructor() { }
+  constructor(
+    private formbuilder: FormBuilder,
+    private authService: AuthenticationService
+  ) {
+  }
+
+   async signIn() {
+    const loggedInUser = await this.authService.signIn(this.user.value);
+  }
+
+  async signUp() {
+    const loggedInUser = await this.authService.signUp(this.user.value);
+  }
 
   ngOnInit() {
+    this.user = this.formbuilder.group({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required,
+        //mind. 1 Großbuchstaben, 1 Kleinbuchstaben, mind. 8 Zeichen und mind. 1 Sonderzeichen, mind. 1 Zahl
+        Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,32}$')]),
+      password2: new FormControl('', [Validators.required])},
+    {
+      validator:this.isEquals('password', 'password2')});
+  }
+  private isEquals(string1: any, string2: any) {
+    return (checkForm: FormGroup) => {
+      const value1 = checkForm.controls[string1];
+      const value2 = checkForm.controls[string2];
+      if (value1.value === value2.value) {
+        return value2.setErrors(null);
+      } else {
+        return value2.setErrors({notEquivalent: true});
+      }
+    };
   }
 
 }

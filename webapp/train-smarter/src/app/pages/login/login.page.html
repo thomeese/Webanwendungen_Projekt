@@ -9,6 +9,53 @@
 
 
 <ion-content>
- <ion-text>Willkommen in der Trainingsapp.</ion-text>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="ion-text-center">
+    <ion-text color="danger">
+      <h2>Willkommen in der Trainingsapp</h2>
+    </ion-text>
+  </div>
+  <div class="content">
+      <form [formGroup]="user" (submit)="signIn()" *ngIf="!register">
+        <ion-item>
+          <ion-label>Email:</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password:</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-button type="submit">Anmelden</ion-button>
+          <ion-item *ngIf="!register">
+            <pre> oder einen Account anlegen </pre>
+            <pre></pre>
+            <ion-button class="ion-margin-horizontal"  (click)="this.register=true"> Registrieren</ion-button>
+          </ion-item>
+        </ion-item>
+      </form>
+      <form [formGroup]="user" (submit)="signUp()" *ngIf="register">
+        <ion-item>
+          <ion-label>Email:</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password:</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password wiederholen:</ion-label>
+          <ion-input type="password" formControlName="password2"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-button type="submit">Registrieren</ion-button>
+          <ion-button class="" slot="end" type="button" (click)="this.register=false">Abbrechen</ion-button>
+        </ion-item>
+      </form>
+  </div>
 </ion-content>
 
