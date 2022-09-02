@@ -31,11 +31,7 @@
       </ion-item>
       <ion-item>
         <ion-button type="submit" [disabled]="!user.valid">Anmelden</ion-button>
-        <ion-item *ngIf="!register">
-          <pre> oder einen Account anlegen </pre>
-          <pre></pre>
-          <ion-button class="ion-margin-horizontal" (click)="this.register=true"> Registrieren</ion-button>
-        </ion-item>
+          <ion-button *ngIf="!register" slot="end" class="ion-margin-horizontal" (click)="this.register=true"> Registrieren</ion-button>
       </ion-item>
     </form>
     <form [formGroup]="registerData" (submit)="signUp()" *ngIf="register">

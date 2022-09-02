@@ -13,4 +13,21 @@
       <ion-title size="large">Exercise</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Wähle den Filter" ng-model="searchTypeSelected">
+        <ion-select-option  *ngFor="let search of enumSearchTypeKeys" [value]="search">{{searchTypes[search]}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="Wähle aus.">
+        <ion-select-option  *ngFor="let search of enumSearchTypeKeys" ng-if="searchTypeSelected === searchTypes.bodyPart" [value]="search">{{searchTypes[search]}}</ion-select-option>
+        <option ng-repeat="target in enumTargetKeys" ng-if="searchTypeSelected === province.city.province_id" value="target">{{targetType[target]}}</option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-button class="search">Suchen</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

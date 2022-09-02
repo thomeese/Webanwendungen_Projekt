@@ -1,27 +1,2 @@
-ion-content {
-  --padding-top: 20%;
-  --padding-start: 20%;
-  --padding-end: 20%;
-}
 
-.content {
-  background: #000000;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 15px;
-}
 
-.errors {
-  font-size: small;
-  color: #fff;
-  background: var(--ion-color-danger);
-  padding-left: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.cancle{
-  display:block;
-  float:right;
-  width:85%;
-}

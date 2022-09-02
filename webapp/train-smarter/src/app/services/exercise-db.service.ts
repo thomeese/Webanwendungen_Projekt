@@ -4,8 +4,13 @@ import {LoadingController} from "@ionic/angular";
 import {Observable} from "rxjs";
 
 //Exercise Enum
-export enum SearchType {
-  exercise = '/exercise',
+export enum SearchTypes {
+  exercisesList = 'Alle Uebungen',
+  bodyPart = 'Nach Körperteil',
+  bodyPartList = 'Nach Muskelgruppe',
+  exerciseByID = 'Nach Equipment'
+
+  /*exercise = '/exercise',
   exercisesList = '',
   bodyPart = '/bodyPart',
   bodyPartList = '/bodyPartList',
@@ -13,8 +18,71 @@ export enum SearchType {
   targetMuscle = '/target',
   targetMuscleList = '/targetList',
   equipment = '/equipment',
-  equipmentList = '/equipmentList'
+  equipmentList = '/equipmentList'*/
 }
+export enum Muscles {
+  abductors = 'abductors',
+  abs = 'abs',
+  adductors = 'adductors',
+  biceps = 'biceps',
+  calves = 'calves',
+  cardiovascularSystem = 'cardiovascular system',
+  delts = 'delts',
+  forearms = 'forearms',
+  glutes = 'glutes',
+  hamstrings = 'hamstrings',
+  lats = 'lats',
+  levatorScapulae = 'levator scapulae',
+  pectorals = 'pectorals',
+  quads = 'quads',
+  serratusAnterior = 'serratus anterior',
+  spine = 'spine',
+  traps = 'traps',
+  triceps = 'triceps',
+  upperBack = 'upper back'
+}
+export enum BodyParts {
+  back = 'back',
+  cardio = 'cardio',
+  chest = 'chest',
+  lowerArms = 'lower arms',
+  lowerLegs = 'lower legs',
+  neck = 'neck',
+  shoulders = 'shoulders',
+  upperArms = 'upper arms',
+  upperLegs = 'upper legs',
+  waist = 'waist'
+}
+export enum Equipment {
+  assisted = 'assisted',
+  band = 'band',
+  barbell = 'barbell',
+  bodyWeight ='body weight',
+  bosuBall ='bosu ball',
+  cable = 'cable',
+  dumbbell = 'dumbbell',
+  ellipticalMachine = 'elliptical machine',
+  ezBarbel = 'ez barbell',
+  hammer = 'hammer',
+  kettlebell = 'kettlebell',
+  leverageMachine = 'leverage machine',
+  medicineBall = 'medicine ball',
+  olympicBarbel = 'olympic barbell',
+  resistanceBand = 'resistance band',
+  roller = 'roller',
+  rope = 'rope',
+  skiergMachine = 'skierg machine',
+  sledMachine = 'sled machine',
+  smithMachine = 'smith machine',
+  stabilityBall = 'stability ball',
+  stationaryBike = 'stationary bike',
+  stepmillMachine = 'stepmill machine',
+  tire = 'tire',
+  trapBar = 'trap bar',
+  upperBodyEergometer = 'upper body ergometer',
+  eighted = 'weighted',
+  wheelRoller = 'wheel roller'
+ }
 
 export interface Exercise {
   bodyPart: string;
@@ -37,7 +105,7 @@ export class ExerciseDBService {
   });
   constructor(private http: HttpClient, private loadingCtr: LoadingController) {}
 
-  getData(type: SearchType, target?): Observable<any> {
+  getData(type: SearchTypes, target?): Observable<any> {
     if(typeof target === undefined) {
       return this.http.get<any>(`${this.url}${type}`, {headers: this.headers});
     }
