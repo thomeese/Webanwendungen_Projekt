@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
       firstname: data.firstname,
       surname: data.surname,
       birthdate: data.birthdate,
-      size: data.size,
+      size: data.size.replace(',','.'),
       email: data.email
     };
     await this.dataService.addUser(newUser);
@@ -80,16 +80,14 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.user = this.formbuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required,
-        //mind. 1 Großbuchstaben, 1 Kleinbuchstaben, mind. 8 Zeichen und mind. 1 Sonderzeichen, mind. 1 Zahl
-        Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,32}$')]),
+      password: new FormControl('', []),
     });
     const docDate = new Date();
     this.registerData = this.formbuilder.group({
-        firstname: new FormControl('', []),
-        surname: new FormControl('', []),
+        firstname: new FormControl('', [Validators.required,Validators.pattern('^[a-zA-Z][a-zA-Z .,\'-]*$')]),
+        surname: new FormControl('', [Validators.required,Validators.pattern('^[a-zA-Z][a-zA-Z .,\'-äÄßüÜ]*$')]),
         birthdate: new FormControl(new Date(docDate).toISOString().slice(0, -1)),
-        size: new FormControl('', []),
+        size: new FormControl('', [Validators.required,Validators.pattern('[1-2]{1}[.,]{1}[0-9]{2}')]),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required,
           //mind. 1 Großbuchstaben, 1 Kleinbuchstaben, mind. 8 Zeichen und mind. 1 Sonderzeichen, mind. 1 Zahl
