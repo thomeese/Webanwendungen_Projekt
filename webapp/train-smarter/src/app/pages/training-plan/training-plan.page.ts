@@ -18,8 +18,8 @@ export class TrainingPlanPage implements OnInit {
 
   ngOnInit() {
     this.trainingform = this.formbuilder.group({
-      name: new FormControl('',[Validators.required, Validators.minLength(5)]),
-      description: new FormControl('',[Validators.required, Validators.minLength(15)])
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(30)])
     });
   }
 

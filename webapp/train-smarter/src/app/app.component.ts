@@ -9,9 +9,9 @@ import {AuthenticationService} from './services/authentication.service';
 })
 export class AppComponent {
   public appPages = [
-    {title: 'home', url: 'home', icon: 'paper-plane'},
+    {title: 'home', url: 'home', icon: 'home'},
     {title: 'live-training', url: 'live-training', icon: 'heart'},
-    {title: 'analytics', url: 'analytics', icon: 'archive'},
+    {title: 'analytics', url: 'analytics', icon: 'analytics'},
     {title: 'training-plan', url: 'training-plan', icon: 'document'},
     {title: 'exercise', url: 'exercise', icon: 'warning'},
   ];
@@ -24,7 +24,7 @@ export class AppComponent {
 
   async signOut() {
     await this.authService.signOut();
-    this.router.navigateByUrl('/login',{replaceUrl: true});
+    await this.router.navigateByUrl('/login', {replaceUrl: true});
     document.location.reload();
   }
 }

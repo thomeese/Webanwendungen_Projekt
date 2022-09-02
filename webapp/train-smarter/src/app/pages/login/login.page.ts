@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validator, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 import {Router} from '@angular/router';
@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
       firstname: data.firstname,
       surname: data.surname,
       birthdate: data.birthdate,
-      size: data.size.replace(',','.'),
+      size: data.size.replace(',', '.'),
       email: data.email
     };
     await this.dataService.addUser(newUser);
@@ -78,10 +78,10 @@ export class LoginPage implements OnInit {
     });
     const docDate = new Date();
     this.registerData = this.formbuilder.group({
-        firstname: new FormControl('', [Validators.required,Validators.pattern('^[a-zA-Z][a-zA-Z .,\'-]*$')]),
-        surname: new FormControl('', [Validators.required,Validators.pattern('^[a-zA-Z][a-zA-Z .,\'-äÄßüÜ]*$')]),
+        firstname: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z .,\'-]*$')]),
+        surname: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z .,\'-äÄßüÜ]*$')]),
         birthdate: new FormControl(new Date(docDate).toISOString().slice(0, -1)),
-        size: new FormControl('', [Validators.required,Validators.pattern('[1-2]{1}[.,]{1}[0-9]{2}')]),
+        size: new FormControl('', [Validators.required, Validators.pattern('[1-2]{1}[.,]{1}[0-9]{2}')]),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required,
           //mind. 1 Großbuchstaben, 1 Kleinbuchstaben, mind. 8 Zeichen und mind. 1 Sonderzeichen, mind. 1 Zahl

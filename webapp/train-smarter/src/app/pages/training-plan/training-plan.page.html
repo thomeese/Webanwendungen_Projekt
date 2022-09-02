@@ -25,15 +25,25 @@
         <ion-toolbar>
           <ion-title>Neuer Trainingsplan</ion-title>
           <ion-buttons slot="end">
-            <ion-button ><ion-icon name="close-circle"></ion-icon></ion-button>
+            <ion-button>
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-item>
-          <ion-label position="stacked">Name des Plans</ion-label>
-          <ion-input ty></ion-input>
-        </ion-item>
+        <form [formGroup]="trainingform">
+          <ion-item>
+            <ion-label position="stacked">Name des Plans</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+            <ion-note slot="error" *ngIf="trainingform.dirty">Feld Name darf nicht leer sein.</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Was bewirkt der Plan</ion-label>
+            <ion-input type="text" formControlName="description"></ion-input>
+            <ion-note slot="error" *ngIf="trainingform.dirty">Feld Beschreibung darf nicht leer sein.</ion-note>
+          </ion-item>
+        </form>
       </ion-content>
     </ng-template>
   </ion-modal>
