@@ -16,14 +16,23 @@
 
   <ion-list>
     <ion-item>
-      <ion-select placeholder="Wähle den Filter" ng-model="searchTypeSelected">
+      <ion-select placeholder="Wähle den Filter" [(ngModel)]="searchTypeSelected">
         <ion-select-option  *ngFor="let search of enumSearchTypeKeys" [value]="search">{{searchTypes[search]}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+      <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
+        <ion-select placeholder="Wähle aus.">
+          <ion-select-option  *ngFor="let bodyPart of enumBodyPartKeys" [value]="bodyPart">{{bodyparts[bodyPart]}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
       <ion-select placeholder="Wähle aus.">
-        <ion-select-option  *ngFor="let search of enumSearchTypeKeys" ng-if="searchTypeSelected === searchTypes.bodyPart" [value]="search">{{searchTypes[search]}}</ion-select-option>
-        <option ng-repeat="target in enumTargetKeys" ng-if="searchTypeSelected === province.city.province_id" value="target">{{targetType[target]}}</option>
+        <ion-select-option  *ngFor="let muscle of enumMuscleKeys" [value]="muscle">{{bodyparts[muscle]}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[3]"> <!-- By Equipment selected -->
+      <ion-select placeholder="Wähle aus.">
+        <ion-select-option  *ngFor="let equipment of enumEquipmentKeys" [value]="equipment">{{bodyparts[equipment]}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>

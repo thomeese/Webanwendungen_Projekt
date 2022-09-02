@@ -8,7 +8,7 @@ import {LoadingController} from "@ionic/angular";
   styleUrls: ['./exercise.page.scss'],
 })
 export class ExercisePage implements OnInit {
-  searchTypeSelected = null;
+
   searchTypes = SearchTypes;
   muscles = Muscles;
   bodyparts = BodyParts;
@@ -17,16 +17,18 @@ export class ExercisePage implements OnInit {
   enumMuscleKeys= [];
   enumBodyPartKeys= [];
   enumEquipmentKeys= [];
+  searchTypeSelected = null;
   constructor(private exerciseDBService: ExerciseDBService, private loadingCtr: LoadingController) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
     this.enumEquipmentKeys = Object.keys(this.equipment);
+    this.searchTypeSelected = this.enumSearchTypeKeys[1];
   }
 
 
   ngOnInit() {
-    this.loadData();
+    console.log(this.searchTypes.bodyPart === this.searchTypes.bodyPart);
   }
 
   async loadData(target?) {
