@@ -32,7 +32,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <form [formGroup]="trainingform">
+        <form [formGroup]="trainingform" (submit)="addTrainingsPlan()">
           <ion-item>
             <ion-label position="stacked">Name des Plans</ion-label>
             <ion-input type="text" formControlName="name"></ion-input>

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import firebase from 'firebase/compat';
-import {Auth, signInWithEmailAndPassword, signOut} from '@angular/fire/auth';
+import {Auth, signInWithEmailAndPassword, signOut, user} from '@angular/fire/auth';
 import {createUserWithEmailAndPassword} from '@angular/fire/auth';
 import {ActivatedRouteSnapshot, Router} from '@angular/router';
 
@@ -9,6 +9,7 @@ import {ActivatedRouteSnapshot, Router} from '@angular/router';
 })
 export class AuthenticationService {
   isAuthetificated;
+  user;
 
   constructor(
     private auth: Auth,
@@ -16,17 +17,18 @@ export class AuthenticationService {
   ) {
     this.isAuthetificated = false;
   }
+
   async signUp(email, password) {
     try {
-      const user = await createUserWithEmailAndPassword(
+      this.user = await createUserWithEmailAndPassword(
         this.auth,
         email,
         password
       );
-      if (user) {
+      if (this.user) {
         this.isAuthetificated = true;
       }
-      return user;
+      return this.user;
     } catch (ex) {
       return null;
     }
@@ -34,15 +36,15 @@ export class AuthenticationService {
 
   async signIn({email, password}) {
     try {
-      const user = await signInWithEmailAndPassword(
+      this.user = await signInWithEmailAndPassword(
         this.auth,
         email,
         password
       );
-      if (user) {
+      if (this.user) {
         this.isAuthetificated = true;
       }
-      return user;
+      return this.user;
     } catch (ex) {
       return null;
     }
@@ -50,6 +52,10 @@ export class AuthenticationService {
 
   signOut(): Promise<void> {
     return signOut(this.auth);
+  }
+
+  getEmail() {
+    return this.user.user.email;
   }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {

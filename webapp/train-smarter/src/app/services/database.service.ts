@@ -7,9 +7,10 @@ import {
   doc,
   docData,
   Firestore,
-  updateDoc
+  updateDoc, where
 } from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
+import {query} from '@angular/fire/database';
 
 export interface UserData {
   userId?: string;
@@ -59,6 +60,15 @@ export class DatabaseService {
   }
 
   getUserByEmail(mail: string): Observable<UserData> {
+   // const userRef = collection(this.firestore, 'userData');
+    //const hfeufhe = userRef.query('mail',mail).get();
+    //console.log(hfeufhe);
+   // const d = query(collection(this.firestore),'userData'),);
+    //const tmp = collectionData(userRef, {idField: 'userId'});
+   // console.log(tmp);
+    const querry = collection(this.firestore, 'userData');
+    const q = query(querry, where('email', '==', mail));
+    console.log(q);
     const userDocRef = doc(this.firestore, `userData/${mail}`);
     return docData(userDocRef, {idField: 'userId'}) as Observable<UserData>;
   }
