@@ -66,8 +66,9 @@ export class DatabaseService {
    // const d = query(collection(this.firestore),'userData'),);
     //const tmp = collectionData(userRef, {idField: 'userId'});
    // console.log(tmp);
-    const querry = collection(this.firestore, 'userData');
-    const q = query(querry, where('email', '==', mail));
+    const ref = collection(this.firestore, 'userData');
+    // @ts-ignore
+    const q = query(ref, where('email', '==', 'manuelarling04@outlook.de'));
     console.log(q);
     const userDocRef = doc(this.firestore, `userData/${mail}`);
     return docData(userDocRef, {idField: 'userId'}) as Observable<UserData>;

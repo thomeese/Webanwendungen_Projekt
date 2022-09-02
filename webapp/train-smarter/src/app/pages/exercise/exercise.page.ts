@@ -14,7 +14,10 @@ import {LoadingController} from "@ionic/angular";
   templateUrl: './exercise.page.html',
   styleUrls: ['./exercise.page.scss'],
 })
+
 export class ExercisePage implements OnInit {
+  exercises = [];
+
   searchTypes = SearchTypesToString;
   muscles = MusclesToString;
   bodyparts = BodyPartsToString;
@@ -54,21 +57,24 @@ export class ExercisePage implements OnInit {
       spinner: 'bubbles',
     });
     await loading.present();
-    loading.dismiss();
 
     if (this.searchTypeSelected === this.enumSearchTypeKeys[3]) { // with ID
-
       this.exerciseDBService.getData(this.searchTypeSelected, this.exerciseID).subscribe((result) => {
         console.log(result);
+        this.exercises = result;
       });
     } else if (this.searchTypeSelected === this.enumSearchTypeKeys[0]) { // All Exercises
       this.exerciseDBService.getData(this.searchTypeSelected).subscribe((result) => {
         console.log(result);
+        this.exercises = result;
+
       });
     } else  { // with Target
       this.exerciseDBService.getData(this.searchTypeSelected, this.targetSelected).subscribe((result) => {
         console.log(result);
+        this.exercises = result;
       });
     }
+    loading.dismiss();
   }
 }

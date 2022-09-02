@@ -31,6 +31,18 @@ const routes: Routes = [
     path: 'live-training',
     loadChildren: () => import('./pages/live-training/live-training.module').then(m => m.LiveTrainingPageModule),
     canActivate: [AuthenticationService]
+  },
+  {
+    path: 'training-plan-detail',
+    loadChildren: () => import('./pages/training-plan-detail/training-plan-detail.module').then( m => m.TrainingPlanDetailPageModule)
+  },
+  {
+    path: 'exercise-detail',
+    loadChildren: () => import('./pages/exercise-detail/exercise-detail.module').then( m => m.ExerciseDetailPageModule)
+  },
+  {
+    path: 'exercise-logging',
+    loadChildren: () => import('./pages/exercise-logging/exercise-logging.module').then( m => m.ExerciseLoggingPageModule)
   }
 ];
 

@@ -34,9 +34,15 @@
     <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[3]">
       <ion-input placeholder="Geben Sie die ID ein." [(ngModel)]="exerciseID"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-button class="search" type="button" (click)="loadData()">Suchen</ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item button *ngFor="let exercise of exercises">
+      <ion-label>{{exercise.name}}</ion-label>
+      <ion-img [src]="exercise.gifUrl" alt="Exercise GIF">
+      </ion-img>
     </ion-item>
   </ion-list>
 </ion-content>
