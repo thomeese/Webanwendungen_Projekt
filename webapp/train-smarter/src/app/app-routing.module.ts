@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {canActivate} from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = (path) => redirectUnauthorizedToLogin(['']);
 const redirectLoggedInToHome = (path) => redirectLoggedInToHome(['home']);
