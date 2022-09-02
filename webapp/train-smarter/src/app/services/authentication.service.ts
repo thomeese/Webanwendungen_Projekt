@@ -11,7 +11,7 @@ export class AuthenticationService {
   constructor(private auth: Auth) {
   }
 
-  async signUp({email, password}) {
+  async signUp(email, password) {
     try {
       const user = await createUserWithEmailAndPassword(
         this.auth,

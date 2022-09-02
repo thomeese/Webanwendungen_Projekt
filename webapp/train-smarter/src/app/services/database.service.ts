@@ -14,7 +14,7 @@ import {Observable} from 'rxjs';
 export interface UserData {
   userId?: string;
   firstname: string;
-  sirname: string;
+  surname: string;
   birthdate: string;
   size: number;
   email: string;
@@ -45,7 +45,7 @@ export class DatabaseService {
 
   updateUser(user: UserData) {
     const userDocRef = doc(this.firestore, `userData/${user.userId}`);
-    return updateDoc(userDocRef,{firstname: user.firstname, sirname: user.sirname,
+    return updateDoc(userDocRef,{firstname: user.firstname, surname: user.surname,
       birthdate: user.birthdate, size: user.size, email: user.email});
   }
 

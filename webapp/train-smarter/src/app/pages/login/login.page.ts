@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validator, Validators} from '@angul
 import {AuthenticationService} from "../../services/authentication.service";
 import {AlertController, LoadingController} from "@ionic/angular";
 import {Router} from "@angular/router";
+import {DatabaseService, UserData} from "../../services/database.service";
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginPage implements OnInit {
     {title: 'Spam', url: '/pages/Spam', icon: 'warning'},
   ];
   user: FormGroup;
+  registerData: FormGroup;
   register = false;
 
   constructor(
@@ -27,7 +29,8 @@ export class LoginPage implements OnInit {
     private authService: AuthenticationService,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private dataService: DatabaseService
   ) {
   }
 
@@ -48,9 +51,17 @@ export class LoginPage implements OnInit {
   async signUp() {
     const loading = await this.loadingController.create();
     await loading.present();
-    const loggedInUser = await this.authService.signUp(this.user.value);
+    const data = this.registerData.getRawValue();
+    const loggedInUser = await this.authService.signUp(data.email, data.password);
+    const newUser: UserData = {
+      firstname: data.firstname,
+      surname: data.surname,
+      birthdate: data.birthdate,
+      size: data.size,
+      email: data.email
+    };
+    await this.dataService.addUser(newUser);
     await loading.dismiss();
-
     if (loggedInUser) {
       //Url noch setzen
       this.router.navigateByUrl('', {replaceUrl: true});
@@ -70,6 +81,17 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.user = this.formbuilder.group({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required,
+        //mind. 1 Großbuchstaben, 1 Kleinbuchstaben, mind. 8 Zeichen und mind. 1 Sonderzeichen, mind. 1 Zahl
+        Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,32}$')]),
+    });
+    const docDate = new Date()
+    this.registerData = this.formbuilder.group({
+        firstname: new FormControl('', []),
+        surname: new FormControl('', []),
+        birthdate: new FormControl(new Date(docDate).toISOString().slice(0, -1)),
+        size: new FormControl('', []),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required,
           //mind. 1 Großbuchstaben, 1 Kleinbuchstaben, mind. 8 Zeichen und mind. 1 Sonderzeichen, mind. 1 Zahl
