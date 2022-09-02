@@ -11,15 +11,6 @@ import {DatabaseService, UserData} from '../../services/database.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  public appPages = [
-    {title: 'Inbox', url: '/pages/Inbox', icon: 'mail'},
-    {title: 'Login', url: '/pages/login/', icon: 'mail'},
-    {title: 'Outbox', url: '/pages/Outbox', icon: 'paper-plane'},
-    {title: 'Favorites', url: '/pages/Favorites', icon: 'heart'},
-    {title: 'Archived', url: '/pages/Archived', icon: 'archive'},
-    {title: 'Trash', url: '/pages/Trash', icon: 'trash'},
-    {title: 'Spam', url: '/pages/Spam', icon: 'warning'},
-  ];
   user: FormGroup;
   registerData: FormGroup;
   register = false;
