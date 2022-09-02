@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validator, Validators} from '@angular/forms';
-import {AuthenticationService} from "../../services/authentication.service";
-import {AlertController, LoadingController} from "@ionic/angular";
-import {Router} from "@angular/router";
-import {DatabaseService, UserData} from "../../services/database.service";
+import {AuthenticationService} from '../../services/authentication.service';
+import {AlertController, LoadingController} from '@ionic/angular';
+import {Router} from '@angular/router';
+import {DatabaseService, UserData} from '../../services/database.service';
 
 @Component({
   selector: 'app-login',
@@ -41,8 +41,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (loggedInUser) {
-      //Url noch setzen
-      this.router.navigateByUrl('', {replaceUrl: true});
+      this.router.navigateByUrl('/home', {replaceUrl: true});
     } else {
       this.displayAlert('Anmeldung fehlgeschlagen', 'Bitte versuchen sie es Erneut');
     }
@@ -63,8 +62,7 @@ export class LoginPage implements OnInit {
     await this.dataService.addUser(newUser);
     await loading.dismiss();
     if (loggedInUser) {
-      //Url noch setzen
-      this.router.navigateByUrl('', {replaceUrl: true});
+      this.router.navigateByUrl('/home', {replaceUrl: true});
     } else {
       this.displayAlert('Registrierung fehlgeschlagen', 'Bitte versuchen sie es Erneut');
     }
@@ -86,7 +84,7 @@ export class LoginPage implements OnInit {
         //mind. 1 Großbuchstaben, 1 Kleinbuchstaben, mind. 8 Zeichen und mind. 1 Sonderzeichen, mind. 1 Zahl
         Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,32}$')]),
     });
-    const docDate = new Date()
+    const docDate = new Date();
     this.registerData = this.formbuilder.group({
         firstname: new FormControl('', []),
         surname: new FormControl('', []),
