@@ -117,3 +117,9 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+ion-app{
+  margin-top: env(safe-area-inset-top);
+  margin-bottom: env(safe-area-inset-bottom)
+}
+
