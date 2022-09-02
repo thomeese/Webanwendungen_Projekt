@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BodyParts, Equipment, ExerciseDBService, Muscles, SearchTypes} from "../../services/exercise-db.service";
 import {LoadingController} from "@ionic/angular";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-exercise',
@@ -8,7 +9,6 @@ import {LoadingController} from "@ionic/angular";
   styleUrls: ['./exercise.page.scss'],
 })
 export class ExercisePage implements OnInit {
-
   searchTypes = SearchTypes;
   muscles = Muscles;
   bodyparts = BodyParts;
@@ -18,12 +18,12 @@ export class ExercisePage implements OnInit {
   enumBodyPartKeys= [];
   enumEquipmentKeys= [];
   searchTypeSelected = null;
+  targetTypeSelected = null;
   constructor(private exerciseDBService: ExerciseDBService, private loadingCtr: LoadingController) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
     this.enumEquipmentKeys = Object.keys(this.equipment);
-    this.searchTypeSelected = this.enumSearchTypeKeys[1];
   }
 
 
