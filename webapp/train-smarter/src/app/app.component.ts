@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -6,12 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'login', url: 'login', icon: 'mail' },
     { title: 'home', url: 'home', icon: 'paper-plane' },
     { title: 'live-training', url: 'live-training', icon: 'heart' },
     { title: 'analytics', url: 'analytics', icon: 'archive' },
     { title: 'training-plan', url: 'training-plan', icon: 'trash' },
     { title: 'exercise', url: 'exercise', icon: 'warning' },
   ];
-  constructor() {}
+  constructor(private router: Router) {}
 }
