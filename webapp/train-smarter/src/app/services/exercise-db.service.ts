@@ -4,13 +4,14 @@ import {LoadingController} from "@ionic/angular";
 import {Observable} from "rxjs";
 
 //Exercise Enum
-export enum SearchTypes {
+export enum SearchTypesToString {
   exercisesList = 'Alle Uebungen',
   bodyPart = 'Nach Körperteil',
   bodyPartList = 'Nach Muskelgruppe',
-  exerciseByID = 'Nach Equipment'
-
-  /*exercise = '/exercise',
+  equipment = 'Nach Equipment'
+}
+export enum SearchTypes {
+  exercise = '/exercise',
   exercisesList = '',
   bodyPart = '/bodyPart',
   bodyPartList = '/bodyPartList',
@@ -18,7 +19,7 @@ export enum SearchTypes {
   targetMuscle = '/target',
   targetMuscleList = '/targetList',
   equipment = '/equipment',
-  equipmentList = '/equipmentList'*/
+  equipmentList = '/equipmentList'
 }
 export enum Muscles {
   abductors = 'abductors',
@@ -105,10 +106,10 @@ export class ExerciseDBService {
   });
   constructor(private http: HttpClient, private loadingCtr: LoadingController) {}
 
-  getData(type: SearchTypes, target?): Observable<any> {
-    if(typeof target === undefined) {
-      return this.http.get<any>(`${this.url}${type}`, {headers: this.headers});
+  getData(type: SearchTypesToString, target?): Observable<any> {
+    if(typeof target === 'undefined') {
+      return this.http.get<any>(`${this.url}${SearchTypes[type]}`, {headers: this.headers});
     }
-    return this.http.get<any>(`${this.url}${type}/${target}`, {headers: this.headers});
+    return this.http.get<any>(`${this.url}${SearchTypes[type]}/${target}`, {headers: this.headers});
   }
 }
