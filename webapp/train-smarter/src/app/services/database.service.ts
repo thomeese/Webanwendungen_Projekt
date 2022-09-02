@@ -54,26 +54,6 @@ export class DatabaseService {
     return collectionData(userRef, {idField: 'userId'}) as Observable<UserData []>;
   }
 
-  getUserById(id: string): Observable<UserData> {
-    const userDocRef = doc(this.firestore, `userData/${id}`);
-    return docData(userDocRef, {idField: 'userId'}) as Observable<UserData>;
-  }
-
-  getUserByEmail(mail: string): Observable<UserData> {
-   // const userRef = collection(this.firestore, 'userData');
-    //const hfeufhe = userRef.query('mail',mail).get();
-    //console.log(hfeufhe);
-   // const d = query(collection(this.firestore),'userData'),);
-    //const tmp = collectionData(userRef, {idField: 'userId'});
-   // console.log(tmp);
-    const ref = collection(this.firestore, 'userData');
-    // @ts-ignore
-    const q = query(ref, where('email', '==', 'manuelarling04@outlook.de'));
-    console.log(q);
-    const userDocRef = doc(this.firestore, `userData/${mail}`);
-    return docData(userDocRef, {idField: 'userId'}) as Observable<UserData>;
-  }
-
   addUser(user: UserData) {
     const userRef = collection(this.firestore, 'userData');
     return addDoc(userRef, user);
@@ -107,6 +87,11 @@ export class DatabaseService {
     return deleteDoc(trainingPlanDocRef);
   }
 
+  getTrainingsPlan(): Observable<any[]> {
+    const trainingPlanRef = collection(this.firestore, 'trainingPlan');
+    return collectionData(trainingPlanRef, {idField: 'userId'}) as Observable<any []>;
+  }
+
   addExercise(exercise: Excersise) {
     const exerciseRef = collection(this.firestore, 'exercises');
     return addDoc(exerciseRef, exercise);
@@ -125,7 +110,7 @@ export class DatabaseService {
     return deleteDoc(exerciseDocRef);
   }
 
-  addSetLogging(setLogging: SetLogging){
+  addSetLogging(setLogging: SetLogging) {
     const setLoggingRef = collection(this.firestore, 'setLogging');
     return addDoc(setLoggingRef, setLogging);
   }
