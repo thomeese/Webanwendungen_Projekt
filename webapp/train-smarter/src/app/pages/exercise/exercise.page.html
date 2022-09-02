@@ -27,7 +27,7 @@
           <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
             <ion-select-option  *ngFor="let musc of enumMuscleKeys" [value]="musc">{{muscles[musc]}}</ion-select-option>
           </ion-item>
-          <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[3]"> <!-- By Equipment selected -->
+          <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[4]"> <!-- By Equipment selected -->
             <ion-select-option  *ngFor="let equip of enumEquipmentKeys" [value]="equip">{{equipment[equip]}}</ion-select-option>
           </ion-item>
         </ion-select>

@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import { IonModal } from '@ionic/angular';
 import {DatabaseService} from '../../services/database.service';
+import { OverlayEventDetail } from '@ionic/core/components';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -8,6 +10,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./training-plan.page.scss'],
 })
 export class TrainingPlanPage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
   trainingform: FormGroup;
 
   constructor(
@@ -23,4 +26,15 @@ export class TrainingPlanPage implements OnInit {
     });
   }
 
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(null, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+  }
 }

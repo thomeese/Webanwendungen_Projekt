@@ -19,13 +19,13 @@
   <ion-item>
     <ion-button id="trigger-btn-trainingModal"><ion-icon name="add-circle"></ion-icon> Trainingsplan Hinzufügen</ion-button>
   </ion-item>
-  <ion-modal trigger="trigger-btn-trainingModal">
+  <ion-modal trigger="trigger-btn-trainingModal" (willDismiss)="onWillDismiss($event)">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title>Neuer Trainingsplan</ion-title>
           <ion-buttons slot="end">
-            <ion-button>
+            <ion-button (click)="cancel()">
               <ion-icon name="close-circle"></ion-icon>
             </ion-button>
           </ion-buttons>
@@ -44,7 +44,7 @@
             <ion-note slot="error" *ngIf="trainingform.dirty">Feld Beschreibung darf nicht leer sein.</ion-note>
           </ion-item>
           <ion-item>
-            <ion-button type="submit" [disabled]="this.trainingform.invalid">Trainingsplan Speichern</ion-button>
+            <ion-button type="submit" (click)="confirm()" [disabled]="this.trainingform.invalid">Trainingsplan Speichern</ion-button>
           </ion-item>
         </form>
       </ion-content>
@@ -52,6 +52,5 @@
   </ion-modal>
 </ion-content>
 
-<
 
 

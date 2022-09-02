@@ -7,9 +7,8 @@ import {Observable} from "rxjs";
 export enum SearchTypesToString {
   exercisesList = 'Alle Uebungen',
   bodyPart = 'Nach Körperteil',
-  bodyPartList = 'Nach Muskelgruppe',
+  targetMuscle = 'Nach Muskelgruppe',
   exerciseByID = 'Nach ÜbungsID',
-  targetMuscle = '/target',
   equipment = 'Nach Equipment'
 }
 export enum SearchTypes {

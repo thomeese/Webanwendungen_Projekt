@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BodyParts, Equipment, ExerciseDBService, Muscles, SearchTypesToString} from "../../services/exercise-db.service";
 import {LoadingController} from "@ionic/angular";
-import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-exercise',
