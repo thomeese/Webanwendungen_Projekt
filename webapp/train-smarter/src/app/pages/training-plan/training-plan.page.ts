@@ -14,6 +14,7 @@ import {Observable} from 'rxjs';
 export class TrainingPlanPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   trainingform: FormGroup;
+  trainingPlanList = [];
 
   constructor(
     private dataServise: DatabaseService,
@@ -28,24 +29,35 @@ export class TrainingPlanPage implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       description: new FormControl('', [Validators.required, Validators.minLength(30)])
     });
+    this.dataServise.getTrainingsPlan().subscribe(res => {
+      this.trainingPlanList = res;
+    });
   }
 
-  async addTrainingsPlan() {
-    this.dataServise.getUserByEmail(this.authService.getEmail()).subscribe(res => {
-      console.log(res);
-      const user = res;
-      console.log(user);
+  async submitData() {
+    let user = null;
+    this.dataServise.getUserData().subscribe(response => {
+      response.forEach(async userDoc => {
+        if (userDoc.email === this.authService.getEmail()) {
+          console.log(userDoc);
+          user = userDoc;
+          await this.addTrainingsPlan(user);
+        }
+      });
     });
+  }
+
+  async addTrainingsPlan(user) {
     const formData = this.trainingform.getRawValue();
     const plan = {
-      userId: 2142,
+      userId: user.userId,
       name: formData.name,
       description: formData.description
     };
     const loading = await this.loadingController.create();
     await loading.present();
-    const doc = await this.dataServise.addTrainingPlan(plan);
-    await loading.dismiss;
+    await this.dataServise.addTrainingPlan(plan);
+    await loading.dismiss();
   }
 
   cancel() {

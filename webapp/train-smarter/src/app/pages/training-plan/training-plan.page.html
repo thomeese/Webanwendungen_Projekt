@@ -13,11 +13,22 @@
       <ion-title size="large">Trainingspläne</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-list>
-    <ion-list-header>Pläne</ion-list-header>
-  </ion-list>
+  <ion-grid>
+    <ion-row>
+        <ion-col>Name</ion-col>
+        <ion-col>Beschreibung</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let plan of trainingPlanList">
+      <ion-col>{{plan.name}}</ion-col>
+      <ion-col>{{plan.description}}</ion-col>
+    </ion-row>
+
+  </ion-grid>
   <ion-item>
-    <ion-button id="trigger-btn-trainingModal"><ion-icon name="add-circle"></ion-icon> Trainingsplan Hinzufügen</ion-button>
+    <ion-button id="trigger-btn-trainingModal">
+      <ion-icon name="add-circle"></ion-icon>
+      Trainingsplan Hinzufügen
+    </ion-button>
   </ion-item>
   <ion-modal trigger="trigger-btn-trainingModal" (willDismiss)="onWillDismiss($event)">
     <ng-template>
@@ -32,7 +43,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <form [formGroup]="trainingform" (submit)="addTrainingsPlan()">
+        <form [formGroup]="trainingform" (submit)="submitData()">
           <ion-item>
             <ion-label position="stacked">Name des Plans</ion-label>
             <ion-input type="text" formControlName="name"></ion-input>
@@ -44,7 +55,9 @@
             <ion-note slot="error" *ngIf="trainingform.dirty">Feld Beschreibung darf nicht leer sein.</ion-note>
           </ion-item>
           <ion-item>
-            <ion-button type="submit" (click)="confirm()" [disabled]="this.trainingform.invalid">Trainingsplan Speichern</ion-button>
+            <ion-button type="submit" (click)="confirm()" [disabled]="this.trainingform.invalid">Trainingsplan
+              Speichern
+            </ion-button>
           </ion-item>
         </form>
       </ion-content>
