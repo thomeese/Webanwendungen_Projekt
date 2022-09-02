@@ -19,23 +19,22 @@ export class ExercisePage implements OnInit {
   enumEquipmentKeys = [];
   searchTypeSelected = null;
   targetSelected = null;
+  exerciseID = null;
 
   constructor(private exerciseDBService: ExerciseDBService, private loadingCtr: LoadingController) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
     this.enumEquipmentKeys = Object.keys(this.equipment);
+    this.searchTypeSelected = this.enumSearchTypeKeys[0];
   }
-
 
   ngOnInit() {
   }
 
-
   async loadData() {
-
-      console.log('LoadData gestartet');
-      console.log(this.searchTypeSelected);
+    console.log('LoadData gestartet');
+    console.log(this.searchTypeSelected);
     console.log(this.enumSearchTypeKeys[0]);
       const loading = await this.loadingCtr.create({
         message: 'Loading..',
@@ -53,7 +52,6 @@ export class ExercisePage implements OnInit {
           console.log(result);
         });
       }
-
   }
 
   test(){

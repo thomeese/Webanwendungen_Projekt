@@ -31,6 +31,7 @@
             <ion-select-option  *ngFor="let equip of enumEquipmentKeys" [value]="equip">{{equipment[equip]}}</ion-select-option>
           </ion-item>
         </ion-select>
+      <ion-input *ngIf="searchTypeSelected !== enumSearchTypeKeys[4]" placeholder="Geben Sie die ID ein." [(ngModel)]="exerciseID"></ion-input>
     <ion-item>
       <ion-button class="search" type="button" (click)="test()">Suchen</ion-button>
     </ion-item>

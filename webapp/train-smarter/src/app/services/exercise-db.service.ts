@@ -8,6 +8,8 @@ export enum SearchTypesToString {
   exercisesList = 'Alle Uebungen',
   bodyPart = 'Nach Körperteil',
   bodyPartList = 'Nach Muskelgruppe',
+  exerciseByID = 'Nach ÜbungsID',
+  targetMuscle = '/target',
   equipment = 'Nach Equipment'
 }
 export enum SearchTypes {
