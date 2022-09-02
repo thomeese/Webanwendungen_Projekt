@@ -16,12 +16,35 @@ export enum SearchTypes {
   exercisesList = '',
   bodyPart = '/bodyPart',
   bodyPartList = '/bodyPartList',
-  exerciseByID = '/excerise',
+  exerciseByID = '/exercise',
   targetMuscle = '/target',
   targetMuscleList = '/targetList',
   equipment = '/equipment',
   equipmentList = '/equipmentList'
 }
+
+export enum MusclesToString {
+  abductors = 'Abduktoren',
+  abs = 'Bauchmuskeln',
+  adductors = 'Adduktoren',
+  biceps = 'Biceps',
+  calves = 'Waden',
+  cardiovascularSystem = 'Blutkreislauf',
+  delts = 'Deltas',
+  forearms = 'Unterarm',
+  glutes = 'Gluteus',
+  hamstrings = 'Oberschenkelmuskulatur',
+  lats = 'Latissimus',
+  levatorScapulae = 'Schulterblätter',
+  pectorals = 'Brustmuskeln',
+  quads = 'Quads',
+  serratusAnterior = 'vorderer Sägemuskel',
+  spine = 'Wirbelsäule',
+  traps = 'Trapezmuskel',
+  triceps = 'Triceps',
+  upperBack = 'Oberer Rücken'
+}
+
 export enum Muscles {
   abductors = 'abductors',
   abs = 'abs',
@@ -43,6 +66,20 @@ export enum Muscles {
   triceps = 'triceps',
   upperBack = 'upper back'
 }
+
+export enum BodyPartsToString {
+  back = 'Rücken',
+  cardio = 'Cardio',
+  chest = 'Brust',
+  lowerArms = 'Unterarm',
+  lowerLegs = 'Untere Beine',
+  neck = 'Nacken',
+  shoulders = 'Schultern',
+  upperArms = 'Obere Arme',
+  upperLegs = 'Oberer Beine',
+  waist = 'waist'
+}
+
 export enum BodyParts {
   back = 'back',
   cardio = 'cardio',
@@ -55,6 +92,38 @@ export enum BodyParts {
   upperLegs = 'upper legs',
   waist = 'waist'
 }
+
+export enum EquipmentToString {
+  assisted = 'unterstützt',
+  band = 'Band',
+  barbell = 'Langhantel',
+  bodyWeight ='body weight',
+  bosuBall ='BosuBall',
+  cable = 'Kabel',
+  dumbbell = 'Kurzhantel',
+  ellipticalMachine = 'elliptische Maschine',
+  ezBarbel = 'EZ Hantel',
+  hammer = 'Hammer',
+  kettlebell = 'Kettlebell',
+  leverageMachine = 'Hebelmaschine',
+  medicineBall = 'Medizinball',
+  olympicBarbel = 'olympische Langhantel',
+  resistanceBand = 'Widerstandsband',
+  roller = 'Rolle',
+  rope = 'Seil',
+  skiergMachine = 'SkiErg Maschine',
+  sledMachine = 'Sled Maschine',
+  smithMachine = 'Multipresse',
+  stabilityBall = 'Stabilitätsball',
+  stationaryBike = 'Fahrrad',
+  stepmillMachine = 'Stepmill Maschine',
+  tire = 'Reifen',
+  trapBar = 'Trap Bar',
+  upperBodyEergometer = 'Oberkörper-Ergometer',
+  weighted = 'gewichtet',
+  wheelRoller = 'AB Roller'
+}
+
 export enum Equipment {
   assisted = 'assisted',
   band = 'band',
@@ -82,7 +151,7 @@ export enum Equipment {
   tire = 'tire',
   trapBar = 'trap bar',
   upperBodyEergometer = 'upper body ergometer',
-  eighted = 'weighted',
+  weighted = 'weighted',
   wheelRoller = 'wheel roller'
  }
 
@@ -107,10 +176,10 @@ export class ExerciseDBService {
   });
   constructor(private http: HttpClient, private loadingCtr: LoadingController) {}
 
-  getData(type: SearchTypesToString, target?): Observable<any> {
+  getData(type, target?): Observable<any> {
     if(typeof target === 'undefined') {
       return this.http.get<any>(`${this.url}${SearchTypes[type]}`, {headers: this.headers});
     }
-    return this.http.get<any>(`${this.url}${SearchTypes[type]}/${target}`, {headers: this.headers});
-  }
+      return this.http.get<any>(`${this.url}${SearchTypes[type]}/${target}`, {headers: this.headers});
+    }
 }
