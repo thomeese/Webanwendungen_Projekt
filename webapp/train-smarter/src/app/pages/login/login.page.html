@@ -20,42 +20,66 @@
     </ion-text>
   </div>
   <div class="content">
-      <form [formGroup]="user" (submit)="signIn()" *ngIf="!register">
-        <ion-item>
-          <ion-label>Email:</ion-label>
-          <ion-input type="text" formControlName="email"></ion-input>
+    <form [formGroup]="user" (submit)="signIn()" *ngIf="!register">
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Passwort:</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button type="submit" [disabled]="!user.valid">Anmelden</ion-button>
+        <ion-item *ngIf="!register">
+          <pre> oder einen Account anlegen </pre>
+          <pre></pre>
+          <ion-button class="ion-margin-horizontal" (click)="this.register=true"> Registrieren</ion-button>
         </ion-item>
-        <ion-item>
-          <ion-label>Password:</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-button type="submit">Anmelden</ion-button>
-          <ion-item *ngIf="!register">
-            <pre> oder einen Account anlegen </pre>
-            <pre></pre>
-            <ion-button class="ion-margin-horizontal"  (click)="this.register=true"> Registrieren</ion-button>
-          </ion-item>
-        </ion-item>
-      </form>
-      <form [formGroup]="user" (submit)="signUp()" *ngIf="register">
-        <ion-item>
-          <ion-label>Email:</ion-label>
-          <ion-input type="text" formControlName="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Password:</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Password wiederholen:</ion-label>
-          <ion-input type="password" formControlName="password2"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-button type="submit">Registrieren</ion-button>
-          <ion-button class="" slot="end" type="button" (click)="this.register=false">Abbrechen</ion-button>
-        </ion-item>
-      </form>
+      </ion-item>
+    </form>
+    <form [formGroup]="registerData" (submit)="signUp()" *ngIf="register">
+      <ion-item>
+        <ion-label>Vorname:</ion-label>
+        <ion-input type="text" formControlName="firstname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nachname:</ion-label>
+        <ion-input type="text" formControlName="surname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Geburtsdatum:</ion-label>
+        <ion-datetime-button displayFormat="MM-DD-YYYY" datetime="datetime" ></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+              <ion-datetime  displayFormat="DD.MM.YYYY"
+                             presentation="date"
+                             id="datetime"
+                             formControlName="birthdate"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+      <ion-item>
+        <ion-label>Körpergröße:</ion-label>
+        <ion-input type="text" formControlName="size"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password:</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password wiederholen:</ion-label>
+        <ion-input type="password" formControlName="password2"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button type="submit" [disabled]="!registerData.valid">Registrieren</ion-button>
+        <ion-button class="" slot="end" type="button" (click)="this.register=false">Abbrechen</ion-button>
+      </ion-item>
+    </form>
   </div>
 </ion-content>
 
