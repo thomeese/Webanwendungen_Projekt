@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validator, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
-import {AlertController, LoadingController} from '@ionic/angular';
+import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {DatabaseService, UserData} from '../../services/database.service';
 
@@ -21,7 +21,8 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private alertController: AlertController,
     private router: Router,
-    private dataService: DatabaseService
+    private dataService: DatabaseService,
+    private menu: MenuController
   ) {
   }
 
@@ -33,8 +34,9 @@ export class LoginPage implements OnInit {
 
     if (loggedInUser) {
       this.router.navigateByUrl('/home', {replaceUrl: true});
+      this.menu.enable(true);
     } else {
-      this.displayAlert('Anmeldung fehlgeschlagen', 'Bitte versuchen sie es Erneut');
+      this.displayAlert('Anmeldung fehlgeschlagen', 'Bitte versuchen sie es erneut.');
     }
   }
 
@@ -54,6 +56,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
     if (loggedInUser) {
       this.router.navigateByUrl('/home', {replaceUrl: true});
+      this.menu.enable(true);
     } else {
       this.displayAlert('Registrierung fehlgeschlagen', 'Bitte versuchen sie es Erneut');
     }
@@ -88,6 +91,7 @@ export class LoginPage implements OnInit {
       {
         validator: this.isEquals('password', 'password2')
       });
+    this.menu.enable(false);
   }
 
   private isEquals(string1: any, string2: any) {

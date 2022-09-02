@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BodyParts, Equipment, ExerciseDBService, Muscles, SearchTypes} from "../../services/exercise-db.service";
+import { BodyParts, Equipment, ExerciseDBService, Muscles, SearchTypesToString} from "../../services/exercise-db.service";
 import {LoadingController} from "@ionic/angular";
 import {FormControl, FormGroup} from "@angular/forms";
 
@@ -9,16 +9,17 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./exercise.page.scss'],
 })
 export class ExercisePage implements OnInit {
-  searchTypes = SearchTypes;
+  searchTypes = SearchTypesToString;
   muscles = Muscles;
   bodyparts = BodyParts;
   equipment = Equipment;
-  enumSearchTypeKeys= [];
-  enumMuscleKeys= [];
-  enumBodyPartKeys= [];
-  enumEquipmentKeys= [];
+  enumSearchTypeKeys = [];
+  enumMuscleKeys = [];
+  enumBodyPartKeys = [];
+  enumEquipmentKeys = [];
   searchTypeSelected = null;
-  targetTypeSelected = null;
+  targetSelected = null;
+
   constructor(private exerciseDBService: ExerciseDBService, private loadingCtr: LoadingController) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
@@ -28,20 +29,38 @@ export class ExercisePage implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.searchTypes.bodyPart === this.searchTypes.bodyPart);
   }
 
-  async loadData(target?) {
-    const loading = await this.loadingCtr.create({
-      message: 'Loading..',
-      spinner: 'bubbles',
-    });
-    await loading.present();
-    loading.dismiss();
 
-    this.exerciseDBService.getData(SearchTypes.exercisesList).subscribe((result) => {
-      console.log(result);
-    });
+  async loadData() {
+
+      console.log('LoadData gestartet');
+      console.log(this.searchTypeSelected);
+    console.log(this.enumSearchTypeKeys[0]);
+      const loading = await this.loadingCtr.create({
+        message: 'Loading..',
+        spinner: 'bubbles',
+      });
+      await loading.present();
+      loading.dismiss();
+
+      if (this.searchTypeSelected !== this.enumSearchTypeKeys[0]) {
+        this.exerciseDBService.getData(this.searchTypeSelected, this.targetSelected).subscribe((result) => {
+          console.log(result);
+        });
+      } else {
+        this.exerciseDBService.getData(this.searchTypeSelected).subscribe((result) => {
+          console.log(result);
+        });
+      }
+
   }
 
+  test(){
+    if (typeof this.searchTypeSelected !== 'undefined') {
+      this.loadData();
+    } else {
+      setTimeout(this.test, 250);
+    }
+  }
 }

@@ -13,30 +13,26 @@
       <ion-title size="large">Exercise</ion-title>
     </ion-toolbar>
   </ion-header>
-
+  <ion-title>{{this.searchTypeSelected}}</ion-title>
   <ion-list>
     <ion-item>
       <ion-select placeholder="Wähle den Filter" [(ngModel)]="searchTypeSelected">
         <ion-select-option  *ngFor="let search of enumSearchTypeKeys" [value]="search">{{searchTypes[search]}}</ion-select-option>
       </ion-select>
     </ion-item>
-      <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
-        <ion-select placeholder="Wähle aus.">
+        <ion-select *ngIf="searchTypeSelected !== enumSearchTypeKeys[0]" placeholder="Wähle aus." [(ngModel)]="targetSelected">
+          <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
           <ion-select-option  *ngFor="let bodyPart of enumBodyPartKeys" [value]="bodyPart">{{bodyparts[bodyPart]}}</ion-select-option>
+          </ion-item>
+          <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
+            <ion-select-option  *ngFor="let musc of enumMuscleKeys" [value]="musc">{{muscles[musc]}}</ion-select-option>
+          </ion-item>
+          <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[3]"> <!-- By Equipment selected -->
+            <ion-select-option  *ngFor="let equip of enumEquipmentKeys" [value]="equip">{{equipment[equip]}}</ion-select-option>
+          </ion-item>
         </ion-select>
-      </ion-item>
-    <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
-      <ion-select placeholder="Wähle aus.">
-        <ion-select-option  *ngFor="let musc of enumMuscleKeys" [value]="musc">{{muscles[musc]}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[3]"> <!-- By Equipment selected -->
-      <ion-select placeholder="Wähle aus.">
-        <ion-select-option  *ngFor="let equip of enumEquipmentKeys" [value]="equip">{{equipment[equip]}}</ion-select-option>
-      </ion-select>
-    </ion-item>
     <ion-item>
-      <ion-button class="search">Suchen</ion-button>
+      <ion-button class="search" type="button" (click)="test()">Suchen</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
