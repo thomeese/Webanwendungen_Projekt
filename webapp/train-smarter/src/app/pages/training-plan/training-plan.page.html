@@ -43,6 +43,9 @@
             <ion-input type="text" formControlName="description"></ion-input>
             <ion-note slot="error" *ngIf="trainingform.dirty">Feld Beschreibung darf nicht leer sein.</ion-note>
           </ion-item>
+          <ion-item>
+            <ion-button type="submit" [disabled]="this.trainingform.invalid">Trainingsplan Speichern</ion-button>
+          </ion-item>
         </form>
       </ion-content>
     </ng-template>
