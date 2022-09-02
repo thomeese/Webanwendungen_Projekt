@@ -27,12 +27,12 @@
       </ion-item>
     <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
       <ion-select placeholder="Wähle aus.">
-        <ion-select-option  *ngFor="let muscle of enumMuscleKeys" [value]="muscle">{{bodyparts[muscle]}}</ion-select-option>
+        <ion-select-option  *ngFor="let musc of enumMuscleKeys" [value]="musc">{{muscles[musc]}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[3]"> <!-- By Equipment selected -->
       <ion-select placeholder="Wähle aus.">
-        <ion-select-option  *ngFor="let equipment of enumEquipmentKeys" [value]="equipment">{{bodyparts[equipment]}}</ion-select-option>
+        <ion-select-option  *ngFor="let equip of enumEquipmentKeys" [value]="equip">{{equipment[equip]}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
