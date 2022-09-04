@@ -10,10 +10,10 @@ import {
   updateDoc, where
 } from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
-import {query} from '@angular/fire/database';
 
 export interface UserData {
   userId?: string;
+  loginId: string;
   firstname: string;
   surname: string;
   birthdate: string;
@@ -46,12 +46,18 @@ export interface SetLogging {
 })
 export class DatabaseService {
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore,
+  ) {
   }
 
   getUserData(): Observable<UserData[]> {
     const userRef = collection(this.firestore, 'userData');
     return collectionData(userRef, {idField: 'userId'}) as Observable<UserData []>;
+  }
+
+  getUserDataById(id: string): Observable<UserData> {
+    const userDocRef = doc(this.firestore, `userData/${id}`);
+    return docData(userDocRef, {idField: 'userId'}) as Observable<UserData>;
   }
 
   addUser(user: UserData) {

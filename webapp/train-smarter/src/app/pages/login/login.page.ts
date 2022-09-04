@@ -11,7 +11,7 @@ import {DatabaseService, UserData} from '../../services/database.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  user: FormGroup;
+  userForm: FormGroup;
   registerData: FormGroup;
   register = false;
 
@@ -29,14 +29,14 @@ export class LoginPage implements OnInit {
   async signIn() {
     const loading = await this.loadingController.create();
     await loading.present();
-    const loggedInUser = await this.authService.signIn(this.user.value);
+    const loggedInUser = await this.authService.signIn(this.userForm.value);
     await loading.dismiss();
 
     if (loggedInUser) {
-      this.router.navigateByUrl('/home', {replaceUrl: true});
-      this.menu.enable(true);
+      await this.router.navigateByUrl('/home', {replaceUrl: true});
+      await this.menu.enable(true);
     } else {
-      this.displayAlert('Anmeldung fehlgeschlagen', 'Bitte versuchen sie es erneut.');
+      await this.displayAlert('Anmeldung fehlgeschlagen', 'Bitte versuchen sie es erneut.');
     }
   }
 
@@ -46,19 +46,20 @@ export class LoginPage implements OnInit {
     const data = this.registerData.getRawValue();
     const loggedInUser = await this.authService.signUp(data.email, data.password);
     const newUser: UserData = {
+      loginId: loggedInUser.user.uid,
       firstname: data.firstname,
       surname: data.surname,
       birthdate: data.birthdate,
       size: data.size.replace(',', '.'),
       email: data.email
     };
-    await this.dataService.addUser(newUser);
+    this.dataService.addUser(newUser);
     await loading.dismiss();
     if (loggedInUser) {
-      this.router.navigateByUrl('/home', {replaceUrl: true});
-      this.menu.enable(true);
+      await this.router.navigateByUrl('/home', {replaceUrl: true});
+      await this.menu.enable(true);
     } else {
-      this.displayAlert('Registrierung fehlgeschlagen', 'Bitte versuchen sie es Erneut');
+      await this.displayAlert('Registrierung fehlgeschlagen', 'Bitte versuchen sie es Erneut');
     }
   }
 
@@ -72,7 +73,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.formbuilder.group({
+    this.userForm = this.formbuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', []),
     });

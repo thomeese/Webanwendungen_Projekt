@@ -7,18 +7,18 @@
     </ion-text>
   </div>
   <div class="content">
-    <form [formGroup]="user" (submit)="signIn()" *ngIf="!register">
+    <form [formGroup]="userForm" (submit)="signIn()" *ngIf="!register">
       <ion-item>
         <ion-label>Email:</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
-        <ion-note slot="error" *ngIf = "user.dirty">Geben sie ein gültige Email-Adresse ein.</ion-note>
+        <ion-note slot="error" *ngIf = "userForm.dirty">Geben sie ein gültige Email-Adresse ein.</ion-note>
       </ion-item>
       <ion-item>
         <ion-label>Passwort:</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-button type="submit" [disabled]="!user.valid">Anmelden</ion-button>
+        <ion-button type="submit" [disabled]="!userForm.valid">Anmelden</ion-button>
           <ion-button *ngIf="!register" slot="end" class="ion-margin-horizontal" (click)="this.register=true"> Registrieren</ion-button>
       </ion-item>
     </form>

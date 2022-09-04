@@ -58,6 +58,10 @@ export class AuthenticationService {
     return this.user.user.email;
   }
 
+  getUserId() {
+    return this.user.user.uid;
+  }
+
   canActivate(route: ActivatedRouteSnapshot): boolean {
     console.log(route);
     if (!this.isAuthetificated) {
