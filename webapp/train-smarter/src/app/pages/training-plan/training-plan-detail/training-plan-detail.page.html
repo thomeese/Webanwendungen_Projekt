@@ -22,7 +22,7 @@
       <ion-icon name="add-circle"></ion-icon>
     </ion-button>
     <ion-list *ngFor="let exercise of this.exercises">
-      <ion-item button = "" routerDirection="forward" [routerLink]="'/exercise-logging/' + exercise.exerciseId" routerLinkActive="selected">{{exercise.name}}</ion-item>
+      <ion-item button = "" routerDirection="forward" [routerLink]="'/exercise/' + exercise.exerciseId" routerLinkActive="selected">{{exercise.name}}</ion-item>
     </ion-list>
   </ion-card-content>
 
