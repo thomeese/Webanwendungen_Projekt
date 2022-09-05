@@ -41,7 +41,7 @@
   </ion-list>
   <ion-list>
     <ion-item position="floating" button *ngFor="let exercise of exercises">
-      <ion-card routerDirection="forward" [routerLink]="'/exercise/' + exercise.exerciseId" routerLinkActive="selected">
+      <ion-card button="" (click)="this.exerciseDetailView(exercise.exerciseId)">
         <ion-card-header>
           <ion-card-title>{{exercise.name}}asdf</ion-card-title>
         </ion-card-header>

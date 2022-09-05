@@ -9,6 +9,7 @@ import {
 } from '../../services/exercise-db.service';
 import {LoadingController} from '@ionic/angular';
 import {DatabaseService, Excersise} from '../../services/database.service';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 
 @Component({
   selector: 'app-exercise',
@@ -34,10 +35,13 @@ export class ExercisePage implements OnInit {
   searchTypeSelected = null;
   targetSelected = null;
   exerciseID = null;
+  trainingPlanId;
 
   constructor(private exerciseDBService: ExerciseDBService,
               private loadingCtr: LoadingController,
-              private database: DatabaseService) {
+              private database: DatabaseService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
@@ -46,9 +50,24 @@ export class ExercisePage implements OnInit {
     this.enumBodyPartValues = Object.values(BodyParts);
     this.enumEquipmentValues = Object.values(Equipment);
     this.searchTypeSelected = this.enumSearchTypeKeys[0];
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
+        console.log(this.trainingPlanId);
+      }
+    });
   }
 
   ngOnInit() {
+  }
+
+  exerciseDetailView(id) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        trainingPlanId: this.trainingPlanId
+      }
+    };
+    this.router.navigateByUrl(`exercise/${id}`, navigationExtras);
   }
 
   async loadData() {
@@ -63,12 +82,12 @@ export class ExercisePage implements OnInit {
 
     if (this.searchTypeSelected === this.enumSearchTypeKeys[3]) { // with ID
       console.log(this.exerciseID.length);
-      if(this.exerciseID.length === 4){
+      if (this.exerciseID.length === 4) {
         this.database.getExerciseByNumericId(this.exerciseID).subscribe(result => {
           console.log(result);
           this.exercises = result;
         });
-      }else {
+      } else {
         console.log(this.exerciseID);
         this.database.getExerciseById(this.exerciseID).subscribe(result => {
           console.log(result);
