@@ -62,9 +62,10 @@ export class ExercisePage implements OnInit {
     await loading.present();
 
     if (this.searchTypeSelected === this.enumSearchTypeKeys[3]) { // with ID
-      this.database.getExerciseById(this.exerciseID).subscribe((result) => {
+      this.database.getExerciseById(this.exerciseID).subscribe(result => {
         console.log(result);
-        this.exercises = result;
+        this.exercises = [];
+        this.exercises.push(result);
       });
     } else if (this.searchTypeSelected === this.enumSearchTypeKeys[0]) { // All Exercises
       this.database.getAllExercises().subscribe(result => {
