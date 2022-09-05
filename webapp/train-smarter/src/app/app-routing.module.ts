@@ -37,8 +37,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/training-plan-detail/training-plan-detail.module').then( m => m.TrainingPlanDetailPageModule)
   },
   {
-    path: 'exercise-detail',
-    loadChildren: () => import('./pages/exercise-detail/exercise-detail.module').then( m => m.ExerciseDetailPageModule)
+    path: 'exercise/:id',
+    loadChildren: () => import('./pages/exercise/exercise-detail/exercise-detail.module').then(m => m.ExerciseDetailPageModule)
   },
   {
     path: 'exercise-logging',

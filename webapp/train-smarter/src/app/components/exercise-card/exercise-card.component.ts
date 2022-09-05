@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-exercise-card',
@@ -7,8 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExerciseCardComponent implements OnInit {
 
-  constructor() { }
+  @Input() gifUrl: string;
+  @Input() title: string;
+  @Input() id: string;
 
-  ngOnInit() {}
+  constructor() {
+    private router: Router
+  }
 
+  ngOnInit() {
+  }
+
+  details() {
+  }
 }

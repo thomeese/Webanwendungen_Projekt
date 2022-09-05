@@ -6,8 +6,8 @@ import {
   ExerciseDBService, Muscles,
   MusclesToString,
   SearchTypesToString
-} from "../../services/exercise-db.service";
-import {LoadingController} from "@ionic/angular";
+} from '../../services/exercise-db.service';
+import {LoadingController} from '@ionic/angular';
 
 @Component({
   selector: 'app-exercise',
@@ -75,6 +75,6 @@ export class ExercisePage implements OnInit {
         this.exercises = result;
       });
     }
-    loading.dismiss();
+    await loading.dismiss();
   }
 }

@@ -1,3 +1,6 @@
-<p>
-  exercise-card works!
-</p>
+<ion-card button (click)="details()">
+  <img [src]="gifUrl" alt="Exercise GIF"/>
+  <ion-card-header>
+    <ion-card-title>{{title}}</ion-card-title>
+  </ion-card-header>
+</ion-card>
