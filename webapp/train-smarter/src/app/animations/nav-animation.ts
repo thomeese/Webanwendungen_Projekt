@@ -1,21 +1,22 @@
-import {AnimationController, Animation, createAnimation} from '@ionic/angular';
+import {AnimationController, Animation} from '@ionic/angular';
 
 
 export const pageAnimation = (baseEL: HTMLElement, opts?: any): Animation => {
   const DURATION = 300;
 
+  const animationCtrl = new AnimationController();
   // root animation with common setup for the whole transition
-  const rootTransition = createAnimation()
+  const rootTransition = animationCtrl.create()
     .duration(opts.duration || DURATION)
     .easing('cubic-bezier(0.3,0,0.66,1)');
 
   // ensure that the entering page is visible from the start of the transition
-  const enteringPage = createAnimation()
+  const enteringPage = animationCtrl.create()
     .addElement(opts.enteringEl)
     .beforeRemoveClass('ion-page-invisible');
 
   // create animation for the leaving page
-  const leavingPage = createAnimation().addElement(opts.leavingEl);
+  const leavingPage = animationCtrl.create().addElement(opts.leavingEl);
 
   // actual customized animation
   if (opts.direction === 'forward') {

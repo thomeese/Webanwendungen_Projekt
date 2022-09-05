@@ -77,7 +77,7 @@ export enum BodyPartsToString {
   shoulders = 'Schultern',
   upperArms = 'Obere Arme',
   upperLegs = 'Oberer Beine',
-  waist = 'waist'
+  waist = 'Taille'
 }
 
 export enum BodyParts {
