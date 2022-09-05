@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {trigger, transition, animate, style, state} from '@angular/animations';
 import {LoadingController} from '@ionic/angular';
 import { Location } from '@angular/common';
+import {DatabaseService} from '../../../services/database.service';
 
 @Component({
   selector: 'app-exercise-detail',
@@ -16,7 +17,8 @@ export class ExerciseDetailPage implements OnInit {
   exercise;
   constructor(private exerciseDBService: ExerciseDBService, private route: ActivatedRoute,
               private loadingController: LoadingController,
-              private location: Location) {
+              private location: Location,
+              private database: DatabaseService) {
   }
 
   ngOnInit() {
@@ -25,7 +27,7 @@ export class ExerciseDetailPage implements OnInit {
   }
 
   async getExercise(){
-    await this.exerciseDBService.getExerciseByID(this.id).subscribe((result) => {
+    await this.database.getExerciseById(this.id).subscribe(result => {
       this.exercise = result;
       console.log(this.exercise);
     });
