@@ -10,7 +10,7 @@ import {ActivatedRouteSnapshot, Router} from '@angular/router';
 export class AuthenticationService {
   isAuthetificated;
   user;
-
+  userDocId;
   constructor(
     private auth: Auth,
     private router: Router
@@ -60,6 +60,12 @@ export class AuthenticationService {
 
   getUserId() {
     return this.user.user.uid;
+  }
+  getUserDocId() {
+    return this.userDocId;
+  }
+  setUserDocId(id: string) {
+    this.userDocId = id;
   }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {

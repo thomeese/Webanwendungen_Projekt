@@ -7,13 +7,17 @@ import {
   doc,
   docData,
   Firestore,
-  updateDoc, where
+  updateDoc,
+  where,
+  query, collectionGroup
 } from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
+import {traceUntilFirst} from '@angular/fire/performance';
+import {AuthenticationService} from './authentication.service';
 
 export interface UserData {
-  userId?: string;
-  loginId: string;
+  docId?: string;
+  uid: string;
   firstname: string;
   surname: string;
   birthdate: string;
@@ -47,7 +51,7 @@ export interface SetLogging {
 export class DatabaseService {
 
   constructor(private firestore: Firestore,
-  ) {
+              private authService: AuthenticationService) {
   }
 
   getUserData(): Observable<UserData[]> {
@@ -66,7 +70,7 @@ export class DatabaseService {
   }
 
   updateUser(user: UserData) {
-    const userDocRef = doc(this.firestore, `userData/${user.userId}`);
+    const userDocRef = doc(this.firestore, `userData/${user.docId}`);
     return updateDoc(userDocRef, {
       firstname: user.firstname, surname: user.surname,
       birthdate: user.birthdate, size: user.size, email: user.email
@@ -74,7 +78,7 @@ export class DatabaseService {
   }
 
   deleteUser(user: UserData) {
-    const userDocRef = doc(this.firestore, `userData/${user.userId}`);
+    const userDocRef = doc(this.firestore, `userData/${user.docId}`);
     return deleteDoc(userDocRef);
   }
 
@@ -95,7 +99,13 @@ export class DatabaseService {
 
   getTrainingsPlan(): Observable<any[]> {
     const trainingPlanRef = collection(this.firestore, 'trainingPlan');
-    return collectionData(trainingPlanRef, {idField: 'userId'}) as Observable<any []>;
+    return collectionData(trainingPlanRef, {idField: 'trainPlanId'}) as Observable<any []>;
+  }
+
+  getUserTrainingsPlan(): Observable<any[]> {
+    const trainingPlanRef = collection(this.firestore, 'trainingPlan');
+    const trainQuery = query(trainingPlanRef,where('uid', '==', this.authService.getUserId()));
+    return collectionData(trainQuery, {idField: 'trainPlanId'}) as Observable<any []>;
   }
 
   addExercise(exercise: Excersise) {
