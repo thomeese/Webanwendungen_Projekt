@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title *ngIf="!name">Detailansicht</ion-title>
+    <ion-title *ngIf="name">{{name}}: Detailansicht</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card-header>
+    <ion-card-title>{{name}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-label>Beschreibung:</ion-label>
+    <ion-item *ngIf="description">{{description}}</ion-item>
+    <ion-label>Häufigkeit des Trainings:</ion-label>
+    <ion-item *ngIf="period">{{period}}</ion-item>
+  </ion-card-content>
+  <ion-card-content>
+    Übungen:
+    <ion-button slot="end">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-button>
+    <ion-list *ngFor="let exercise of this.exercises">
+      <ion-item button="" (click)="this.showExerciseLogging()">{{exercise.name}}</ion-item>
+    </ion-list>
+  </ion-card-content>
+
+</ion-content>

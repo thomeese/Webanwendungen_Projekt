@@ -13,17 +13,11 @@
       <ion-title size="large">Trainingspläne</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-grid>
-    <ion-item>
-      <ion-col>Name</ion-col>
-      <ion-col>Beschreibung</ion-col>
-    </ion-item>
+  <ion-list>
     <ion-item button *ngFor="let plan of trainingPlanList">
-      <ion-col>{{plan.name}}</ion-col>
-      <ion-col>{{plan.description}}</ion-col>
+      <app-training-plan-card [name]="plan.name" [description]="plan.description" [id]="plan.trainingPlanId"></app-training-plan-card>
     </ion-item>
-
-  </ion-grid>
+  </ion-list>
   <ion-item>
     <ion-button id="trigger-btn-trainingModal">
       <ion-icon name="add-circle"></ion-icon>

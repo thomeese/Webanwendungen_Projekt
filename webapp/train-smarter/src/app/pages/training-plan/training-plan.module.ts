@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TrainingPlanPageRoutingModule } from './training-plan-routing.module';
 
 import { TrainingPlanPage } from './training-plan.page';
+import {TrainingPlanCardComponent} from "../../components/training-plan-card/training-plan-card.component";
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { TrainingPlanPage } from './training-plan.page';
     TrainingPlanPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [TrainingPlanPage]
+    declarations: [TrainingPlanPage, TrainingPlanCardComponent]
 })
 export class TrainingPlanPageModule {}
