@@ -20,6 +20,6 @@ export class ExerciseCardComponent implements OnInit {
   }
 
   details() {
-    this.router.navigateByUrl(`/exercise/${this.id}`);
+    this.router.navigateByUrl(`/home`);
   }
 }
