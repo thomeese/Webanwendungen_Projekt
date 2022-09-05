@@ -34,7 +34,21 @@ export class ExerciseDetailPage implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getExercise();
   }
-
+ addToTrainingPlan(){
+    this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res =>{
+      const array = res.exercises;
+      array.push({exerciseId: this.id});
+      const updatePlan = {
+        trainingPlanId: this.trainingPlanId,
+        name: res.name,
+        description: res.description,
+        period: res.period,
+        uid: res.uid,
+        exersises: array
+      };
+      this.database.updateTrainingPlan(updatePlan);
+    });
+ }
   async getExercise(){
     await this.database.getExerciseById(this.id).subscribe(result => {
       this.exercise = result;

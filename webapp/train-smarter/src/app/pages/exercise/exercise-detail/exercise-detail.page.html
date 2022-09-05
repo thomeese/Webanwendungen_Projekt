@@ -10,4 +10,5 @@
   <ion-item>{{exercise.name}}</ion-item>
   <ion-item>{{exercise.target}}</ion-item>
   <ion-item>{{exercise.equipment}}</ion-item>
+  <ion-button *ngIf="this.trainingPlanId" (click)="addToTrainingPlan()">Übung zum Trainingsplan hinzufügen</ion-button>
 </ion-content>
