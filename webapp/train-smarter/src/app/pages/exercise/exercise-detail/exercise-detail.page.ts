@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ExerciseDBService} from '../../../services/exercise-db.service';
 import {ActivatedRoute} from '@angular/router';
-import { trigger, transition, animate, style } from '@angular/animations';
+import {trigger, transition, animate, style, state} from '@angular/animations';
 import {LoadingController} from '@ionic/angular';
-import { Location } from "@angular/common";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-exercise-detail',

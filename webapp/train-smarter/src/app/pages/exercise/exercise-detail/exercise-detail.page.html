@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button (click)="myBackButton()" slot="start"></ion-button>
+    <ion-back-button slot="start"></ion-back-button>
     <ion-title>exercise-detail</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -8,7 +8,6 @@
 <ion-content *ngIf="exercise">
   <ion-item>{{id}}</ion-item>
   <ion-item>{{exercise.name}}</ion-item>
-  <ion-item><img [src]="exercise.gifUrl"/></ion-item>
   <ion-item>{{exercise.target}}</ion-item>
   <ion-item>{{exercise.equipment}}</ion-item>
 </ion-content>

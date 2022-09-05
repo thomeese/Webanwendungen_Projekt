@@ -2,6 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Exercise</ion-title>
   </ion-toolbar>
@@ -40,7 +41,11 @@
   </ion-list>
   <ion-list>
     <ion-item position="floating" button *ngFor="let exercise of exercises">
-      <app-exercise-card [title]=exercise.name [gifUrl]="exercise.gifUrl" [id]="exercise.id"></app-exercise-card>
+      <ion-card routerDirection="forward" [routerLink]="'/exercise/' + exercise.id" routerLinkActive="selected">
+        <ion-card-header>
+          <ion-card-title>{{exercise.name}}asdf</ion-card-title>
+        </ion-card-header>
+      </ion-card>
     </ion-item>
   </ion-list>
 </ion-content>
