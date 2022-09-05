@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-exercise-card',
@@ -12,13 +12,14 @@ export class ExerciseCardComponent implements OnInit {
   @Input() title: string;
   @Input() id: string;
 
-  constructor() {
-    private router: Router
+  constructor(private router: Router) {
+
   }
 
   ngOnInit() {
   }
 
   details() {
+    this.router.navigateByUrl(`/exercise/${this.id}`);
   }
 }

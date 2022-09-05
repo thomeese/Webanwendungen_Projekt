@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {LoadingController} from "@ionic/angular";
-import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoadingController} from '@ionic/angular';
+import {Observable} from 'rxjs';
 
 //Exercise Enum
 export enum SearchTypesToString {
@@ -182,4 +182,7 @@ export class ExerciseDBService {
     }
       return this.http.get<any>(`${this.url}${SearchTypes[type]}/${target}`, {headers: this.headers});
     }
+  getExerciseByID(id): Observable<any> {
+    return this.http.get<any>(`${this.url}/exercise/${id}`, {headers: this.headers});
+  }
 }
