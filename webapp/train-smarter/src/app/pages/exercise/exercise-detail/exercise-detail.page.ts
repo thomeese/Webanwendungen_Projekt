@@ -32,7 +32,6 @@ export class ExerciseDetailPage implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.getExercise();
   }
  addToTrainingPlan(){
     this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res =>{

@@ -5,7 +5,7 @@ import {AuthenticationService} from './services/authentication.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -19,15 +19,15 @@ const routes: Routes = [
     path: 'training-plan',
     loadChildren: () => import('./pages/training-plan/training-plan.module').then(m => m.TrainingPlanPageModule),
     canActivate: [AuthenticationService]
-  }, {
+  },
+  {
     path: 'exercise',
-    loadChildren: () => import('./pages/exercise/exercise.module').then(m => m.ExercisePageModule),
-    canActivate: [AuthenticationService]
-  }, {
+    loadChildren: () => import('./pages/exercise/exercise.module').then(m => m.ExercisePageModule)
+  },
+  {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthenticationService]
-  }, {
+    canActivate: [AuthenticationService]}, {
     path: 'live-training',
     loadChildren: () => import('./pages/live-training/live-training.module').then(m => m.LiveTrainingPageModule),
     canActivate: [AuthenticationService]

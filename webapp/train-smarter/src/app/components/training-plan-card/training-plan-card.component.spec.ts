@@ -10,7 +10,7 @@ describe('TrainingPlanCardComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TrainingPlanCardComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: []
     }).compileComponents();
 
     fixture = TestBed.createComponent(TrainingPlanCardComponent);

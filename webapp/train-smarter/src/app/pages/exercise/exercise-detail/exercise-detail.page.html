@@ -5,10 +5,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="exercise">
-  <ion-item>{{id}}</ion-item>
-  <ion-item>{{exercise.name}}</ion-item>
-  <ion-item>{{exercise.target}}</ion-item>
-  <ion-item>{{exercise.equipment}}</ion-item>
-  <ion-button *ngIf="this.trainingPlanId" (click)="addToTrainingPlan()">Übung zum Trainingsplan hinzufügen</ion-button>
+<ion-content>
+  <div *ngIf="exercise"><ion-item>{{id}}</ion-item>
+    <ion-item>{{exercise.name}}</ion-item>
+    <ion-item>{{exercise.target}}</ion-item>
+    <ion-item>{{exercise.equipment}}</ion-item>
+    <ion-button *ngIf="this.trainingPlanId" (click)="addToTrainingPlan()">Übung zum Trainingsplan hinzufügen</ion-button>
+  </div>
+  <p>{{id}}</p>
 </ion-content>
+
