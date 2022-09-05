@@ -1,4 +1,4 @@
-<ion-card button (click)="details()">
+<ion-card button routerDirection="root" [routerLink]="'/training-plan/' + this.id" routerLinkActive="selected">
   <ion-card-header>
     <ion-card-title>{{name}}</ion-card-title>
   </ion-card-header>

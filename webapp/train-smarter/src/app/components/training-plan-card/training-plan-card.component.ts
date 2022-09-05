@@ -16,7 +16,4 @@ export class TrainingPlanCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  details() {
-    this.router.navigateByUrl(`/training-plan/${this.id}`);
-  }
 }

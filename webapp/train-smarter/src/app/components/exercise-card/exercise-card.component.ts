@@ -18,8 +18,4 @@ export class ExerciseCardComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  details() {
-    this.router.navigateByUrl(`/home`);
-  }
 }

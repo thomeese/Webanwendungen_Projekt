@@ -1,6 +1,10 @@
-<ion-card (click)="details()">
+<ion-card routerDirection="root" [routerLink]="'/exercise/' + this.id" routerLinkActive="selected">
   <img [src]="gifUrl" alt="Exercise GIF"/>
   <ion-card-header>
     <ion-card-title>{{title}}</ion-card-title>
   </ion-card-header>
 </ion-card>
+<a routerLink="/exercise/{{id}}">
+  Link that uses a string.
+</a>
+
