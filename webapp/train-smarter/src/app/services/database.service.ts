@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Query} from '@angular/core';
 import {
   addDoc,
   collection,
@@ -14,6 +14,18 @@ import {
 import {Observable} from 'rxjs';
 import {traceUntilFirst} from '@angular/fire/performance';
 import {AuthenticationService} from './authentication.service';
+
+enum SearchTypes {
+  exercise = '/exercise',
+  exercisesList = '',
+  bodyPart = '/bodyPart',
+  bodyPartList = '/bodyPartList',
+  exerciseByID = '/exercise',
+  targetMuscle = '/target',
+  targetMuscleList = '/targetList',
+  equipment = '/equipment',
+  equipmentList = '/equipmentList'
+}
 
 export interface UserData {
   docId?: string;
@@ -48,6 +60,7 @@ export interface SetLogging {
 @Injectable({
   providedIn: 'root'
 })
+
 export class DatabaseService {
 
   constructor(private firestore: Firestore,
@@ -101,6 +114,7 @@ export class DatabaseService {
     const trainingPlanRef = collection(this.firestore, 'trainingPlan');
     return collectionData(trainingPlanRef, {idField: 'trainingPlanId'}) as Observable<any []>;
   }
+
   getTrainingsPlanById(id: string): Observable<any> {
     const trainingPlanRef = doc(this.firestore, `trainingPlan/${id}`);
     return docData(trainingPlanRef, {idField: 'trainingPlanId'}) as Observable<any>;
@@ -108,13 +122,49 @@ export class DatabaseService {
 
   getUserTrainingsPlan(): Observable<any[]> {
     const trainingPlanRef = collection(this.firestore, 'trainingPlan');
-    const trainQuery = query(trainingPlanRef,where('uid', '==', this.authService.getUserId()));
+    const trainQuery = query(trainingPlanRef, where('uid', '==', this.authService.getUserId()));
     return collectionData(trainQuery, {idField: 'trainingPlanId'}) as Observable<any []>;
   }
 
   addExercise(exercise: Excersise) {
     const exerciseRef = collection(this.firestore, 'exercises');
     return addDoc(exerciseRef, exercise);
+  }
+
+  getAllExercises(): Observable<Excersise[]> {
+    const exerciseRef = collection(this.firestore, 'exercises');
+    return collectionData(exerciseRef, {idField: 'exerciseId'}) as Observable<Excersise []>;
+  }
+
+  getExercisesBySearch(type, target): Observable<Excersise[]> {
+    const exerciseRef = collection(this.firestore, 'exercises');
+    if (target !== 'undefinded') {
+      if (type === SearchTypes.exerciseByID) {
+        return this.getExerciseById(type);
+      }
+      if (type === SearchTypes.exercisesList) {
+        return this.getAllExercises();
+      }
+      if (type === SearchTypes.bodyPart) {
+        const exerciseQuary = query(exerciseRef, where('bodypart', '==', target));
+        return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
+      }
+      if (type === SearchTypes.targetMuscle) {
+        const exerciseQuary = query(exerciseRef, where('target', '==', target));
+        return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
+      }
+      if (type === SearchTypes.equipment) {
+        const exerciseQuary = query(exerciseRef, where('equipment', '==', target));
+        return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
+      }
+    } else {
+      return this.getAllExercises();
+    }
+  }
+
+  getExerciseById(id: string) {
+    const exerciseRef = collection(this.firestore, `exercises/${id}`);
+    return docData(exerciseRef, {idField: 'exerciseId'}) as Observable<any>;
   }
 
   updateExercise(exercise: Excersise) {
