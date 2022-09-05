@@ -167,6 +167,12 @@ export class DatabaseService {
     return docData(exerciseRef, {idField: 'exerciseId'}) as Observable<Excersise>;
   }
 
+  getExerciseByNumericId(id: string) {
+    const exerciseRef = collection(this.firestore, 'exercises');
+    const exerciseQuary = query(exerciseRef, where('numericId', '==', id));
+    return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
+  }
+
   updateExercise(exercise: Excersise) {
     const exerciseDocRef = doc(this.firestore, `exercises/${exercise.exerciseId}`);
     return updateDoc(exerciseDocRef, {

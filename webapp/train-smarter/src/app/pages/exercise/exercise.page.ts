@@ -62,16 +62,24 @@ export class ExercisePage implements OnInit {
     await loading.present();
 
     if (this.searchTypeSelected === this.enumSearchTypeKeys[3]) { // with ID
-      this.database.getExerciseById(this.exerciseID).subscribe(result => {
-        console.log(result);
-        this.exercises = [];
-        this.exercises.push(result);
-      });
+      console.log(this.exerciseID.length);
+      if(this.exerciseID.length === 4){
+        this.database.getExerciseByNumericId(this.exerciseID).subscribe(result => {
+          console.log(result);
+          this.exercises = result;
+        });
+      }else {
+        console.log(this.exerciseID);
+        this.database.getExerciseById(this.exerciseID).subscribe(result => {
+          console.log(result);
+          this.exercises = [];
+          this.exercises.push(result);
+        });
+      }
     } else if (this.searchTypeSelected === this.enumSearchTypeKeys[0]) { // All Exercises
       this.database.getAllExercises().subscribe(result => {
         console.log(result);
         this.exercises = result;
-
       });
     } else { // with Target
       this.database.getExercisesBySearch(this.searchTypeSelected, this.targetSelected).subscribe(result => {
