@@ -133,38 +133,40 @@ export class DatabaseService {
 
   getAllExercises(): Observable<Excersise[]> {
     const exerciseRef = collection(this.firestore, 'exercises');
-    return collectionData(exerciseRef, {idField: 'exerciseId'}) as Observable<Excersise []>;
+    return collectionData(exerciseRef, {idField: 'exerciseId'}) as Observable<Excersise[]>;
   }
 
-  getExercisesBySearch(type, target): Observable<Excersise[]> {
+  getExercisesBySearch(type, target?): Observable<Excersise[]> {
     const exerciseRef = collection(this.firestore, 'exercises');
     if (target !== 'undefinded') {
-      if (type === SearchTypes.exerciseByID) {
-        return this.getExerciseById(type);
-      }
       if (type === SearchTypes.exercisesList) {
+        console.log(SearchTypes.exercisesList);
         return this.getAllExercises();
       }
       if (type === SearchTypes.bodyPart) {
+        console.log(SearchTypes.bodyPart);
         const exerciseQuary = query(exerciseRef, where('bodypart', '==', target));
         return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
       }
       if (type === SearchTypes.targetMuscle) {
+        console.log(SearchTypes.targetMuscle);
         const exerciseQuary = query(exerciseRef, where('target', '==', target));
         return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
       }
       if (type === SearchTypes.equipment) {
+        console.log(SearchTypes.equipment);
         const exerciseQuary = query(exerciseRef, where('equipment', '==', target));
         return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
       }
     } else {
+      console.log('alles');
       return this.getAllExercises();
     }
   }
 
-  getExerciseById(id: string) {
+  getExerciseById(id: string): Observable<Excersise[]> {
     const exerciseRef = collection(this.firestore, `exercises/${id}`);
-    return docData(exerciseRef, {idField: 'exerciseId'}) as Observable<any>;
+    return docData(exerciseRef, {idField: 'exerciseId'}) as Observable<Excersise[]>;
   }
 
   updateExercise(exercise: Excersise) {

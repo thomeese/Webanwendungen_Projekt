@@ -8,6 +8,7 @@ import {
   SearchTypesToString
 } from '../../services/exercise-db.service';
 import {LoadingController} from '@ionic/angular';
+import {DatabaseService, Excersise} from '../../services/database.service';
 
 @Component({
   selector: 'app-exercise',
@@ -34,7 +35,9 @@ export class ExercisePage implements OnInit {
   targetSelected = null;
   exerciseID = null;
 
-  constructor(private exerciseDBService: ExerciseDBService, private loadingCtr: LoadingController) {
+  constructor(private exerciseDBService: ExerciseDBService,
+              private loadingCtr: LoadingController,
+              private database: DatabaseService) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
@@ -59,18 +62,18 @@ export class ExercisePage implements OnInit {
     await loading.present();
 
     if (this.searchTypeSelected === this.enumSearchTypeKeys[3]) { // with ID
-      this.exerciseDBService.getData(this.searchTypeSelected, this.exerciseID).subscribe((result) => {
+      this.database.getExerciseById(this.exerciseID).subscribe((result) => {
         console.log(result);
         this.exercises = result;
       });
     } else if (this.searchTypeSelected === this.enumSearchTypeKeys[0]) { // All Exercises
-      this.exerciseDBService.getData(this.searchTypeSelected).subscribe((result) => {
+      this.database.getAllExercises().subscribe(result => {
         console.log(result);
         this.exercises = result;
 
       });
-    } else  { // with Target
-      this.exerciseDBService.getData(this.searchTypeSelected, this.targetSelected).subscribe((result) => {
+    } else { // with Target
+      this.database.getExercisesBySearch(this.searchTypeSelected, this.targetSelected).subscribe(result => {
         console.log(result);
         this.exercises = result;
       });
