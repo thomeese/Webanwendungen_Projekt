@@ -15,7 +15,18 @@ export class TrainingPlanPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   trainingform: FormGroup;
   trainingPlanList = [];
-
+  weekdays= [
+    'Jeden Tag',
+    'alle zwei Tage',
+    'alle drei Tage',
+    'alle vier Tage',
+    'alle fünf Tage',
+    'alle sechs Tage',
+    'Jede Woche',
+    'alle zwei Wochen',
+    'alle drei Wochen',
+    'Jeden Monat',
+  ];
   constructor(
     private dataServise: DatabaseService,
     private formbuilder: FormBuilder,
@@ -26,33 +37,27 @@ export class TrainingPlanPage implements OnInit {
 
   ngOnInit() {
     this.trainingform = this.formbuilder.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(30)])
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(15)]),
+      period: new FormControl('Auswahl',[])
     });
-    this.dataServise.getTrainingsPlan().subscribe(res => {
+
+    this.dataServise.getUserTrainingsPlan().subscribe(res => {
       this.trainingPlanList = res;
     });
+    /*
+    this.dataServise.getTrainingsPlan().subscribe(res => {
+      this.trainingPlanList = res;
+    });*/
   }
 
-  async submitData() {
-    let user = null;
-    this.dataServise.getUserData().subscribe(response => {
-      response.forEach(async userDoc => {
-        if (userDoc.email === this.authService.getEmail()) {
-          console.log(userDoc);
-          user = userDoc;
-          await this.addTrainingsPlan(user);
-        }
-      });
-    });
-  }
-
-  async addTrainingsPlan(user) {
+  async addTrainingsPlan() {
     const formData = this.trainingform.getRawValue();
     const plan = {
-      userId: user.userId,
+      uid: this.authService.getUserId(),
       name: formData.name,
-      description: formData.description
+      description: formData.description,
+      period: formData.period
     };
     const loading = await this.loadingController.create();
     await loading.present();

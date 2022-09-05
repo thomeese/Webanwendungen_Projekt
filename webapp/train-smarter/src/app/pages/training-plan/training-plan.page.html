@@ -14,14 +14,14 @@
     </ion-toolbar>
   </ion-header>
   <ion-grid>
-    <ion-row>
-        <ion-col>Name</ion-col>
-        <ion-col>Beschreibung</ion-col>
-    </ion-row>
-    <ion-row *ngFor="let plan of trainingPlanList">
+    <ion-item>
+      <ion-col>Name</ion-col>
+      <ion-col>Beschreibung</ion-col>
+    </ion-item>
+    <ion-item button *ngFor="let plan of trainingPlanList">
       <ion-col>{{plan.name}}</ion-col>
       <ion-col>{{plan.description}}</ion-col>
-    </ion-row>
+    </ion-item>
 
   </ion-grid>
   <ion-item>
@@ -43,7 +43,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <form [formGroup]="trainingform" (submit)="submitData()">
+        <form [formGroup]="trainingform" (submit)="addTrainingsPlan()">
           <ion-item>
             <ion-label position="stacked">Name des Plans</ion-label>
             <ion-input type="text" formControlName="name"></ion-input>
@@ -53,6 +53,12 @@
             <ion-label position="stacked">Was bewirkt der Plan</ion-label>
             <ion-input type="text" formControlName="description"></ion-input>
             <ion-note slot="error" *ngIf="trainingform.dirty">Feld Beschreibung darf nicht leer sein.</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-select formControlName="period" placeholder="Wie häufig soll trainiert werden?">
+              <ion-label position="stacked">Häufigkeit des Trainings:</ion-label>
+              <ion-select-option *ngFor="let option of this.weekdays">{{option}}</ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-item>
             <ion-button type="submit" (click)="confirm()" [disabled]="this.trainingform.invalid">Trainingsplan
