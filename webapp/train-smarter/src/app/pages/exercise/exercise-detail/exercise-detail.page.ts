@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ExerciseDBService} from '../../../services/exercise-db.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {trigger, transition, animate, style, state} from '@angular/animations';
-import {LoadingController} from '@ionic/angular';
+import {LoadingController, NavController} from '@ionic/angular';
 import {Location} from '@angular/common';
 import {DatabaseService} from '../../../services/database.service';
 import {waitForAsync} from '@angular/core/testing';
@@ -26,7 +26,8 @@ export class ExerciseDetailPage implements OnInit {
               private location: Location,
               private database: DatabaseService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private nav: NavController) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation() !== null) {
         console.log('Navigation on');
