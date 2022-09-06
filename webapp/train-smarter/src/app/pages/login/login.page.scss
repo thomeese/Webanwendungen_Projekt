@@ -2,6 +2,7 @@ ion-content {
   // https://unsplash.com/photos/WvDYdXDzkhs
   --background: url("/assets/images/victor-freitas-unsplash.jpg") no-repeat center center / cover;
   display: flex;
+  position: fixed;
 }
 
 ion-label {
@@ -14,14 +15,14 @@ ion-col  {
 }
 .content {
   opacity: 0.9;
-  height: 75vh;
-  width: 100%;
-  max-width: 500px;
+  //height: 75vh;
+  //width: 100%;
+  //max-width: 500px;
   right: 0;
   left: 0;
   bottom: 0;
-  position: fixed;
-  margin: auto;
+  //position: fixed;
+  //margin: auto;
   border-top-left-radius: 20px;
   border-top-right-radius: 25px;
 }

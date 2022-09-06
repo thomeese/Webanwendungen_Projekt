@@ -9,17 +9,26 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideAuth,getAuth, initializeAuth, indexedDBLocalPersistence } from '@angular/fire/auth';
+import { provideFirestore,getFirestore, enableIndexedDbPersistence} from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { HttpClientModule } from '@angular/common/http';
 import {pageAnimation} from './animations/nav-animation';
+import {Capacitor} from '@capacitor/core';
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,IonicModule.forRoot({navAnimation: pageAnimation}), AppRoutingModule, HttpClientModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirebaseApp(() => {
+      const app = initializeApp(environment.firebase);
+      if (Capacitor.isNativePlatform()) {
+        initializeAuth(app, {
+          persistence: indexedDBLocalPersistence
+        });
+      }
+      return app;
+    }),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())],

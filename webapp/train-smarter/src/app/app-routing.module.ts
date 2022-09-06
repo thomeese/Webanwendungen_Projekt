@@ -5,12 +5,12 @@ import {AuthenticationService} from './services/authentication.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   }, {
     path: 'analytics',
     loadChildren: () => import('./pages/analytics/analytics.module').then(m => m.AnalyticsPageModule),
@@ -22,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'exercise',
-    loadChildren: () => import('./pages/exercise/exercise.module').then(m => m.ExercisePageModule)
+    loadChildren: () => import('./pages/exercise/exercise.module').then(m => m.ExercisePageModule),
+    canActivate: [AuthenticationService]
   },
   {
     path: 'home',
@@ -34,15 +35,18 @@ const routes: Routes = [
   },
   {
     path: 'training-plan-detail',
-    loadChildren: () => import('./pages/training-plan/training-plan-detail/training-plan-detail.module').then(m => m.TrainingPlanDetailPageModule)
+    loadChildren: () => import('./pages/training-plan/training-plan-detail/training-plan-detail.module').then(m => m.TrainingPlanDetailPageModule),
+    canActivate: [AuthenticationService]
   },
   {
     path: 'exercise-detail',
-    loadChildren: () => import('./pages/exercise/exercise-detail/exercise-detail.module').then(m => m.ExerciseDetailPageModule)
+    loadChildren: () => import('./pages/exercise/exercise-detail/exercise-detail.module').then(m => m.ExerciseDetailPageModule),
+    canActivate: [AuthenticationService]
   },
   {
     path: 'exercise-logging',
-    loadChildren: () => import('./pages/exercise-logging/exercise-logging.module').then( m => m.ExerciseLoggingPageModule)
+    loadChildren: () => import('./pages/exercise-logging/exercise-logging.module').then( m => m.ExerciseLoggingPageModule),
+    canActivate: [AuthenticationService]
   }
 ];
 

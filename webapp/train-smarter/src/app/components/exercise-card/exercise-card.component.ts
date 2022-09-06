@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-exercise-card',
@@ -12,8 +13,14 @@ export class ExerciseCardComponent implements OnInit {
   @Input() title: string;
   @Input() id: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private modalCtrl: ModalController) {
 
+  }
+
+  async openDetails() {
+    const modal = await this.modalCtrl.create({
+      component: ModalPage,
+    componentProps:})
   }
 
   ngOnInit() {

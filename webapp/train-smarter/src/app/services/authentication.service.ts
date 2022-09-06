@@ -70,7 +70,6 @@ export class AuthenticationService {
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     console.log(route);
-    return true;
     if (!this.isAuthetificated) {
       this.router.navigateByUrl('/login', {replaceUrl: true});
       return false;
