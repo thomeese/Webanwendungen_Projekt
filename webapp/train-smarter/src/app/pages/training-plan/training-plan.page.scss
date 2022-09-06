@@ -1,0 +1,16 @@
+app-training-plan-card {
+  width: 100%;
+  max-width: 350px;
+}
+
+.button-add{
+  z-index: 12;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 50%;
+  ion-icon{
+    padding-right: 5px;
+  }
+}

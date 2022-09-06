@@ -10,6 +10,7 @@ export class TrainingPlanCardComponent implements OnInit {
   @Input() name: string;
   @Input() description: string;
   @Input() id: string;
+  @Input() showDescription: boolean;
   constructor(private router: Router) {
   }
 

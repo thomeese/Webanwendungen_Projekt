@@ -15,8 +15,8 @@ SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 export class HomePage implements OnInit {
 
   config: SwiperOptions = {
-    slidesPerView: 3,
-    spaceBetween: 25,
+    slidesPerView: 2,
+    spaceBetween: 10,
     centeredSlides: true,
     pagination: {
       dynamicBullets: true,
@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
       slideShadows: false
     },
     effect: 'coverflow',
-    navigation: true,
+    //navigation: true,
   };
 
   trainingPlanList = [];
