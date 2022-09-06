@@ -6,13 +6,12 @@ import {LoadingController, NavController} from '@ionic/angular';
 import {Location} from '@angular/common';
 import {DatabaseService} from '../../../services/database.service';
 import {waitForAsync} from '@angular/core/testing';
-
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-exercise-detail',
   templateUrl: './exercise-detail.page.html',
   styleUrls: ['./exercise-detail.page.scss'],
 })
-
 //getExercise momentan nicht eingebunden
 export class ExerciseDetailPage implements OnInit {
 
@@ -20,6 +19,9 @@ export class ExerciseDetailPage implements OnInit {
   exercise;
   trainingPlanId;
   trainingPlan;
+  setArray;
+  setForm: FormGroup;
+  displayForm;
 
   constructor(private exerciseDBService: ExerciseDBService,
               private loadingController: LoadingController,
@@ -27,7 +29,10 @@ export class ExerciseDetailPage implements OnInit {
               private database: DatabaseService,
               private route: ActivatedRoute,
               private router: Router,
-              private nav: NavController) {
+              private nav: NavController,
+              private formbuilder: FormBuilder) {
+    this.setArray = [];
+    this.displayForm = true;
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation() !== null) {
         console.log('Navigation on');
@@ -39,14 +44,38 @@ export class ExerciseDetailPage implements OnInit {
     });
   }
 
+  newSet() {
+    this.displayForm = true;
+  }
+
+  addSet() {
+    const data = this.setForm.getRawValue();
+    this.setArray.push({
+      setnumber: data.setnumber,
+      repetition: data.repetition,
+      weight: data.weight
+    });
+    this.setForm = this.setForm = this.formbuilder.group({
+      setnumber: new FormControl(`${this.setArray.length + 1}`, []),
+      repetition: new FormControl('', [Validators.required, Validators.pattern('[0-9]{2}')]),
+      weight: new FormControl('', [])
+    });
+    this.displayForm = false;
+  }
+
   ngOnInit() {
     try {
+      this.setForm = this.formbuilder.group({
+        setnumber: new FormControl(`${this.setArray.length + 1}`, []),
+        repetition: new FormControl('', [Validators.required, Validators.pattern('[0-9]{2}')]),
+        weight: new FormControl('', [])
+      });
       const idTmp = this.route.snapshot.paramMap.get('id');
       if (idTmp !== 'undefined' && idTmp !== null) {
         this.id = idTmp;
       }
-      console.log('trainingsPlanId: ' +this.trainingPlanId);
-      if(this.trainingPlanId){
+      console.log('trainingsPlanId: ' + this.trainingPlanId);
+      if (this.trainingPlanId) {
         this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res => {
           this.trainingPlan = res;
           console.log(this.trainingPlan);
@@ -68,8 +97,10 @@ export class ExerciseDetailPage implements OnInit {
     }
     console.log('Mitten drin');
     console.log(this.id);
-    array.push({exerciseId: this.id,
-    name: this.exercise.name});
+    array.push({
+      exerciseId: this.id,
+      name: this.exercise.name
+    });
     const updatePlan = {
       id: this.trainingPlan.trainingPlanId,
       name: this.trainingPlan.name,
