@@ -45,34 +45,15 @@
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-item button>
-      <app-exercise-card [title]="'band alternating biceps curl'"></app-exercise-card>
+    <ion-item position="floating" button *ngFor="let exercise of exercises">
+      <app-exercise-card [exercise]="exercise" [trainingPlanId]="trainingPlanId"></app-exercise-card>
     </ion-item>
-    <ion-item button>
-      <app-exercise-card [title]="'band alternating biceps curl'"></app-exercise-card>
-    </ion-item>
-    <ion-item class="" button>
-      <app-exercise-card [title]="'wide grip pull-up asdfsd'"></app-exercise-card>
-    </ion-item>
-    <ion-item position="floating" button>
-      <app-exercise-card [title]="'wide grip pull-up'"></app-exercise-card>
-    </ion-item>
-    <ion-item position="floating" button>
-      <app-exercise-card [title]="'wide grip pull-up'"></app-exercise-card>
-    </ion-item>
-    <ion-item position="floating" button>
-      <app-exercise-card [title]="'wide grip pull-up'"></app-exercise-card>
-    </ion-item>
-    <ion-item position="floating" button>
-      <app-exercise-card [title]="'wide grip pull-up'"></app-exercise-card>
-    </ion-item>
-
-    <!-- <ion-item position="floating" button *ngFor="let exercise of exercises">
-      <ion-card button="" (click)="this.exerciseDetailView(exercise.exerciseId)">
+      <!-- <ion-card button="" (click)="this.exerciseDetailView(exercise.exerciseId)">
         <ion-card-header>
           <ion-card-title>{{exercise.name}}asdf</ion-card-title>
         </ion-card-header>
       </ion-card>
     </ion-item>-->
   </ion-list>
+  <ion-button [routerLink]="'/exercise/0111'" routerDirection="forward" routerLinkActive="true"></ion-button>
 </ion-content>

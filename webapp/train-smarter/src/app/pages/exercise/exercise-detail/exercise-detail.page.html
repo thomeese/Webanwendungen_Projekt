@@ -1,17 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-back-button slot="start"></ion-back-button>
+    <ion-buttons>
+      <ion-back-button slot="start" (click)="myBackButton()"></ion-back-button>
+    </ion-buttons>
     <ion-title>exercise-detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="exercise"><ion-item>{{id}}</ion-item>
-    <ion-item>{{exercise.name}}</ion-item>
-    <ion-item>{{exercise.target}}</ion-item>
-    <ion-item>{{exercise.equipment}}</ion-item>
-    <ion-button *ngIf="this.trainingPlanId" (click)="addToTrainingPlan()">Übung zum Trainingsplan hinzufügen</ion-button>
-  </div>
-  <p>{{id}}</p>
+    <div *ngIf="exercise">
+      <ion-item>{{exercise.numericId}}</ion-item>
+      <ion-item><img src="{{exercise.gifUrl}}"/></ion-item>
+      <ion-item>{{exercise.name}}</ion-item>
+      <ion-item>{{exercise.target}}</ion-item>
+      <ion-item>{{exercise.equipment}}</ion-item>
+      <ion-button *ngIf="this.trainingPlanId" (click)="addToTrainingPlan()">Übung zum Trainingsplan hinzufügen
+      </ion-button>
+    </div>
+
 </ion-content>
 

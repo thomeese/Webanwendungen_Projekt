@@ -13,5 +13,8 @@
       <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-input type="text"  placeholder="password2"></ion-input>
+    <h1>Main Content</h1>
+    <swiper #swiper [config]="config" >
+      <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList"><app-training-plan-card [name]="trainingPlan.name" [description]="trainingPlan.description" [id]="trainingPlan.trainingPlanId"></app-training-plan-card></ng-template>
+    </swiper>
 </ion-content>

@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {pageAnimation} from './animations/nav-animation';
 import {Capacitor} from '@capacitor/core';
 import {indexedDBLocalPersistence} from '@firebase/auth';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,IonicModule.forRoot({navAnimation: pageAnimation}), AppRoutingModule, HttpClientModule,

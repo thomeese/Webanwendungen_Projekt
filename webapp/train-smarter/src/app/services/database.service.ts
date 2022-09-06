@@ -120,10 +120,10 @@ export class DatabaseService {
     return docData(trainingPlanRef, {idField: 'trainingPlanId'}) as Observable<any>;
   }
 
-  getUserTrainingsPlan(): Observable<any[]> {
+  getUserTrainingsPlan() {
     const trainingPlanRef = collection(this.firestore, 'trainingPlan');
     const trainQuery = query(trainingPlanRef, where('uid', '==', this.authService.getUserId()));
-    return collectionData(trainQuery, {idField: 'trainingPlanId'}) as Observable<any []>;
+    return collectionData(trainQuery, {idField: 'trainingPlanId'});
   }
 
   addExercise(exercise: Excersise) {

@@ -10,13 +10,16 @@ import { TrainingPlanPage } from './training-plan.page';
 import {TrainingPlanCardComponent} from "../../components/training-plan-card/training-plan-card.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TrainingPlanPageRoutingModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        TrainingPlanPageRoutingModule,
+        ReactiveFormsModule
+    ],
+    exports: [
+        TrainingPlanCardComponent
+    ],
     declarations: [TrainingPlanPage, TrainingPlanCardComponent]
 })
 export class TrainingPlanPageModule {}

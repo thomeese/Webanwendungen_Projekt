@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from './services/authentication.service';
-import {SettingsService} from "./services/settings.service";
+import {SettingsService} from './services/settings.service';
 
 @Component({
   selector: 'app-root',

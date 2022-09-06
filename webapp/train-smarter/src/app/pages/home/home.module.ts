@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
+import { SwiperModule} from 'swiper/angular';
+import {TrainingPlanPageModule} from "../training-plan/training-plan.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    SwiperModule,
+    TrainingPlanPageModule
   ],
   declarations: [HomePage]
 })

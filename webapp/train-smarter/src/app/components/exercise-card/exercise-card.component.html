@@ -1,7 +1,7 @@
-<ion-card routerDirection="forward" [routerLink]="'/exercise/' + this.id" routerLinkActive="selected">
+<ion-card button (click)="openDetails()">
   <ion-card-header>
-    <ion-img [src]="'https://www.exercisedb.io/_next/image?url=%2F0968.gif&w=384&q=75'"></ion-img>
-    <ion-card-title class="ion-text-center">{{title}}</ion-card-title>
+    <ion-img [src]="exercise.gifUrl"></ion-img>
+    <ion-card-title class="ion-text-center">{{exercise.name}}</ion-card-title>
   </ion-card-header>
 </ion-card>
 

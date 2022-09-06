@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ExerciseDBService} from '../../../services/exercise-db.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {trigger, transition, animate, style, state} from '@angular/animations';
@@ -11,46 +11,76 @@ import {DatabaseService} from '../../../services/database.service';
   templateUrl: './exercise-detail.page.html',
   styleUrls: ['./exercise-detail.page.scss'],
 })
+
+//getExercise momentan nicht eingebunden
 export class ExerciseDetailPage implements OnInit {
 
-  id;
+  @Input() id;
   exercise;
   trainingPlanId;
+  trainingPlan;
   constructor(private exerciseDBService: ExerciseDBService,
               private loadingController: LoadingController,
               private location: Location,
               private database: DatabaseService,
               private route: ActivatedRoute,
               private router: Router) {
-    this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
-        console.log(this.trainingPlanId);
+      this.route.queryParams.subscribe(params => {
+        if (this.router.getCurrentNavigation() !== null) {
+          console.log("Navigation on");
+          console.log(this.router.getCurrentNavigation());
+          if(this.router.getCurrentNavigation().extras.state){
+            this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
+            console.log(this.trainingPlanId);
+          }
+        }
+      });
+  }
+  ngOnInit() {
+
+    try {
+      let idTmp = this.route.snapshot.paramMap.get('id');
+      if (idTmp !== 'undefined' && idTmp !== null) {
+        this.id = idTmp;
       }
+    } catch (error) {
+      console.log(error);
+    }
+    this.getExercise();
+  }
+
+  addToTrainingPlan() {
+    console.log("Vorher");
+    this.trainingPlan = this.getTrainingPlan();
+    console.log("Danach");
+
+    let array;
+    array = this.trainingPlan .exercises;
+    if(!array) {
+      array = [];
+    }
+    console.log("Mitten drin");
+    array.push({exerciseId: this.id});
+    const updatePlan = {
+      id: this.trainingPlanId,
+      name: this.trainingPlan .name,
+      description: this.trainingPlan .description,
+      period: this.trainingPlan .period,
+      uid: this.trainingPlan .uid,
+      exercises: array
+    };
+    this.database.updateTrainingPlan(updatePlan);
+    console.log("Button hinzufuegen zum Trainingsplan");
+  }
+  async getTrainingPlan(){
+    this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res =>{
+      return res;
     });
   }
 
-  ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-  }
- addToTrainingPlan(){
-    this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res =>{
-      const array = res.exercises;
-      array.push({exerciseId: this.id});
-      const updatePlan = {
-        trainingPlanId: this.trainingPlanId,
-        name: res.name,
-        description: res.description,
-        period: res.period,
-        uid: res.uid,
-        exersises: array
-      };
-      this.database.updateTrainingPlan(updatePlan);
-    });
- }
   async getExercise(){
-    await this.database.getExerciseById(this.id).subscribe(result => {
-      this.exercise = result;
+    await this.database.getExerciseByNumericId(this.id).subscribe(result => {
+      this.exercise = result[0];
       console.log(this.exercise);
     });
   }

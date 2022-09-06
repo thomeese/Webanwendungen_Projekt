@@ -51,23 +51,16 @@ export class ExercisePage implements OnInit {
     this.enumEquipmentValues = Object.values(Equipment);
     this.searchTypeSelected = this.enumSearchTypeKeys[0];
     this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
-        console.log(this.trainingPlanId);
+      if (this.router.getCurrentNavigation() !== null) {
+        if (this.router.getCurrentNavigation().extras.state) {
+          this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
+          console.log(this.trainingPlanId);
+        }
       }
     });
   }
 
   ngOnInit() {
-  }
-
-  exerciseDetailView(id) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        trainingPlanId: this.trainingPlanId
-      }
-    };
-    this.router.navigateByUrl(`exercise/${id}`, navigationExtras);
   }
 
   async loadData() {
