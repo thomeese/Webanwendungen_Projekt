@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-title>Trainingspläne</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Trainingspläne</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,16 +14,12 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item button *ngFor="let plan of trainingPlanList">
-      <app-training-plan-card [name]="plan.name" [description]="plan.description" [id]="plan.trainingPlanId"></app-training-plan-card>
+    <ion-item button *ngFor="let plan of trainingPlanList" lines="none">
+      <app-training-plan-card [name]="plan.name" [description]="plan.description" [id]="plan.trainingPlanId" [showDescription]="'true'"></app-training-plan-card>
     </ion-item>
   </ion-list>
-  <ion-item>
-    <ion-button id="trigger-btn-trainingModal">
-      <ion-icon name="add-circle"></ion-icon>
-      Trainingsplan Hinzufügen
-    </ion-button>
-  </ion-item>
+  <ion-button id="trigger-btn-trainingModal" class="button-add"><ion-icon name="add-circle"></ion-icon>Trainingsplan</ion-button>
+
   <ion-modal trigger="trigger-btn-trainingModal" (willDismiss)="onWillDismiss($event)">
     <ng-template>
       <ion-header>
