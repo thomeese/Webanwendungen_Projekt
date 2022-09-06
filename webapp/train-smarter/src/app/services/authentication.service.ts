@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import firebase from 'firebase/compat';
-import {Auth, signInWithEmailAndPassword, signOut, user} from '@angular/fire/auth';
+import {Auth, setPersistence, signInWithEmailAndPassword, signOut,} from '@angular/fire/auth';
 import {createUserWithEmailAndPassword} from '@angular/fire/auth';
 import {ActivatedRouteSnapshot, Router} from '@angular/router';
 
@@ -20,15 +20,17 @@ export class AuthenticationService {
 
   async signUp(email, password) {
     try {
-      this.user = await createUserWithEmailAndPassword(
-        this.auth,
-        email,
-        password
-      );
-      if (this.user) {
-        this.isAuthetificated = true;
-      }
-      return this.user;
+      await setPersistence('session').then(async () => {
+        this.user = await createUserWithEmailAndPassword(
+          this.auth,
+          email,
+          password
+        );
+        if (this.user) {
+          this.isAuthetificated = true;
+        }
+        return this.user;
+      });
     } catch (ex) {
       return null;
     }
@@ -36,16 +38,18 @@ export class AuthenticationService {
 
   async signIn({email, password}) {
     try {
-      this.user = await signInWithEmailAndPassword(
-        this.auth,
-        email,
-        password
-      );
-      if (this.user) {
-        this.isAuthetificated = true;
-      }
-      return this.user;
-    } catch (ex) {
+      await setPersistence('session').then(async () => {
+        this.user = await signInWithEmailAndPassword(
+          this.auth,
+          email,
+          password
+        );
+        if (this.user) {
+          this.isAuthetificated = true;
+        }
+        return this.user;
+    });
+    }catch (ex) {
       return null;
     }
   }

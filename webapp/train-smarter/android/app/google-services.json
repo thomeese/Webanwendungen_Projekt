@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "104247468122",
+    "project_id": "train-smarter-7f991",
+    "storage_bucket": "train-smarter-7f991.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104247468122:android:912414ee583876aeaf7863",
+        "android_client_info": {
+          "package_name": "com.mathbehe.train_smarter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104247468122-8j6un3k5i3s2sp4ipp4n3aogqp18gkk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo9n6T-suo2SZOYRqwSEaAGuZrq0DnwY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104247468122-8j6un3k5i3s2sp4ipp4n3aogqp18gkk8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "104247468122-hmsf8m7ph474m2k7gavlli2euin32nlu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mathbehe.train-smarter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

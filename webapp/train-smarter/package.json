@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@angular/animations": "^14.2.0",
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
@@ -20,6 +21,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@capacitor/android": "^4.1.0",
     "@capacitor/angular": "^2.0.3",
     "@capacitor/app": "^4.0.1",
     "@capacitor/core": "4.1.0",
@@ -29,6 +31,7 @@
     "@capacitor/status-bar": "^4.0.1",
     "@ionic/angular": "^6.1.9",
     "@ionic/lab": "^3.2.13",
+    "d": "^1.0.1",
     "firebase": "^9.9.3",
     "ionicons": "^6.0.3",
     "rxjs": "~6.6.0",
