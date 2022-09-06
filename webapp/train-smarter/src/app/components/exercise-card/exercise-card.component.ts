@@ -21,7 +21,7 @@ export class ExerciseCardComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ExerciseDetailPage,
       componentProps: {id: this.exercise.numericId, trainingPlanId: this.trainingPlanId},
-      breakpoints: [0, 0.8, 1],
+      breakpoints: [0, 0.5 ,0.8, 1],
       initialBreakpoint: 0.5
     });
     modal.present();
