@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import firebase from 'firebase/compat';
 import {Auth, setPersistence, signInWithEmailAndPassword, signOut,} from '@angular/fire/auth';
+import {browserLocalPersistence} from '@firebase/auth';
 import {createUserWithEmailAndPassword} from '@angular/fire/auth';
 import {ActivatedRouteSnapshot, Router} from '@angular/router';
 
@@ -11,6 +12,7 @@ export class AuthenticationService {
   isAuthetificated;
   user;
   userDocId;
+
   constructor(
     private auth: Auth,
     private router: Router
@@ -20,17 +22,15 @@ export class AuthenticationService {
 
   async signUp(email, password) {
     try {
-      await setPersistence('session').then(async () => {
-        this.user = await createUserWithEmailAndPassword(
-          this.auth,
-          email,
-          password
-        );
-        if (this.user) {
-          this.isAuthetificated = true;
-        }
-        return this.user;
-      });
+      this.user = await createUserWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+      if (this.user) {
+        this.isAuthetificated = true;
+      }
+      return this.user;
     } catch (ex) {
       return null;
     }
@@ -38,18 +38,16 @@ export class AuthenticationService {
 
   async signIn({email, password}) {
     try {
-      await setPersistence('session').then(async () => {
-        this.user = await signInWithEmailAndPassword(
-          this.auth,
-          email,
-          password
-        );
-        if (this.user) {
-          this.isAuthetificated = true;
-        }
-        return this.user;
-    });
-    }catch (ex) {
+      this.user = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+      if (this.user) {
+        this.isAuthetificated = true;
+      }
+      return this.user;
+    } catch (ex) {
       return null;
     }
   }
@@ -65,9 +63,11 @@ export class AuthenticationService {
   getUserId() {
     return this.user.user.uid;
   }
+
   getUserDocId() {
     return this.userDocId;
   }
+
   setUserDocId(id: string) {
     this.userDocId = id;
   }

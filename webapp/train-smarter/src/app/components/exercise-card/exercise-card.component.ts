@@ -17,12 +17,6 @@ export class ExerciseCardComponent implements OnInit {
 
   }
 
-  async openDetails() {
-    const modal = await this.modalCtrl.create({
-      component: ModalPage,
-    componentProps:})
-  }
-
   ngOnInit() {
   }
 }

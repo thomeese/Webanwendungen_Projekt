@@ -15,12 +15,14 @@
         <ion-list id="labels-list">
           <ion-list-header>Labels</ion-list-header>
           <ion-item lines="none">
+            <ion-label>Darkmode toggle</ion-label>
             <ion-toggle slot="start"  *ngIf="settings.settings.darkModeOn" checked={true}
                         (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>
             <ion-toggle slot="start"  *ngIf="!settings.settings.darkModeOn"
                         (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>
           </ion-item>
           <ion-item lines="none">
+            <ion-label>Loggout</ion-label>
             <ion-button slot="start" color="danger" (click)="this.signOut()">
               <ion-icon name="log-out-outline"></ion-icon>
             </ion-button>

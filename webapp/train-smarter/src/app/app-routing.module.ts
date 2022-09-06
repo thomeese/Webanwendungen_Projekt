@@ -35,6 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'training-plan-detail',
+    // eslint-disable-next-line max-len
     loadChildren: () => import('./pages/training-plan/training-plan-detail/training-plan-detail.module').then(m => m.TrainingPlanDetailPageModule),
     canActivate: [AuthenticationService]
   },
