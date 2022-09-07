@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LocalstorageService} from '../../../services/localstorage.service';
-import {DatabaseService} from "../../../services/database.service";
+import {DatabaseService} from '../../../services/database.service';
 
 @Component({
   selector: 'app-live-training-logging',
@@ -29,11 +29,15 @@ export class LiveTrainingLoggingPage implements OnInit {
           });
         }
       });
-      this.setLog = JSON.parse(this.locaStorageServ.getData('set-log-data'));
+      this.setLog = JSON.parse(this.locaStorageServ.getData('set-log-data-'+this.exerciseId));
       if(!this.setLog){
         this.setLog = [];
       }
     }
   }
 
+  updateSetLogArray($event: string) {
+    this.setLog = JSON.parse($event);
+    this.locaStorageServ.saveData(`set-log-data-${this.exerciseId}`,JSON.stringify(this.setLog));
+  }
 }

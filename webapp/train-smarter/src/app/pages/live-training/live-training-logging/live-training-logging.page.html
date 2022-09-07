@@ -10,5 +10,6 @@
     <div>
       <img src="{{gifUrl}}"/>
     </div>
+    <app-set-card (newSetArray)="updateSetLogArray($event)" [setArray]="setLog" *ngIf="this.exercise"></app-set-card>
   </div>
 </ion-content>

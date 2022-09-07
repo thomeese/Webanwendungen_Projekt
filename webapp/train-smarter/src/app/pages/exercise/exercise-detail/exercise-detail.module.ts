@@ -17,6 +17,9 @@ import {SetCardComponent} from "../../../components/set-card/set-card.component"
         ExerciseDetailPageRoutingModule,
         ReactiveFormsModule
     ],
-  declarations: [ExerciseDetailPage, SetCardComponent]
+    exports: [
+        SetCardComponent
+    ],
+    declarations: [ExerciseDetailPage, SetCardComponent]
 })
 export class ExerciseDetailPageModule {}

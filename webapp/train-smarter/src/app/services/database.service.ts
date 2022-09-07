@@ -52,9 +52,7 @@ export interface SetLogging {
   trainingPlanId: string;
   userId: string;
   date: string;
-  set: number;
-  weight: number;
-  repition: number;
+  sets: Array<any>;
 }
 
 @Injectable({
@@ -195,8 +193,7 @@ export class DatabaseService {
     const setLoggingDocRef = doc(this.firestore, `setLogging/${setLogging.id}`);
     return updateDoc(setLoggingDocRef, {
       exerciseId: setLogging.excercizeId, trainingPlanId: setLogging.trainingPlanId,
-      userId: setLogging.userId, date: setLogging.date, set: setLogging.set,
-      weight: setLogging.weight, repetiton: setLogging.repition
+      userId: setLogging.userId, date: setLogging.date, sets: setLogging.sets,
     });
   }
 

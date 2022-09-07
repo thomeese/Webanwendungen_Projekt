@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { LiveTrainingPageRoutingModule } from './live-training-routing.module';
+import {LiveTrainingPageRoutingModule} from './live-training-routing.module';
 
-import { LiveTrainingPage } from './live-training.page';
+import {LiveTrainingPage} from './live-training.page';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     IonicModule,
     LiveTrainingPageRoutingModule
   ],
   declarations: [LiveTrainingPage]
 })
-export class LiveTrainingPageModule {}
+export class LiveTrainingPageModule {
+}

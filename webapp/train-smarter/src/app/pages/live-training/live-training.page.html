@@ -28,10 +28,13 @@
         <ion-col>Todo</ion-col>
         <ion-col>Done</ion-col>
       </ion-item>
-      <ion-item *ngFor="let todo of exercises" button="" (click)="this.logTraining(todo.exerciseId)">
+      <ion-item *ngFor="let todo of exercises">
         <ion-col>{{todo.name}}</ion-col>
         <ion-col>
-          <ion-icon color="danger" name="close-circle"></ion-icon>
+          <ion-icon color="danger" name="close-circle" button="" (click)="this.logTraining(todo.exerciseId)"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-icon color="success" name="checkmark-done-circle"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-list>
