@@ -42,10 +42,20 @@
     </ion-item>
       <ion-button class="search" type="button" (click)="loadData()">Suchen</ion-button>
   </ion-list>
+
+  <!--Search Results-->
   <ion-list>
-    <ion-item position="floating" button *ngFor="let exercise of exercises">
+    <ion-item position="floating" button *ngFor="let exercise of exercises | slice:0 :slice; let i=index">
       <app-exercise-card [exercise]="exercise" [trainingPlanId]="trainingPlanId"></app-exercise-card>
     </ion-item>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        distance="1%"
+        loadingText="Lade neue Übungen...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-list>
+
   <ion-button [routerLink]="'/exercise/0111'" routerDirection="forward" routerLinkActive="true"></ion-button>
 </ion-content>

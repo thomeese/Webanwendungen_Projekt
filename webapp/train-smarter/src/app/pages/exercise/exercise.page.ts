@@ -32,10 +32,13 @@ export class ExercisePage implements OnInit {
   enumBodyPartValues = [];
   enumEquipmentValues = [];
 
+
   searchTypeSelected = null;
   targetSelected = null;
   exerciseID = null;
   trainingPlanId;
+  // wird fuer Infinite Scroll verwendet
+  slice = 10;
 
   constructor(private exerciseDBService: ExerciseDBService,
               private loadingCtr: LoadingController,
@@ -109,5 +112,13 @@ export class ExercisePage implements OnInit {
       });
     }
     await loading.dismiss();
+  }
+
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {
+      console.log('Slice: ' + this.slice);
+      this.slice += 10;
+      infiniteScroll.target.complete();
+    }, 200);
   }
 }
