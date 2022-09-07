@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {
   BodyParts,
   BodyPartsToString, Equipment,
@@ -7,7 +7,7 @@ import {
   MusclesToString,
   SearchTypesToString
 } from '../../services/exercise-db.service';
-import {IonRouterOutlet, LoadingController, MenuController} from '@ionic/angular';
+import {IonContent, IonRouterOutlet, LoadingController, MenuController, Platform} from '@ionic/angular';
 import {DatabaseService, Excersise} from '../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 
@@ -18,6 +18,9 @@ import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 })
 
 export class ExercisePage implements OnInit {
+  @ViewChild(IonContent) content: IonContent;
+  backToTop = false;
+
   exercises = [];
 
   searchTypes = SearchTypesToString;
@@ -46,7 +49,8 @@ export class ExercisePage implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private ionRouterOutlet: IonRouterOutlet,
-              private menu: MenuController) {
+              private menu: MenuController,
+              private platform: Platform) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
@@ -120,5 +124,18 @@ export class ExercisePage implements OnInit {
       this.slice += 10;
       infiniteScroll.target.complete();
     }, 200);
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop(400);
+    console.log('Go to Top');
+  }
+
+  getScrollPos(scrollTop: number) {
+    if(scrollTop > this.platform.height()) {
+      this.backToTop = true;
+    } else {
+      this.backToTop = false;
+    }
   }
 }
