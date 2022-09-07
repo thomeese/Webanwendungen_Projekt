@@ -3,6 +3,7 @@ import {SwiperOptions} from 'swiper';
 import {DatabaseService} from '../../services/database.service';
 import {LoadingController} from '@ionic/angular';
 import SwiperCore, {Navigation, Pagination, EffectCoverflow} from 'swiper';
+import {AuthenticationService} from '../../services/authentication.service';
 
 SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 
@@ -34,12 +35,18 @@ export class HomePage implements OnInit {
   };
 
   trainingPlanList = [];
+  user;
 
-  constructor(private dataServise: DatabaseService, private loadingCtr: LoadingController) {
+  constructor(private dataServise: DatabaseService,
+              private loadingCtr: LoadingController,
+              private authService: AuthenticationService) {
   }
 
   ngOnInit() {
     this.getTrainingPlans();
+    this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
+      this.user = res[0];
+    });
   }
 
   async getTrainingPlans() {

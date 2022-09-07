@@ -75,6 +75,12 @@ export class DatabaseService {
     return docData(userDocRef, {idField: 'userId'}) as Observable<UserData>;
   }
 
+  getUserDataByUid(uid: string): Observable<UserData[]> {
+    const userRef = collection(this.firestore, 'userData');
+    const userQuery = query(userRef, where('uid', '==', uid));
+    return collectionData(userQuery, {idField: 'userId'}) as Observable<UserData []>;
+  }
+
   addUser(user: UserData) {
     const userRef = collection(this.firestore, 'userData');
     return addDoc(userRef, user);

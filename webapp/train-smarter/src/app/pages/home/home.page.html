@@ -13,7 +13,7 @@
       <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
-  <h1>Hi, name</h1>
+  <h1 *ngIf="user">Hi, {{this.user.firstname}}</h1>
   <ion-text>Trainingspläne</ion-text>
   <swiper #swiper [config]="config">
     <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
