@@ -98,12 +98,12 @@ const routes = [
     }, {
         path: 'training-plan-detail',
         // eslint-disable-next-line max-len
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_training-plan_training-plan-detail_training-plan-detail_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_pages_training-plan_training-plan-detail_training-plan-detail_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/training-plan/training-plan-detail/training-plan-detail.module */ 7491)).then(m => m.TrainingPlanDetailPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_exercise_exercise-detail_exercise-detail_page_ts"), __webpack_require__.e("default-src_app_pages_training-plan_training-plan-detail_training-plan-detail_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_pages_training-plan_training-plan-detail_training-plan-detail_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/training-plan/training-plan-detail/training-plan-detail.module */ 7491)).then(m => m.TrainingPlanDetailPageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
     },
     {
         path: 'exercise-detail',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_exercise_exercise-detail_exercise-detail_page_ts"), __webpack_require__.e("src_app_pages_exercise_exercise-detail_exercise-detail_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/exercise/exercise-detail/exercise-detail.module */ 4496)).then(m => m.ExerciseDetailPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_exercise_exercise-detail_exercise-detail_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_services_database_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/exercise/exercise-detail/exercise-detail.module */ 4496)).then(m => m.ExerciseDetailPageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
     },
     {
@@ -174,13 +174,13 @@ let AppComponent = class AppComponent {
       url: 'analytics',
       icon: 'analytics'
     }, {
-      title: 'training-plan',
+      title: 'Trainingspläne',
       url: 'training-plan',
-      icon: 'document'
+      icon: 'file-tray-full'
     }, {
-      title: 'exercise',
+      title: 'Übungen',
       url: 'exercise',
-      icon: 'warning'
+      icon: 'list'
     }];
     console.log(_capacitor_core__WEBPACK_IMPORTED_MODULE_3__.Capacitor.isNativePlatform());
     console.log(_capacitor_core__WEBPACK_IMPORTED_MODULE_3__.Capacitor.getPlatform());
@@ -790,7 +790,7 @@ module.exports = "ion-menu ion-content {\n  --background: var(--ion-item-backgro
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-app>\n  <ion-split-pane contentId=\"main-content\">\n    <ion-menu contentId=\"main-content\" type=\"overlay\">\n      <ion-content>\n        <ion-list id=\"inbox-list\">\n          <ion-list-header>Inbox</ion-list-header>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages; let i = index\">\n            <ion-item routerDirection=\"root\" [routerLink]=\"[p.url]\" lines=\"none\" detail=\"false\"\n                      routerLinkActive=\"selected\">\n              <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon>\n              <ion-label>{{ p.title }}</ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n        <ion-list id=\"labels-list\">\n          <ion-list-header>Labels</ion-list-header>\n          <ion-item lines=\"none\">\n            <ion-label>Darkmode toggle</ion-label>\n            <ion-toggle slot=\"start\"  *ngIf=\"settings.settings.darkModeOn\" checked={true}\n                        (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>\n            <ion-toggle slot=\"start\"  *ngIf=\"!settings.settings.darkModeOn\"\n                        (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>\n          </ion-item>\n          <ion-item lines=\"none\">\n            <ion-label>Loggout</ion-label>\n            <ion-button slot=\"start\" color=\"danger\" (click)=\"this.signOut()\">\n              <ion-icon name=\"log-out-outline\"></ion-icon>\n            </ion-button>\n          </ion-item>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n";
+module.exports = "<ion-app>\n  <ion-split-pane contentId=\"main-content\">\n    <ion-menu contentId=\"main-content\" type=\"overlay\">\n      <ion-content>\n        <ion-list id=\"inbox-list\">\n          <ion-list-header>Inbox</ion-list-header>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages; let i = index\">\n            <ion-item routerDirection=\"root\" [routerLink]=\"[p.url]\" lines=\"none\" detail=\"false\"\n                      routerLinkActive=\"selected\">\n              <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon>\n              <ion-label>{{ p.title }}</ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n        <div>\n          <ion-item lines=\"none\">\n            <ion-label>Loggout</ion-label>\n            <ion-button slot=\"start\" color=\"danger\" (click)=\"this.signOut()\">\n              <ion-icon name=\"log-out-outline\"></ion-icon>\n            </ion-button>\n          </ion-item>\n            <ion-fab vertical=\"bottom\" horizontal=\"start\">\n              <ion-fab-button color=\"dark\">\n                <ion-icon name=\"settings\"></ion-icon>\n              </ion-fab-button>\n              <ion-fab-list side=\"end\">\n                <ion-item lines=\"none\">\n                  <ion-label>Darkmode</ion-label>\n                  <ion-toggle slot=\"start\" *ngIf=\"settings.settings.darkModeOn\" checked={true}\n                              (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>\n                  <ion-toggle slot=\"start\" *ngIf=\"!settings.settings.darkModeOn\"\n                              (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>\n                </ion-item>\n              </ion-fab-list>\n            </ion-fab>\n        </div>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n";
 
 /***/ })
 

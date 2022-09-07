@@ -24,7 +24,7 @@
                 <ion-icon name="settings"></ion-icon>
               </ion-fab-button>
               <ion-fab-list side="end">
-                <ion-item lines="none">
+                <ion-item class="toggle" lines="none">
                   <ion-label>Darkmode</ion-label>
                   <ion-toggle slot="start" *ngIf="settings.settings.darkModeOn" checked={true}
                               (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>

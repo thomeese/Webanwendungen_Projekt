@@ -177,10 +177,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ExercisePage": () => (/* binding */ ExercisePage)
 /* harmony export */ });
 /* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _exercise_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exercise.page.html?ngResource */ 2942);
 /* harmony import */ var _exercise_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exercise.page.scss?ngResource */ 6541);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _services_exercise_db_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/exercise-db.service */ 3597);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
 /* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/database.service */ 4382);
@@ -195,7 +195,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ExercisePage = class ExercisePage {
-  constructor(exerciseDBService, loadingCtr, database, route, router, ionRouterOutlet, menu) {
+  constructor(exerciseDBService, loadingCtr, database, route, router, ionRouterOutlet, menu, platform) {
     this.exerciseDBService = exerciseDBService;
     this.loadingCtr = loadingCtr;
     this.database = database;
@@ -203,6 +203,8 @@ let ExercisePage = class ExercisePage {
     this.router = router;
     this.ionRouterOutlet = ionRouterOutlet;
     this.menu = menu;
+    this.platform = platform;
+    this.backToTop = false;
     this.exercises = [];
     this.searchTypes = _services_exercise_db_service__WEBPACK_IMPORTED_MODULE_3__.SearchTypesToString;
     this.muscles = _services_exercise_db_service__WEBPACK_IMPORTED_MODULE_3__.MusclesToString;
@@ -217,7 +219,9 @@ let ExercisePage = class ExercisePage {
     this.enumEquipmentValues = [];
     this.searchTypeSelected = null;
     this.targetSelected = null;
-    this.exerciseID = null;
+    this.exerciseID = null; // wird fuer Infinite Scroll verwendet
+
+    this.slice = 10;
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
@@ -296,6 +300,27 @@ let ExercisePage = class ExercisePage {
     })();
   }
 
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {
+      console.log('Slice: ' + this.slice);
+      this.slice += 10;
+      infiniteScroll.target.complete();
+    }, 200);
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop(400);
+    console.log('Go to Top');
+  }
+
+  getScrollPos(scrollTop) {
+    if (scrollTop > this.platform.height()) {
+      this.backToTop = true;
+    } else {
+      this.backToTop = false;
+    }
+  }
+
 };
 
 ExercisePage.ctorParameters = () => [{
@@ -312,13 +337,197 @@ ExercisePage.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonRouterOutlet
 }, {
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.MenuController
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.Platform
 }];
 
-ExercisePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+ExercisePage.propDecorators = {
+  content: [{
+    type: _angular_core__WEBPACK_IMPORTED_MODULE_7__.ViewChild,
+    args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonContent]
+  }]
+};
+ExercisePage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
   selector: 'app-exercise',
   template: _exercise_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_exercise_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
 })], ExercisePage);
+
+
+/***/ }),
+
+/***/ 4382:
+/*!**********************************************!*\
+  !*** ./src/app/services/database.service.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatabaseService": () => (/* binding */ DatabaseService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/fire/firestore */ 6466);
+/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./authentication.service */ 7053);
+
+
+
+
+var SearchTypes;
+(function (SearchTypes) {
+    SearchTypes["exercise"] = "/exercise";
+    SearchTypes["exercisesList"] = "";
+    SearchTypes["bodyPart"] = "/bodyPart";
+    SearchTypes["bodyPartList"] = "/bodyPartList";
+    SearchTypes["exerciseByID"] = "/exercise";
+    SearchTypes["targetMuscle"] = "/target";
+    SearchTypes["targetMuscleList"] = "/targetList";
+    SearchTypes["equipment"] = "/equipment";
+    SearchTypes["equipmentList"] = "/equipmentList";
+})(SearchTypes || (SearchTypes = {}));
+let DatabaseService = class DatabaseService {
+    constructor(firestore, authService) {
+        this.firestore = firestore;
+        this.authService = authService;
+    }
+    getUserData() {
+        const userRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'userData');
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(userRef, { idField: 'userId' });
+    }
+    getUserDataById(id) {
+        const userDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `userData/${id}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.docData)(userDocRef, { idField: 'userId' });
+    }
+    getUserDataByUid(uid) {
+        const userRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'userData');
+        const userQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(userRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', uid));
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(userQuery, { idField: 'userId' });
+    }
+    addUser(user) {
+        const userRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'userData');
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(userRef, user);
+    }
+    updateUser(user) {
+        const userDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `userData/${user.docId}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(userDocRef, {
+            firstname: user.firstname, surname: user.surname,
+            birthdate: user.birthdate, size: user.size, email: user.email
+        });
+    }
+    deleteUser(user) {
+        const userDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `userData/${user.docId}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(userDocRef);
+    }
+    addTrainingPlan(plan) {
+        const trainingPlanRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'trainingPlan');
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(trainingPlanRef, plan);
+    }
+    updateTrainingPlan(plan) {
+        const trainingPlanDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `trainingPlan/${plan.id}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(trainingPlanDocRef, plan);
+    }
+    deleteTrainingPlan(plan) {
+        const trainingPlanDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `trainingPlan/${plan.id}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(trainingPlanDocRef);
+    }
+    getTrainingsPlan() {
+        const trainingPlanRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'trainingPlan');
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(trainingPlanRef, { idField: 'trainingPlanId' });
+    }
+    getTrainingsPlanById(id) {
+        const trainingPlanRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `trainingPlan/${id}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.docData)(trainingPlanRef, { idField: 'trainingPlanId' });
+    }
+    getUserTrainingsPlan() {
+        const trainingPlanRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'trainingPlan');
+        const trainQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(trainingPlanRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', this.authService.getUserId()));
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(trainQuery, { idField: 'trainingPlanId' });
+    }
+    addExercise(exercise) {
+        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'exercises');
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(exerciseRef, exercise);
+    }
+    getAllExercises() {
+        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'exercises');
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseRef, { idField: 'exerciseId' });
+    }
+    getExercisesBySearch(type, target) {
+        console.log('Hello');
+        console.log(type);
+        console.log(SearchTypes.bodyPart);
+        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'exercises');
+        if (type === 'exercisesList') {
+            console.log(SearchTypes.exercisesList);
+            return this.getAllExercises();
+        }
+        if (type === 'bodyPart') {
+            console.log('bodypart');
+            const exerciseQuary = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(exerciseRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('bodypart', '==', target));
+            return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseQuary, { idField: 'exerciseId' });
+        }
+        if (type === 'targetMuscle') {
+            console.log(SearchTypes.targetMuscle);
+            const exerciseQuary = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(exerciseRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('target', '==', target));
+            return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseQuary, { idField: 'exerciseId' });
+        }
+        if (type === 'equipment') {
+            console.log(SearchTypes.equipment);
+            const exerciseQuary = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(exerciseRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('equipment', '==', target));
+            return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseQuary, { idField: 'exerciseId' });
+        }
+    }
+    getExerciseById(id) {
+        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `exercises/${id}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.docData)(exerciseRef, { idField: 'exerciseId' });
+    }
+    getExerciseByNumericId(id) {
+        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'exercises');
+        const exerciseQuary = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(exerciseRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('numericId', '==', id));
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseQuary, { idField: 'exerciseId' });
+    }
+    updateExercise(exercise) {
+        const exerciseDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `exercises/${exercise.exerciseId}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(exerciseDocRef, {
+            name: exercise.name, bodypart: exercise.bodypart,
+            equipment: exercise.equipment, gifUrl: exercise.gifUrl, target: exercise.target
+        });
+    }
+    deleteExercise(exercise) {
+        const exerciseDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `exercises/${exercise.exerciseId}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(exerciseDocRef);
+    }
+    getAllSetLoggingByUid() {
+        const setLoggingRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'setLogging');
+        const setLogginQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(setLoggingRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', this.authService.getUserId()));
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(setLogginQuery, { idField: 'setLoggingId' });
+    }
+    addSetLogging(setLogging) {
+        const setLoggingRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'setLogging');
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(setLoggingRef, setLogging);
+    }
+    updateSetLogging(setLogging) {
+        const setLoggingDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `setLogging/${setLogging.id}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(setLoggingDocRef, {
+            exerciseId: setLogging.excerciseId, trainingPlanId: setLogging.trainingPlanId,
+            userId: setLogging.uid, date: setLogging.date, time: setLogging.time, sets: setLogging.sets,
+        });
+    }
+    deleteSetLogging(setLogging) {
+        const setLoggingDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `setLogging/${setLogging.id}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(setLoggingDocRef);
+    }
+};
+DatabaseService.ctorParameters = () => [
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.Firestore },
+    { type: _authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService }
+];
+DatabaseService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
+        providedIn: 'root'
+    })
+], DatabaseService);
+
 
 
 /***/ }),
@@ -329,7 +538,7 @@ ExercisePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_co
   \**********************************************************************************/
 /***/ ((module) => {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJleGVyY2lzZS1jYXJkLmNvbXBvbmVudC5zY3NzIn0= */";
+module.exports = ".card-design {\n  border-radius: 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLWNhcmQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxtQkFBQTtBQUNGIiwiZmlsZSI6ImV4ZXJjaXNlLWNhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2FyZC1kZXNpZ257XG4gIGJvcmRlci1yYWRpdXM6IDIwcHg7XG59XG5cblxuIl19 */";
 
 /***/ }),
 
@@ -359,7 +568,7 @@ module.exports = "<ion-card button (click)=\"openDetails()\">\n  <ion-card-heade
   \**************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Exercise</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Exercise</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-list>\n    <ion-item>\n      <ion-select interface=\"popover\" placeholder=\"Wähle den Filter\" [(ngModel)]=\"searchTypeSelected\">\n        <ion-select-option *ngFor=\"let search of enumSearchTypeKeys\"\n                           [value]=\"search\">{{searchTypes[search]}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item *ngIf=\"(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])\">\n    <ion-select interface=\"popover\" placeholder=\"Wähle aus.\" [(ngModel)]=\"targetSelected\">\n      <div *ngIf=\"searchTypeSelected === enumSearchTypeKeys[1]\"> <!-- By BodyPart selected -->\n        <ion-select-option *ngFor=\"let part of enumBodyPartKeys; let i = index\"\n                           [value]=this.enumBodyPartValues[i]>{{bodyparts[part]}}</ion-select-option>\n      </div>\n      <div *ngIf=\"searchTypeSelected === enumSearchTypeKeys[2]\"> <!-- By Muscle selected -->\n        <ion-select-option *ngFor=\"let musc of enumMuscleKeys; let i = index\"\n                           [value]=\"this.enumMuscleValues[i]\">{{muscles[musc]}}</ion-select-option>\n      </div>\n      <div *ngIf=\"searchTypeSelected === enumSearchTypeKeys[4]\"> <!-- By Equipment selected -->\n        <ion-select-option *ngFor=\"let equip of enumEquipmentKeys; let i = index\"\n                           [value]=\"this.enumEquipmentValues[i]\">{{equipment[equip]}}</ion-select-option>\n      </div>\n    </ion-select>\n    </ion-item>\n    <ion-item *ngIf=\"searchTypeSelected === enumSearchTypeKeys[3]\">\n      <ion-input placeholder=\"Geben Sie die ID ein.\" [(ngModel)]=\"exerciseID\"></ion-input>\n    </ion-item>\n      <ion-button class=\"search\" type=\"button\" (click)=\"loadData()\">Suchen</ion-button>\n  </ion-list>\n  <ion-list>\n    <ion-item position=\"floating\" button *ngFor=\"let exercise of exercises\">\n      <app-exercise-card [exercise]=\"exercise\" [trainingPlanId]=\"trainingPlanId\"></app-exercise-card>\n    </ion-item>\n  </ion-list>\n  <ion-button [routerLink]=\"'/exercise/0111'\" routerDirection=\"forward\" routerLinkActive=\"true\"></ion-button>\n</ion-content>\n";
+module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>Exercise</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [scrollEvents]=\"true\" (ionScroll)=\"getScrollPos($event.detail.scrollTop)\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Exercise</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-list>\n    <ion-item>\n      <ion-select interface=\"popover\" placeholder=\"Wähle den Filter\" [(ngModel)]=\"searchTypeSelected\">\n        <ion-select-option *ngFor=\"let search of enumSearchTypeKeys\"\n                           [value]=\"search\">{{searchTypes[search]}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item *ngIf=\"(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])\">\n    <ion-select interface=\"popover\" placeholder=\"Wähle aus.\" [(ngModel)]=\"targetSelected\">\n      <div *ngIf=\"searchTypeSelected === enumSearchTypeKeys[1]\"> <!-- By BodyPart selected -->\n        <ion-select-option *ngFor=\"let part of enumBodyPartKeys; let i = index\"\n                           [value]=this.enumBodyPartValues[i]>{{bodyparts[part]}}</ion-select-option>\n      </div>\n      <div *ngIf=\"searchTypeSelected === enumSearchTypeKeys[2]\"> <!-- By Muscle selected -->\n        <ion-select-option *ngFor=\"let musc of enumMuscleKeys; let i = index\"\n                           [value]=\"this.enumMuscleValues[i]\">{{muscles[musc]}}</ion-select-option>\n      </div>\n      <div *ngIf=\"searchTypeSelected === enumSearchTypeKeys[4]\"> <!-- By Equipment selected -->\n        <ion-select-option *ngFor=\"let equip of enumEquipmentKeys; let i = index\"\n                           [value]=\"this.enumEquipmentValues[i]\">{{equipment[equip]}}</ion-select-option>\n      </div>\n    </ion-select>\n    </ion-item>\n    <ion-item *ngIf=\"searchTypeSelected === enumSearchTypeKeys[3]\">\n      <ion-input placeholder=\"Geben Sie die ID ein.\" [(ngModel)]=\"exerciseID\"></ion-input>\n    </ion-item>\n      <ion-button class=\"search\" type=\"button\" (click)=\"loadData()\">Suchen</ion-button>\n  </ion-list>\n\n  <!--Search Results-->\n  <ion-list>\n    <ion-item position=\"floating\" button *ngFor=\"let exercise of exercises | slice:0 :slice; let i=index\">\n      <app-exercise-card [exercise]=\"exercise\" [trainingPlanId]=\"trainingPlanId\"></app-exercise-card>\n    </ion-item>\n    <ion-infinite-scroll (ionInfinite)=\"doInfinite($event)\">\n      <ion-infinite-scroll-content\n        loadingSpinner=\"bubbles\"\n        distance=\"1%\"\n        loadingText=\"Lade neue Übungen...\">\n      </ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n  </ion-list>\n\n  <ion-fab *ngIf=\"backToTop\" slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\">\n    <ion-fab-button size=\"small\" color=\"dark\" (click)=\"scrollToTop()\"><ion-icon name=\"arrow-up-circle-outline\"></ion-icon></ion-fab-button>\n  </ion-fab>\n\n  <ion-button [routerLink]=\"'/exercise/0111'\" routerDirection=\"forward\" routerLinkActive=\"true\"></ion-button>\n</ion-content>\n";
 
 /***/ })
 

@@ -97,13 +97,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "HomePage": () => (/* binding */ HomePage)
 /* harmony export */ });
 /* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _home_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.page.html?ngResource */ 8380);
 /* harmony import */ var _home_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.page.scss?ngResource */ 2260);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/database.service */ 4382);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper */ 3587);
+/* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/authentication.service */ 7053);
+
 
 
 
@@ -114,9 +116,10 @@ __webpack_require__.r(__webpack_exports__);
 
 swiper__WEBPACK_IMPORTED_MODULE_4__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_4__.Navigation, swiper__WEBPACK_IMPORTED_MODULE_4__.Pagination, swiper__WEBPACK_IMPORTED_MODULE_4__.EffectCoverflow]);
 let HomePage = class HomePage {
-  constructor(dataServise, loadingCtr) {
+  constructor(dataServise, loadingCtr, authService) {
     this.dataServise = dataServise;
     this.loadingCtr = loadingCtr;
+    this.authService = authService;
     this.config = {
       slidesPerView: 2,
       spaceBetween: 10,
@@ -140,6 +143,9 @@ let HomePage = class HomePage {
 
   ngOnInit() {
     this.getTrainingPlans();
+    this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
+      this.user = res[0];
+    });
   }
 
   getTrainingPlans() {
@@ -165,13 +171,15 @@ let HomePage = class HomePage {
 HomePage.ctorParameters = () => [{
   type: _services_database_service__WEBPACK_IMPORTED_MODULE_3__.DatabaseService
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.LoadingController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.LoadingController
+}, {
+  type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_5__.AuthenticationService
 }];
 
-HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
   selector: 'app-home',
   template: _home_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
-  encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_7__.ViewEncapsulation.None,
+  encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_8__.ViewEncapsulation.None,
   styles: [_home_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
 })], HomePage);
 
@@ -184,7 +192,7 @@ HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,_angular_core__
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = ".swiper-wrapper {\n  margin-bottom: 10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQUE7QUFDRiIsImZpbGUiOiJob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zd2lwZXItd3JhcHBlciB7XG4gIG1hcmdpbi1ib3R0b206IDEwcHg7XG59XG4iXX0= */";
+module.exports = ".swiper-wrapper {\n  margin-bottom: 10px;\n}\n\n/*.transparent {\n  background: transparent !important;\n  --background: transparent;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQUE7QUFDRjs7QUFLQTs7O0VBQUEiLCJmaWxlIjoiaG9tZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3dpcGVyLXdyYXBwZXIge1xuICBtYXJnaW4tYm90dG9tOiAxMHB4O1xufVxuXG5pb24tY29udGVudHtcbiAgLy8tLWJhY2tncm91bmQ6IHVybChcIi9hc3NldHMvaW1hZ2VzL2hvbWVwYWdlLnBuZ1wiKSAwIDAvMTAwJSAxMDAlIG5vLXJlcGVhdDtcbn1cbi8qLnRyYW5zcGFyZW50IHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbn0qL1xuXG4iXX0= */";
 
 /***/ }),
 
@@ -194,7 +202,7 @@ module.exports = ".swiper-wrapper {\n  margin-bottom: 10px;\n}\n/*# sourceMappin
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Home</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Home</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <h1>Hi, name</h1>\n  <ion-text>Trainingspläne</ion-text>\n  <swiper #swiper [config]=\"config\">\n    <ng-template swiperSlide *ngFor=\"let trainingPlan of trainingPlanList\">\n      <app-training-plan-card [name]=\"trainingPlan.name\" [description]=\"trainingPlan.description\"\n                              [id]=\"trainingPlan.trainingPlanId\" [showDescription]=\"false\"></app-training-plan-card>\n    </ng-template>\n  </swiper>\n</ion-content>\n";
+module.exports = "<ion-header [translucent]=\"true\" class=\"ion-no-border\">\n  <ion-toolbar class=\"transparent\" style=\"background: #F4FAF6\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Homeasdf</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\" class=\"ion-no-border\">\n    <ion-toolbar class=\"transparent\" style=\"background: #F4FAF6\">\n      <ion-title size=\"large\">Home</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <h1 *ngIf=\"user\">Hi, {{this.user.firstname}}</h1>\n  <ion-text>Trainingspläne</ion-text>\n  <swiper #swiper [config]=\"config\">\n    <ng-template swiperSlide *ngFor=\"let trainingPlan of trainingPlanList\">\n      <app-training-plan-card [trainingPlan]=\"trainingPlan\" [showDescription]=\"false\"></app-training-plan-card>\n    </ng-template>\n  </swiper>\n</ion-content>\n";
 
 /***/ }),
 

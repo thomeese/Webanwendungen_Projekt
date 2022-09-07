@@ -123,3 +123,8 @@ ion-app{
   margin-bottom: env(safe-area-inset-bottom)
 }
 
+ion-item.toggle {
+  margin-left: 10px;
+  --inner-padding-start: 0px;
+  --padding-start: 0px !important;
+}

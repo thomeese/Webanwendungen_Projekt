@@ -1,6 +1,77 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["common"],{
 
+/***/ 876:
+/*!***********************************************************!*\
+  !*** ./src/app/components/set-card/set-card.component.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SetCardComponent": () => (/* binding */ SetCardComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _set_card_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./set-card.component.html?ngResource */ 9203);
+/* harmony import */ var _set_card_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./set-card.component.scss?ngResource */ 8088);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 2508);
+
+
+
+
+
+let SetCardComponent = class SetCardComponent {
+    constructor(formbuilder) {
+        this.formbuilder = formbuilder;
+        this.newSetArray = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
+    }
+    ngOnInit() { }
+    newSet() {
+        this.generateSetFormgroup();
+        this.displayForm = true;
+    }
+    abbortSet() {
+        this.displayForm = false;
+        this.newSetArray.emit(JSON.stringify(this.setArray));
+        this.generateSetFormgroup();
+    }
+    generateSetFormgroup() {
+        this.setForm = this.setForm = this.formbuilder.group({
+            setnumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(`${this.setArray.length + 1}`, []),
+            repetition: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern('[0-9]{2}')]),
+            weight: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl('', [])
+        });
+    }
+    addSet() {
+        const data = this.setForm.getRawValue();
+        this.setArray.push({
+            setnumber: data.setnumber,
+            repetition: data.repetition,
+            weight: data.weight
+        });
+        this.abbortSet();
+    }
+};
+SetCardComponent.ctorParameters = () => [
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormBuilder }
+];
+SetCardComponent.propDecorators = {
+    setArray: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }],
+    newSetArray: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Output }]
+};
+SetCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
+        selector: 'app-set-card',
+        template: _set_card_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
+        styles: [_set_card_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], SetCardComponent);
+
+
+
+/***/ }),
+
 /***/ 3305:
 /*!*******************************************************************************!*\
   !*** ./src/app/components/training-plan-card/training-plan-card.component.ts ***!
@@ -26,15 +97,14 @@ let TrainingPlanCardComponent = class TrainingPlanCardComponent {
         this.router = router;
     }
     ngOnInit() {
+        console.log("TrainingPlanCard erstellt");
     }
 };
 TrainingPlanCardComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router }
 ];
 TrainingPlanCardComponent.propDecorators = {
-    name: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
-    description: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
-    id: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    trainingPlan: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
     showDescription: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }]
 };
 TrainingPlanCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
@@ -80,6 +150,91 @@ ExerciseLoggingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
         styles: [_exercise_logging_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ExerciseLoggingPage);
+
+
+
+/***/ }),
+
+/***/ 9478:
+/*!**********************************************************************************!*\
+  !*** ./src/app/pages/exercise/exercise-detail/exercise-detail-routing.module.ts ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ExerciseDetailPageRoutingModule": () => (/* binding */ ExerciseDetailPageRoutingModule)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _exercise_detail_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./exercise-detail.page */ 148);
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _exercise_detail_page__WEBPACK_IMPORTED_MODULE_0__.ExerciseDetailPage
+    }
+];
+let ExerciseDetailPageRoutingModule = class ExerciseDetailPageRoutingModule {
+};
+ExerciseDetailPageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule],
+    })
+], ExerciseDetailPageRoutingModule);
+
+
+
+/***/ }),
+
+/***/ 4496:
+/*!**************************************************************************!*\
+  !*** ./src/app/pages/exercise/exercise-detail/exercise-detail.module.ts ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ExerciseDetailPageModule": () => (/* binding */ ExerciseDetailPageModule)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _exercise_detail_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./exercise-detail-routing.module */ 9478);
+/* harmony import */ var _exercise_detail_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exercise-detail.page */ 148);
+/* harmony import */ var _components_set_card_set_card_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/set-card/set-card.component */ 876);
+
+
+
+
+
+
+
+
+let ExerciseDetailPageModule = class ExerciseDetailPageModule {
+};
+ExerciseDetailPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
+            _exercise_detail_routing_module__WEBPACK_IMPORTED_MODULE_0__.ExerciseDetailPageRoutingModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.ReactiveFormsModule
+        ],
+        exports: [
+            _components_set_card_set_card_component__WEBPACK_IMPORTED_MODULE_2__.SetCardComponent
+        ],
+        declarations: [_exercise_detail_page__WEBPACK_IMPORTED_MODULE_1__.ExerciseDetailPage, _components_set_card_set_card_component__WEBPACK_IMPORTED_MODULE_2__.SetCardComponent]
+    })
+], ExerciseDetailPageModule);
 
 
 
@@ -1605,6 +1760,16 @@ const createSwipeBackGesture = (el, canStartHandler, onStartHandler, onMoveHandl
 
 /***/ }),
 
+/***/ 8088:
+/*!************************************************************************!*\
+  !*** ./src/app/components/set-card/set-card.component.scss?ngResource ***!
+  \************************************************************************/
+/***/ ((module) => {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzZXQtY2FyZC5jb21wb25lbnQuc2NzcyJ9 */";
+
+/***/ }),
+
 /***/ 8822:
 /*!********************************************************************************************!*\
   !*** ./src/app/components/training-plan-card/training-plan-card.component.scss?ngResource ***!
@@ -1635,13 +1800,23 @@ module.exports = "app-training-plan-card {\n  width: 100%;\n  max-width: 350px;\
 
 /***/ }),
 
+/***/ 9203:
+/*!************************************************************************!*\
+  !*** ./src/app/components/set-card/set-card.component.html?ngResource ***!
+  \************************************************************************/
+/***/ ((module) => {
+
+module.exports = "<ion-card>\n  <ion-card-header></ion-card-header>\n  <ion-card-content>\n    <ion-item>\n      <ion-col>Satz</ion-col>\n      <ion-col>Wiederhohlung</ion-col>\n      <ion-col>Gewicht (optional)</ion-col>\n    </ion-item>\n    <ion-item *ngFor=\"let set of this.setArray\">\n      <ion-col>{{set.setnumber}}</ion-col>\n      <ion-col>{{set.repetition}}</ion-col>\n      <ion-col>{{set.weight}}</ion-col>\n    </ion-item>\n    <ion-button *ngIf=\"!displayForm\" (click)=\"this.newSet()\">\n      <ion-icon name=\"add-circle\"></ion-icon>\n    </ion-button>\n    <form [formGroup]=\"this.setForm\" (submit)=\"this.addSet()\" *ngIf=\"this.displayForm\">\n      <ion-item>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"setnumber\"></ion-input>\n        </ion-col>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"repetition\"></ion-input>\n        </ion-col>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"weight\"></ion-input>\n        </ion-col>\n      </ion-item>\n      <ion-button color=\"success\" type=\"submit\" [disabled]=\"setForm.invalid\">\n        <ion-icon name=\"checkmark-circle\"></ion-icon>\n      </ion-button>\n      <ion-button color=\"danger\" [disabled]=\"setArray.length === 0\" (click)=\"this.abbortSet()\">\n        <ion-icon name=\"close-circle\"></ion-icon>\n      </ion-button>\n    </form>\n  </ion-card-content>\n</ion-card>\n";
+
+/***/ }),
+
 /***/ 6164:
 /*!********************************************************************************************!*\
   !*** ./src/app/components/training-plan-card/training-plan-card.component.html?ngResource ***!
   \********************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-card button routerDirection=\"forward\" [routerLink]=\"'/training-plan/' + this.id\" routerLinkActive=\"selected\">\n  <ion-card-header>\n    <ion-card-title>{{name}}</ion-card-title>\n  </ion-card-header>\n  <ion-card-content *ngIf=\"showDescription\">\n    {{description}}\n  </ion-card-content>\n</ion-card>\n";
+module.exports = "<ion-card button *ngIf=\"trainingPlan\" routerDirection=\"forward\" [routerLink]=\"'/training-plan/' + trainingPlan.id\" routerLinkActive=\"selected\">\n  <ion-card-header>\n    <ion-card-title>{{trainingPlan.name}}</ion-card-title>\n  </ion-card-header>\n  <ion-card-content *ngIf=\"showDescription\">\n    {{trainingPlan.description}}\n  </ion-card-content>\n</ion-card>\n";
 
 /***/ }),
 
@@ -1661,7 +1836,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>exercise-logging
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>Trainingspläne</ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Trainingspläne</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-list>\n    <ion-item *ngFor=\"let plan of trainingPlanList\" lines=\"none\">\n      <app-training-plan-card [name]=\"plan.name\" [description]=\"plan.description\" [id]=\"plan.trainingPlanId\" [showDescription]=\"true\"></app-training-plan-card>\n    </ion-item>\n  </ion-list>\n  <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\">\n    <ion-fab-button size=\"small\" color=\"dark\" id=\"trigger-btn-trainingModal\" class=\"button-add\"><ion-icon name=\"add-circle\"></ion-icon></ion-fab-button>\n  </ion-fab>\n\n\n  <ion-modal trigger=\"trigger-btn-trainingModal\" (willDismiss)=\"onWillDismiss($event)\">\n    <ng-template>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Neuer Trainingsplan</ion-title>\n          <ion-buttons slot=\"end\">\n            <ion-button (click)=\"cancel()\">\n              <ion-icon name=\"close-circle\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content class=\"ion-padding\">\n        <form [formGroup]=\"trainingform\" (submit)=\"addTrainingsPlan()\">\n          <ion-item>\n            <ion-label position=\"stacked\">Name des Plans</ion-label>\n            <ion-input type=\"text\" formControlName=\"name\"></ion-input>\n            <ion-note slot=\"error\" *ngIf=\"trainingform.dirty\">Feld Name darf nicht leer sein.</ion-note>\n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">Was bewirkt der Plan</ion-label>\n            <ion-input type=\"text\" formControlName=\"description\"></ion-input>\n            <ion-note slot=\"error\" *ngIf=\"trainingform.dirty\">Feld Beschreibung darf nicht leer sein.</ion-note>\n          </ion-item>\n          <ion-item>\n            <ion-select formControlName=\"period\" placeholder=\"Wie häufig soll trainiert werden?\">\n              <ion-label position=\"stacked\">Häufigkeit des Trainings:</ion-label>\n              <ion-select-option *ngFor=\"let option of this.weekdays\">{{option}}</ion-select-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-button type=\"submit\" (click)=\"confirm()\" [disabled]=\"this.trainingform.invalid\">Trainingsplan\n              Speichern\n            </ion-button>\n          </ion-item>\n        </form>\n      </ion-content>\n    </ng-template>\n  </ion-modal>\n</ion-content>\n\n\n\n";
+module.exports = "<ion-header [translucent]=\"false\">\n  <ion-toolbar>\n    <ion-title>Trainingspläne</ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Trainingsplänea</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-list>\n    <ion-item *ngFor=\"let plan of trainingPlanList\" lines=\"none\">\n      <app-training-plan-card [trainingPlan]=\"plan\" [showDescription]=\"true\"></app-training-plan-card>\n    </ion-item>\n  </ion-list>\n  <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\">\n    <ion-fab-button size=\"small\" color=\"dark\" id=\"trigger-btn-trainingModal\" class=\"button-add\"><ion-icon name=\"add-circle\"></ion-icon></ion-fab-button>\n  </ion-fab>\n\n\n  <ion-modal trigger=\"trigger-btn-trainingModal\" (willDismiss)=\"onWillDismiss($event)\">\n    <ng-template>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Neuer Trainingsplan</ion-title>\n          <ion-buttons slot=\"end\">\n            <ion-button (click)=\"cancel()\">\n              <ion-icon name=\"close-circle\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content class=\"ion-padding\">\n        <form [formGroup]=\"trainingform\" (submit)=\"addTrainingsPlan()\">\n          <ion-item>\n            <ion-label position=\"stacked\">Name des Plans</ion-label>\n            <ion-input type=\"text\" formControlName=\"name\"></ion-input>\n            <ion-note slot=\"error\" *ngIf=\"trainingform.dirty\">Feld Name darf nicht leer sein.</ion-note>\n          </ion-item>\n          <ion-item>\n            <ion-label position=\"stacked\">Was bewirkt der Plan</ion-label>\n            <ion-input type=\"text\" formControlName=\"description\"></ion-input>\n            <ion-note slot=\"error\" *ngIf=\"trainingform.dirty\">Feld Beschreibung darf nicht leer sein.</ion-note>\n          </ion-item>\n          <ion-item>\n            <ion-select formControlName=\"period\" placeholder=\"Wie häufig soll trainiert werden?\">\n              <ion-label position=\"stacked\">Häufigkeit des Trainings:</ion-label>\n              <ion-select-option *ngFor=\"let option of this.weekdays\">{{option}}</ion-select-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-button type=\"submit\" (click)=\"confirm()\" [disabled]=\"this.trainingform.invalid\">Trainingsplan\n              Speichern\n            </ion-button>\n          </ion-item>\n        </form>\n      </ion-content>\n    </ng-template>\n  </ion-modal>\n</ion-content>\n\n\n\n";
 
 /***/ })
 
