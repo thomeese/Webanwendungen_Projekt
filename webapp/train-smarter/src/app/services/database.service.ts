@@ -191,6 +191,12 @@ export class DatabaseService {
     return deleteDoc(exerciseDocRef);
   }
 
+  getAllSetLoggingByUid(): Observable<SetLogging []> {
+    const setLoggingRef = collection(this.firestore, 'setLogging');
+    const setLogginQuery = query(setLoggingRef, where('uid', '==', this.authService.getUserId()));
+    return collectionData(setLogginQuery, {idField: 'setLoggingId'}) as Observable<SetLogging []>;
+  }
+
   addSetLogging(setLogging: SetLogging) {
     const setLoggingRef = collection(this.firestore, 'setLogging');
     return addDoc(setLoggingRef, setLogging);
