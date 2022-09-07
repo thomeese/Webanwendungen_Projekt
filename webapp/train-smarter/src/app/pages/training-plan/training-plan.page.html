@@ -14,11 +14,14 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item button *ngFor="let plan of trainingPlanList" lines="none">
-      <app-training-plan-card [name]="plan.name" [description]="plan.description" [id]="plan.trainingPlanId" [showDescription]="'true'"></app-training-plan-card>
+    <ion-item *ngFor="let plan of trainingPlanList" lines="none">
+      <app-training-plan-card [name]="plan.name" [description]="plan.description" [id]="plan.trainingPlanId" [showDescription]="true"></app-training-plan-card>
     </ion-item>
   </ion-list>
-  <ion-button id="trigger-btn-trainingModal" class="button-add"><ion-icon name="add-circle"></ion-icon>Trainingsplan</ion-button>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small" color="dark" id="trigger-btn-trainingModal" class="button-add"><ion-icon name="add-circle"></ion-icon></ion-fab-button>
+  </ion-fab>
+
 
   <ion-modal trigger="trigger-btn-trainingModal" (willDismiss)="onWillDismiss($event)">
     <ng-template>

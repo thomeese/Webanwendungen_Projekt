@@ -7,7 +7,7 @@ import {
   MusclesToString,
   SearchTypesToString
 } from '../../services/exercise-db.service';
-import {LoadingController} from '@ionic/angular';
+import {IonRouterOutlet, LoadingController, MenuController} from '@ionic/angular';
 import {DatabaseService, Excersise} from '../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 
@@ -41,7 +41,9 @@ export class ExercisePage implements OnInit {
               private loadingCtr: LoadingController,
               private database: DatabaseService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private ionRouterOutlet: IonRouterOutlet,
+              private menu: MenuController) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
@@ -61,6 +63,13 @@ export class ExercisePage implements OnInit {
   }
 
   ngOnInit() {
+    if (this.ionRouterOutlet.canGoBack()) {
+      this.menu.enable(false);
+    }
+  }
+
+  ionViewDidLeave(){
+    this.menu.enable(true);
   }
 
   async loadData() {

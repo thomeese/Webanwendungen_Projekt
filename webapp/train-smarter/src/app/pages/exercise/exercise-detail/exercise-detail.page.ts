@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ExerciseDBService} from '../../../services/exercise-db.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {trigger, transition, animate, style, state} from '@angular/animations';
-import {LoadingController, NavController} from '@ionic/angular';
+import {LoadingController, ModalController, NavController} from '@ionic/angular';
 import {Location} from '@angular/common';
 import {DatabaseService} from '../../../services/database.service';
 import {waitForAsync} from '@angular/core/testing';
@@ -31,7 +31,8 @@ export class ExerciseDetailPage implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private nav: NavController,
-              private formbuilder: FormBuilder) {
+              private formbuilder: FormBuilder,
+              private modalController: ModalController) {
     this.setArray = [];
     this.displayForm = true;
     this.route.queryParams.subscribe(params => {
@@ -118,6 +119,7 @@ export class ExerciseDetailPage implements OnInit {
     };
     await this.database.updateTrainingPlan(updatePlan);
     console.log('Button hinzufuegen zum Trainingsplan');
+    this.modalController.dismiss();
   }
 
 
@@ -126,9 +128,5 @@ export class ExerciseDetailPage implements OnInit {
       this.exercise = result[0];
       console.log(this.exercise);
     });
-  }
-
-  myBackButton() {
-    this.location.back();
   }
 }
