@@ -20,14 +20,14 @@
     <ion-label>Exercise PersonalRecord</ion-label>
   </ion-item>
   <ion-item lines="none">
-    <ion-card *ngIf="mostUsedPlan" button="" (click)="this.redirect(this.mostUsedPlan.trainingPlanId)">
+    <ion-card *ngIf="mostUsedPlan" button="" routerDirection="forward" [routerLink]="'/training-plan/' + this.mostUsedPlan.trainingPlanId" routerLinkActive="selected">
       <ion-card-header>Am meisten absolvierter Trainingplan</ion-card-header>
       <ion-card-content>{{this.mostUsedPlan.name}}</ion-card-content>
       <ion-card-content>{{this.mostUsedPlan.description}}</ion-card-content>
     </ion-card>
   </ion-item>
   <ion-item lines="none">
-    <ion-card *ngIf="leastUsedPlan" button="" (click)="this.redirect(this.leastUsedPlan.trainingPlanId)">
+    <ion-card *ngIf="leastUsedPlan" button="" routerDirection="forward" [routerLink]="'/training-plan/' + this.leastUsedPlan.trainingPlanId" routerLinkActive="selected">
       <ion-card-header>Am wenigsten absolvierter Trainingplan</ion-card-header>
       <ion-card-content>{{this.leastUsedPlan.name}}</ion-card-content>
       <ion-card-content>{{this.leastUsedPlan.description}}</ion-card-content>
