@@ -1,6 +1,5 @@
 .exercise-card {
   border-radius: 15px;
-  margin: 0 7px 12px 7px;
 
   ion-card-header {
     border-bottom: 1px solid grey;
@@ -17,5 +16,9 @@
 
   .set-header {
     border-bottom: 1px dashed grey;
+  }
+
+  ion-item {
+    --inner-padding-end:0 !important;
   }
 }

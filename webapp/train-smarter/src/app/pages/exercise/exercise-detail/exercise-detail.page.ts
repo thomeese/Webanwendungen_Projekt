@@ -16,12 +16,13 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 //getExercise momentan nicht eingebunden
 export class ExerciseDetailPage implements OnInit {
 
-  @Input() id; //exerciseId
+  id; //exerciseId
   exercise;
   trainingPlanId;
   trainingPlan;
   setArray;
   displayForm;
+  edit = false;
 
   constructor(private exerciseDBService: ExerciseDBService,
               private loadingController: LoadingController,
@@ -45,12 +46,15 @@ export class ExerciseDetailPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.edit);
+    console.log(this.setArray);
+    console.log(this.id);
+    console.log(this.trainingPlanId);
     try {
-      const idTmp = this.route.snapshot.paramMap.get('id');
-      if (idTmp !== 'undefined' && idTmp !== null) {
-        this.id = idTmp; //exerciseId setzten
+
+      if (this.id === 'undefined' || this.id === null) {
+        this.id = this.route.snapshot.paramMap.get('id'); //exerciseId setzten
       }
-      console.log('trainingsPlanId: ' + this.trainingPlanId);
       //Falls ein Trainingsplan uebergeben wurde, diesen holen
       if (this.trainingPlanId) {
         this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res => {
@@ -58,17 +62,18 @@ export class ExerciseDetailPage implements OnInit {
           console.log(this.trainingPlan);
         });
       }
-    } catch (error) {
+      this.getExercise();
+    } catch
+      (error) {
       console.log(error);
     }
-    this.getExercise();
   }
 
   async updateExerciseinTrainingPlan() {
     const array = this.trainingPlan.exercises;
-    array.forEach(item =>{
+    array.forEach(item => {
       //Exercise im Array finden
-      if(item.exerciseId === this.exercise.exerciseId){
+      if (item.exerciseId === this.exercise.exerciseId) {
         //Bearbeitete Sets setzen
         item.sets = this.setArray;
       }
@@ -128,5 +133,24 @@ export class ExerciseDetailPage implements OnInit {
   updateSetArray(newSetArray: string) {
     //Formdaten setzen
     this.setArray = JSON.parse(newSetArray);
+  }
+
+  async saveChanges() {
+    console.log('Vorher');
+    for (const selectedExercise of this.trainingPlan.exercises) {
+      if (selectedExercise.exerciseId === this.exercise.numericId) {
+        selectedExercise.sets = this.setArray;
+      }
+    }
+    await this.database.updateTrainingPlan(this.trainingPlan);
+    //Modal schliessen
+    await this.modalController.dismiss();
+  }
+
+  loadSets() {
+    console.log("Exercise");
+    console.log(this.exercise);
+    this.setArray = this.exercise.sets;
+    console.log(this.setArray);
   }
 }

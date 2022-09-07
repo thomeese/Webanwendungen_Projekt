@@ -12,6 +12,7 @@ export class SetCardComponent implements OnInit {
   @Output() newSetArray = new EventEmitter<string>();
   setForm: FormGroup;
   displayForm;
+
   constructor(private formbuilder: FormBuilder) { }
   ngOnInit() {}
 

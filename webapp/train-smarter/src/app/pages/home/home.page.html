@@ -17,8 +17,7 @@
   <ion-text>Trainingspläne</ion-text>
   <swiper #swiper [config]="config">
     <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-      <app-training-plan-card [name]="trainingPlan.name" [description]="trainingPlan.description"
-                              [id]="trainingPlan.trainingPlanId" [showDescription]="false"></app-training-plan-card>
+      <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
     </ng-template>
   </swiper>
 </ion-content>

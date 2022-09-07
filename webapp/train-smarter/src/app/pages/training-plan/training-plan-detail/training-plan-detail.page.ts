@@ -9,13 +9,8 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./training-plan-detail.page.scss'],
 })
 export class TrainingPlanDetailPage implements OnInit {
-  id;
-  name;
-  description;
-  period;
-  uid;
-  exercises = [];
 
+  trainingPlan;
   constructor(private databaseService: DatabaseService,
               private route: ActivatedRoute,
               private router: Router,
@@ -23,62 +18,24 @@ export class TrainingPlanDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.getPlan();
+    const id = this.route.snapshot.paramMap.get('id');
+    this.getPlan(id);
   }
 
   addExerciseView() {
     const navigationExtras: NavigationExtras = {
       state: {
-        trainingPlanId: this.id
+        trainingPlanId: this.trainingPlan.id
       }
     };
     this.router.navigate(['exercise'], navigationExtras);
   }
 
-  getPlan() {
-    this.databaseService.getTrainingsPlanById(this.id).subscribe(res => {
-      this.name = res.name;
-      this.description = res.description;
-      this.period = res.period;
-      this.uid = res.uid;
-      this.exercises = res.exercises;
+  getPlan(id) {
+    this.databaseService.getTrainingsPlanById(id).subscribe(res => {
+      this.trainingPlan = res;
+
+      console.log("Trainingsplan Detailansicht: " + this.trainingPlan.id);
     });
-  }
-
-  editExercise(exercise) {
-    return null;
-  }
-
-  async deleteExerciseView(exerciseId) {
-    const alert = await this.alertController.create({
-      message: 'Möchten Sie diese Übung wirklich löschen?',
-      buttons: [{
-        text: 'Abbrechen',
-        role: 'cancel',
-      },
-        {
-          text: 'Löschen',
-          handler: () => {
-            this.deleteExercise(exerciseId);
-            alert.dismiss();
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  async deleteExercise(exerciseId) {
-   this.exercises =  this.exercises.filter(item => item.exerciseId !== exerciseId);
-    const updatePlan = {
-      id: this.id,
-      name: this.name,
-      description: this.description,
-      period: this.period,
-      uid: this.uid,
-      exercises: this.exercises
-    };
-    await this.databaseService.updateTrainingPlan(updatePlan);
   }
 }

@@ -1,8 +1,8 @@
-<ion-card button routerDirection="forward" [routerLink]="'/training-plan/' + this.id" routerLinkActive="selected">
+<ion-card button *ngIf="trainingPlan" routerDirection="forward" [routerLink]="'/training-plan/' + trainingPlan.id" routerLinkActive="selected">
   <ion-card-header>
-    <ion-card-title>{{name}}</ion-card-title>
+    <ion-card-title>{{trainingPlan.name}}</ion-card-title>
   </ion-card-header>
   <ion-card-content *ngIf="showDescription">
-    {{description}}
+    {{trainingPlan.description}}
   </ion-card-content>
 </ion-card>

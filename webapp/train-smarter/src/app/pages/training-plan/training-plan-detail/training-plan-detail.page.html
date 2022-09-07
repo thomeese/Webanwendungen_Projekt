@@ -4,8 +4,8 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <div class="ion-text-wrap">
-      <ion-title *ngIf="!name">Detailansicht</ion-title>
-      <ion-title *ngIf="name">{{name}}</ion-title>
+      <ion-title *ngIf="!this.trainingPlan">Detailansicht</ion-title>
+      <ion-title *ngIf="this.trainingPlan">{{this.trainingPlan.name}}</ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -17,15 +17,15 @@
         <ion-back-button></ion-back-button>
       </ion-buttons>
       <div class="ion-text-wrap">
-        <ion-title size="large" *ngIf="!name">Detailansicht</ion-title>
-        <ion-title size="large" *ngIf="name">{{name}}</ion-title>
+        <ion-title size="large" *ngIf="!this.trainingPlan">Detailansicht</ion-title>
+        <ion-title size="large" *ngIf="this.trainingPlan">{{this.trainingPlan.name}}</ion-title>
       </div>
     </ion-toolbar>
   </ion-header>
   <ion-label>Beschreibung:</ion-label>
-  <ion-item *ngIf="description">{{description}}</ion-item>
+  <ion-item *ngIf="this.trainingPlan">{{this.trainingPlan.description}}</ion-item>
   <ion-label>Häufigkeit des Trainings:</ion-label>
-  <ion-item *ngIf="period">{{period}}</ion-item>
+  <ion-item *ngIf="this.trainingPlan">{{this.trainingPlan.period}}</ion-item>
   <ion-card class="exercises-list">
     <ion-card-header>
       <ion-text><h3>Übungen:</h3></ion-text>
@@ -35,19 +35,8 @@
         </ion-fab-button>
       </ion-fab>
     </ion-card-header>
-    <ion-card-content>
-      <ion-item-sliding *ngFor="let exercise of this.exercises">
-        <ion-item-options side="start">
-          <ion-item-option (click)="editExercise(exercise)"><ion-icon name="pencil-sharp"></ion-icon></ion-item-option>
-        </ion-item-options>
-        <ion-item>
-          <app-exercise-with-logging-card  [exercise]="this.exercise"></app-exercise-with-logging-card>
-        </ion-item>
-        <ion-item-options slot="end">
-          <ion-item-option color="danger" (click)="this.deleteExerciseView(exercise.exerciseId)"><ion-icon name="trash-sharp"></ion-icon></ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
+    <ion-card-content class="exercises-list-content" *ngIf="this.trainingPlan">
+      <app-exercise-with-logging-card *ngFor="let exercise of this.trainingPlan.exercises" [trainingPlan]="this.trainingPlan" [exercise]="exercise"></app-exercise-with-logging-card>
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-      <div *ngIf="exercise" class="ion-text-wrap ion-text-center" >{{exercise.name}}</div>
+      <div *ngIf="exercise" class="ion-text-wrap ion-text-center">{{exercise.name}}</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,7 +13,7 @@
   <ion-card>
     <ion-card-content>
       <ion-title>
-        <div *ngIf="exercise" class="ion-text-wrap ion-text-center" >{{exercise.name}}</div>
+        <div *ngIf="exercise" class="ion-text-wrap ion-text-center">{{exercise.name}}</div>
       </ion-title>
     </ion-card-content>
   </ion-card>
@@ -33,7 +33,11 @@
     </ion-card>
     <app-set-card (newSetArray)="updateSetArray($event)" [setArray]="setArray" *ngIf="this.trainingPlan"></app-set-card>
 
-    <ion-button *ngIf="this.trainingPlan" [disabled]="this.setArray.length === 0" (click)="addToTrainingPlan()">Zum Trainingsplan hinzufügen
+    <ion-button *ngIf="this.trainingPlan && !this.edit" [disabled]="this.setArray.length === 0"
+                (click)="addToTrainingPlan()">Zum Trainingsplan hinzufügen
+    </ion-button>
+    <ion-button *ngIf="this.trainingPlan && this.edit" [disabled]="this.setArray.length === 0"
+                (click)="saveChanges()">Änderungen speichern
     </ion-button>
   </div>
 </ion-content>
