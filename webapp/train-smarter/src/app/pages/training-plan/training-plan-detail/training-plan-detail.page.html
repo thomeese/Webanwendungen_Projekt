@@ -36,25 +36,7 @@
       </ion-fab>
     </ion-card-header>
     <ion-card-content>
-      <ion-card class="exercise-card" *ngFor="let exercise of this.exercises" button="" routerDirection="forward"
-                [routerLink]="'/exercise/' + exercise.exerciseId"
-                routerLinkActive="selected">
-        <ion-card-header>
-          <ion-text><h4>{{exercise.name}}</h4></ion-text>
-        </ion-card-header>
-        <ion-grid>
-          <ion-row class="set-header ion-text-center ion-justify-content-center">
-            <ion-col size="3">Satz</ion-col>
-            <ion-col size="5">Wiederholung</ion-col>
-            <ion-col>Gewicht</ion-col>
-          </ion-row>
-          <ion-row class="ion-text-center ion-justify-content-center" *ngFor="let set of exercise.sets">
-            <ion-col size="3">{{set.setnumber}}</ion-col>
-            <ion-col size="5">{{set.repetition}}</ion-col>
-            <ion-col>{{set.weight}}</ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
+      <app-exercise-with-logging-card *ngFor="let exercise of this.exercises" [exercise]="this.exercise"></app-exercise-with-logging-card>
     </ion-card-content>
   </ion-card>
 </ion-content>
