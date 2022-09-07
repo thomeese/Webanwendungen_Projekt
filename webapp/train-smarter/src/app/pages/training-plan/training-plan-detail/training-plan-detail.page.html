@@ -7,23 +7,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-card-header>
-    <ion-card-title>{{name}}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-label>Beschreibung:</ion-label>
-    <ion-item *ngIf="description">{{description}}</ion-item>
-    <ion-label>Häufigkeit des Trainings:</ion-label>
-    <ion-item *ngIf="period">{{period}}</ion-item>
-  </ion-card-content>
-  <ion-card-content>
-    Übungen:
-    <ion-button button = "" (click)="addExerciseView()">
-      <ion-icon name="add-circle"></ion-icon>
-    </ion-button>
-    <ion-list *ngFor="let exercise of this.exercises">
-      <ion-item button = "" routerDirection="forward" [routerLink]="'/exercise/' + exercise.exerciseId" routerLinkActive="selected">{{exercise.name}}</ion-item>
-    </ion-list>
-  </ion-card-content>
-
+  <ion-card-title>{{name}}</ion-card-title>
+  <ion-label>Beschreibung:</ion-label>
+  <ion-item *ngIf="description">{{description}}</ion-item>
+  <ion-label>Häufigkeit des Trainings:</ion-label>
+  <ion-item *ngIf="period">{{period}}</ion-item>
+  <ion-card>
+    <ion-card-header>
+      <ion-text><h3>Übungen:</h3></ion-text>
+      <ion-fab horizontal="end" vertical="top">
+        <ion-fab-button size="small" color="dark" class="button-add" (click)="addExerciseView()">
+          <ion-icon name="add-circle"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngFor="let exercise of this.exercises">
+        <ion-item button="" routerDirection="forward" [routerLink]="'/exercise/' + exercise.exerciseId"
+                  routerLinkActive="selected">{{exercise.name}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

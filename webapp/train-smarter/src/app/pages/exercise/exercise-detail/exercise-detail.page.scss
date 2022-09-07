@@ -1,0 +1,22 @@
+ion-title{
+  padding-left: 0;
+  color: #0d0d0d;
+  font-size: 20px;
+}
+
+ion-content {
+  ion-title {
+    padding-right: 0;
+  }
+}
+
+ion-text {
+  color: #0d0d0d;
+  word-wrap: break-word;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.label {
+  padding-right: 5px;
+}

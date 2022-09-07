@@ -1,19 +1,37 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons>
-      <ion-back-button slot="start" (click)="myBackButton()"></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>exercise-detail</ion-title>
+    <ion-title>
+      <div *ngIf="exercise" class="ion-text-wrap ion-text-center" >{{exercise.name}}</div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-title>
+        <div *ngIf="exercise" class="ion-text-wrap ion-text-center" >{{exercise.name}}</div>
+      </ion-title>
+    </ion-card-content>
+  </ion-card>
   <div *ngIf="exercise">
-    <ion-item>{{exercise.numericId}}</ion-item>
-    <ion-item><img src="{{exercise.gifUrl}}"/></ion-item>
-    <ion-item>{{exercise.name}}</ion-item>
-    <ion-item>{{exercise.target}}</ion-item>
-    <ion-item>{{exercise.equipment}}</ion-item>
+    <img src="{{exercise.gifUrl}}"/>
+    <ion-card>
+      <ion-card-content>
+        <ion-text class="label">Muskelgruppe:</ion-text>
+        <ion-text>{{exercise.target}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-text class="label">Benötigtes Equipment:</ion-text>
+        <ion-text>{{exercise.equipment}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+
     <ion-list *ngIf="this.trainingPlan && setArray.length !== 0">
       <ion-item>
         <ion-col>Satz</ion-col>
@@ -21,9 +39,9 @@
         <ion-col>Gewicht (optional)</ion-col>
       </ion-item>
       <ion-item *ngFor="let set of this.setArray">
-          <ion-col>{{set.setnumber}}</ion-col>
-          <ion-col>{{set.repetition}}</ion-col>
-          <ion-col>{{set.weight}}</ion-col>
+        <ion-col>{{set.setnumber}}</ion-col>
+        <ion-col>{{set.repetition}}</ion-col>
+        <ion-col>{{set.weight}}</ion-col>
       </ion-item>
       <ion-button (click)="this.newSet()">
         <ion-icon name="add-circle"></ion-icon>
@@ -46,7 +64,9 @@
           <ion-input type="text" formControlName="weight"></ion-input>
         </ion-col>
       </ion-item>
-      <ion-button type="submit" [disabled]="setForm.invalid"><ion-icon name="checkmark-circle"></ion-icon></ion-button>
+      <ion-button type="submit" [disabled]="setForm.invalid">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-button>
     </form>
     <ion-button *ngIf="this.trainingPlan" (click)="addToTrainingPlan()">Zum Trainingsplan hinzufügen
     </ion-button>

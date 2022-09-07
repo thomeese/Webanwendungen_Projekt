@@ -14,46 +14,38 @@
       <ion-title size="large">Exercise</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-title>{{this.searchTypeSelected}}</ion-title>
   <ion-list>
     <ion-item>
-      <ion-select placeholder="Wähle den Filter" [(ngModel)]="searchTypeSelected">
+      <ion-select interface="popover" placeholder="Wähle den Filter" [(ngModel)]="searchTypeSelected">
         <ion-select-option *ngFor="let search of enumSearchTypeKeys"
                            [value]="search">{{searchTypes[search]}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-select *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])"
-                placeholder="Wähle aus." [(ngModel)]="targetSelected">
-      <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
+    <ion-item *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
+    <ion-select interface="popover" placeholder="Wähle aus." [(ngModel)]="targetSelected">
+      <div *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
         <ion-select-option *ngFor="let part of enumBodyPartKeys; let i = index"
                            [value]=this.enumBodyPartValues[i]>{{bodyparts[part]}}</ion-select-option>
-      </ion-item>
-      <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
+      </div>
+      <div *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
         <ion-select-option *ngFor="let musc of enumMuscleKeys; let i = index"
                            [value]="this.enumMuscleValues[i]">{{muscles[musc]}}</ion-select-option>
-      </ion-item>
-      <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[4]"> <!-- By Equipment selected -->
+      </div>
+      <div *ngIf="searchTypeSelected === enumSearchTypeKeys[4]"> <!-- By Equipment selected -->
         <ion-select-option *ngFor="let equip of enumEquipmentKeys; let i = index"
                            [value]="this.enumEquipmentValues[i]">{{equipment[equip]}}</ion-select-option>
-      </ion-item>
+      </div>
     </ion-select>
+    </ion-item>
     <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[3]">
       <ion-input placeholder="Geben Sie die ID ein." [(ngModel)]="exerciseID"></ion-input>
     </ion-item>
-    <ion-item>
       <ion-button class="search" type="button" (click)="loadData()">Suchen</ion-button>
-    </ion-item>
   </ion-list>
   <ion-list>
     <ion-item position="floating" button *ngFor="let exercise of exercises">
       <app-exercise-card [exercise]="exercise" [trainingPlanId]="trainingPlanId"></app-exercise-card>
     </ion-item>
-      <!-- <ion-card button="" (click)="this.exerciseDetailView(exercise.exerciseId)">
-        <ion-card-header>
-          <ion-card-title>{{exercise.name}}asdf</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </ion-item>-->
   </ion-list>
   <ion-button [routerLink]="'/exercise/0111'" routerDirection="forward" routerLinkActive="true"></ion-button>
 </ion-content>
