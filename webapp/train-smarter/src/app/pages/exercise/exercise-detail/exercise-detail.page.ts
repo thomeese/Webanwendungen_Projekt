@@ -7,6 +7,7 @@ import {Location} from '@angular/common';
 import {DatabaseService} from '../../../services/database.service';
 import {waitForAsync} from '@angular/core/testing';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+
 @Component({
   selector: 'app-exercise-detail',
   templateUrl: './exercise-detail.page.html',
@@ -48,6 +49,19 @@ export class ExerciseDetailPage implements OnInit {
     this.displayForm = true;
   }
 
+  abbortSet() {
+    this.displayForm = false;
+    this.generateSetFormgroup();
+  }
+
+  generateSetFormgroup() {
+    this.setForm = this.setForm = this.formbuilder.group({
+      setnumber: new FormControl(`${this.setArray.length + 1}`, []),
+      repetition: new FormControl('', [Validators.required, Validators.pattern('[0-9]{2}')]),
+      weight: new FormControl('', [])
+    });
+  }
+
   addSet() {
     const data = this.setForm.getRawValue();
     this.setArray.push({
@@ -55,21 +69,13 @@ export class ExerciseDetailPage implements OnInit {
       repetition: data.repetition,
       weight: data.weight
     });
-    this.setForm = this.setForm = this.formbuilder.group({
-      setnumber: new FormControl(`${this.setArray.length + 1}`, []),
-      repetition: new FormControl('', [Validators.required, Validators.pattern('[0-9]{2}')]),
-      weight: new FormControl('', [])
-    });
+    this.generateSetFormgroup();
     this.displayForm = false;
   }
 
   ngOnInit() {
     try {
-      this.setForm = this.formbuilder.group({
-        setnumber: new FormControl(`${this.setArray.length + 1}`, []),
-        repetition: new FormControl('', [Validators.required, Validators.pattern('[0-9]{2}')]),
-        weight: new FormControl('', [])
-      });
+      this.generateSetFormgroup();
       const idTmp = this.route.snapshot.paramMap.get('id');
       if (idTmp !== 'undefined' && idTmp !== null) {
         this.id = idTmp;
@@ -99,7 +105,8 @@ export class ExerciseDetailPage implements OnInit {
     console.log(this.id);
     array.push({
       exerciseId: this.id,
-      name: this.exercise.name
+      name: this.exercise.name,
+      sets: this.setArray
     });
     const updatePlan = {
       id: this.trainingPlan.trainingPlanId,
