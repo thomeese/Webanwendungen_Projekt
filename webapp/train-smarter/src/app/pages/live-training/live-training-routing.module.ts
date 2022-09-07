@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: LiveTrainingDetailPage
+    loadChildren: () => import('./live-training-detail/live-training-detail.module').then(m => m.LiveTrainingDetailPageModule)
   }
 
 ];

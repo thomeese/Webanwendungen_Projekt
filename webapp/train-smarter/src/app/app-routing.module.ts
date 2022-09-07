@@ -33,8 +33,7 @@ const routes: Routes = [
     path: 'live-training',
     loadChildren: () => import('./pages/live-training/live-training.module').then(m => m.LiveTrainingPageModule),
     canActivate: [AuthenticationService]
-  },
-  {
+  }, {
     path: 'training-plan-detail',
     // eslint-disable-next-line max-len
     loadChildren: () => import('./pages/training-plan/training-plan-detail/training-plan-detail.module').then(m => m.TrainingPlanDetailPageModule),

@@ -1,13 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-back-button slot="start"></ion-back-button>
-    <ion-title *ngIf="!name">Detailansicht</ion-title>
-    <ion-title *ngIf="name">{{name}}: Detailansicht</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="ion-text-wrap">
+      <ion-title *ngIf="!name">Detailansicht</ion-title>
+      <ion-title *ngIf="name">{{name}}</ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card-title>{{name}}</ion-card-title>
   <ion-label>Beschreibung:</ion-label>
   <ion-item *ngIf="description">{{description}}</ion-item>
   <ion-label>Häufigkeit des Trainings:</ion-label>
@@ -22,22 +25,25 @@
       </ion-fab>
     </ion-card-header>
     <ion-card-content>
-        <ion-card class="exercise-card" *ngFor="let exercise of this.exercises" button="" routerDirection="forward" [routerLink]="'/exercise/' + exercise.exerciseId"
-                  routerLinkActive="selected">
-          <ion-card-header><ion-text><h4>{{exercise.name}}</h4></ion-text></ion-card-header>
-          <ion-grid>
-            <ion-row class="set-header ion-text-center ion-justify-content-center">
-              <ion-col size="3">Satz</ion-col>
-              <ion-col size="5">Wiederhohlung</ion-col>
-              <ion-col>Gewicht</ion-col>
-            </ion-row>
-            <ion-row class="ion-text-center ion-justify-content-center" *ngFor="let set of exercise.sets">
-              <ion-col size="3">{{set.setnumber}}</ion-col>
-              <ion-col size="5">{{set.repetition}}</ion-col>
-              <ion-col>{{set.weight}}</ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card>
+      <ion-card class="exercise-card" *ngFor="let exercise of this.exercises" button="" routerDirection="forward"
+                [routerLink]="'/exercise/' + exercise.exerciseId"
+                routerLinkActive="selected">
+        <ion-card-header>
+          <ion-text><h4>{{exercise.name}}</h4></ion-text>
+        </ion-card-header>
+        <ion-grid>
+          <ion-row class="set-header ion-text-center ion-justify-content-center">
+            <ion-col size="3">Satz</ion-col>
+            <ion-col size="5">Wiederhohlung</ion-col>
+            <ion-col>Gewicht</ion-col>
+          </ion-row>
+          <ion-row class="ion-text-center ion-justify-content-center" *ngFor="let set of exercise.sets">
+            <ion-col size="3">{{set.setnumber}}</ion-col>
+            <ion-col size="5">{{set.repetition}}</ion-col>
+            <ion-col>{{set.weight}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
     </ion-card-content>
   </ion-card>
 </ion-content>
