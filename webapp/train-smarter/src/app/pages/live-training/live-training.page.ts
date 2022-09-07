@@ -32,12 +32,7 @@ export class LiveTrainingPage implements OnInit {
     await loading.dismiss();
   }
 
-  addPlanView(id) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        trainingPlanId: id
-      }
-    };
-    this.router.navigateByUrl('/live-training-detail', navigationExtras);
+  addPlanView(trainingPlanId) {
+    this.router.navigateByUrl('/live-training/' + trainingPlanId);
   }
 }

@@ -1,0 +1,31 @@
+.exercises-list {
+  border-radius: 10px;
+  background: rgba(224, 224, 224, 0.71);
+
+  ion-card-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.exercise-card {
+  border-radius: 15px;
+  margin: 0 7px 7px 7px;
+
+  ion-card-header {
+    border-bottom: 1px solid grey;
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    h4 {
+      font-weight: bold;
+      font-size: 18px;
+      color: #0d0d0d;
+    }
+  }
+
+  .set-header {
+    border-bottom: 1px dashed grey;
+  }
+}

@@ -12,7 +12,7 @@
   <ion-item *ngIf="description">{{description}}</ion-item>
   <ion-label>Häufigkeit des Trainings:</ion-label>
   <ion-item *ngIf="period">{{period}}</ion-item>
-  <ion-card>
+  <ion-card class="exercises-list">
     <ion-card-header>
       <ion-text><h3>Übungen:</h3></ion-text>
       <ion-fab horizontal="end" vertical="top">
@@ -22,23 +22,22 @@
       </ion-fab>
     </ion-card-header>
     <ion-card-content>
-      <ion-list *ngFor="let exercise of this.exercises">
-        <ion-item button="" routerDirection="forward" [routerLink]="'/exercise/' + exercise.exerciseId"
-                  routerLinkActive="selected">{{exercise.name}}</ion-item>
-        <ion-list>
-          <ion-text><h3>Sets:</h3></ion-text>
-          <ion-item>
-            <ion-col>Satz</ion-col>
-            <ion-col>Wiederhohlung</ion-col>
-            <ion-col>Gewicht (optional)</ion-col>
-          </ion-item>
-          <ion-item *ngFor="let set of exercise.sets">
-            <ion-col>{{set.setnumber}}</ion-col>
-            <ion-col>{{set.repetition}}</ion-col>
-            <ion-col>{{set.weight}}</ion-col>
-          </ion-item>
-        </ion-list>
-      </ion-list>
+        <ion-card class="exercise-card" *ngFor="let exercise of this.exercises" button="" routerDirection="forward" [routerLink]="'/exercise/' + exercise.exerciseId"
+                  routerLinkActive="selected">
+          <ion-card-header><ion-text><h4>{{exercise.name}}</h4></ion-text></ion-card-header>
+          <ion-grid>
+            <ion-row class="set-header ion-text-center ion-justify-content-center">
+              <ion-col size="3">Satz</ion-col>
+              <ion-col size="5">Wiederhohlung</ion-col>
+              <ion-col>Gewicht</ion-col>
+            </ion-row>
+            <ion-row class="ion-text-center ion-justify-content-center" *ngFor="let set of exercise.sets">
+              <ion-col size="3">{{set.setnumber}}</ion-col>
+              <ion-col size="5">{{set.repetition}}</ion-col>
+              <ion-col>{{set.weight}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
     </ion-card-content>
   </ion-card>
 </ion-content>

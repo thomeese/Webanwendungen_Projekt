@@ -16,15 +16,7 @@ export class LiveTrainingDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation() !== null) {
-        console.log('Navigation on');
-        console.log(this.router.getCurrentNavigation());
-        if (this.router.getCurrentNavigation().extras.state) {
-          this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
-        }
-      }
-    });
+    this.trainingPlanId = this.route.snapshot.paramMap.get('trainingPlanId');
     this.getPlan();
   }
   getPlan() {
