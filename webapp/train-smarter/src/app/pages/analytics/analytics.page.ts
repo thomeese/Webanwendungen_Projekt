@@ -19,19 +19,22 @@ export class AnalyticsPage implements OnInit {
     const map = new Map();
     this.dataService.getUserTrainingsPlan().subscribe(result => {
       result.forEach(resultItem => {
+        //Map mit ids und Nullen vorinitialisieren
         map.set(resultItem.trainingPlanId, 0);
       });
       this.dataService.getAllSetLoggingByUid().subscribe(res => {
         res.forEach(resItem => {
+          //Jede gefundene Id hochzaehlen
           map.set(resItem.trainingPlanId, map.get(resItem.trainingPlanId) + 1);
         });
+        //Max-Wert in der Map ermitteln
         const maxValue = Math.max(...map.values());
         for (const keyItem of map.keys()) {
           if (map.get(keyItem) === maxValue) {
+            //Plan der dem Max-Wert in der Map hat setzen
             this.dataService.getTrainingsPlanById(keyItem).subscribe(resultItem => {
               this.mostUsedPlan = resultItem;
             });
-          } else {
           }
         }
       });
@@ -42,19 +45,22 @@ export class AnalyticsPage implements OnInit {
     const map = new Map();
     this.dataService.getUserTrainingsPlan().subscribe(result => {
       result.forEach(resultItem => {
+        //Map mit ids und Nullen vorinitialisieren
         map.set(resultItem.trainingPlanId, 0);
       });
       this.dataService.getAllSetLoggingByUid().subscribe(res => {
         res.forEach(resItem => {
+          //Jede gefundene Id hochzaehlen
           map.set(resItem.trainingPlanId, map.get(resItem.trainingPlanId) + 1);
         });
+        //Min-Wert in der Map ermitteln
         const minValue = Math.min(...map.values());
         for (const keyItem of map.keys()) {
           if (map.get(keyItem) === minValue) {
+            //Plan der dem Min-Wert in der Map hat setzen
             this.dataService.getTrainingsPlanById(keyItem).subscribe(resultItem => {
               this.leastUsedPlan = resultItem;
             });
-          } else {
           }
         }
       });
