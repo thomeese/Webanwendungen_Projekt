@@ -65,7 +65,7 @@
         </ion-col>
       </ion-item>
       <ion-button color="success" type="submit" [disabled]="setForm.invalid"><ion-icon name="checkmark-circle"></ion-icon></ion-button>
-      <ion-button color="danger" [disabled]="setArray.length === 0" (click)="this.abbortSet()"><ion-icon name="close-circle"></ion-icon></ion-button>
+      <ion-button color="danger" [disabled]="setArray.length === 0" (click)="this.abbortSet()"><ion-icon name="close-circle"></ion-icon> </ion-button>
     </form>
     <ion-button *ngIf="this.trainingPlan" [disabled]="displayForm || this.setArray.length === 0" (click)="addToTrainingPlan()">Zum Trainingsplan hinzufügen
     </ion-button>
