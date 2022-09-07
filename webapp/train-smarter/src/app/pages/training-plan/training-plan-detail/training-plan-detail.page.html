@@ -44,7 +44,7 @@
           <app-exercise-with-logging-card  [exercise]="this.exercise"></app-exercise-with-logging-card>
         </ion-item>
         <ion-item-options slot="end">
-          <ion-item-option (click)="deleteExercise(exercise)"><ion-icon name="trash-sharp"></ion-icon></ion-item-option>
+          <ion-item-option color="danger" (click)="this.deleteExerciseView(exercise.exerciseId)"><ion-icon name="trash-sharp"></ion-icon></ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
 
