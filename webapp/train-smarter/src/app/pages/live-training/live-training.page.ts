@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {LoadingController} from '@ionic/angular';
+import {LoadingController, ModalController} from '@ionic/angular';
 import {DatabaseService} from '../../services/database.service';
 import {NavigationExtras, Router} from '@angular/router';
 import {LocalstorageService} from '../../services/localstorage.service';
+import {LiveTrainingLoggingPage} from "./live-training-logging/live-training-logging.page";
 
 @Component({
   selector: 'app-live-training',
@@ -19,15 +20,16 @@ export class LiveTrainingPage implements OnInit {
   constructor(private loadingCtr: LoadingController,
               private dataService: DatabaseService,
               private router: Router,
-              private localStorageCtrl: LocalstorageService) {
+              private localStorageCtrl: LocalstorageService,
+              private modalCtrl: ModalController) {
   }
 
   ngOnInit() {
     this.trainingPlanId = this.localStorageCtrl.getData('live-training-trainingPlanId');
-    if(this.trainingPlanId){
+    if (this.trainingPlanId) {
       //this.exercises = JSON.parse(this.localStorageCtrl.getData('live-training-trainingPlanId'));
       console.log(this.exercises);
-      if(!this.exercises) {
+      if (!this.exercises) {
         this.getExercises();
       }
     } else {
@@ -48,6 +50,19 @@ export class LiveTrainingPage implements OnInit {
       this.localStorageCtrl.saveData('live-training-exercises', JSON.stringify(this.exercises));
     });
     await loading.dismiss();
+  }
+
+  async logTraining(_exerciseId) {
+    const modal = await this.modalCtrl.create({
+      component: LiveTrainingLoggingPage,
+      componentProps: {
+        trainingPlanId: this.trainingPlanId,
+        exerciseId: _exerciseId
+      },
+      breakpoints: [0, 0.8, 1],
+      initialBreakpoint: 0.8
+    });
+    modal.present();
   }
 
   async getTrainingPlans() {

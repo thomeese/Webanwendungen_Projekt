@@ -28,7 +28,7 @@
         <ion-col>Todo</ion-col>
         <ion-col>Done</ion-col>
       </ion-item>
-      <ion-item *ngFor="let todo of exercises">
+      <ion-item *ngFor="let todo of exercises" button="" (click)="this.logTraining(todo.exerciseId)">
         <ion-col>{{todo.name}}</ion-col>
         <ion-col>
           <ion-icon color="danger" name="close-circle"></ion-icon>

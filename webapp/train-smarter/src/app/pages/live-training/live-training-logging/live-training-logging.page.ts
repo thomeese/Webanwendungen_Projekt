@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {LocalstorageService} from '../../../services/localstorage.service';
+import {DatabaseService} from "../../../services/database.service";
 
 @Component({
   selector: 'app-live-training-logging',
@@ -6,10 +8,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./live-training-logging.page.scss'],
 })
 export class LiveTrainingLoggingPage implements OnInit {
-
-  constructor() { }
+  @Input() trainingPlanId;
+  @Input() exerciseId;
+  exercise;
+  gifUrl;
+  setLog = [];
+  constructor(private locaStorageServ: LocalstorageService,
+  private dataService: DatabaseService) {
+  }
 
   ngOnInit() {
+    if (this.trainingPlanId) {
+      const exercises = JSON.parse(this.locaStorageServ.getData('live-training-exercises'));
+      console.log(exercises);
+      exercises.forEach(item =>{
+        if(item.exerciseId === this.exerciseId){
+          this.exercise = item;
+          this.dataService.getExerciseByNumericId(this.exercise.exerciseId).subscribe(res =>{
+            this.gifUrl = res[0].gifUrl;
+          });
+        }
+      });
+      this.setLog = JSON.parse(this.locaStorageServ.getData('set-log-data'));
+      if(!this.setLog){
+        this.setLog = [];
+      }
+    }
   }
 
 }
