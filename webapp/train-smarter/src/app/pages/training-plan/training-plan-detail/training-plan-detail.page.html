@@ -25,6 +25,19 @@
       <ion-list *ngFor="let exercise of this.exercises">
         <ion-item button="" routerDirection="forward" [routerLink]="'/exercise/' + exercise.exerciseId"
                   routerLinkActive="selected">{{exercise.name}}</ion-item>
+        <ion-list>
+          <ion-text><h3>Sets:</h3></ion-text>
+          <ion-item>
+            <ion-col>Satz</ion-col>
+            <ion-col>Wiederhohlung</ion-col>
+            <ion-col>Gewicht (optional)</ion-col>
+          </ion-item>
+          <ion-item *ngFor="let set of exercise.sets">
+            <ion-col>{{set.setnumber}}</ion-col>
+            <ion-col>{{set.repetition}}</ion-col>
+            <ion-col>{{set.weight}}</ion-col>
+          </ion-item>
+        </ion-list>
       </ion-list>
     </ion-card-content>
   </ion-card>
