@@ -14,9 +14,9 @@
     </ion-toolbar>
   </ion-header>
   <div *ngIf="trainingPlanList && !trainingPlanId">
-    <ion-text>Wähle einen Trainingsplan: </ion-text>
+    <ion-text>Wähle einen Trainingsplan:</ion-text>
     <ion-list>
-      <ion-item Button = "" (click)="startLiveTraining(plan.trainingPlanId)" *ngFor="let plan of this.trainingPlanList">
+      <ion-item Button="" (click)="startLiveTraining(plan.trainingPlanId)" *ngFor="let plan of this.trainingPlanList">
         <ion-text>{{plan.name}}</ion-text>
       </ion-item>
     </ion-list>
@@ -28,15 +28,15 @@
         <ion-col>Todo</ion-col>
         <ion-col>Done</ion-col>
       </ion-item>
-      <ion-item *ngFor="let todo of exercises">
-        <ion-col>{{todo.name}}</ion-col>
+      <ion-item *ngFor="let todo of exercises; let i=index" button="">
+        <ion-col (click)="this.logTraining(todo.exerciseId)">{{todo.name}}</ion-col>
         <ion-col>
-          <ion-icon color="danger" name="close-circle" button="" (click)="this.logTraining(todo.exerciseId)"></ion-icon>
-        </ion-col>
-        <ion-col>
-          <ion-icon color="success" name="checkmark-done-circle"></ion-icon>
+          <ion-icon size="large" (click)="setChecked(i, todo.exerciseId)"
+                    [attr.color]=" exercisesState[i] ? 'success' : 'danger'"
+                    [attr.disabled]="exercisesState[i]" name="checkmark-done-circle"></ion-icon>
         </ion-col>
       </ion-item>
+
     </ion-list>
   </div>
 </ion-content>
