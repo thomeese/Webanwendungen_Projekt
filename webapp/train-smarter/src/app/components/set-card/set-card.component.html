@@ -1,0 +1,37 @@
+<ion-card>
+  <ion-card-header></ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      <ion-col>Satz</ion-col>
+      <ion-col>Wiederhohlung</ion-col>
+      <ion-col>Gewicht (optional)</ion-col>
+    </ion-item>
+    <ion-item *ngFor="let set of this.setArray">
+      <ion-col>{{set.setnumber}}</ion-col>
+      <ion-col>{{set.repetition}}</ion-col>
+      <ion-col>{{set.weight}}</ion-col>
+    </ion-item>
+    <ion-button *ngIf="!displayForm" (click)="this.newSet()">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-button>
+    <form [formGroup]="this.setForm" (submit)="this.addSet()" *ngIf="this.displayForm">
+      <ion-item>
+        <ion-col>
+          <ion-input type="text" formControlName="setnumber"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-input type="text" formControlName="repetition"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-input type="text" formControlName="weight"></ion-input>
+        </ion-col>
+      </ion-item>
+      <ion-button color="success" type="submit" [disabled]="setForm.invalid">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" [disabled]="setArray.length === 0" (click)="this.abbortSet()">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
