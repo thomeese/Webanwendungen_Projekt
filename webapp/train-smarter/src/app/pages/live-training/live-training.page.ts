@@ -110,7 +110,7 @@ export class LiveTrainingPage implements OnInit {
     console.log(this.trainingPlan);
     const set: SetLogging = {
       date: new DatePipe('de-DE').transform(new Date(),'dd.MM.yyyy'),
-      time:new DatePipe('de-DE').transform(new Date(),'HH:mm'),
+      time: new DatePipe('de-DE').transform(new Date(),'HH:mm'),
       excerciseId: _exerciseId,
       sets: JSON.parse(this.localStorageCtrl.getData('set-log-data-'+ _exerciseId)),
       trainingPlanId: this.trainingPlanId,

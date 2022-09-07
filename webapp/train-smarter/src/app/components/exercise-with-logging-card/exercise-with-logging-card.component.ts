@@ -13,4 +13,11 @@ export class ExerciseWithLoggingCardComponent implements OnInit {
 
   ngOnInit() {}
 
+  editExercise(exercise) {
+
+  }
+
+  deleteExercise(exercise) {
+
+  }
 }

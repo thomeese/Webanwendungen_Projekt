@@ -40,6 +40,11 @@ export class TrainingPlanDetailPage implements OnInit {
     });
   }
 
-  showExerciseLogging() {
+  editExercise(exercise) {
+    return null;
+  }
+
+  deleteExercise(exercise){
+    return null;
   }
 }
