@@ -16,12 +16,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 //getExercise momentan nicht eingebunden
 export class ExerciseDetailPage implements OnInit {
 
-  @Input() id;
+  @Input() id; //exerciseId
   exercise;
   trainingPlanId;
   trainingPlan;
   setArray;
-  setForm: FormGroup;
   displayForm;
 
   constructor(private exerciseDBService: ExerciseDBService,
@@ -45,38 +44,14 @@ export class ExerciseDetailPage implements OnInit {
     });
   }
 
-
-
-  abbortSet() {
-    this.displayForm = false;
-    this.generateSetFormgroup();
-  }
-
-  generateSetFormgroup() {
-    this.setForm = this.setForm = this.formbuilder.group({
-      setnumber: new FormControl(`${this.setArray.length + 1}`, []),
-      repetition: new FormControl('', [Validators.required, Validators.pattern('[0-9]{2}')]),
-      weight: new FormControl('', [])
-    });
-  }
-
-  addSet() {
-    const data = this.setForm.getRawValue();
-    this.setArray.push({
-      setnumber: data.setnumber,
-      repetition: data.repetition,
-      weight: data.weight
-    });
-    this.abbortSet();
-  }
-
   ngOnInit() {
     try {
       const idTmp = this.route.snapshot.paramMap.get('id');
       if (idTmp !== 'undefined' && idTmp !== null) {
-        this.id = idTmp;
+        this.id = idTmp; //exerciseId setzten
       }
       console.log('trainingsPlanId: ' + this.trainingPlanId);
+      //Falls ein Trainingsplan uebergeben wurde, diesen holen
       if (this.trainingPlanId) {
         this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res => {
           this.trainingPlan = res;
@@ -89,21 +64,16 @@ export class ExerciseDetailPage implements OnInit {
     this.getExercise();
   }
 
-  async addToTrainingPlan() {
-    console.log('Vorher');
-    let array;
-    array = this.trainingPlan.exercises;
-    console.log(array);
-    if (!array) {
-      array = [];
-    }
-    console.log('Mitten drin');
-    console.log(this.id);
-    array.push({
-      exerciseId: this.id,
-      name: this.exercise.name,
-      sets: this.setArray
+  async updateExerciseinTrainingPlan() {
+    const array = this.trainingPlan.exercises;
+    array.forEach(item =>{
+      //Exercise im Array finden
+      if(item.exerciseId === this.exercise.exerciseId){
+        //Bearbeitete Sets setzen
+        item.sets = this.setArray;
+      }
     });
+    //Attribute im Plan setzten
     const updatePlan = {
       id: this.trainingPlan.trainingPlanId,
       name: this.trainingPlan.name,
@@ -112,13 +82,43 @@ export class ExerciseDetailPage implements OnInit {
       uid: this.trainingPlan.uid,
       exercises: array
     };
+    //Plan in der Datenbank updaten
     await this.database.updateTrainingPlan(updatePlan);
-    console.log('Button hinzufuegen zum Trainingsplan');
+    //Modal schliessen
+    await this.modalController.dismiss();
+  }
+
+  async addToTrainingPlan() {
+    console.log('Vorher');
+    let array;
+    array = this.trainingPlan.exercises;
+    if (!array) {
+      array = [];
+    }
+    //Exercise dem Exercise-Array hinzufuegen
+    array.push({
+      exerciseId: this.id,
+      name: this.exercise.name,
+      sets: this.setArray
+    });
+    //Attribute im Plan setzten
+    const updatePlan = {
+      id: this.trainingPlan.trainingPlanId,
+      name: this.trainingPlan.name,
+      description: this.trainingPlan.description,
+      period: this.trainingPlan.period,
+      uid: this.trainingPlan.uid,
+      exercises: array
+    };
+    //Plan in der Datenbank updaten
+    await this.database.updateTrainingPlan(updatePlan);
+    //Modal schliessen
     await this.modalController.dismiss();
   }
 
 
   async getExercise() {
+    //exercise-Daten laden
     await this.database.getExerciseByNumericId(this.id).subscribe(result => {
       this.exercise = result[0];
       console.log(this.exercise);
@@ -126,6 +126,7 @@ export class ExerciseDetailPage implements OnInit {
   }
 
   updateSetArray(newSetArray: string) {
+    //Formdaten setzen
     this.setArray = JSON.parse(newSetArray);
   }
 }
