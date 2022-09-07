@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LiveTrainingPage } from './live-training.page';
-import {LiveTrainingDetailPage} from './live-training-detail/live-training-detail.page';
 
 const routes: Routes = [
   {
@@ -10,9 +9,10 @@ const routes: Routes = [
     component: LiveTrainingPage
   },
   {
-    path: ':id',
-    loadChildren: () => import('./live-training-detail/live-training-detail.module').then(m => m.LiveTrainingDetailPageModule)
+    path: 'live-training-logging',
+    loadChildren: () => import('./live-training-logging/live-training-logging.module').then( m => m.LiveTrainingLoggingPageModule)
   }
+
 
 ];
 

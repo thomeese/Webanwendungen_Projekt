@@ -13,11 +13,26 @@
       <ion-title size="large">LiveTraining</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div *ngIf="trainingPlanList">
+  <div *ngIf="trainingPlanList && !trainingPlanId">
     <ion-text>Wähle einen Trainingsplan: </ion-text>
     <ion-list>
-      <ion-item Button = "" (click)="addPlanView(plan.trainingPlanId)" *ngFor="let plan of this.trainingPlanList">
+      <ion-item Button = "" (click)="startLiveTraining(plan.trainingPlanId)" *ngFor="let plan of this.trainingPlanList">
         <ion-text>{{plan.name}}</ion-text>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="trainingPlanId && exercises">
+    <ion-list>
+      <ion-item>
+        <ion-col>Todo</ion-col>
+        <ion-col>Done</ion-col>
+      </ion-item>
+      <ion-item *ngFor="let todo of exercises">
+        <ion-col>{{todo.name}}</ion-col>
+        <ion-col>
+          <ion-icon color="danger" name="close-circle"></ion-icon>
+        </ion-col>
       </ion-item>
     </ion-list>
   </div>
