@@ -39,9 +39,17 @@
         </ion-col>
       </ion-item>
     </ion-list>
-    <div>
-      <ion-label>Training beenden   </ion-label>
-      <ion-button (click)="this.finishTraining()"><ion-icon name="cloud-done"></ion-icon></ion-button>
-    </div>
+
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <!--<ion-grid>
+        <ion-row>
+          <ion-button class=" ion-align-self-center ion-text-right"><ion-text>Training beenden</ion-text></ion-button>
+          <ion-col size="3"><ion-fab-button size="small" (click)="this.finishTraining()"><ion-icon name="cloud-done"></ion-icon></ion-fab-button></ion-col>
+        </ion-row>
+      </ion-grid>-->
+      <ion-button color="success" (click)="this.finishTraining()"><ion-text>beenden</ion-text><ion-icon name="cloud-done"></ion-icon></ion-button>
+    </ion-fab>
+
   </div>
 </ion-content>
