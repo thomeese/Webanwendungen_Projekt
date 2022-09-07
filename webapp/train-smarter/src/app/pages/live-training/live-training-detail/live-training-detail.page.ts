@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from '../../../services/database.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -8,20 +8,23 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./live-training-detail.page.scss'],
 })
 export class LiveTrainingDetailPage implements OnInit {
-  trainingPlanId;
-  exercises;
+  id;
+  name;
+  exercises = [];
+
   constructor(private databaseService: DatabaseService,
               private route: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.trainingPlanId = this.route.snapshot.paramMap.get('trainingPlanId');
-    this.getPlan();
-  }
-  getPlan() {
-    this.databaseService.getTrainingsPlanById(this.trainingPlanId).subscribe(res => {
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log('Id: '+this.id);
+    this.databaseService.getTrainingsPlanById(this.id).subscribe(res => {
+      this.name = res.name;
       this.exercises = res.exercises;
+      console.log('exercises: ');
+      console.log(this.exercises);
     });
   }
 }
