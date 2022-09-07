@@ -31,9 +31,12 @@
       <ion-item *ngFor="let todo of exercises; let i=index" button="">
         <ion-col (click)="this.logTraining(todo.exerciseId)">{{todo.name}}</ion-col>
         <ion-col>
-          <ion-icon size="large" (click)="setChecked(i, todo.exerciseId)"
-                    [attr.color]=" exercisesState[i] ? 'success' : 'danger'"
-                    [attr.disabled]="exercisesState[i]" name="checkmark-done-circle"></ion-icon>
+          <ion-button shape="round" fill="clear" [class.button-disabled]="exercisesState[i]" (click)="setChecked(i, todo.exerciseId)">
+            <ion-icon size="large"
+                      [attr.color]=" exercisesState[i] ? 'success' : 'danger'"
+                       name="checkmark-done-circle"></ion-icon>
+
+        </ion-button>
         </ion-col>
       </ion-item>
 
