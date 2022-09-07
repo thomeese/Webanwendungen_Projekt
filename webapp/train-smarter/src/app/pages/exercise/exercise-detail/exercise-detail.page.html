@@ -43,12 +43,12 @@
         <ion-col>{{set.repetition}}</ion-col>
         <ion-col>{{set.weight}}</ion-col>
       </ion-item>
-      <ion-button (click)="this.newSet()">
+      <ion-button *ngIf="!displayForm" (click)="this.newSet()">
         <ion-icon name="add-circle"></ion-icon>
       </ion-button>
     </ion-list>
     <form [formGroup]="this.setForm" (submit)="this.addSet()" *ngIf="this.trainingPlan && this.displayForm">
-      <ion-item>
+      <ion-item *ngIf="setArray.length === 0">
         <ion-col>Satz</ion-col>
         <ion-col>Wiederhohlung</ion-col>
         <ion-col>Gewicht (optional)</ion-col>
