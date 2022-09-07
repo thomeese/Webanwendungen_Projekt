@@ -13,11 +13,26 @@
       <ion-title size="large">Analytics</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <ion-text>Letzter Trainingsplan</ion-text>
-  <ion-text>Exercise PersonalRecord</ion-text>
-  <ion-text>Am meisten absolvierter Trainingplan</ion-text>
-  <ion-text>Am wenigsten absolvierter Trainingplan</ion-text>
-  <ion-text>Exercise Gewichtserfolgskurve</ion-text>
+  <ion-item lines="none">
+    <ion-label>Letzter Trainingsplan</ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>Exercise PersonalRecord</ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-card *ngIf="mostUsedPlan" button="" (click)="this.redirect(this.mostUsedPlan.trainingPlanId)">
+      <ion-card-header>Am meisten absolvierter Trainingplan</ion-card-header>
+      <ion-card-content>{{this.mostUsedPlan.name}}</ion-card-content>
+      <ion-card-content>{{this.mostUsedPlan.description}}</ion-card-content>
+    </ion-card>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-card *ngIf="leastUsedPlan" button="" (click)="this.redirect(this.leastUsedPlan.trainingPlanId)">
+      <ion-card-header>Am wenigsten absolvierter Trainingplan</ion-card-header>
+      <ion-card-content>{{this.leastUsedPlan.name}}</ion-card-content>
+      <ion-card-content>{{this.leastUsedPlan.description}}</ion-card-content>
+    </ion-card>
+  </ion-item>
+  <ion-label>Exercise Gewichtserfolgskurve</ion-label>
 
 </ion-content>
