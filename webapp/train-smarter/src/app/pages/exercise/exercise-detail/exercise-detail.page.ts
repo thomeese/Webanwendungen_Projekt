@@ -47,6 +47,7 @@ export class ExerciseDetailPage implements OnInit {
   }
 
   newSet() {
+    this.generateSetFormgroup();
     this.displayForm = true;
   }
 
@@ -70,8 +71,7 @@ export class ExerciseDetailPage implements OnInit {
       repetition: data.repetition,
       weight: data.weight
     });
-    this.generateSetFormgroup();
-    this.displayForm = false;
+    this.abbortSet();
   }
 
   ngOnInit() {
@@ -119,7 +119,7 @@ export class ExerciseDetailPage implements OnInit {
     };
     await this.database.updateTrainingPlan(updatePlan);
     console.log('Button hinzufuegen zum Trainingsplan');
-    this.modalController.dismiss();
+    await this.modalController.dismiss();
   }
 
 
