@@ -28,7 +28,8 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthenticationService]}, {
+    canActivate: [AuthenticationService]
+  }, {
     path: 'live-training',
     loadChildren: () => import('./pages/live-training/live-training.module').then(m => m.LiveTrainingPageModule),
     canActivate: [AuthenticationService]
@@ -46,9 +47,10 @@ const routes: Routes = [
   },
   {
     path: 'exercise-logging',
-    loadChildren: () => import('./pages/exercise-logging/exercise-logging.module').then( m => m.ExerciseLoggingPageModule),
+    loadChildren: () => import('./pages/exercise-logging/exercise-logging.module').then(m => m.ExerciseLoggingPageModule),
     canActivate: [AuthenticationService]
   }
+
 ];
 
 @NgModule({

@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: LiveTrainingPage
+  },  {
+    path: 'live-training-detail',
+    loadChildren: () => import('./live-training-detail/live-training-detail.module').then( m => m.LiveTrainingDetailPageModule)
   }
+
 ];
 
 @NgModule({

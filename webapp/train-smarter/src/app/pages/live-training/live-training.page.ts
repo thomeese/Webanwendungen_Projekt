@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LoadingController} from '@ionic/angular';
+import {DatabaseService} from '../../services/database.service';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
   selector: 'app-live-training',
@@ -6,10 +9,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./live-training.page.scss'],
 })
 export class LiveTrainingPage implements OnInit {
+  trainingPlanList;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private loadingCtr: LoadingController,
+              private dataService: DatabaseService,
+              private router: Router) {
   }
 
+  ngOnInit() {
+    this.getTrainingPlans();
+  }
+
+  async getTrainingPlans() {
+    const loading = await this.loadingCtr.create({
+      message: 'Loading..',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+    this.dataService.getUserTrainingsPlan().subscribe(res => {
+      this.trainingPlanList = res;
+    });
+    await loading.dismiss();
+  }
+
+  addPlanView(id) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        trainingPlanId: id
+      }
+    };
+    this.router.navigateByUrl('/live-training-detail', navigationExtras);
+  }
 }
