@@ -16,8 +16,8 @@ export class AppComponent {
     {title: 'home', url: 'home', icon: 'home'},
     {title: 'live-training', url: 'live-training', icon: 'heart'},
     {title: 'analytics', url: 'analytics', icon: 'analytics'},
-    {title: 'training-plan', url: 'training-plan', icon: 'document'},
-    {title: 'exercise', url: 'exercise', icon: 'warning'},
+    {title: 'Trainingspläne', url: 'training-plan', icon: 'file-tray-full'},
+    {title: 'Übungen', url: 'exercise', icon: 'list'},
   ];
 
   constructor(
