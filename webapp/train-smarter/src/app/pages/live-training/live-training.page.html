@@ -35,11 +35,13 @@
             <ion-icon size="large"
                       [attr.color]=" exercisesState[i] ? 'success' : 'danger'"
                        name="checkmark-done-circle"></ion-icon>
-
         </ion-button>
         </ion-col>
       </ion-item>
-
     </ion-list>
+    <div>
+      <ion-label>Training beenden   </ion-label>
+      <ion-button (click)="this.finishTraining()"><ion-icon name="cloud-done"></ion-icon></ion-button>
+    </div>
   </div>
 </ion-content>

@@ -119,4 +119,9 @@ export class LiveTrainingPage implements OnInit {
     this.localStorageCtrl.removeData('set-log-data-'+ _exerciseId);
     this.localStorageCtrl.saveData('training-exercise-state',JSON.stringify(this.exercisesState));
   }
+
+  finishTraining() {
+    this.localStorageCtrl.clearData();
+    this.router.navigateByUrl('home',{replaceUrl: true});
+  }
 }
