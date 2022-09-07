@@ -59,7 +59,21 @@ let ExerciseDetailPage = class ExerciseDetailPage {
   }
 
   newSet() {
+    this.generateSetFormgroup();
     this.displayForm = true;
+  }
+
+  abbortSet() {
+    this.displayForm = false;
+    this.generateSetFormgroup();
+  }
+
+  generateSetFormgroup() {
+    this.setForm = this.setForm = this.formbuilder.group({
+      setnumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(`${this.setArray.length + 1}`, []),
+      repetition: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('[0-9]{2}')]),
+      weight: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl('', [])
+    });
   }
 
   addSet() {
@@ -69,21 +83,12 @@ let ExerciseDetailPage = class ExerciseDetailPage {
       repetition: data.repetition,
       weight: data.weight
     });
-    this.setForm = this.setForm = this.formbuilder.group({
-      setnumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(`${this.setArray.length + 1}`, []),
-      repetition: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('[0-9]{2}')]),
-      weight: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl('', [])
-    });
-    this.displayForm = false;
+    this.abbortSet();
   }
 
   ngOnInit() {
     try {
-      this.setForm = this.formbuilder.group({
-        setnumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(`${this.setArray.length + 1}`, []),
-        repetition: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('[0-9]{2}')]),
-        weight: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl('', [])
-      });
+      this.generateSetFormgroup();
       const idTmp = this.route.snapshot.paramMap.get('id');
 
       if (idTmp !== 'undefined' && idTmp !== null) {
@@ -122,7 +127,8 @@ let ExerciseDetailPage = class ExerciseDetailPage {
       console.log(_this.id);
       array.push({
         exerciseId: _this.id,
-        name: _this.exercise.name
+        name: _this.exercise.name,
+        sets: _this.setArray
       });
       const updatePlan = {
         id: _this.trainingPlan.trainingPlanId,
@@ -134,8 +140,7 @@ let ExerciseDetailPage = class ExerciseDetailPage {
       };
       yield _this.database.updateTrainingPlan(updatePlan);
       console.log('Button hinzufuegen zum Trainingsplan');
-
-      _this.modalController.dismiss();
+      yield _this.modalController.dismiss();
     })();
   }
 
@@ -573,7 +578,7 @@ ExerciseDBService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
   \*************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "ion-title {\n  padding-left: 0;\n  color: #0d0d0d;\n  font-size: 20px;\n}\n\nion-content ion-title {\n  padding-right: 0;\n}\n\nion-text {\n  color: #0d0d0d;\n  word-wrap: break-word;\n  font-weight: bold;\n  font-size: 14px;\n}\n\n.label {\n  padding-right: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLWRldGFpbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxlQUFBO0VBQ0EsY0FBQTtFQUNBLGVBQUE7QUFDRjs7QUFHRTtFQUNFLGdCQUFBO0FBQUo7O0FBSUE7RUFDRSxjQUFBO0VBQ0EscUJBQUE7RUFDQSxpQkFBQTtFQUNBLGVBQUE7QUFERjs7QUFJQTtFQUNFLGtCQUFBO0FBREYiLCJmaWxlIjoiZXhlcmNpc2UtZGV0YWlsLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10aXRsZXtcbiAgcGFkZGluZy1sZWZ0OiAwO1xuICBjb2xvcjogIzBkMGQwZDtcbiAgZm9udC1zaXplOiAyMHB4O1xufVxuXG5pb24tY29udGVudCB7XG4gIGlvbi10aXRsZSB7XG4gICAgcGFkZGluZy1yaWdodDogMDtcbiAgfVxufVxuXG5pb24tdGV4dCB7XG4gIGNvbG9yOiAjMGQwZDBkO1xuICB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmb250LXNpemU6IDE0cHg7XG59XG5cbi5sYWJlbCB7XG4gIHBhZGRpbmctcmlnaHQ6IDVweDtcbn1cbiJdfQ== */";
+module.exports = "ion-title {\n  padding-left: 0;\n  color: #0d0d0d;\n  font-size: 20px;\n}\n\nion-content ion-title {\n  padding-right: 0;\n}\n\nion-text {\n  color: #0d0d0d;\n  word-wrap: break-word;\n  font-weight: bold;\n  font-size: 14px;\n}\n\n.label {\n  padding-right: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLWRldGFpbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxlQUFBO0VBQ0EsY0FBQTtFQUNBLGVBQUE7QUFDRjs7QUFHRTtFQUNFLGdCQUFBO0FBQUo7O0FBSUE7RUFDRSxjQUFBO0VBQ0EscUJBQUE7RUFDQSxpQkFBQTtFQUNBLGVBQUE7QUFERjs7QUFJQTtFQUNFLGtCQUFBO0FBREYiLCJmaWxlIjoiZXhlcmNpc2UtZGV0YWlsLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10aXRsZXtcbiAgcGFkZGluZy1sZWZ0OiAwO1xuICBjb2xvcjogIzBkMGQwZDtcbiAgZm9udC1zaXplOiAyMHB4O1xufVxuXG5pb24tY29udGVudCB7XG4gIGlvbi10aXRsZSB7XG4gICAgcGFkZGluZy1yaWdodDogMDtcbiAgfVxufVxuXG5pb24tdGV4dCB7XG4gIGNvbG9yOiAjMGQwZDBkO1xuICB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmb250LXNpemU6IDE0cHg7XG59XG5cbi5sYWJlbCB7XG4gIHBhZGRpbmctcmlnaHQ6IDVweDtcbn1cblxuIl19 */";
 
 /***/ }),
 
@@ -583,7 +588,7 @@ module.exports = "ion-title {\n  padding-left: 0;\n  color: #0d0d0d;\n  font-siz
   \*************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\" >{{exercise.name}}</div>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <ion-title>\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\" >{{exercise.name}}</div>\n      </ion-title>\n    </ion-card-content>\n  </ion-card>\n  <div *ngIf=\"exercise\">\n    <img src=\"{{exercise.gifUrl}}\"/>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Muskelgruppe:</ion-text>\n        <ion-text>{{exercise.target}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Benötigtes Equipment:</ion-text>\n        <ion-text>{{exercise.equipment}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n\n    <ion-list *ngIf=\"this.trainingPlan && setArray.length !== 0\">\n      <ion-item>\n        <ion-col>Satz</ion-col>\n        <ion-col>Wiederhohlung</ion-col>\n        <ion-col>Gewicht (optional)</ion-col>\n      </ion-item>\n      <ion-item *ngFor=\"let set of this.setArray\">\n        <ion-col>{{set.setnumber}}</ion-col>\n        <ion-col>{{set.repetition}}</ion-col>\n        <ion-col>{{set.weight}}</ion-col>\n      </ion-item>\n      <ion-button (click)=\"this.newSet()\">\n        <ion-icon name=\"add-circle\"></ion-icon>\n      </ion-button>\n    </ion-list>\n    <form [formGroup]=\"this.setForm\" (submit)=\"this.addSet()\" *ngIf=\"this.trainingPlan && this.displayForm\">\n      <ion-item>\n        <ion-col>Satz</ion-col>\n        <ion-col>Wiederhohlung</ion-col>\n        <ion-col>Gewicht (optional)</ion-col>\n      </ion-item>\n      <ion-item>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"setnumber\"></ion-input>\n        </ion-col>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"repetition\"></ion-input>\n        </ion-col>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"weight\"></ion-input>\n        </ion-col>\n      </ion-item>\n      <ion-button type=\"submit\" [disabled]=\"setForm.invalid\">\n        <ion-icon name=\"checkmark-circle\"></ion-icon>\n      </ion-button>\n    </form>\n    <ion-button *ngIf=\"this.trainingPlan\" (click)=\"addToTrainingPlan()\">Zum Trainingsplan hinzufügen\n    </ion-button>\n  </div>\n</ion-content>\n\n";
+module.exports = "<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\" >{{exercise.name}}</div>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <ion-title>\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\" >{{exercise.name}}</div>\n      </ion-title>\n    </ion-card-content>\n  </ion-card>\n  <div *ngIf=\"exercise\">\n    <img src=\"{{exercise.gifUrl}}\"/>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Muskelgruppe:</ion-text>\n        <ion-text>{{exercise.target}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Benötigtes Equipment:</ion-text>\n        <ion-text>{{exercise.equipment}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n\n    <ion-list *ngIf=\"this.trainingPlan && setArray.length !== 0\">\n      <ion-item>\n        <ion-col>Satz</ion-col>\n        <ion-col>Wiederhohlung</ion-col>\n        <ion-col>Gewicht (optional)</ion-col>\n      </ion-item>\n      <ion-item *ngFor=\"let set of this.setArray\">\n        <ion-col>{{set.setnumber}}</ion-col>\n        <ion-col>{{set.repetition}}</ion-col>\n        <ion-col>{{set.weight}}</ion-col>\n      </ion-item>\n      <ion-button *ngIf=\"!displayForm\" (click)=\"this.newSet()\">\n        <ion-icon name=\"add-circle\"></ion-icon>\n      </ion-button>\n    </ion-list>\n    <form [formGroup]=\"this.setForm\" (submit)=\"this.addSet()\" *ngIf=\"this.trainingPlan && this.displayForm\">\n      <ion-item *ngIf=\"setArray.length === 0\">\n        <ion-col>Satz</ion-col>\n        <ion-col>Wiederhohlung</ion-col>\n        <ion-col>Gewicht (optional)</ion-col>\n      </ion-item>\n      <ion-item>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"setnumber\"></ion-input>\n        </ion-col>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"repetition\"></ion-input>\n        </ion-col>\n        <ion-col>\n          <ion-input type=\"text\" formControlName=\"weight\"></ion-input>\n        </ion-col>\n      </ion-item>\n      <ion-button color=\"success\" type=\"submit\" [disabled]=\"setForm.invalid\"><ion-icon name=\"checkmark-circle\"></ion-icon></ion-button>\n      <ion-button color=\"danger\" [disabled]=\"setArray.length === 0\" (click)=\"this.abbortSet()\"><ion-icon name=\"close-circle\"></ion-icon> </ion-button>\n    </form>\n    <ion-button *ngIf=\"this.trainingPlan\" [disabled]=\"displayForm || this.setArray.length === 0\" (click)=\"addToTrainingPlan()\">Zum Trainingsplan hinzufügen\n    </ion-button>\n  </div>\n</ion-content>\n\n";
 
 /***/ })
 

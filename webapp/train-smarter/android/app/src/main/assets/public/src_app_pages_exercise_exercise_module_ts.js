@@ -242,6 +242,10 @@ let ExercisePage = class ExercisePage {
     }
   }
 
+  ionViewDidLeave() {
+    this.menu.enable(true);
+  }
+
   loadData() {
     var _this = this;
 

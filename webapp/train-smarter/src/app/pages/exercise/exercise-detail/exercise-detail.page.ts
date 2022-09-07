@@ -34,7 +34,6 @@ export class ExerciseDetailPage implements OnInit {
               private formbuilder: FormBuilder,
               private modalController: ModalController) {
     this.setArray = [];
-    this.displayForm = true;
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation() !== null) {
         console.log('Navigation on');
@@ -46,10 +45,7 @@ export class ExerciseDetailPage implements OnInit {
     });
   }
 
-  newSet() {
-    this.generateSetFormgroup();
-    this.displayForm = true;
-  }
+
 
   abbortSet() {
     this.displayForm = false;
@@ -76,7 +72,6 @@ export class ExerciseDetailPage implements OnInit {
 
   ngOnInit() {
     try {
-      this.generateSetFormgroup();
       const idTmp = this.route.snapshot.paramMap.get('id');
       if (idTmp !== 'undefined' && idTmp !== null) {
         this.id = idTmp;
@@ -128,5 +123,9 @@ export class ExerciseDetailPage implements OnInit {
       this.exercise = result[0];
       console.log(this.exercise);
     });
+  }
+
+  updateSetArray(newSetArray: string) {
+    this.setArray = JSON.parse(newSetArray);
   }
 }

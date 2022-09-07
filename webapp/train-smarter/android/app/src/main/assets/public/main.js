@@ -79,7 +79,7 @@ const routes = [
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
     }, {
         path: 'training-plan',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "default-src_app_pages_training-plan_training-plan_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/training-plan/training-plan.module */ 2589)).then(m => m.TrainingPlanPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_training-plan_training-plan-detail_training-plan-detail_page_ts"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/training-plan/training-plan.module */ 2589)).then(m => m.TrainingPlanPageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
     },
     {
@@ -89,17 +89,16 @@ const routes = [
     },
     {
         path: 'home',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_training-plan_training-plan_module_ts"), __webpack_require__.e("src_app_pages_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/home/home.module */ 7994)).then(m => m.HomePageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_training-plan_training-plan-detail_training-plan-detail_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_pages_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/home/home.module */ 7994)).then(m => m.HomePageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
     }, {
         path: 'live-training',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_live-training_live-training_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/live-training/live-training.module */ 1879)).then(m => m.LiveTrainingPageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
-    },
-    {
+    }, {
         path: 'training-plan-detail',
         // eslint-disable-next-line max-len
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_training-plan_training-plan-detail_training-plan-detail_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/training-plan/training-plan-detail/training-plan-detail.module */ 7491)).then(m => m.TrainingPlanDetailPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_training-plan_training-plan-detail_training-plan-detail_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_pages_training-plan_training-plan-detail_training-plan-detail_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/training-plan/training-plan-detail/training-plan-detail.module */ 7491)).then(m => m.TrainingPlanDetailPageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
     },
     {
