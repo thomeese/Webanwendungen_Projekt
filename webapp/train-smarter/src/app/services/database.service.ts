@@ -52,6 +52,7 @@ export interface SetLogging {
   trainingPlanId: string;
   uid: string;
   date: string;
+  time: string;
   sets: Array<any>;
 }
 
@@ -199,7 +200,7 @@ export class DatabaseService {
     const setLoggingDocRef = doc(this.firestore, `setLogging/${setLogging.id}`);
     return updateDoc(setLoggingDocRef, {
       exerciseId: setLogging.excerciseId, trainingPlanId: setLogging.trainingPlanId,
-      userId: setLogging.uid, date: setLogging.date, sets: setLogging.sets,
+      userId: setLogging.uid, date: setLogging.date, time: setLogging.time, sets: setLogging.sets,
     });
   }
 
