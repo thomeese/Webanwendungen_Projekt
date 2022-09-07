@@ -17,6 +17,8 @@ export class LiveTrainingPage implements OnInit {
   trainingPlanId;
   trainingPlan;
   exercises;
+
+  // Zeigt, ob die Übung schon erledigt ist
   exercisesState = [];
 
   constructor(private loadingCtr: LoadingController,
