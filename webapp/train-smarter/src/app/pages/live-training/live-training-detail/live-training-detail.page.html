@@ -1,6 +1,9 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>live-training-detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>LiveTraining</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +15,9 @@
     </ion-item>
     <ion-item *ngFor="let todo of this.exercises">
       <ion-col>{{todo.name}}</ion-col>
-      <ion-col><ion-icon color="danger" name="close-circle"></ion-icon></ion-col>
+      <ion-col>
+        <ion-icon color="danger" name="close-circle"></ion-icon>
+      </ion-col>
     </ion-item>
   </ion-list>
 </ion-content>
