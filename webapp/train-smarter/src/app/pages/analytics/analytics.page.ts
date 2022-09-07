@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from '../../services/database.service';
-import {AuthenticationService} from '../../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-analytics',
@@ -10,13 +10,14 @@ import {AuthenticationService} from '../../services/authentication.service';
 export class AnalyticsPage implements OnInit {
   mostUsedPlan;
   leastUsedPlan;
+
   constructor(private dataService: DatabaseService,
-              private authService: AuthenticationService) {
+              private router: Router) {
   }
 
-   getMostUsedTrainingsPlan() {
+  getMostUsedTrainingsPlan() {
     const map = new Map();
-     this.dataService.getUserTrainingsPlan().subscribe(result => {
+    this.dataService.getUserTrainingsPlan().subscribe(result => {
       result.forEach(resultItem => {
         map.set(resultItem.trainingPlanId, 0);
       });
@@ -65,4 +66,7 @@ export class AnalyticsPage implements OnInit {
     this.getLeastUsedTrainingsPlan();
   }
 
+  async redirect(trainingPlanId: string) {
+   await this.router.navigateByUrl(`/training-plan/${trainingPlanId}`, {replaceUrl: true});
+  }
 }
