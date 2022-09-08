@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ExerciseWithLoggingCardComponent": () => (/* binding */ ExerciseWithLoggingCardComponent)
 /* harmony export */ });
-/* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _exercise_with_logging_card_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exercise-with-logging-card.component.html?ngResource */ 3566);
 /* harmony import */ var _exercise_with_logging_card_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exercise-with-logging-card.component.scss?ngResource */ 494);
@@ -45,7 +45,7 @@ let ExerciseWithLoggingCardComponent = class ExerciseWithLoggingCardComponent {
   editExercise() {
     var _this = this;
 
-    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this.modalCtrl.create({
         component: _pages_exercise_exercise_detail_exercise_detail_page__WEBPACK_IMPORTED_MODULE_3__.ExerciseDetailPage,
         componentProps: {
@@ -65,7 +65,7 @@ let ExerciseWithLoggingCardComponent = class ExerciseWithLoggingCardComponent {
   deleteExerciseView() {
     var _this2 = this;
 
-    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const alert = yield _this2.alertController.create({
         message: 'Möchten Sie diese Übung wirklich löschen?',
         buttons: [{
@@ -87,7 +87,7 @@ let ExerciseWithLoggingCardComponent = class ExerciseWithLoggingCardComponent {
   deleteExercise(exerciseId) {
     var _this3 = this;
 
-    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this3.trainingPlan.exercises = _this3.trainingPlan.exercises.filter(item => item.exerciseId !== exerciseId);
       yield _this3.databaseService.updateTrainingPlan(_this3.trainingPlan);
     })();
@@ -215,7 +215,7 @@ TrainingPlanDetailPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)
   \************************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = ".exercise-card {\n  border-radius: 15px;\n}\n.exercise-card ion-card-header {\n  border-bottom: 1px solid grey;\n  padding-bottom: 10px;\n  padding-top: 10px;\n}\n.exercise-card ion-card-header h4 {\n  font-weight: bold;\n  font-size: 18px;\n  color: #0d0d0d;\n}\n.exercise-card .set-header {\n  border-bottom: 1px dashed grey;\n}\n.exercise-card ion-item {\n  --inner-padding-end:0 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLXdpdGgtbG9nZ2luZy1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQUE7QUFDRjtBQUNFO0VBQ0UsNkJBQUE7RUFFQSxvQkFBQTtFQUNBLGlCQUFBO0FBQUo7QUFFSTtFQUNFLGlCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7QUFBTjtBQUlFO0VBQ0UsOEJBQUE7QUFGSjtBQUtFO0VBQ0UsZ0NBQUE7QUFISiIsImZpbGUiOiJleGVyY2lzZS13aXRoLWxvZ2dpbmctY2FyZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5leGVyY2lzZS1jYXJkIHtcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcblxuICBpb24tY2FyZC1oZWFkZXIge1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBncmV5O1xuXG4gICAgcGFkZGluZy1ib3R0b206IDEwcHg7XG4gICAgcGFkZGluZy10b3A6IDEwcHg7XG5cbiAgICBoNCB7XG4gICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAgIGZvbnQtc2l6ZTogMThweDtcbiAgICAgIGNvbG9yOiAjMGQwZDBkO1xuICAgIH1cbiAgfVxuXG4gIC5zZXQtaGVhZGVyIHtcbiAgICBib3JkZXItYm90dG9tOiAxcHggZGFzaGVkIGdyZXk7XG4gIH1cblxuICBpb24taXRlbSB7XG4gICAgLS1pbm5lci1wYWRkaW5nLWVuZDowICFpbXBvcnRhbnQ7XG4gIH1cbn1cbiJdfQ== */";
+module.exports = ".exercise-card {\n  border-radius: 15px;\n}\n.exercise-card ion-card-header {\n  border-bottom: 1px solid grey;\n  padding-bottom: 10px;\n  padding-top: 10px;\n}\n.exercise-card ion-card-header h4 {\n  font-weight: bold;\n  font-size: 18px;\n  color: #0d0d0d;\n}\n.exercise-card .set-header {\n  border-bottom: 1px dashed grey;\n}\n.exercise-card ion-item {\n  --inner-padding-end:0 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLXdpdGgtbG9nZ2luZy1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQUE7QUFDRjtBQUNFO0VBQ0UsNkJBQUE7RUFFQSxvQkFBQTtFQUNBLGlCQUFBO0FBQUo7QUFFSTtFQUNFLGlCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7QUFBTjtBQUlFO0VBQ0UsOEJBQUE7QUFGSjtBQUtFO0VBQ0UsZ0NBQUE7QUFISiIsImZpbGUiOiJleGVyY2lzZS13aXRoLWxvZ2dpbmctY2FyZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5leGVyY2lzZS1jYXJkIHtcclxuICBib3JkZXItcmFkaXVzOiAxNXB4O1xyXG5cclxuICBpb24tY2FyZC1oZWFkZXIge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIGdyZXk7XHJcblxyXG4gICAgcGFkZGluZy1ib3R0b206IDEwcHg7XHJcbiAgICBwYWRkaW5nLXRvcDogMTBweDtcclxuXHJcbiAgICBoNCB7XHJcbiAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgICAgIGNvbG9yOiAjMGQwZDBkO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgLnNldC1oZWFkZXIge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IGRhc2hlZCBncmV5O1xyXG4gIH1cclxuXHJcbiAgaW9uLWl0ZW0ge1xyXG4gICAgLS1pbm5lci1wYWRkaW5nLWVuZDowICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG59XHJcbiJdfQ== */";
 
 /***/ }),
 
@@ -225,7 +225,7 @@ module.exports = ".exercise-card {\n  border-radius: 15px;\n}\n.exercise-card io
   \************************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<!--<ion-card class=\"exercise-card\" button=\"\" routerDirection=\"forward\"\n          [routerLink]=\"'/exercise/' + exercise.exerciseId\"\n          routerLinkActive=\"selected\">-->\n<ion-card class=\"exercise-card\">\n  <ion-card-header>\n    <ion-text><h4>{{exercise.name}}</h4></ion-text>\n  </ion-card-header>\n  <ion-item-sliding >\n    <ion-item-options side=\"start\">\n      <ion-item-option (click)=\"this.editExercise()\"><ion-icon name=\"pencil-sharp\"></ion-icon></ion-item-option>\n    </ion-item-options>\n    <ion-item class=\"ion-no-padding\" lines=\"none\">\n      <ion-grid>\n        <ion-row class=\"set-header ion-text-center ion-justify-content-center\">\n          <ion-col size=\"2\">Satz</ion-col>\n          <ion-col size=\"6\">Wiederholung</ion-col>\n          <ion-col>Gewicht</ion-col>\n        </ion-row>\n        <ion-row class=\"ion-text-center ion-justify-content-center\" *ngFor=\"let set of exercise.sets\">\n          <ion-col size=\"2\">{{set.setnumber}}</ion-col>\n          <ion-col size=\"6\">{{set.repetition}}</ion-col>\n          <ion-col>{{set.weight}}</ion-col>\n        </ion-row>\n      </ion-grid>\n    </ion-item>\n    <ion-item-options slot=\"end\">\n      <ion-item-option color=\"danger\" (click)=\"this.deleteExerciseView()\"><ion-icon name=\"trash-sharp\"></ion-icon></ion-item-option>\n    </ion-item-options>\n  </ion-item-sliding>\n\n</ion-card>\n";
+module.exports = "<!--<ion-card class=\"exercise-card\" button=\"\" routerDirection=\"forward\"\r\n          [routerLink]=\"'/exercise/' + exercise.exerciseId\"\r\n          routerLinkActive=\"selected\">-->\r\n<ion-card class=\"exercise-card\">\r\n  <ion-card-header>\r\n    <ion-text><h4>{{exercise.name}}</h4></ion-text>\r\n  </ion-card-header>\r\n  <ion-item-sliding >\r\n    <ion-item-options side=\"start\">\r\n      <ion-item-option (click)=\"this.editExercise()\"><ion-icon name=\"pencil-sharp\"></ion-icon></ion-item-option>\r\n    </ion-item-options>\r\n    <ion-item class=\"ion-no-padding\" lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row class=\"set-header ion-text-center ion-justify-content-center\">\r\n          <ion-col size=\"2\">Satz</ion-col>\r\n          <ion-col size=\"6\">Wiederholung</ion-col>\r\n          <ion-col>Gewicht</ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-text-center ion-justify-content-center\" *ngFor=\"let set of exercise.sets\">\r\n          <ion-col size=\"2\">{{set.setnumber}}</ion-col>\r\n          <ion-col size=\"6\">{{set.repetition}}</ion-col>\r\n          <ion-col>{{set.weight}}</ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item-options slot=\"end\">\r\n      <ion-item-option color=\"danger\" (click)=\"this.deleteExerciseView()\"><ion-icon name=\"trash-sharp\"></ion-icon></ion-item-option>\r\n    </ion-item-options>\r\n  </ion-item-sliding>\r\n\r\n</ion-card>\r\n";
 
 /***/ })
 
