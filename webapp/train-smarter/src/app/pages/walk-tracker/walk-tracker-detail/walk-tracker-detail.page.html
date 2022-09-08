@@ -23,7 +23,7 @@
   </ion-card-header>
   <div #map id="map"></div>
   <div *ngIf="!this.specificWalkData">
-    <ion-button *ngIf="!this.walkStartet" (click)="this.startRun()">Lauf Starten
+    <ion-button color="dark" *ngIf="!this.walkStartet" (click)="this.startRun()">Lauf Starten
       <ion-icon name="play"></ion-icon>
     </ion-button>
     <ion-button *ngIf="this.walkStartet" (click)="this.persistRun()">Lauf Beenden
