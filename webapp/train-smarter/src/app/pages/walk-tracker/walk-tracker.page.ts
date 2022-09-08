@@ -48,16 +48,14 @@ export class WalkTrackerPage implements OnInit {
   startRun() {
     this.startTimestamp = new Date();
     this.walkStartet = true;
-    this.posSub = this.geolocation.watchPosition().subscribe(data => {
-      setTimeout(() => {
-        if ((data as Geoposition).coords !== undefined) {
-          this.trackedRoute.push({
-            lat: (data as Geoposition).coords.latitude,
-            lon: (data as Geoposition).coords.longitude
-          });
-          this.drawPath(this.trackedRoute);
-        }
-      });
+    this.posSub = this.geolocation.watchPosition().subscribe((data) => {
+      if(data as Geoposition && 'coords' in data){
+        this.trackedRoute.push({
+          lat: data.coords.latitude,
+          lng: data.coords.longitude
+        });
+        this.drawPath(this.trackedRoute);
+      }
     });
     return null;
   }
@@ -70,7 +68,7 @@ export class WalkTrackerPage implements OnInit {
       this.displayedTrack = new google.maps.Polyline({
         path: pathValue,
         geodesic: true,
-        strokeColor: '#0037ff',
+        strokeColor: '#ff0000',
         strokeOpacity: 1.0,
         strokeWeight: 3
       });
@@ -79,14 +77,16 @@ export class WalkTrackerPage implements OnInit {
   }
 
   timeConvert(input: number): string {
-    const seconds = Math.floor(input / 1000);
+    let seconds = Math.floor(input / 1000);
     let minutes = 0;
     let hours = 0;
     if(seconds > 60){
       minutes = seconds % 60;
+      seconds = seconds/60;
     }
     if(minutes > 60){
       hours = seconds % 60;
+      minutes = minutes/60;
     }
     return hours+':'+minutes+':' + seconds;
   }
