@@ -14,7 +14,16 @@
     </ion-toolbar>
   </ion-header>
 
-  <div #map id="map"> </div>
-  <ion-button *ngIf="!this.walkStartet" (click)="this.startRun()">Lauf Starten <ion-icon name="play"></ion-icon></ion-button>
-  <ion-button *ngIf="this.walkStartet" (click)="this.persistRun()">Lauf Beenden<ion-icon name="pause"></ion-icon></ion-button>
+  <div *ngIf="this.userWalkData">
+    <ion-card *ngFor="let walk of this.userWalkData" button="" routerDirection="forward" [routerLink]="'/walk-router/' + walk.walkId" routerLinkActive="selected">
+      <ion-card-header>Lauf vom {{walk.date}} um {{walk.time}}</ion-card-header>
+      <ion-card-content>
+        <ion-label>Benötigte Zeit:</ion-label>
+        <ion-text>{{walk.neededTime}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-fab-button size="small" color="dark" class="button-add" routerDirection="forward" [routerLink]="'/walk-tracker-detail'" routerLinkActive="selected">
+    <ion-icon name="add-circle"></ion-icon>
+  </ion-fab-button>
 </ion-content>

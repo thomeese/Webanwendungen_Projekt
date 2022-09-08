@@ -220,6 +220,11 @@ export class DatabaseService {
     return addDoc(walkRef, walk);
   }
 
+  getWalkDataById(id: string): Observable<any> {
+    const walkRef = doc(this.firestore, `walkData/${id}`);
+    return docData(walkRef, {idField: 'walkId'}) as Observable<any>;
+  }
+
   getWalkDataByUid(): Observable<any []> {
     const walkRef = collection(this.firestore, 'walkData');
     const walkQuery = query(walkRef, where('uid', '==', this.authService.getUserId()));
