@@ -2,9 +2,9 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {Platform} from '@ionic/angular';
-import {DatePipe} from '@angular/common';
-import {filter} from 'rxjs/operators';
 import {Geoposition} from '@ionic-native/geolocation';
+import {AuthenticationService} from '../../services/authentication.service';
+import {DatabaseService} from '../../services/database.service';
 
 declare let google;
 
@@ -24,7 +24,10 @@ export class WalkTrackerPage implements OnInit {
   routeData = [];
   posSub: Subscription;
 
-  constructor(private geolocation: Geolocation, private platform: Platform) {
+  constructor(private geolocation: Geolocation,
+              private platform: Platform,
+              authService: AuthenticationService,
+              private dataService: DatabaseService) {
   }
 
   ngOnInit() {
@@ -49,7 +52,7 @@ export class WalkTrackerPage implements OnInit {
     this.startTimestamp = new Date();
     this.walkStartet = true;
     this.posSub = this.geolocation.watchPosition().subscribe((data) => {
-      if(data as Geoposition && 'coords' in data){
+      if (data as Geoposition && 'coords' in data) {
         this.trackedRoute.push({
           lat: data.coords.latitude,
           lng: data.coords.longitude
@@ -80,24 +83,28 @@ export class WalkTrackerPage implements OnInit {
     let seconds = Math.floor(input / 1000);
     let minutes = 0;
     let hours = 0;
-    if(seconds > 60){
-      minutes = seconds % 60;
-      seconds = seconds/60;
+    if (seconds > 60) {
+      minutes = Math.floor(seconds / 60);
+      seconds = Math.floor(seconds % 60);
     }
-    if(minutes > 60){
-      hours = seconds % 60;
-      minutes = minutes/60;
+    if (minutes > 60) {
+      hours = Math.floor(minutes / 60);
+      minutes = Math.floor(minutes % 60);
     }
-    return hours+':'+minutes+':' + seconds;
+    return hours + ':' + minutes + ':' + seconds;
   }
 
   persistRun() {
+    this.posSub.unsubscribe();
     this.endTimetamp = new Date();
     this.routeData.push(this.trackedRoute);
     const neededTime = this.endTimetamp.valueOf() - this.startTimestamp.valueOf();
+    console.log(neededTime);
     console.log(this.timeConvert(neededTime));
     this.walkStartet = false;
-    this.posSub.unsubscribe();
+    const newWalkDoc = {
+      uid: this.authService.getUid()
+    };
     return null;
   }
 }
