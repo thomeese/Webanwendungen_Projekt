@@ -214,4 +214,20 @@ export class DatabaseService {
     const setLoggingDocRef = doc(this.firestore, `setLogging/${setLogging.id}`);
     return deleteDoc(setLoggingDocRef);
   }
+
+  addWalk(walk: any) {
+    const walkRef = collection(this.firestore, 'walkData');
+    return addDoc(walkRef, walk);
+  }
+
+  getWalkDataByUid(): Observable<any []> {
+    const walkRef = collection(this.firestore, 'walkData');
+    const walkQuery = query(walkRef, where('uid', '==', this.authService.getUserId()));
+    return collectionData(walkQuery, {idField: 'walkId'}) as Observable<any []>;
+  }
+
+  deleteWalk(walk: any) {
+    const walkRef = doc(this.firestore, `walkData/${walk.walkId}`);
+    return deleteDoc(walkRef);
+  }
 }

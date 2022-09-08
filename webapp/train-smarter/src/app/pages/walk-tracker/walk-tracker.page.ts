@@ -5,6 +5,7 @@ import {Platform} from '@ionic/angular';
 import {Geoposition} from '@ionic-native/geolocation';
 import {AuthenticationService} from '../../services/authentication.service';
 import {DatabaseService} from '../../services/database.service';
+import {DatePipe} from '@angular/common';
 
 declare let google;
 
@@ -21,12 +22,12 @@ export class WalkTrackerPage implements OnInit {
   endTimetamp;
   displayedTrack = null;
   trackedRoute = [];
-  routeData = [];
+  userWalkData = [];
   posSub: Subscription;
 
   constructor(private geolocation: Geolocation,
               private platform: Platform,
-              authService: AuthenticationService,
+              private authService: AuthenticationService,
               private dataService: DatabaseService) {
   }
 
@@ -43,8 +44,11 @@ export class WalkTrackerPage implements OnInit {
       this.geolocation.getCurrentPosition().then(pos => {
         const latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
         this.map.setCenter(latLng);
-        this.map.setZoom(15);
+        this.map.setZoom(18);
       });
+    });
+    this.dataService.getWalkDataByUid().subscribe((res) =>{
+      this.userWalkData = res;
     });
   }
 
@@ -94,17 +98,20 @@ export class WalkTrackerPage implements OnInit {
     return hours + ':' + minutes + ':' + seconds;
   }
 
-  persistRun() {
+  async persistRun() {
     this.posSub.unsubscribe();
     this.endTimetamp = new Date();
-    this.routeData.push(this.trackedRoute);
     const neededTime = this.endTimetamp.valueOf() - this.startTimestamp.valueOf();
     console.log(neededTime);
     console.log(this.timeConvert(neededTime));
     this.walkStartet = false;
     const newWalkDoc = {
-      uid: this.authService.getUid()
+      uid: this.authService.getUserId(),
+      neededTime: this.timeConvert(neededTime),
+      timeStamp: new DatePipe('de-DE').transform(new Date(),'dd.MM.yyyy/HH:mm:ss'),
+      route: this.trackedRoute
     };
-    return null;
+    //this.userWalkData.push(newWalkDoc);
+    await this.dataService.addWalk(newWalkDoc);
   }
 }
