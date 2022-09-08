@@ -1,8 +1,28 @@
 #map{
-  width: 100%;
+  width: auto;
   height: 300px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
-
+ion-card-header {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin: 5px 5px 0px 5px;
+  border-bottom: 1px solid grey;
+  font-weight: bold;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background: rgba(211, 211, 211, 0.45);
+}
+ion-card-content{
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin: 5px 5px 0px 5px;
+  border-bottom: 1px solid #808080;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background: rgba(211, 211, 211, 0.45);
+}
 .toolbar {
   padding-top: 0 !important;
 }

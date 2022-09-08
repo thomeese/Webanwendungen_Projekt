@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Walk-Tracker</ion-title>
+    <ion-title size="large" *ngIf="!specificWalkData">Neue Lauf-Route</ion-title>
+    <ion-title size="large" *ngIf="specificWalkData">Deine Lauf-Route</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,12 +14,13 @@
       <ion-buttons slot="start">
         <ion-back-button></ion-back-button>
       </ion-buttons>
-      <ion-title size="large">Walk-Tracker</ion-title>
+      <ion-title size="large" *ngIf="!specificWalkData">Neue Lauf-Route</ion-title>
+      <ion-title size="large" *ngIf="specificWalkData">Deine Lauf-Route</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-label *ngIf="this.specificWalkData">Lauf vom {{this.specificWalkData.date}} um {{this.specificWalkData.time}}
+  <ion-card-header *ngIf="this.specificWalkData">Lauf vom {{this.specificWalkData.date}} um {{this.specificWalkData.time}}
     Uhr
-  </ion-label>
+  </ion-card-header>
   <div #map id="map"></div>
   <div *ngIf="!this.specificWalkData">
     <ion-button *ngIf="!this.walkStartet" (click)="this.startRun()">Lauf Starten
@@ -28,8 +30,8 @@
       <ion-icon name="pause"></ion-icon>
     </ion-button>
   </div>
-  <div *ngIf="this.specificWalkData">
+  <ion-card-content *ngIf="this.specificWalkData">
     <ion-label>Benötigte Zeit: </ion-label>
     <ion-text>{{this.specificWalkData.neededTime}}</ion-text>
-  </div>
+  </ion-card-content>
 </ion-content>

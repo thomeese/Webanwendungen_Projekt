@@ -27,6 +27,13 @@ export class WalkTrackerDetailPage implements OnInit {
   displayedTrack = null;
   trackedRoute = [];
   posSub: Subscription;
+  mapOptions = {
+    zoom: 13,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false
+  };
 
   constructor(private geolocation: Geolocation,
               private platform: Platform,
@@ -39,23 +46,22 @@ export class WalkTrackerDetailPage implements OnInit {
   ngOnInit() {
     this.walkId = this.route.snapshot.paramMap.get('id');
     this.platform.ready().then(() => {
-      const mapOptions = {
-        zoom: 13,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: false
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      this.geolocation.getCurrentPosition().then(pos => {
-        const latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-        this.map.setCenter(latLng);
-        this.map.setZoom(18);
-      });
+      if (!this.walkId) {
+        this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+        this.geolocation.getCurrentPosition().then(pos => {
+          const latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+          this.map.setCenter(latLng);
+          this.map.setZoom(18);
+        });
+      }
     });
     if (this.walkId) {
       this.dataService.getWalkDataById(this.walkId).subscribe((res) => {
         this.specificWalkData = res;
+        this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+        const latLng = new google.maps.LatLng(this.specificWalkData.route[0]);
+        this.map.setCenter(latLng);
+        this.map.setZoom(18);
         this.drawPath(this.specificWalkData.route);
       });
     }
