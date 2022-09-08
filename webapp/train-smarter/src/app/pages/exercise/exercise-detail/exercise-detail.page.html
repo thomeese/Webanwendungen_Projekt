@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="false">
+  <ion-toolbar class="toolbar transparent">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -9,7 +9,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar class="toolbar transparent">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        <div *ngIf="exercise" class="ion-text-wrap ion-text-center">{{exercise.name}}</div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-card>
     <ion-card-content>
       <ion-title>

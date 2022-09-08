@@ -3,6 +3,17 @@ app-training-plan-card {
   max-width: 350px;
 }
 
+.toolbar{
+  padding-top: 0 !important;
+}
+
+// Header durchsichtig
+.transparent {
+  background: transparent !important;
+  --background: transparent !important;
+}
+
+
 /*
 .button-add{
   z-index: 12;

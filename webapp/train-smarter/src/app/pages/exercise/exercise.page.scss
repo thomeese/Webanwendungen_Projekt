@@ -9,3 +9,13 @@ app-exercise-card {
   }
 
 }
+
+.toolbar{
+  padding-top: 0 !important;
+}
+
+// Header durchsichtig
+.transparent {
+  background: transparent !important;
+  --background: transparent !important;
+}

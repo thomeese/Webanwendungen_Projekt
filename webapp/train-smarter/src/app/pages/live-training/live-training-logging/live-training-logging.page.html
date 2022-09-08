@@ -1,10 +1,15 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header [translucent]="false">
+  <ion-toolbar class="toolbar transparent">
     <ion-title>live-training-logging</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar class="toolbar transparent">
+      <ion-title size="large">live-training-logging</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <div *ngIf="this.exercise">
     <ion-header>{{this.exercise.name}}</ion-header>
     <div>

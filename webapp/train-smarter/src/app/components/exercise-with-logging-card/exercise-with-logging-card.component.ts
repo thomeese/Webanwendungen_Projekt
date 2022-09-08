@@ -28,8 +28,8 @@ export class ExerciseWithLoggingCardComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ExerciseDetailPage,
       componentProps: {id: this.exercise.exerciseId, trainingPlanId: this.trainingPlan.id, edit: true, setArray: this.exercise.sets},
-      breakpoints: [0, 0.5 ,0.8, 1],
-      initialBreakpoint: 0.5
+      breakpoints: [0,0.8, 1],
+      initialBreakpoint: 0.8
     });
     console.log(this.exercise.exerciseId);
     modal.present();

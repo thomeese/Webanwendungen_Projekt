@@ -3,6 +3,8 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-text-color: #000000;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -236,4 +238,13 @@ body[color-theme="dark"]{
 .center {
   text-align: center;
 }
-//}
+
+
+//Safe-Area-Top wird nicht benötigt, da nicht im fullscreen. Sonst Header zu gross
+//Not working with sheet Modals Workaround: Setting ion-safe-area-top to zero in all pages directly
+/*.ios{
+  --ion-safe-area-top : 0 !important;
+}*/
+
+
+

@@ -1,3 +1,7 @@
+.toolbar {
+  padding-top: 0 !important;
+}
+
 ion-title{
   padding-left: 0;
   color: #0d0d0d;
@@ -8,7 +12,6 @@ ion-content {
   ion-title {
     padding-right: 0;
   }
-
 
 }
 
@@ -23,3 +26,8 @@ ion-text {
   padding-right: 5px;
 }
 
+// Header durchsichtig
+.transparent {
+  background: transparent !important;
+  --background: transparent !important;
+}

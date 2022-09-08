@@ -54,8 +54,8 @@ let ExerciseWithLoggingCardComponent = class ExerciseWithLoggingCardComponent {
           edit: true,
           setArray: _this.exercise.sets
         },
-        breakpoints: [0, 0.5, 0.8, 1],
-        initialBreakpoint: 0.5
+        breakpoints: [0, 0.8, 1],
+        initialBreakpoint: 0.8
       });
       console.log(_this.exercise.exerciseId);
       modal.present();

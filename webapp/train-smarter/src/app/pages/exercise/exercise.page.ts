@@ -7,9 +7,17 @@ import {
   MusclesToString,
   SearchTypesToString
 } from '../../services/exercise-db.service';
-import {IonContent, IonRouterOutlet, LoadingController, MenuController, Platform} from '@ionic/angular';
+import {
+  IonContent,
+  IonRouterOutlet,
+  LoadingController,
+  MenuController,
+  ModalController,
+  Platform
+} from '@ionic/angular';
 import {DatabaseService, Excersise} from '../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {ExerciseDetailPage} from "./exercise-detail/exercise-detail.page";
 
 @Component({
   selector: 'app-exercise',
@@ -50,7 +58,8 @@ export class ExercisePage implements OnInit {
               private router: Router,
               private ionRouterOutlet: IonRouterOutlet,
               private menu: MenuController,
-              private platform: Platform) {
+              private platform: Platform,
+              private modalCtrl: ModalController) {
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
@@ -137,5 +146,15 @@ export class ExercisePage implements OnInit {
     } else {
       this.backToTop = false;
     }
+  }
+
+  async openDetails() {
+    const modal = await this.modalCtrl.create({
+      component: ExerciseDetailPage,
+      componentProps: {id: 1231, trainingPlanId: this.trainingPlanId},
+      breakpoints: [0, 0.5 ,0.8, 1],
+      initialBreakpoint: 0.5
+    });
+    modal.present();
   }
 }
