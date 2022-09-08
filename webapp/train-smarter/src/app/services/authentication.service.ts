@@ -1,23 +1,41 @@
 import {Injectable} from '@angular/core';
 import firebase from 'firebase/compat';
-import {Auth, setPersistence, signInWithEmailAndPassword, signOut,} from '@angular/fire/auth';
+import {Auth, onAuthStateChanged, setPersistence, signInWithEmailAndPassword, signOut,} from '@angular/fire/auth';
 import {browserLocalPersistence} from '@firebase/auth';
 import {createUserWithEmailAndPassword} from '@angular/fire/auth';
 import {ActivatedRouteSnapshot, Router} from '@angular/router';
+import {MenuController} from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  isAuthetificated;
+  isAuthetificated = false;
   user;
   userDocId;
 
   constructor(
     private auth: Auth,
-    private router: Router
-  ) {
-    this.isAuthetificated = false;
+    private router: Router,
+    private menu: MenuController) {
+    this.checkAllreadyLockedIn();
+  }
+
+  checkAllreadyLockedIn(): boolean{
+      this.auth.onAuthStateChanged( (user) => {
+        if (user) {
+          console.log(user);
+          console.log('Nutzer bereits eingeloggt!');
+          this.user = user;
+          this.isAuthetificated = true;
+          this.menu.enable(true);
+          this.router.navigateByUrl('/home', {replaceUrl: true});
+        } else {
+          this.isAuthetificated = false;
+          return false;
+        }
+      });
+    return true;
   }
 
   async signUp(email, password) {
@@ -29,6 +47,7 @@ export class AuthenticationService {
       );
       if (this.user) {
         this.isAuthetificated = true;
+        this.user = this.user.user;
       }
       return this.user;
     } catch (ex) {
@@ -45,6 +64,7 @@ export class AuthenticationService {
       );
       if (this.user) {
         this.isAuthetificated = true;
+        this.user = this.user.user;
       }
       return this.user;
     } catch (ex) {
@@ -57,11 +77,11 @@ export class AuthenticationService {
   }
 
   getEmail() {
-    return this.user.user.email;
+    return this.user.email;
   }
 
   getUserId() {
-    return this.user.user.uid;
+    return this.user.uid;
   }
 
   getUserDocId() {
@@ -73,11 +93,12 @@ export class AuthenticationService {
   }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
+    console.log(this.router.url);
     console.log(route);
-    if (!this.isAuthetificated) {
-      this.router.navigateByUrl('/login', {replaceUrl: true});
-      return false;
-    }
-    return true;
+    if (this.isAuthetificated) {
+        return true;
+      }
+    this.router.navigateByUrl('/login', {replaceUrl: true});
+    return false;
   }
 }

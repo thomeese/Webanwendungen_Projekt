@@ -110,6 +110,10 @@ const routes = [
         path: 'exercise-logging',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_exercise-logging_exercise-logging_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/exercise-logging/exercise-logging.module */ 7245)).then(m => m.ExerciseLoggingPageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
+    },
+    {
+        path: 'walk-tracker',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_walk-tracker_walk-tracker_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/walk-tracker/walk-tracker.module */ 6425)).then(m => m.WalkTrackerPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -181,6 +185,10 @@ let AppComponent = class AppComponent {
       title: 'Übungen',
       url: 'exercise',
       icon: 'list'
+    }, {
+      title: 'Lauf',
+      url: 'walk-tracker',
+      icon: 'walk'
     }];
     console.log(_capacitor_core__WEBPACK_IMPORTED_MODULE_3__.Capacitor.isNativePlatform());
     console.log(_capacitor_core__WEBPACK_IMPORTED_MODULE_3__.Capacitor.getPlatform());
@@ -278,7 +286,10 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
             (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__.provideAuth)(() => (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__.getAuth)()),
             (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_13__.provideFirestore)(() => (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_13__.getFirestore)()),
             (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__.provideStorage)(() => (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__.getStorage)())],
-        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_15__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.IonicRouteStrategy }],
+        providers: [
+            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_15__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.IonicRouteStrategy, },
+            { provide: Geolocation }
+        ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent]
     })
 ], AppModule);
