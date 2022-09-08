@@ -8,7 +8,7 @@ import {DatabaseService} from '../../../services/database.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 
-declare let google;
+declare const google;
 
 @Component({
   selector: 'app-walk-tracker-detail',
