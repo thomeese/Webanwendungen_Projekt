@@ -62,6 +62,7 @@ export class AnalyticsPage implements OnInit {
         }
       }
       this.exerciseWeightRecordMap = secondMap;
+      this.exerciseLookupMap = new Map();
       for(const j of secondMap.keys()){
         if(secondMap.get(j)){
           //genaue Exercise-Daten holen und mit Maximalgewicht speichern
