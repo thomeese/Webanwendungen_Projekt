@@ -32,7 +32,9 @@ import {indexedDBLocalPersistence} from '@firebase/auth';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
+  providers: [
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy,},
+    {provide: Geolocation}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

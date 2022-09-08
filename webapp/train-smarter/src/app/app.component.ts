@@ -18,6 +18,7 @@ export class AppComponent {
     {title: 'analytics', url: 'analytics', icon: 'analytics'},
     {title: 'Trainingspläne', url: 'training-plan', icon: 'file-tray-full'},
     {title: 'Übungen', url: 'exercise', icon: 'list'},
+    {title: 'Lauf', url: 'walk-tracker', icon: 'walk'}
   ];
 
   constructor(
