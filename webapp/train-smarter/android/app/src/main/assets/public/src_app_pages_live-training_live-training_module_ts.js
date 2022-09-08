@@ -523,6 +523,10 @@ let DatabaseService = class DatabaseService {
         const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'walkData');
         return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(walkRef, walk);
     }
+    getWalkDataById(id) {
+        const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `walkData/${id}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.docData)(walkRef, { idField: 'walkId' });
+    }
     getWalkDataByUid() {
         const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'walkData');
         const walkQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(walkRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', this.authService.getUserId()));
