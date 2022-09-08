@@ -103,7 +103,7 @@ const routes = [
     },
     {
         path: 'exercise-detail',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_exercise_exercise-detail_exercise-detail_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_services_database_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/exercise/exercise-detail/exercise-detail.module */ 4496)).then(m => m.ExerciseDetailPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_exercise_exercise-detail_exercise-detail_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_services_database_service_ts-_9e570")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/exercise/exercise-detail/exercise-detail.module */ 4496)).then(m => m.ExerciseDetailPageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
     },
     {
@@ -114,6 +114,10 @@ const routes = [
     {
         path: 'walk-tracker',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_walk-tracker_walk-tracker_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/walk-tracker/walk-tracker.module */ 6425)).then(m => m.WalkTrackerPageModule),
+        canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
+    }, {
+        path: 'walk-tracker-detail',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_walk-tracker_walk-tracker-detail_walk-tracker-detail_module_ts"), __webpack_require__.e("src_app_services_database_service_ts-_9e571")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/walk-tracker/walk-tracker-detail/walk-tracker-detail.module */ 2969)).then(m => m.WalkTrackerDetailPageModule),
         canActivate: [_services_authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService]
     }
 ];
