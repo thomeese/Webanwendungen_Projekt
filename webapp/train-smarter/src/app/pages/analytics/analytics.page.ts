@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from '../../services/database.service';
 import {Router} from '@angular/router';
+import {SwiperOptions} from "swiper";
 
 @Component({
   selector: 'app-analytics',
@@ -10,7 +11,26 @@ import {Router} from '@angular/router';
 export class AnalyticsPage implements OnInit {
   mostUsedPlan;
   leastUsedPlan;
-  exerciseWeightRecordMap = new Map ();
+  exerciseWeightRecordMap;
+  exerciseLookupMap;
+  config: SwiperOptions = {
+    slidesPerView: 'auto',
+    spaceBetween: 10,
+    centeredSlides: true,
+    pagination: {
+      dynamicBullets: true,
+      clickable: true
+    },
+    coverflowEffect: {
+      rotate: 30,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: false
+    },
+    effect: 'coverflow',
+    //navigation: true,
+  };
   constructor(private dataService: DatabaseService,
               private router: Router) {
   }
@@ -41,11 +61,13 @@ export class AnalyticsPage implements OnInit {
           secondMap.set(k, Math.max(...map.get(k)));
         }
       }
+      this.exerciseWeightRecordMap = secondMap;
       for(const j of secondMap.keys()){
         if(secondMap.get(j)){
           //genaue Exercise-Daten holen und mit Maximalgewicht speichern
           this.dataService.getExerciseByNumericId(j).subscribe(resultExercise => {
-            this.exerciseWeightRecordMap.set(resultExercise[0],secondMap.get(j));
+            this.exerciseLookupMap.set(j,resultExercise[0]);
+            console.log(this.exerciseLookupMap);
           });
         }
       }
