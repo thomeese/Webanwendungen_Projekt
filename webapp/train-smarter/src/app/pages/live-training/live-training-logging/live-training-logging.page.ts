@@ -8,7 +8,7 @@ import {DatabaseService} from '../../../services/database.service';
   styleUrls: ['./live-training-logging.page.scss'],
 })
 export class LiveTrainingLoggingPage implements OnInit {
-  @Input() trainingPlanId;
+  @Input() trainingPlan;
   @Input() exerciseId;
   exercise;
   gifUrl;
@@ -18,7 +18,7 @@ export class LiveTrainingLoggingPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.trainingPlanId) {
+    if (this.trainingPlan) {
       const exercises = JSON.parse(this.locaStorageServ.getData('live-training-exercises'));
       console.log(exercises);
       exercises.forEach(item =>{
