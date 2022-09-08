@@ -79,7 +79,7 @@ export class LiveTrainingPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: LiveTrainingLoggingPage,
       componentProps: {
-        trainingPlanId: this.trainingPlanId,
+        trainingPlan: this.trainingPlan,
         exerciseId: _exerciseId
       },
       breakpoints: [0, 0.8, 1],

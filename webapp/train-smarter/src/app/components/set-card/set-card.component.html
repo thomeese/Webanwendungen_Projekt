@@ -7,12 +7,11 @@
     </ion-row>
   </ion-card-header>
   <ion-card-content>
-    <ion-grid>
-
+      <!--Liste alle Sets auf-->
       <div class="ion-text-center ion-justify-content-center" *ngFor="let set of this.setArray">
-        <ion-item-sliding>
+        <ion-item-sliding *ngIf="!this.displayEditForm[set.setnumber-1]">
           <ion-item-options side="start">
-            <ion-item-option (click)="this.editExercise()">
+            <ion-item-option (click)="this.editSetClick(set.setnumber)">
               <ion-icon name="pencil-sharp"></ion-icon>
             </ion-item-option>
           </ion-item-options>
@@ -26,29 +25,53 @@
             </ion-grid>
           </ion-item>
           <ion-item-options slot="end">
-            <ion-item-option color="danger" (click)="this.deleteExerciseView()">
+            <ion-item-option color="danger" (click)="this.deleteSetClick(set.setnumber)">
               <ion-icon name="trash-sharp"></ion-icon>
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
+        <form [formGroup]="this.setEditForm" (submit)="this.safeChanges(set.setnumber)" *ngIf="this.displayEditForm[set.setnumber-1] && this.editSet">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="2">
+                <ion-input type="text" formControlName="setnumber" ></ion-input>
+              </ion-col>
+              <ion-col size="6">
+                <ion-input type="text" formControlName="repetition"></ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-input type="text" formControlName="weight"></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-button color="success" type="submit" [disabled]="setEditForm.invalid">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </ion-button>
+          <ion-button color="danger" [disabled]="setArray.length === 0" (click)="this.abortChanges(set.setnumber)">
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-button>
+        </form>
       </div>
 
-    </ion-grid>
-    <ion-button *ngIf="!displayForm" (click)="this.newSet()">
+    <!--Neuen Satz hinzufuegen-->
+    <ion-button *ngIf="!displayAddForm" (click)="this.newSet()">
       <ion-icon name="add-circle"></ion-icon>
     </ion-button>
-    <form [formGroup]="this.setForm" (submit)="this.addSet()" *ngIf="this.displayForm">
-      <ion-item>
-        <ion-col>
-          <ion-input type="text" formControlName="setnumber"></ion-input>
-        </ion-col>
-        <ion-col>
-          <ion-input type="text" formControlName="repetition"></ion-input>
-        </ion-col>
-        <ion-col>
-          <ion-input type="text" formControlName="weight"></ion-input>
-        </ion-col>
-      </ion-item>
+    <form [formGroup]="this.setForm" (submit)="this.addSet()" *ngIf="this.displayAddForm">
+      <ion-grid>
+        <ion-row class="ion-text-center ion-justify-content-center">
+          <ion-col size="2">
+            <ion-input type="text" formControlName="setnumber"></ion-input>
+          </ion-col>
+          <ion-col size="6">
+            <ion-input type="text" formControlName="repetition"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input type="text" formControlName="weight"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
       <ion-button color="success" type="submit" [disabled]="setForm.invalid">
         <ion-icon name="checkmark-circle"></ion-icon>
       </ion-button>
