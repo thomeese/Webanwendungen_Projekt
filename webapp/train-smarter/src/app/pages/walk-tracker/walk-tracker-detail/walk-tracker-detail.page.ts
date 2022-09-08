@@ -113,7 +113,7 @@ export class WalkTrackerDetailPage implements OnInit {
       uid: this.authService.getUserId(),
       neededTime: this.timeConvert(neededTime),
       date: new DatePipe('de-DE').transform(new Date(), 'dd.MM.yyyy'),
-      time: new DatePipe('de-DE').transform(new Date(), 'HH:mm:ss'),
+      time: new DatePipe('de-DE').transform(new Date(), 'HH:mm'),
       route: this.trackedRoute
     };
     //this.userWalkData.push(newWalkDoc);

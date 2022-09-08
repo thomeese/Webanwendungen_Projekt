@@ -13,8 +13,20 @@
       <ion-title size="large">Walk-Tracker</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div #map id="map"> </div>
-  <ion-button *ngIf="!this.walkStartet" (click)="this.startRun()">Lauf Starten <ion-icon name="play"></ion-icon></ion-button>
-  <ion-button *ngIf="this.walkStartet" (click)="this.persistRun()">Lauf Beenden<ion-icon name="pause"></ion-icon></ion-button>
+  <ion-label *ngIf="this.specificWalkData">Lauf vom {{this.specificWalkData.date}} um {{this.specificWalkData.time}}
+    Uhr
+  </ion-label>
+  <div #map id="map"></div>
+  <div *ngIf="!this.specificWalkData">
+    <ion-button *ngIf="!this.walkStartet" (click)="this.startRun()">Lauf Starten
+      <ion-icon name="play"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="this.walkStartet" (click)="this.persistRun()">Lauf Beenden
+      <ion-icon name="pause"></ion-icon>
+    </ion-button>
+  </div>
+  <div *ngIf="this.specificWalkData">
+    <ion-label>Benötigte Zeit:</ion-label>
+    <ion-text>{{this.specificWalkData.neededTime}}</ion-text>
+  </div>
 </ion-content>
