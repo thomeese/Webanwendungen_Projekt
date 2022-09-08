@@ -7,4 +7,22 @@ ion-item {
 ion-card {
   border-radius: 15px;
   margin: 0 5px 0 5px;
+  //margin: 5px 5px 15px 5px;
+
+  ion-card-header {
+    border-bottom: 1px solid grey;
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    h4 {
+      font-weight: bold;
+      font-size: 18px;
+      color: #0d0d0d;
+    }
+  }
+}
+
+ion-grid {
+  padding: 0 0 0 0;
 }

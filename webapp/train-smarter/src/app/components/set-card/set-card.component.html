@@ -1,16 +1,39 @@
 <ion-card>
-  <ion-card-header></ion-card-header>
+  <ion-card-header>
+    <ion-row class="set-header ion-text-center ion-align-items-center ion-justify-content-center">
+      <ion-col size="2">Satz</ion-col>
+      <ion-col size="6">Wiederholung</ion-col>
+      <ion-col>Gewicht (Optional)</ion-col>
+    </ion-row>
+  </ion-card-header>
   <ion-card-content>
-    <ion-item>
-      <ion-col>Satz</ion-col>
-      <ion-col>Wiederhohlung</ion-col>
-      <ion-col>Gewicht (optional)</ion-col>
-    </ion-item>
-    <ion-item *ngFor="let set of this.setArray">
-      <ion-col>{{set.setnumber}}</ion-col>
-      <ion-col>{{set.repetition}}</ion-col>
-      <ion-col>{{set.weight}}</ion-col>
-    </ion-item>
+    <ion-grid>
+
+      <div class="ion-text-center ion-justify-content-center" *ngFor="let set of this.setArray">
+        <ion-item-sliding>
+          <ion-item-options side="start">
+            <ion-item-option (click)="this.editExercise()">
+              <ion-icon name="pencil-sharp"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+          <ion-item class="ion-no-padding" lines="none">
+            <ion-grid>
+              <ion-row class="ion-text-center ion-justify-content-center">
+                <ion-col size="2">{{set.setnumber}}</ion-col>
+                <ion-col size="6">{{set.repetition}}</ion-col>
+                <ion-col>{{set.weight}}</ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item-options slot="end">
+            <ion-item-option color="danger" (click)="this.deleteExerciseView()">
+              <ion-icon name="trash-sharp"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </div>
+
+    </ion-grid>
     <ion-button *ngIf="!displayForm" (click)="this.newSet()">
       <ion-icon name="add-circle"></ion-icon>
     </ion-button>

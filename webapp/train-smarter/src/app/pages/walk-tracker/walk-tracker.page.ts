@@ -77,16 +77,18 @@ export class WalkTrackerPage implements OnInit {
   }
 
   timeConvert(input: number): string {
-    let seconds = Math.floor(input / 1000);
+    console.log(input);
+    let seconds = Math.abs(input / 1000);
+    console.log(seconds);
     let minutes = 0;
     let hours = 0;
     if(seconds > 60){
-      minutes = seconds % 60;
-      seconds = seconds/60;
+      minutes = Math.abs(seconds / 60);
+      seconds = Math.abs(seconds % 60);
     }
     if(minutes > 60){
-      hours = seconds % 60;
-      minutes = minutes/60;
+      hours = Math.abs(minutes / 60);
+      minutes = Math.abs(minutes % 60);
     }
     return hours+':'+minutes+':' + seconds;
   }
@@ -94,6 +96,8 @@ export class WalkTrackerPage implements OnInit {
   persistRun() {
     this.endTimetamp = new Date();
     this.routeData.push(this.trackedRoute);
+    console.log(this.endTimetamp.valueOf());
+    console.log(this.startTimestamp.valueOf());
     const neededTime = this.endTimetamp.valueOf() - this.startTimestamp.valueOf();
     console.log(this.timeConvert(neededTime));
     this.walkStartet = false;

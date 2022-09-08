@@ -9,11 +9,13 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class SetCardComponent implements OnInit {
 
   @Input() setArray;
+  //Damit am Ende die Exercise und die Satzangaben im Trainingsplan gesetzt werden können
   @Output() newSetArray = new EventEmitter<string>();
   setForm: FormGroup;
   displayForm;
 
-  constructor(private formbuilder: FormBuilder) { }
+  constructor(private formbuilder: FormBuilder) {}
+
   ngOnInit() {}
 
   newSet() {
@@ -43,5 +45,13 @@ export class SetCardComponent implements OnInit {
       weight: data.weight
     });
     this.abbortSet();
+  }
+
+  deleteExerciseView() {
+    console.log("Delete gedrückt");
+  }
+
+  editExercise() {
+    console.log("Edit gedrückt");
   }
 }

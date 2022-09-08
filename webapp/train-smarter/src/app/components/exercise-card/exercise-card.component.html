@@ -5,6 +5,9 @@
     <ion-card-title *ngIf="this.exercise" class="ion-text-center">{{exercise.name}}</ion-card-title>
   </ion-card-header>
 
+
+    <!-- Wird in der Trainingsplan Detailansicht ausgegeben, zeigt die Basisdaten der Übung in dem Trainingsplan an.
+         Die Sätze lassen sich ändern oder die ganze Übung löschen-->
   <ion-item-sliding *ngIf="this.sets">
     <ion-item-options side="start">
       <ion-item-option (click)="this.editExercise()"><ion-icon name="pencil-sharp"></ion-icon></ion-item-option>
