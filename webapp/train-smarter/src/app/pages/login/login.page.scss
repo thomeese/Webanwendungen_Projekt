@@ -26,6 +26,11 @@ ion-col  {
   border-top-left-radius: 20px;
   border-top-right-radius: 25px;
 }
+// Header durchsichtig
+.transparent {
+  background: transparent !important;
+  --background: transparent !important;
+}
 
 /*
 ion-content {

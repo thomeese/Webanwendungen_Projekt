@@ -16,7 +16,7 @@ SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 export class HomePage implements OnInit {
 
   config: SwiperOptions = {
-    slidesPerView: 2,
+    slidesPerView: 'auto',
     spaceBetween: 10,
     centeredSlides: true,
     pagination: {
