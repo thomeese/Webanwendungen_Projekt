@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {Platform} from '@ionic/angular';
+
+declare let google;
 
 @Component({
   selector: 'app-walk-tracker',
@@ -6,10 +11,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./walk-tracker.page.scss'],
 })
 export class WalkTrackerPage implements OnInit {
+  @ViewChild('map') mapElement: ElementRef;
+  walkStartet = false;
+  map: any;
+  displayedTrack = null;
+  trackedRoute = [];
+  routeData = [];
+  posSub: Subscription;
+  constructor(private geolocation: Geolocation, private platform: Platform) { }
 
-  constructor() { }
-
+  ionViewDidLoad(){
+    this.platform.ready().then(() =>{
+      const mapOptions ={
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl:false
+      };
+      this.map = new google.maps.Map(this.mapElement.nativeElement,mapOptions);
+    });
+  }
   ngOnInit() {
   }
 
+  startRun() {
+    return null;
+  }
+
+  persistRun() {
+    return null;
+  }
 }
