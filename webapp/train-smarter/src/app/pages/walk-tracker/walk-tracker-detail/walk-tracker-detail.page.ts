@@ -70,7 +70,7 @@ export class WalkTrackerDetailPage implements OnInit {
   startRun() {
     this.startTimestamp = new Date();
     this.walkStartet = true;
-    this.posSub = this.geolocation.watchPosition().subscribe((data) => {
+    this.posSub = this.geolocation.watchPosition({enableHighAccuracy: true,maximumAge:1000}).subscribe((data) => {
       if (data as Geoposition && 'coords' in data) {
         this.trackedRoute.push({
           lat: data.coords.latitude,
