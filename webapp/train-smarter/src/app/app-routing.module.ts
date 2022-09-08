@@ -53,6 +53,10 @@ const routes: Routes = [
     path: 'walk-tracker',
     loadChildren: () => import('./pages/walk-tracker/walk-tracker.module').then( m => m.WalkTrackerPageModule),
     canActivate: [AuthenticationService]
+  }, {
+    path: 'walk-tracker-detail',
+    loadChildren: () => import('./pages/walk-tracker/walk-tracker-detail/walk-tracker-detail.module').then( m => m.WalkTrackerDetailPageModule),
+    canActivate: [AuthenticationService]
   }
 
 

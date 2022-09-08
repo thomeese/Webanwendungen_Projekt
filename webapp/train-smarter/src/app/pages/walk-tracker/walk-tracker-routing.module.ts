@@ -8,11 +8,7 @@ const routes: Routes = [
     path: '',
     component: WalkTrackerPage
   },{
-    path: ':walkId',
-    loadChildren: () => import('./walk-tracker-detail/walk-tracker-detail.module').then( m => m.WalkTrackerDetailPageModule)
-  },
-  {
-    path: 'walk-tracker-detail',
+    path: ':id',
     loadChildren: () => import('./walk-tracker-detail/walk-tracker-detail.module').then( m => m.WalkTrackerDetailPageModule)
   }
 ];
