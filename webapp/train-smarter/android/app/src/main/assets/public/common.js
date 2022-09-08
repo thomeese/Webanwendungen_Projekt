@@ -1517,7 +1517,7 @@ const createSwipeBackGesture = (el, canStartHandler, onStartHandler, onMoveHandl
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzZXQtY2FyZC5jb21wb25lbnQuc2NzcyJ9 */";
+module.exports = "ion-item {\n  --padding-start: 0 !important;\n  --inner-padding-start: 0 !important;\n  --inner-padding-end: 0 !important;\n}\n\nion-card {\n  border-radius: 15px;\n  margin: 0 5px 0 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNldC1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsNkJBQUE7RUFDQSxtQ0FBQTtFQUNBLGlDQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtFQUNBLG1CQUFBO0FBQ0YiLCJmaWxlIjoic2V0LWNhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taXRlbSB7XG4gIC0tcGFkZGluZy1zdGFydDogMCAhaW1wb3J0YW50O1xuICAtLWlubmVyLXBhZGRpbmctc3RhcnQ6IDAgIWltcG9ydGFudDtcbiAgLS1pbm5lci1wYWRkaW5nLWVuZDogMCAhaW1wb3J0YW50O1xufVxuXG5pb24tY2FyZCB7XG4gIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gIG1hcmdpbjogMCA1cHggMCA1cHg7XG59XG4iXX0= */";
 
 /***/ }),
 

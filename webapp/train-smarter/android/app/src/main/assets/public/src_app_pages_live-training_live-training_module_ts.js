@@ -237,7 +237,13 @@ let LiveTrainingPage = class LiveTrainingPage {
 
       _this.dataService.getTrainingsPlanById(_this.trainingPlanId).subscribe(res => {
         _this.trainingPlan = res;
-        _this.exercises = res.exercises;
+
+        if (!res.exercises) {
+          _this.exercises = [];
+        } else {
+          _this.exercises = res.exercises;
+        }
+
         console.log(_this.trainingPlan);
 
         _this.localStorageCtrl.saveData('live-training-exercises', JSON.stringify(_this.exercises));

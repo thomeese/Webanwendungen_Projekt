@@ -9,6 +9,7 @@ import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+
 @Component({
   selector: 'app-live-training',
   templateUrl: './live-training.page.html',
@@ -34,7 +35,7 @@ export class LiveTrainingPage implements OnInit {
   ngOnInit() {
     this.trainingPlanId = this.localStorageCtrl.getData('live-training-trainingPlanId');
     this.exercisesState = JSON.parse(this.localStorageCtrl.getData('training-exercise-state'));
-    if(!this.exercisesState){
+    if (!this.exercisesState) {
       this.exercisesState = [];
     }
     if (this.trainingPlanId) {
@@ -57,11 +58,15 @@ export class LiveTrainingPage implements OnInit {
     await loading.present();
     this.dataService.getTrainingsPlanById(this.trainingPlanId).subscribe(res => {
       this.trainingPlan = res;
-      this.exercises = res.exercises;
+      if (!res.exercises) {
+        this.exercises = [];
+      } else {
+        this.exercises = res.exercises;
+      }
       console.log(this.trainingPlan);
       this.localStorageCtrl.saveData('live-training-exercises', JSON.stringify(this.exercises));
-      if(this.exercisesState.length === 0){
-        for(const exercise of this.exercises) {
+      if (this.exercisesState.length === 0) {
+        for (const exercise of this.exercises) {
           this.exercisesState.push(false);
         }
       }
@@ -109,20 +114,20 @@ export class LiveTrainingPage implements OnInit {
   async commitSetLog(_exerciseId) {
     console.log(this.trainingPlan);
     const set: SetLogging = {
-      date: new DatePipe('de-DE').transform(new Date(),'dd.MM.yyyy'),
-      time: new DatePipe('de-DE').transform(new Date(),'HH:mm'),
+      date: new DatePipe('de-DE').transform(new Date(), 'dd.MM.yyyy'),
+      time: new DatePipe('de-DE').transform(new Date(), 'HH:mm'),
       excerciseId: _exerciseId,
-      sets: JSON.parse(this.localStorageCtrl.getData('set-log-data-'+ _exerciseId)),
+      sets: JSON.parse(this.localStorageCtrl.getData('set-log-data-' + _exerciseId)),
       trainingPlanId: this.trainingPlanId,
       uid: this.trainingPlan.uid
     };
     await this.dataService.addSetLogging(set);
-    this.localStorageCtrl.removeData('set-log-data-'+ _exerciseId);
-    this.localStorageCtrl.saveData('training-exercise-state',JSON.stringify(this.exercisesState));
+    this.localStorageCtrl.removeData('set-log-data-' + _exerciseId);
+    this.localStorageCtrl.saveData('training-exercise-state', JSON.stringify(this.exercisesState));
   }
 
   finishTraining() {
     this.localStorageCtrl.clearData();
-    this.router.navigateByUrl('home',{replaceUrl: true});
+    this.router.navigateByUrl('home', {replaceUrl: true});
   }
 }

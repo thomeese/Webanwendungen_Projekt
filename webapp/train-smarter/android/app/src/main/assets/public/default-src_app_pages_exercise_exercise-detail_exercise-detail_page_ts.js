@@ -45,14 +45,14 @@ let ExerciseDetailPage = class ExerciseDetailPage {
     this.formbuilder = formbuilder;
     this.modalController = modalController;
     this.edit = false;
-    this.setArray = [];
+    this.addToPlan = false;
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation() !== null) {
         console.log('Navigation on');
         console.log(this.router.getCurrentNavigation());
 
         if (this.router.getCurrentNavigation().extras.state) {
-          this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
+          this.trainingPlan = this.router.getCurrentNavigation().extras.state.trainingPlan;
         }
       }
     });
@@ -60,26 +60,21 @@ let ExerciseDetailPage = class ExerciseDetailPage {
 
   ngOnInit() {
     console.log(this.edit);
-    console.log(this.setArray);
+    console.log(this.addToPlan);
     console.log(this.id);
-    console.log(this.trainingPlanId);
 
     try {
       if (this.id === 'undefined' || this.id === null) {
         this.id = this.route.snapshot.paramMap.get('id'); //exerciseId setzten
-      } //Falls ein Trainingsplan uebergeben wurde, diesen holen
-
-
-      if (this.trainingPlanId) {
-        this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res => {
-          this.trainingPlan = res;
-          console.log(this.trainingPlan);
-        });
       }
 
       this.getExercise();
     } catch (error) {
       console.log(error);
+    }
+
+    if (this.addToPlan) {
+      this.setArray = [];
     }
   }
 
@@ -178,13 +173,6 @@ let ExerciseDetailPage = class ExerciseDetailPage {
 
       yield _this4.modalController.dismiss();
     })();
-  }
-
-  loadSets() {
-    console.log("Exercise");
-    console.log(this.exercise);
-    this.setArray = this.exercise.sets;
-    console.log(this.setArray);
   }
 
 };
@@ -448,7 +436,7 @@ module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\nion-title {\n  
   \*************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"false\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n      <ion-title>\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n      </ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-card>\n    <ion-card-content>\n      <ion-title>\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n      </ion-title>\n    </ion-card-content>\n  </ion-card>\n  <div *ngIf=\"exercise\">\n    <img src=\"{{exercise.gifUrl}}\"/>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Muskelgruppe:</ion-text>\n        <ion-text>{{exercise.target}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Benötigtes Equipment:</ion-text>\n        <ion-text>{{exercise.equipment}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n    <app-set-card (newSetArray)=\"updateSetArray($event)\" [setArray]=\"setArray\" *ngIf=\"this.trainingPlan\"></app-set-card>\n\n    <ion-button *ngIf=\"this.trainingPlan && !this.edit\" [disabled]=\"this.setArray.length === 0\"\n                (click)=\"addToTrainingPlan()\">Zum Trainingsplan hinzufügen\n    </ion-button>\n    <ion-button *ngIf=\"this.trainingPlan && this.edit\" [disabled]=\"this.setArray.length === 0\"\n                (click)=\"saveChanges()\">Änderungen speichern\n    </ion-button>\n  </div>\n</ion-content>\n\n";
+module.exports = "<ion-header [translucent]=\"false\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n      <ion-title>\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n      </ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-card>\n    <ion-card-content>\n      <ion-title>\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n      </ion-title>\n    </ion-card-content>\n  </ion-card>\n  <div *ngIf=\"exercise\">\n    <img src=\"{{exercise.gifUrl}}\"/>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Muskelgruppe:</ion-text>\n        <ion-text>{{exercise.target}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Benötigtes Equipment:</ion-text>\n        <ion-text>{{exercise.equipment}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n    <app-set-card *ngIf=\"this.trainingPlan && (this.addToPlan || this.edit)\" (newSetArray)=\"updateSetArray($event)\" [setArray]=\"setArray\" ></app-set-card>\n\n    <ion-button *ngIf=\"this.trainingPlan && !this.edit && this.addToPlan\" [disabled]=\"this.setArray.length === 0\"\n                (click)=\"addToTrainingPlan()\">Zum Trainingsplan hinzufügen\n    </ion-button>\n    <ion-button *ngIf=\"this.trainingPlan && this.edit\" [disabled]=\"this.setArray.length === 0\"\n                (click)=\"saveChanges()\">Änderungen speichern\n    </ion-button>\n  </div>\n</ion-content>\n\n";
 
 /***/ })
 

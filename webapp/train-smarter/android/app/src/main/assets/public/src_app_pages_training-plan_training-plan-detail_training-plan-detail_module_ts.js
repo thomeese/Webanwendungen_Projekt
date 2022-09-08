@@ -1,127 +1,6 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_pages_training-plan_training-plan-detail_training-plan-detail_module_ts"],{
 
-/***/ 2288:
-/*!***********************************************************************************************!*\
-  !*** ./src/app/components/exercise-with-logging-card/exercise-with-logging-card.component.ts ***!
-  \***********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ExerciseWithLoggingCardComponent": () => (/* binding */ ExerciseWithLoggingCardComponent)
-/* harmony export */ });
-/* harmony import */ var C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _exercise_with_logging_card_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exercise-with-logging-card.component.html?ngResource */ 3566);
-/* harmony import */ var _exercise_with_logging_card_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exercise-with-logging-card.component.scss?ngResource */ 494);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _pages_exercise_exercise_detail_exercise_detail_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../pages/exercise/exercise-detail/exercise-detail.page */ 148);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/database.service */ 4382);
-
-
-
-
-
-
-
-
-
-let ExerciseWithLoggingCardComponent = class ExerciseWithLoggingCardComponent {
-  constructor(router, modalCtrl, alertController, databaseService) {
-    this.router = router;
-    this.modalCtrl = modalCtrl;
-    this.alertController = alertController;
-    this.databaseService = databaseService;
-  }
-
-  ngOnInit() {
-    console.log("Card");
-    console.log(this.exercise);
-  }
-
-  editExercise() {
-    var _this = this;
-
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const modal = yield _this.modalCtrl.create({
-        component: _pages_exercise_exercise_detail_exercise_detail_page__WEBPACK_IMPORTED_MODULE_3__.ExerciseDetailPage,
-        componentProps: {
-          id: _this.exercise.exerciseId,
-          trainingPlanId: _this.trainingPlan.id,
-          edit: true,
-          setArray: _this.exercise.sets
-        },
-        breakpoints: [0, 0.8, 1],
-        initialBreakpoint: 0.8
-      });
-      console.log(_this.exercise.exerciseId);
-      modal.present();
-    })();
-  }
-
-  deleteExerciseView() {
-    var _this2 = this;
-
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const alert = yield _this2.alertController.create({
-        message: 'Möchten Sie diese Übung wirklich löschen?',
-        buttons: [{
-          text: 'Abbrechen',
-          role: 'cancel'
-        }, {
-          text: 'Löschen',
-          handler: () => {
-            _this2.deleteExercise(_this2.exercise.exerciseId);
-
-            alert.dismiss();
-          }
-        }]
-      });
-      alert.present();
-    })();
-  }
-
-  deleteExercise(exerciseId) {
-    var _this3 = this;
-
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      _this3.trainingPlan.exercises = _this3.trainingPlan.exercises.filter(item => item.exerciseId !== exerciseId);
-      yield _this3.databaseService.updateTrainingPlan(_this3.trainingPlan);
-    })();
-  }
-
-};
-
-ExerciseWithLoggingCardComponent.ctorParameters = () => [{
-  type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router
-}, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController
-}, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController
-}, {
-  type: _services_database_service__WEBPACK_IMPORTED_MODULE_4__.DatabaseService
-}];
-
-ExerciseWithLoggingCardComponent.propDecorators = {
-  exercise: [{
-    type: _angular_core__WEBPACK_IMPORTED_MODULE_7__.Input
-  }],
-  trainingPlan: [{
-    type: _angular_core__WEBPACK_IMPORTED_MODULE_7__.Input
-  }]
-};
-ExerciseWithLoggingCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
-  selector: 'app-exercise-with-logging-card',
-  template: _exercise_with_logging_card_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
-  styles: [_exercise_with_logging_card_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
-})], ExerciseWithLoggingCardComponent);
-
-
-/***/ }),
-
 /***/ 9295:
 /*!*************************************************************************************************!*\
   !*** ./src/app/pages/training-plan/training-plan-detail/training-plan-detail-routing.module.ts ***!
@@ -182,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 3819);
 /* harmony import */ var _training_plan_detail_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./training-plan-detail-routing.module */ 9295);
 /* harmony import */ var _training_plan_detail_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./training-plan-detail.page */ 5142);
-/* harmony import */ var _components_exercise_with_logging_card_exercise_with_logging_card_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/exercise-with-logging-card/exercise-with-logging-card.component */ 2288);
+/* harmony import */ var _exercise_exercise_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../exercise/exercise.module */ 1751);
 
 
 
@@ -199,9 +78,10 @@ TrainingPlanDetailPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)
             _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
             _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
             _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
-            _training_plan_detail_routing_module__WEBPACK_IMPORTED_MODULE_0__.TrainingPlanDetailPageRoutingModule
+            _training_plan_detail_routing_module__WEBPACK_IMPORTED_MODULE_0__.TrainingPlanDetailPageRoutingModule,
+            _exercise_exercise_module__WEBPACK_IMPORTED_MODULE_2__.ExercisePageModule
         ],
-        declarations: [_training_plan_detail_page__WEBPACK_IMPORTED_MODULE_1__.TrainingPlanDetailPage, _components_exercise_with_logging_card_exercise_with_logging_card_component__WEBPACK_IMPORTED_MODULE_2__.ExerciseWithLoggingCardComponent]
+        declarations: [_training_plan_detail_page__WEBPACK_IMPORTED_MODULE_1__.TrainingPlanDetailPage]
     })
 ], TrainingPlanDetailPageModule);
 
@@ -209,23 +89,92 @@ TrainingPlanDetailPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)
 
 /***/ }),
 
-/***/ 494:
-/*!************************************************************************************************************!*\
-  !*** ./src/app/components/exercise-with-logging-card/exercise-with-logging-card.component.scss?ngResource ***!
-  \************************************************************************************************************/
-/***/ ((module) => {
+/***/ 5142:
+/*!***************************************************************************************!*\
+  !*** ./src/app/pages/training-plan/training-plan-detail/training-plan-detail.page.ts ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-module.exports = ".exercise-card {\n  border-radius: 15px;\n}\n.exercise-card ion-card-header {\n  border-bottom: 1px solid grey;\n  padding-bottom: 10px;\n  padding-top: 10px;\n}\n.exercise-card ion-card-header h4 {\n  font-weight: bold;\n  font-size: 18px;\n  color: #0d0d0d;\n}\n.exercise-card .set-header {\n  border-bottom: 1px dashed grey;\n}\n.exercise-card ion-item {\n  --inner-padding-end:0 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLXdpdGgtbG9nZ2luZy1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQUE7QUFDRjtBQUNFO0VBQ0UsNkJBQUE7RUFFQSxvQkFBQTtFQUNBLGlCQUFBO0FBQUo7QUFFSTtFQUNFLGlCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7QUFBTjtBQUlFO0VBQ0UsOEJBQUE7QUFGSjtBQUtFO0VBQ0UsZ0NBQUE7QUFISiIsImZpbGUiOiJleGVyY2lzZS13aXRoLWxvZ2dpbmctY2FyZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5leGVyY2lzZS1jYXJkIHtcclxuICBib3JkZXItcmFkaXVzOiAxNXB4O1xyXG5cclxuICBpb24tY2FyZC1oZWFkZXIge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIGdyZXk7XHJcblxyXG4gICAgcGFkZGluZy1ib3R0b206IDEwcHg7XHJcbiAgICBwYWRkaW5nLXRvcDogMTBweDtcclxuXHJcbiAgICBoNCB7XHJcbiAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgICAgIGNvbG9yOiAjMGQwZDBkO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgLnNldC1oZWFkZXIge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IGRhc2hlZCBncmV5O1xyXG4gIH1cclxuXHJcbiAgaW9uLWl0ZW0ge1xyXG4gICAgLS1pbm5lci1wYWRkaW5nLWVuZDowICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG59XHJcbiJdfQ== */";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TrainingPlanDetailPage": () => (/* binding */ TrainingPlanDetailPage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _training_plan_detail_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./training-plan-detail.page.html?ngResource */ 9784);
+/* harmony import */ var _training_plan_detail_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./training-plan-detail.page.scss?ngResource */ 6449);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/database.service */ 4382);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+
+
+
+
+
+
+
+let TrainingPlanDetailPage = class TrainingPlanDetailPage {
+    constructor(databaseService, route, router, alertController) {
+        this.databaseService = databaseService;
+        this.route = route;
+        this.router = router;
+        this.alertController = alertController;
+    }
+    ngOnInit() {
+        const id = this.route.snapshot.paramMap.get('id');
+        this.getPlan(id);
+    }
+    addExerciseView() {
+        const navigationExtras = {
+            state: {
+                trainingPlan: this.trainingPlan,
+                addToPlan: true
+            }
+        };
+        this.router.navigate(['exercise'], navigationExtras);
+    }
+    getPlan(id) {
+        this.databaseService.getTrainingsPlanById(id).subscribe(res => {
+            this.trainingPlan = res;
+            console.log("Trainingsplan Detailansicht: " + this.trainingPlan.id);
+        });
+    }
+};
+TrainingPlanDetailPage.ctorParameters = () => [
+    { type: _services_database_service__WEBPACK_IMPORTED_MODULE_2__.DatabaseService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.ActivatedRoute },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.AlertController }
+];
+TrainingPlanDetailPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+        selector: 'app-training-plan-detail',
+        template: _training_plan_detail_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
+        styles: [_training_plan_detail_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], TrainingPlanDetailPage);
+
+
 
 /***/ }),
 
-/***/ 3566:
-/*!************************************************************************************************************!*\
-  !*** ./src/app/components/exercise-with-logging-card/exercise-with-logging-card.component.html?ngResource ***!
-  \************************************************************************************************************/
+/***/ 6449:
+/*!****************************************************************************************************!*\
+  !*** ./src/app/pages/training-plan/training-plan-detail/training-plan-detail.page.scss?ngResource ***!
+  \****************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<!--<ion-card class=\"exercise-card\" button=\"\" routerDirection=\"forward\"\r\n          [routerLink]=\"'/exercise/' + exercise.exerciseId\"\r\n          routerLinkActive=\"selected\">-->\r\n<ion-card class=\"exercise-card\">\r\n  <ion-card-header>\r\n    <ion-text><h4>{{exercise.name}}</h4></ion-text>\r\n  </ion-card-header>\r\n  <ion-item-sliding >\r\n    <ion-item-options side=\"start\">\r\n      <ion-item-option (click)=\"this.editExercise()\"><ion-icon name=\"pencil-sharp\"></ion-icon></ion-item-option>\r\n    </ion-item-options>\r\n    <ion-item class=\"ion-no-padding\" lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row class=\"set-header ion-text-center ion-justify-content-center\">\r\n          <ion-col size=\"2\">Satz</ion-col>\r\n          <ion-col size=\"6\">Wiederholung</ion-col>\r\n          <ion-col>Gewicht</ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-text-center ion-justify-content-center\" *ngFor=\"let set of exercise.sets\">\r\n          <ion-col size=\"2\">{{set.setnumber}}</ion-col>\r\n          <ion-col size=\"6\">{{set.repetition}}</ion-col>\r\n          <ion-col>{{set.weight}}</ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item-options slot=\"end\">\r\n      <ion-item-option color=\"danger\" (click)=\"this.deleteExerciseView()\"><ion-icon name=\"trash-sharp\"></ion-icon></ion-item-option>\r\n    </ion-item-options>\r\n  </ion-item-sliding>\r\n\r\n</ion-card>\r\n";
+module.exports = ".exercises-list {\n  border-radius: 10px;\n  background: rgba(224, 224, 224, 0.71);\n  box-shadow: 16px 18px 27px -2px rgba(89, 89, 89, 0.51);\n}\n.exercises-list .exercises-list-content {\n  padding-left: 0;\n  padding-right: 0;\n}\n.exercises-list app-exercise-card {\n  padding-bottom: 10px;\n}\n.toolbar {\n  padding-top: 0 !important;\n}\n.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRyYWluaW5nLXBsYW4tZGV0YWlsLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFLQTtFQUNFLG1CQUFBO0VBQ0EscUNBQUE7RUFDQSxzREFBQTtBQUpGO0FBTUU7RUFDRSxlQUFBO0VBQ0EsZ0JBQUE7QUFKSjtBQU1FO0VBQ0Usb0JBQUE7QUFKSjtBQVFBO0VBQ0UseUJBQUE7QUFMRjtBQVNBO0VBQ0Usa0NBQUE7RUFDQSxvQ0FBQTtBQU5GIiwiZmlsZSI6InRyYWluaW5nLXBsYW4tZGV0YWlsLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi8ve1xuLy8gIGJhY2tncm91bmQ6IHJnYigwLDAsMCk7XG4vLyAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDM1MmRlZywgcmdiYSgwLDAsMCwxKSA0NiUsIHJnYmEoMjIsNDAsMjI4LDEpIDgzJSwgcmdiYSgwLDIzMiwyNTUsMSkgMTAwJSk7XG4vL31cblxuLmV4ZXJjaXNlcy1saXN0IHtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgYmFja2dyb3VuZDogcmdiYSgyMjQsIDIyNCwgMjI0LCAwLjcxKTtcbiAgYm94LXNoYWRvdzogMTZweCAxOHB4IDI3cHggLTJweCByZ2JhKDg5LCA4OSwgODksIDAuNTEpO1xuXG4gIC5leGVyY2lzZXMtbGlzdC1jb250ZW50IHtcbiAgICBwYWRkaW5nLWxlZnQ6IDA7XG4gICAgcGFkZGluZy1yaWdodDogMDtcbiAgfVxuICBhcHAtZXhlcmNpc2UtY2FyZCB7XG4gICAgcGFkZGluZy1ib3R0b206IDEwcHg7XG4gIH1cbn1cblxuLnRvb2xiYXJ7XG4gIHBhZGRpbmctdG9wOiAwICFpbXBvcnRhbnQ7XG59XG5cbi8vIEhlYWRlciBkdXJjaHNpY2h0aWdcbi50cmFuc3BhcmVudCB7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbn1cblxuXG4iXX0= */";
+
+/***/ }),
+
+/***/ 9784:
+/*!****************************************************************************************************!*\
+  !*** ./src/app/pages/training-plan/training-plan-detail/training-plan-detail.page.html?ngResource ***!
+  \****************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "<ion-header [translucent]=\"false\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <div class=\"ion-text-wrap\">\n      <ion-title *ngIf=\"!this.trainingPlan\">Detailansicht</ion-title>\n      <ion-title *ngIf=\"this.trainingPlan\">{{this.trainingPlan.name}}</ion-title>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n      <div class=\"ion-text-wrap\">\n        <ion-title size=\"large\" *ngIf=\"!this.trainingPlan\">Detailansicht</ion-title>\n        <ion-title size=\"large\" *ngIf=\"this.trainingPlan\">{{this.trainingPlan.name}}</ion-title>\n      </div>\n    </ion-toolbar>\n  </ion-header>\n  <ion-label>Beschreibung:</ion-label>\n  <ion-item *ngIf=\"this.trainingPlan\">{{this.trainingPlan.description}}</ion-item>\n  <ion-label>Häufigkeit des Trainings:</ion-label>\n  <ion-item *ngIf=\"this.trainingPlan\">{{this.trainingPlan.period}}</ion-item>\n  <ion-card class=\"exercises-list\">\n    <ion-card-header>\n      <ion-text><h3>Übungen:</h3></ion-text>\n      <ion-fab horizontal=\"end\" vertical=\"top\">\n        <ion-fab-button size=\"small\" color=\"dark\" class=\"button-add\" (click)=\"addExerciseView()\">\n          <ion-icon name=\"add-circle\"></ion-icon>\n        </ion-fab-button>\n      </ion-fab>\n    </ion-card-header>\n    <ion-card-content class=\"exercises-list-content\" *ngIf=\"this.trainingPlan\">\n      <app-exercise-card *ngFor=\"let exercise of this.trainingPlan.exercises\" [trainingPlan]=\"this.trainingPlan\" [exercise]=\"exercise\" [sets]=\"exercise.sets\" [showGif]=\"true\"></app-exercise-card>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
 
 /***/ })
 
