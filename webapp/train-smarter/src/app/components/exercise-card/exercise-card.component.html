@@ -29,7 +29,8 @@
   </ion-item-sliding>
 
   <ion-card-content (click)="openDetails()" *ngIf="maxWeight">
-    <ion-text><h4>{{this.maxWeight}}</h4></ion-text>
+    <ion-label>Gewicht: </ion-label>
+    <ion-text><h4>{{this.maxWeight}}Kg</h4></ion-text>
   </ion-card-content>
 </ion-card>
 
