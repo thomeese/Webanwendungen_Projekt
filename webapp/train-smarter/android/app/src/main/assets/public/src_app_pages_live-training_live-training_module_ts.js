@@ -165,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LiveTrainingPage": () => (/* binding */ LiveTrainingPage)
 /* harmony export */ });
-/* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _live_training_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./live-training.page.html?ngResource */ 92);
 /* harmony import */ var _live_training_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./live-training.page.scss?ngResource */ 1831);
@@ -228,7 +228,7 @@ let LiveTrainingPage = class LiveTrainingPage {
   getExercises() {
     var _this = this;
 
-    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this.loadingCtr.create({
         message: 'Loading..',
         spinner: 'bubbles'
@@ -264,7 +264,7 @@ let LiveTrainingPage = class LiveTrainingPage {
   logTraining(_exerciseId) {
     var _this2 = this;
 
-    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalCtrl.create({
         component: _live_training_logging_live_training_logging_page__WEBPACK_IMPORTED_MODULE_5__.LiveTrainingLoggingPage,
         componentProps: {
@@ -281,7 +281,7 @@ let LiveTrainingPage = class LiveTrainingPage {
   getTrainingPlans() {
     var _this3 = this;
 
-    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this3.loadingCtr.create({
         message: 'Loading..',
         spinner: 'bubbles'
@@ -310,7 +310,7 @@ let LiveTrainingPage = class LiveTrainingPage {
   commitSetLog(_exerciseId) {
     var _this4 = this;
 
-    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       console.log(_this4.trainingPlan);
       const set = {
         date: new _angular_common__WEBPACK_IMPORTED_MODULE_6__.DatePipe('de-DE').transform(new Date(), 'dd.MM.yyyy'),
@@ -580,7 +580,7 @@ LocalstorageService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
   \******************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtdHJhaW5pbmctbG9nZ2luZy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBQTtBQUNGOztBQUVBO0VBQ0Usa0NBQUE7RUFDQSxvQ0FBQTtBQUNGIiwiZmlsZSI6ImxpdmUtdHJhaW5pbmctbG9nZ2luZy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudG9vbGJhcntcbiAgcGFkZGluZy10b3A6IDAgIWltcG9ydGFudDtcbn1cbi8vIEhlYWRlciBkdXJjaHNpY2h0aWdcbi50cmFuc3BhcmVudCB7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbn1cbiJdfQ== */";
+module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtdHJhaW5pbmctbG9nZ2luZy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBQTtBQUNGOztBQUVBO0VBQ0Usa0NBQUE7RUFDQSxvQ0FBQTtBQUNGIiwiZmlsZSI6ImxpdmUtdHJhaW5pbmctbG9nZ2luZy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudG9vbGJhcntcclxuICBwYWRkaW5nLXRvcDogMCAhaW1wb3J0YW50O1xyXG59XHJcbi8vIEhlYWRlciBkdXJjaHNpY2h0aWdcclxuLnRyYW5zcGFyZW50IHtcclxuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xyXG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcclxufVxyXG4iXX0= */";
 
 /***/ }),
 
@@ -590,7 +590,7 @@ module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n.transparent {\
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "ion-fab ion-text {\n  padding-right: 10px;\n}\n\nion-col {\n  padding-right: 0;\n  padding-left: 0;\n}\n\n.toolbar {\n  padding-top: 0 !important;\n}\n\n.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtdHJhaW5pbmcucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNFO0VBQ0UsbUJBQUE7QUFBSjs7QUFJQTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtBQURGOztBQUlBO0VBQ0UseUJBQUE7QUFERjs7QUFJQTtFQUNFLGtDQUFBO0VBQ0Esb0NBQUE7QUFERiIsImZpbGUiOiJsaXZlLXRyYWluaW5nLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1mYWJ7XG4gIGlvbi10ZXh0e1xuICAgIHBhZGRpbmctcmlnaHQ6IDEwcHg7XG4gIH1cbn1cblxuaW9uLWNvbCB7XG4gIHBhZGRpbmctcmlnaHQ6IDA7XG4gIHBhZGRpbmctbGVmdDogMDtcbn1cblxuLnRvb2xiYXJ7XG4gIHBhZGRpbmctdG9wOiAwICFpbXBvcnRhbnQ7XG59XG4vLyBIZWFkZXIgZHVyY2hzaWNodGlnXG4udHJhbnNwYXJlbnQge1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xuICAtLWJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG59XG4iXX0= */";
+module.exports = "ion-fab ion-text {\n  padding-right: 10px;\n}\n\nion-col {\n  padding-right: 0;\n  padding-left: 0;\n}\n\n.toolbar {\n  padding-top: 0 !important;\n}\n\n.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtdHJhaW5pbmcucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNFO0VBQ0UsbUJBQUE7QUFBSjs7QUFJQTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtBQURGOztBQUlBO0VBQ0UseUJBQUE7QUFERjs7QUFJQTtFQUNFLGtDQUFBO0VBQ0Esb0NBQUE7QUFERiIsImZpbGUiOiJsaXZlLXRyYWluaW5nLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1mYWJ7XHJcbiAgaW9uLXRleHR7XHJcbiAgICBwYWRkaW5nLXJpZ2h0OiAxMHB4O1xyXG4gIH1cclxufVxyXG5cclxuaW9uLWNvbCB7XHJcbiAgcGFkZGluZy1yaWdodDogMDtcclxuICBwYWRkaW5nLWxlZnQ6IDA7XHJcbn1cclxuXHJcbi50b29sYmFye1xyXG4gIHBhZGRpbmctdG9wOiAwICFpbXBvcnRhbnQ7XHJcbn1cclxuLy8gSGVhZGVyIGR1cmNoc2ljaHRpZ1xyXG4udHJhbnNwYXJlbnQge1xyXG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XHJcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xyXG59XHJcbiJdfQ== */";
 
 /***/ }),
 
@@ -600,7 +600,7 @@ module.exports = "ion-fab ion-text {\n  padding-right: 10px;\n}\n\nion-col {\n  
   \******************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"false\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-title>live-training-logging</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-title size=\"large\">live-training-logging</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <div *ngIf=\"this.exercise\">\n    <ion-header>{{this.exercise.name}}</ion-header>\n    <div>\n      <img src=\"{{gifUrl}}\"/>\n    </div>\n    <app-set-card (newSetArray)=\"updateSetLogArray($event)\" [setArray]=\"setLog\" *ngIf=\"this.exercise\"></app-set-card>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-header [translucent]=\"false\">\r\n  <ion-toolbar class=\"toolbar transparent\">\r\n    <ion-title>live-training-logging</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content fullscreen=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar class=\"toolbar transparent\">\r\n      <ion-title size=\"large\">live-training-logging</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <div *ngIf=\"this.exercise\">\r\n    <ion-header>{{this.exercise.name}}</ion-header>\r\n    <div>\r\n      <img src=\"{{gifUrl}}\"/>\r\n    </div>\r\n    <app-set-card (newSetArray)=\"updateSetLogArray($event)\" [setArray]=\"setLog\" *ngIf=\"this.exercise\"></app-set-card>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -610,7 +610,7 @@ module.exports = "<ion-header [translucent]=\"false\">\n  <ion-toolbar class=\"t
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"false\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>LiveTraining</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-title size=\"large\">LiveTraining</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <div *ngIf=\"trainingPlanList && !trainingPlanId\">\n    <ion-text>Wähle einen Trainingsplan:</ion-text>\n    <ion-list>\n      <ion-item Button=\"\" (click)=\"startLiveTraining(plan.trainingPlanId)\" *ngFor=\"let plan of this.trainingPlanList\">\n        <ion-text>{{plan.name}}</ion-text>\n      </ion-item>\n    </ion-list>\n  </div>\n\n  <div *ngIf=\"trainingPlanId && exercises\">\n    <ion-list>\n      <ion-item>\n        <ion-col>Todo</ion-col>\n        <ion-col>Done</ion-col>\n      </ion-item>\n      <ion-item *ngFor=\"let todo of exercises; let i=index\" button=\"\">\n        <ion-col (click)=\"this.logTraining(todo.exerciseId)\">{{todo.name}}</ion-col>\n        <ion-col>\n          <ion-button shape=\"round\" fill=\"clear\" [class.button-disabled]=\"exercisesState[i]\" (click)=\"setChecked(i, todo.exerciseId)\">\n            <ion-icon size=\"large\"\n                      [attr.color]=\" exercisesState[i] ? 'success' : 'danger'\"\n                       name=\"checkmark-done-circle\"></ion-icon>\n        </ion-button>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n\n\n    <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\">\n      <!--<ion-grid>\n        <ion-row>\n          <ion-button class=\" ion-align-self-center ion-text-right\"><ion-text>Training beenden</ion-text></ion-button>\n          <ion-col size=\"3\"><ion-fab-button size=\"small\" (click)=\"this.finishTraining()\"><ion-icon name=\"cloud-done\"></ion-icon></ion-fab-button></ion-col>\n        </ion-row>\n      </ion-grid>-->\n      <ion-button color=\"success\" (click)=\"this.finishTraining()\"><ion-text>beenden</ion-text><ion-icon name=\"cloud-done\"></ion-icon></ion-button>\n    </ion-fab>\n\n  </div>\n</ion-content>\n";
+module.exports = "<ion-header [translucent]=\"false\">\r\n  <ion-toolbar class=\"toolbar transparent\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>LiveTraining</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content fullscreen=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar class=\"toolbar transparent\">\r\n      <ion-title size=\"large\">LiveTraining</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <div *ngIf=\"trainingPlanList && !trainingPlanId\">\r\n    <ion-text>Wähle einen Trainingsplan:</ion-text>\r\n    <ion-list>\r\n      <ion-item Button=\"\" (click)=\"startLiveTraining(plan.trainingPlanId)\" *ngFor=\"let plan of this.trainingPlanList\">\r\n        <ion-text>{{plan.name}}</ion-text>\r\n      </ion-item>\r\n    </ion-list>\r\n  </div>\r\n\r\n  <div *ngIf=\"trainingPlanId && exercises\">\r\n    <ion-list>\r\n      <ion-item>\r\n        <ion-col>Todo</ion-col>\r\n        <ion-col>Done</ion-col>\r\n      </ion-item>\r\n      <ion-item *ngFor=\"let todo of exercises; let i=index\" button=\"\">\r\n        <ion-col (click)=\"this.logTraining(todo.exerciseId)\">{{todo.name}}</ion-col>\r\n        <ion-col>\r\n          <ion-button shape=\"round\" fill=\"clear\" [class.button-disabled]=\"exercisesState[i]\" (click)=\"setChecked(i, todo.exerciseId)\">\r\n            <ion-icon size=\"large\"\r\n                      [attr.color]=\" exercisesState[i] ? 'success' : 'danger'\"\r\n                       name=\"checkmark-done-circle\"></ion-icon>\r\n        </ion-button>\r\n        </ion-col>\r\n      </ion-item>\r\n    </ion-list>\r\n\r\n\r\n    <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\">\r\n      <!--<ion-grid>\r\n        <ion-row>\r\n          <ion-button class=\" ion-align-self-center ion-text-right\"><ion-text>Training beenden</ion-text></ion-button>\r\n          <ion-col size=\"3\"><ion-fab-button size=\"small\" (click)=\"this.finishTraining()\"><ion-icon name=\"cloud-done\"></ion-icon></ion-fab-button></ion-col>\r\n        </ion-row>\r\n      </ion-grid>-->\r\n      <ion-button color=\"success\" (click)=\"this.finishTraining()\"><ion-text>beenden</ion-text><ion-icon name=\"cloud-done\"></ion-icon></ion-button>\r\n    </ion-fab>\r\n\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
