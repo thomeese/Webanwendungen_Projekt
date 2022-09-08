@@ -13,7 +13,8 @@ import { WalkTrackerPage } from './walk-tracker.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    WalkTrackerPageRoutingModule
+    WalkTrackerPageRoutingModule,
+    Geolocation
   ],
   declarations: [WalkTrackerPage]
 })
