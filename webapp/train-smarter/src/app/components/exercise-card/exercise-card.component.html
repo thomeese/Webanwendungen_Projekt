@@ -2,7 +2,7 @@
   <ion-card button>
   <ion-card-header (click)="openDetails()">
     <ion-img *ngIf="showGif" [src]="exercise.gifUrl"></ion-img>
-    <ion-card-title class="ion-text-center">{{exercise.name}}</ion-card-title>
+    <ion-card-title *ngIf="this.exercise" class="ion-text-center">{{exercise.name}}</ion-card-title>
   </ion-card-header>
 
   <ion-item-sliding *ngIf="this.sets">

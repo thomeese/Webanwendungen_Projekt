@@ -6,9 +6,14 @@
   padding-top: 0 !important;
 }
 
-ion-content {
-  --background: url("/assets/images/wave-haikei(3).svg") no-repeat;
+.home-background {
+  --background: url("/assets/images/wave-haikei(3).svg") no-repeat center center fixed;
+  -webkit-background-size: cover; /* For WebKit*/
+  -moz-background-size: cover;    /* Mozilla*/
+  -o-background-size: cover;      /* Opera*/
+  --background-size: cover;         /* Generic*/
 }
+
 
 // Header durchsichtig
 .transparent {
@@ -22,6 +27,7 @@ h1 {
 }
 
 .trainingPlans-card {
+  margin: 0 0 0 0;
   max-width: 400px;
   border-radius: 10px;
   background: rgba(183, 214, 227, 0.71);
