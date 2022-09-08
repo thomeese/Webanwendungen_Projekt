@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {pageAnimation} from './animations/nav-animation';
 import {Capacitor} from '@capacitor/core';
 import {indexedDBLocalPersistence} from '@firebase/auth';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,10 +32,8 @@ import {indexedDBLocalPersistence} from '@firebase/auth';
     }),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())],
-  providers: [
-    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy,},
-    {provide: Geolocation}],
+    provideStorage(() => getStorage()),],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, Geolocation],
   bootstrap: [AppComponent]
 })
 export class AppModule {

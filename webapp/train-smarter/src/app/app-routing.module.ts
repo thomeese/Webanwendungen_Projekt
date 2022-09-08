@@ -48,9 +48,11 @@ const routes: Routes = [
     path: 'exercise-logging',
     loadChildren: () => import('./pages/exercise-logging/exercise-logging.module').then(m => m.ExerciseLoggingPageModule),
     canActivate: [AuthenticationService]
-  },  {
+  },
+  {
     path: 'walk-tracker',
-    loadChildren: () => import('./pages/walk-tracker/walk-tracker.module').then( m => m.WalkTrackerPageModule)
+    loadChildren: () => import('./pages/walk-tracker/walk-tracker.module').then( m => m.WalkTrackerPageModule),
+    canActivate: [AuthenticationService]
   }
 
 
