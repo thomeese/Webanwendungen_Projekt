@@ -24,6 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 let SetCardComponent = class SetCardComponent {
     constructor(formbuilder) {
         this.formbuilder = formbuilder;
+        //Damit am Ende die Exercise und die Satzangaben im Trainingsplan gesetzt werden können
         this.newSetArray = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
     }
     ngOnInit() { }
@@ -51,6 +52,12 @@ let SetCardComponent = class SetCardComponent {
             weight: data.weight
         });
         this.abbortSet();
+    }
+    deleteExerciseView() {
+        console.log("Delete gedrückt");
+    }
+    editExercise() {
+        console.log("Edit gedrückt");
     }
 };
 SetCardComponent.ctorParameters = () => [
@@ -1517,7 +1524,7 @@ const createSwipeBackGesture = (el, canStartHandler, onStartHandler, onMoveHandl
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "ion-item {\n  --padding-start: 0 !important;\n  --inner-padding-start: 0 !important;\n  --inner-padding-end: 0 !important;\n}\n\nion-card {\n  border-radius: 15px;\n  margin: 0 5px 0 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNldC1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsNkJBQUE7RUFDQSxtQ0FBQTtFQUNBLGlDQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtFQUNBLG1CQUFBO0FBQ0YiLCJmaWxlIjoic2V0LWNhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taXRlbSB7XHJcbiAgLS1wYWRkaW5nLXN0YXJ0OiAwICFpbXBvcnRhbnQ7XHJcbiAgLS1pbm5lci1wYWRkaW5nLXN0YXJ0OiAwICFpbXBvcnRhbnQ7XHJcbiAgLS1pbm5lci1wYWRkaW5nLWVuZDogMCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG5pb24tY2FyZCB7XHJcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcclxuICBtYXJnaW46IDAgNXB4IDAgNXB4O1xyXG59XHJcbiJdfQ== */";
+module.exports = "ion-item {\n  --padding-start: 0 !important;\n  --inner-padding-start: 0 !important;\n  --inner-padding-end: 0 !important;\n}\n\nion-card {\n  border-radius: 15px;\n  margin: 0 5px 0 5px;\n}\n\nion-card ion-card-header {\n  border-bottom: 1px solid grey;\n  padding-bottom: 10px;\n  padding-top: 10px;\n}\n\nion-card ion-card-header h4 {\n  font-weight: bold;\n  font-size: 18px;\n  color: #0d0d0d;\n}\n\nion-grid {\n  padding: 0 0 0 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNldC1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsNkJBQUE7RUFDQSxtQ0FBQTtFQUNBLGlDQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtFQUNBLG1CQUFBO0FBQ0Y7O0FBRUU7RUFDRSw2QkFBQTtFQUVBLG9CQUFBO0VBQ0EsaUJBQUE7QUFESjs7QUFHSTtFQUNFLGlCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7QUFETjs7QUFNQTtFQUNFLGdCQUFBO0FBSEYiLCJmaWxlIjoic2V0LWNhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taXRlbSB7XHJcbiAgLS1wYWRkaW5nLXN0YXJ0OiAwICFpbXBvcnRhbnQ7XHJcbiAgLS1pbm5lci1wYWRkaW5nLXN0YXJ0OiAwICFpbXBvcnRhbnQ7XHJcbiAgLS1pbm5lci1wYWRkaW5nLWVuZDogMCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG5pb24tY2FyZCB7XHJcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcclxuICBtYXJnaW46IDAgNXB4IDAgNXB4O1xyXG4gIC8vbWFyZ2luOiA1cHggNXB4IDE1cHggNXB4O1xyXG5cclxuICBpb24tY2FyZC1oZWFkZXIge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIGdyZXk7XHJcblxyXG4gICAgcGFkZGluZy1ib3R0b206IDEwcHg7XHJcbiAgICBwYWRkaW5nLXRvcDogMTBweDtcclxuXHJcbiAgICBoNCB7XHJcbiAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgICAgIGNvbG9yOiAjMGQwZDBkO1xyXG4gICAgfVxyXG4gIH1cclxufVxyXG5cclxuaW9uLWdyaWQge1xyXG4gIHBhZGRpbmc6IDAgMCAwIDA7XHJcbn1cclxuIl19 */";
 
 /***/ }),
 
@@ -1537,7 +1544,7 @@ module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n.transparent {\
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-card>\r\n  <ion-card-header></ion-card-header>\r\n  <ion-card-content>\r\n    <ion-item>\r\n      <ion-col>Satz</ion-col>\r\n      <ion-col>Wiederhohlung</ion-col>\r\n      <ion-col>Gewicht (optional)</ion-col>\r\n    </ion-item>\r\n    <ion-item *ngFor=\"let set of this.setArray\">\r\n      <ion-col>{{set.setnumber}}</ion-col>\r\n      <ion-col>{{set.repetition}}</ion-col>\r\n      <ion-col>{{set.weight}}</ion-col>\r\n    </ion-item>\r\n    <ion-button *ngIf=\"!displayForm\" (click)=\"this.newSet()\">\r\n      <ion-icon name=\"add-circle\"></ion-icon>\r\n    </ion-button>\r\n    <form [formGroup]=\"this.setForm\" (submit)=\"this.addSet()\" *ngIf=\"this.displayForm\">\r\n      <ion-item>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"setnumber\"></ion-input>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"repetition\"></ion-input>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"weight\"></ion-input>\r\n        </ion-col>\r\n      </ion-item>\r\n      <ion-button color=\"success\" type=\"submit\" [disabled]=\"setForm.invalid\">\r\n        <ion-icon name=\"checkmark-circle\"></ion-icon>\r\n      </ion-button>\r\n      <ion-button color=\"danger\" [disabled]=\"setArray.length === 0\" (click)=\"this.abbortSet()\">\r\n        <ion-icon name=\"close-circle\"></ion-icon>\r\n      </ion-button>\r\n    </form>\r\n  </ion-card-content>\r\n</ion-card>\r\n";
+module.exports = "<ion-card>\r\n  <ion-card-header>\r\n    <ion-row class=\"set-header ion-text-center ion-align-items-center ion-justify-content-center\">\r\n      <ion-col size=\"2\">Satz</ion-col>\r\n      <ion-col size=\"6\">Wiederholung</ion-col>\r\n      <ion-col>Gewicht (Optional)</ion-col>\r\n    </ion-row>\r\n  </ion-card-header>\r\n  <ion-card-content>\r\n    <ion-grid>\r\n\r\n      <div class=\"ion-text-center ion-justify-content-center\" *ngFor=\"let set of this.setArray\">\r\n        <ion-item-sliding>\r\n          <ion-item-options side=\"start\">\r\n            <ion-item-option (click)=\"this.editExercise()\">\r\n              <ion-icon name=\"pencil-sharp\"></ion-icon>\r\n            </ion-item-option>\r\n          </ion-item-options>\r\n          <ion-item class=\"ion-no-padding\" lines=\"none\">\r\n            <ion-grid>\r\n              <ion-row class=\"ion-text-center ion-justify-content-center\">\r\n                <ion-col size=\"2\">{{set.setnumber}}</ion-col>\r\n                <ion-col size=\"6\">{{set.repetition}}</ion-col>\r\n                <ion-col>{{set.weight}}</ion-col>\r\n              </ion-row>\r\n            </ion-grid>\r\n          </ion-item>\r\n          <ion-item-options slot=\"end\">\r\n            <ion-item-option color=\"danger\" (click)=\"this.deleteExerciseView()\">\r\n              <ion-icon name=\"trash-sharp\"></ion-icon>\r\n            </ion-item-option>\r\n          </ion-item-options>\r\n        </ion-item-sliding>\r\n      </div>\r\n\r\n    </ion-grid>\r\n    <ion-button *ngIf=\"!displayForm\" (click)=\"this.newSet()\">\r\n      <ion-icon name=\"add-circle\"></ion-icon>\r\n    </ion-button>\r\n    <form [formGroup]=\"this.setForm\" (submit)=\"this.addSet()\" *ngIf=\"this.displayForm\">\r\n      <ion-item>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"setnumber\"></ion-input>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"repetition\"></ion-input>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"weight\"></ion-input>\r\n        </ion-col>\r\n      </ion-item>\r\n      <ion-button color=\"success\" type=\"submit\" [disabled]=\"setForm.invalid\">\r\n        <ion-icon name=\"checkmark-circle\"></ion-icon>\r\n      </ion-button>\r\n      <ion-button color=\"danger\" [disabled]=\"setArray.length === 0\" (click)=\"this.abbortSet()\">\r\n        <ion-icon name=\"close-circle\"></ion-icon>\r\n      </ion-button>\r\n    </form>\r\n  </ion-card-content>\r\n</ion-card>\r\n";
 
 /***/ }),
 

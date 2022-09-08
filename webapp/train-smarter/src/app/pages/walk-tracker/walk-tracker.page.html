@@ -15,6 +15,6 @@
   </ion-header>
 
   <div #map id="map"> </div>
-  <ion-button *ngIf="!this.walkStartet" (click)="this.startRun()">Lauf Starten</ion-button>
-  <ion-button *ngIf="this.walkStartet" (click)="this.persistRun()">Lauf Beenden</ion-button>
+  <ion-button *ngIf="!this.walkStartet" (click)="this.startRun()">Lauf Starten <ion-icon name="play"></ion-icon></ion-button>
+  <ion-button *ngIf="this.walkStartet" (click)="this.persistRun()">Lauf Beenden<ion-icon name="pause"></ion-icon></ion-button>
 </ion-content>

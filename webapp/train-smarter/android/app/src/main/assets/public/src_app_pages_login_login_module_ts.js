@@ -414,6 +414,19 @@ let DatabaseService = class DatabaseService {
         const setLoggingDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `setLogging/${setLogging.id}`);
         return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(setLoggingDocRef);
     }
+    addWalk(walk) {
+        const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'walkData');
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(walkRef, walk);
+    }
+    getWalkDataByUid() {
+        const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'walkData');
+        const walkQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(walkRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', this.authService.getUserId()));
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(walkQuery, { idField: 'walkId' });
+    }
+    deleteWalk(walk) {
+        const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `walkData/${walk.walkId}`);
+        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(walkRef);
+    }
 };
 DatabaseService.ctorParameters = () => [
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.Firestore },
