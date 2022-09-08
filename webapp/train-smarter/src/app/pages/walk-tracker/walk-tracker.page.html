@@ -18,8 +18,8 @@
     <ion-card *ngFor="let walk of this.userWalkData" button="" routerDirection="forward" [routerLink]="'/walk-tracker/' + walk.walkId" routerLinkActive="selected">
       <ion-card-header>Lauf vom {{walk.date}} um {{walk.time}} Uhr</ion-card-header>
       <ion-card-content>
-        <ion-label>Benötigte Zeit:</ion-label>
-        <ion-text>{{walk.neededTime}}</ion-text>
+        <ion-label>Benötigte Zeit: </ion-label>
+        <ion-text>{{ walk.neededTime}}</ion-text>
       </ion-card-content>
     </ion-card>
   </div>

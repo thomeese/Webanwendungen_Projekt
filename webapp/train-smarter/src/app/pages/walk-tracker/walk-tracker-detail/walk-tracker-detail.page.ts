@@ -1,11 +1,12 @@
 import {Component, ElementRef, OnInit, Input, ViewChild} from '@angular/core';
 import {Geoposition} from '@ionic-native/geolocation';
-import {DatePipe} from '@angular/common';
+import {DatePipe, Location} from '@angular/common';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {Platform} from '@ionic/angular';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {DatabaseService} from '../../../services/database.service';
 import {Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 declare let google;
 
@@ -16,8 +17,8 @@ declare let google;
 })
 
 export class WalkTrackerDetailPage implements OnInit {
-  @Input() walkId;
   @ViewChild('map') mapElement: ElementRef;
+  walkId;
   walkStartet = false;
   map: any;
   startTimestamp;
@@ -29,11 +30,14 @@ export class WalkTrackerDetailPage implements OnInit {
 
   constructor(private geolocation: Geolocation,
               private platform: Platform,
+              private route: ActivatedRoute,
               private authService: AuthenticationService,
-              private dataService: DatabaseService) {
+              private dataService: DatabaseService,
+              private location: Location) {
   }
 
   ngOnInit() {
+    this.walkId = this.route.snapshot.paramMap.get('id');
     this.platform.ready().then(() => {
       const mapOptions = {
         zoom: 13,
@@ -49,9 +53,10 @@ export class WalkTrackerDetailPage implements OnInit {
         this.map.setZoom(18);
       });
     });
-    if(this.walkId){
-      this.dataService.getWalkDataById(this.walkId).subscribe((res) =>{
+    if (this.walkId) {
+      this.dataService.getWalkDataById(this.walkId).subscribe((res) => {
         this.specificWalkData = res;
+        this.drawPath(this.specificWalkData.route);
       });
     }
   }
@@ -118,5 +123,6 @@ export class WalkTrackerDetailPage implements OnInit {
     };
     //this.userWalkData.push(newWalkDoc);
     await this.dataService.addWalk(newWalkDoc);
+    this.location.back();
   }
 }
