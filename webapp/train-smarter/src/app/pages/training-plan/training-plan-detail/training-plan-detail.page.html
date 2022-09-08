@@ -36,7 +36,7 @@
       </ion-fab>
     </ion-card-header>
     <ion-card-content class="exercises-list-content" *ngIf="this.trainingPlan">
-      <app-exercise-with-logging-card *ngFor="let exercise of this.trainingPlan.exercises" [trainingPlan]="this.trainingPlan" [exercise]="exercise"></app-exercise-with-logging-card>
+      <app-exercise-card *ngFor="let exercise of this.trainingPlan.exercises" [trainingPlan]="this.trainingPlan" [exercise]="exercise" [sets]="exercise.sets" [showGif]="true"></app-exercise-card>
     </ion-card-content>
   </ion-card>
 </ion-content>

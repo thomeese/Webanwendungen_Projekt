@@ -7,17 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { TrainingPlanDetailPageRoutingModule } from './training-plan-detail-routing.module';
 
 import { TrainingPlanDetailPage } from './training-plan-detail.page';
-import {
-  ExerciseWithLoggingCardComponent
-} from "../../../components/exercise-with-logging-card/exercise-with-logging-card.component";
+import {ExercisePageModule} from "../../exercise/exercise.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TrainingPlanDetailPageRoutingModule
-  ],
-  declarations: [TrainingPlanDetailPage, ExerciseWithLoggingCardComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        TrainingPlanDetailPageRoutingModule,
+        ExercisePageModule
+    ],
+  declarations: [TrainingPlanDetailPage]
 })
 export class TrainingPlanDetailPageModule {}

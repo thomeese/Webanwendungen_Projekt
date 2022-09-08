@@ -20,7 +20,7 @@
     <ion-label>Exercise PersonalRecord</ion-label>
     <swiper #swiper [config]="this.config" *ngIf="this.exerciseLookupMap && this.exerciseWeightRecordMap">
       <ng-template swiperSlide *ngFor="let exercise of exerciseWeightRecordMap.keys()">
-        <app-exercise-card [exercise]="exerciseLookupMap.get(exercise)" [weight]="exerciseWeightRecordMap.get(exercise)"></app-exercise-card>
+        <app-exercise-card [exercise]="exerciseLookupMap.get(exercise)" [maxWeight]="exerciseWeightRecordMap.get(exercise)"></app-exercise-card>
       </ng-template>
     </swiper>
   </ion-item>

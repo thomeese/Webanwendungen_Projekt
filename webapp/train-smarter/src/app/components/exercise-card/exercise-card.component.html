@@ -1,8 +1,36 @@
-<ion-card button (click)="openDetails()">
-  <ion-card-header>
-    <ion-img [src]="exercise.gifUrl"></ion-img>
+<!--<ion-card (click)="openDetails()">-->
+  <ion-card button>
+  <ion-card-header (click)="openDetails()">
+    <ion-img *ngIf="showGif" [src]="exercise.gifUrl"></ion-img>
     <ion-card-title class="ion-text-center">{{exercise.name}}</ion-card-title>
   </ion-card-header>
+
+  <ion-item-sliding *ngIf="this.sets">
+    <ion-item-options side="start">
+      <ion-item-option (click)="this.editExercise()"><ion-icon name="pencil-sharp"></ion-icon></ion-item-option>
+    </ion-item-options>
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-grid (click)="openDetails()">
+        <ion-row class="set-header ion-text-center ion-justify-content-center">
+          <ion-col size="2">Satz</ion-col>
+          <ion-col size="6">Wiederholung</ion-col>
+          <ion-col>Gewicht</ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center ion-justify-content-center" *ngFor="let set of sets">
+          <ion-col size="2">{{set.setnumber}}</ion-col>
+          <ion-col size="6">{{set.repetition}}</ion-col>
+          <ion-col>{{set.weight}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item-options slot="end">
+      <ion-item-option color="danger" (click)="this.deleteExerciseView()"><ion-icon name="trash-sharp"></ion-icon></ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+
+  <ion-card-content (click)="openDetails()" *ngIf="maxWeight">
+    <ion-text><h4>{{this.maxWeight}}</h4></ion-text>
+  </ion-card-content>
 </ion-card>
 
 

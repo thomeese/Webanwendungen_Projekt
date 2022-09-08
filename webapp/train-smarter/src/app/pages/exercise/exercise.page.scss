@@ -14,8 +14,16 @@ app-exercise-card {
   padding-top: 0 !important;
 }
 
+.background-transparent{
+  background: transparent;
+}
+
 // Header durchsichtig
 .transparent {
   background: transparent !important;
   --background: transparent !important;
+}
+
+.search-btn {
+  margin-left: 15px;
 }

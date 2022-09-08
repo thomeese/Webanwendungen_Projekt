@@ -14,113 +14,41 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-text><h1 *ngIf="user">Hi, {{this.user.firstname}}</h1></ion-text>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="trainingPlans-card">
-    <ion-card-header>
-      <ion-text><h2>Trainingspläne</h2></ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <swiper #swiper [config]="config">
-        <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
-          <app-training-plan-card [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
-        </ng-template>
-      </swiper>
-    </ion-card-content>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-text><h1 *ngIf="user">Hi, {{this.user.firstname}}</h1></ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-lg="">
+        <ion-card class="trainingPlans-card">
+          <ion-card-header class="trainingPlans-card-header">
+            <ion-text><h2>Trainingspläne</h2></ion-text>
+          </ion-card-header>
+          <ion-card-content>
+            <swiper #swiper [config]="config">
+              <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
+                <app-training-plan-card class="trainingPlan-card" [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
+              </ng-template>
+            </swiper>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-lg="">
+        <ion-card class="trainingPlans-card">
+          <ion-card-header class="trainingPlans-card-header">
+            <ion-text><h3>PersonalRecord</h3></ion-text>
+          </ion-card-header>
+          <ion-card-content>
+            <swiper #swiper [config]="config">
+              <ng-template swiperSlide *ngFor="let trainingPlan of trainingPlanList">
+                <app-training-plan-card class="trainingPlan-card" [trainingPlan]="trainingPlan" [showDescription]="false"></app-training-plan-card>
+              </ng-template>
+            </swiper>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

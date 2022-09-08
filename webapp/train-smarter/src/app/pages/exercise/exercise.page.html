@@ -8,47 +8,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true" (ionScroll)="getScrollPos($event.detail.scrollTop)">
+<ion-content fullscreen="true" [scrollEvents]="true" (ionScroll)="getScrollPos($event.detail.scrollTop)">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title class="toolbar transparent" size="large">Exercise</ion-title>
+    <ion-toolbar class="toolbar transparent">
+      <ion-title size="large">Exercise</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-list>
-    <ion-item>
-      <ion-select interface="popover" placeholder="Wähle den Filter" [(ngModel)]="searchTypeSelected">
-        <ion-select-option *ngFor="let search of enumSearchTypeKeys"
-                           [value]="search">{{searchTypes[search]}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
-    <ion-select interface="popover" placeholder="Wähle aus." [(ngModel)]="targetSelected">
-      <div *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
-        <ion-select-option *ngFor="let part of enumBodyPartKeys; let i = index"
-                           [value]=this.enumBodyPartValues[i]>{{bodyparts[part]}}</ion-select-option>
-      </div>
-      <div *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
-        <ion-select-option *ngFor="let musc of enumMuscleKeys; let i = index"
-                           [value]="this.enumMuscleValues[i]">{{muscles[musc]}}</ion-select-option>
-      </div>
-      <div *ngIf="searchTypeSelected === enumSearchTypeKeys[4]"> <!-- By Equipment selected -->
-        <ion-select-option *ngFor="let equip of enumEquipmentKeys; let i = index"
-                           [value]="this.enumEquipmentValues[i]">{{equipment[equip]}}</ion-select-option>
-      </div>
-    </ion-select>
-    </ion-item>
-    <ion-item *ngIf="searchTypeSelected === enumSearchTypeKeys[3]">
-      <ion-input placeholder="Geben Sie die ID ein." [(ngModel)]="exerciseID"></ion-input>
-    </ion-item>
-      <ion-button class="search" type="button" (click)="loadData()"><ion-icon name="search"></ion-icon></ion-button>
-  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-select interface="popover" placeholder="Wähle den Filter" [(ngModel)]="searchTypeSelected">
+          <ion-select-option *ngFor="let search of enumSearchTypeKeys"
+                             [value]="search">{{searchTypes[search]}}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
+        <ion-select interface="popover" placeholder="Wähle aus." [(ngModel)]="targetSelected">
+          <div *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
+            <ion-select-option *ngFor="let part of enumBodyPartKeys; let i = index"
+                               [value]=this.enumBodyPartValues[i]>{{bodyparts[part]}}</ion-select-option>
+          </div>
+          <div *ngIf="searchTypeSelected === enumSearchTypeKeys[2]"> <!-- By Muscle selected -->
+            <ion-select-option *ngFor="let musc of enumMuscleKeys; let i = index"
+                               [value]="this.enumMuscleValues[i]">{{muscles[musc]}}</ion-select-option>
+          </div>
+          <div *ngIf="searchTypeSelected === enumSearchTypeKeys[4]"> <!-- By Equipment selected -->
+            <ion-select-option *ngFor="let equip of enumEquipmentKeys; let i = index"
+                               [value]="this.enumEquipmentValues[i]">{{equipment[equip]}}</ion-select-option>
+          </div>
+        </ion-select>
+      </ion-col>
+      <ion-col *ngIf="searchTypeSelected === enumSearchTypeKeys[3]">
+        <ion-input placeholder="Geben Sie die ID ein." [(ngModel)]="exerciseID"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button class="search-btn" type="button" (click)="loadData()"><ion-icon name="search"></ion-icon></ion-button>
 
   <!--Search Results-->
-  <ion-list>
-    <ion-item position="floating" button *ngFor="let exercise of exercises | slice:0 :slice; let i=index">
-      <app-exercise-card [exercise]="exercise" [trainingPlanId]="trainingPlanId"></app-exercise-card>
+  <ion-list class="background-transparent">
+    <ion-item lines="none" color="none" position="floating" button *ngFor="let exercise of exercises | slice:0 :slice; let i=index">
+      <app-exercise-card [exercise]="exercise" [trainingPlan]="trainingPlan" [addToPlan]="true"></app-exercise-card>
     </ion-item>
-    <ion-item (click)="openDetails()"></ion-item>
+    <ion-item color="none" (click)="openDetails()"></ion-item>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"

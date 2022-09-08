@@ -10,13 +10,16 @@ import { ExercisePage } from './exercise.page';
 import {ExerciseCardComponent} from '../../components/exercise-card/exercise-card.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ExercisePageRoutingModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ExercisePageRoutingModule,
+        ReactiveFormsModule
+    ],
+    exports: [
+        ExerciseCardComponent
+    ],
     declarations: [ExercisePage, ExerciseCardComponent]
 })
 export class ExercisePageModule {}

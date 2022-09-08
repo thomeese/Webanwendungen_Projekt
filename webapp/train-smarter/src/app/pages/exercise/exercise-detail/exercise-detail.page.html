@@ -41,9 +41,9 @@
         <ion-text>{{exercise.equipment}}</ion-text>
       </ion-card-content>
     </ion-card>
-    <app-set-card (newSetArray)="updateSetArray($event)" [setArray]="setArray" *ngIf="this.trainingPlan"></app-set-card>
+    <app-set-card *ngIf="this.trainingPlan && (this.addToPlan || this.edit)" (newSetArray)="updateSetArray($event)" [setArray]="setArray" ></app-set-card>
 
-    <ion-button *ngIf="this.trainingPlan && !this.edit" [disabled]="this.setArray.length === 0"
+    <ion-button *ngIf="this.trainingPlan && !this.edit && this.addToPlan" [disabled]="this.setArray.length === 0"
                 (click)="addToTrainingPlan()">Zum Trainingsplan hinzufügen
     </ion-button>
     <ion-button *ngIf="this.trainingPlan && this.edit" [disabled]="this.setArray.length === 0"

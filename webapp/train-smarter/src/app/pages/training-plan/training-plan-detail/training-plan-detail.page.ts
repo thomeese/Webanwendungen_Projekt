@@ -25,7 +25,8 @@ export class TrainingPlanDetailPage implements OnInit {
   addExerciseView() {
     const navigationExtras: NavigationExtras = {
       state: {
-        trainingPlanId: this.trainingPlan.id
+        trainingPlan: this.trainingPlan,
+        addToPlan: true
       }
     };
     this.router.navigate(['exercise'], navigationExtras);

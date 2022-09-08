@@ -18,11 +18,11 @@ export class ExerciseDetailPage implements OnInit {
 
   id; //exerciseId
   exercise;
-  trainingPlanId;
   trainingPlan;
   setArray;
-  displayForm;
+  showSetForm;
   edit = false;
+  addToPlan = false;
 
   constructor(private exerciseDBService: ExerciseDBService,
               private loadingController: LoadingController,
@@ -33,13 +33,12 @@ export class ExerciseDetailPage implements OnInit {
               private nav: NavController,
               private formbuilder: FormBuilder,
               private modalController: ModalController) {
-    this.setArray = [];
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation() !== null) {
         console.log('Navigation on');
         console.log(this.router.getCurrentNavigation());
         if (this.router.getCurrentNavigation().extras.state) {
-          this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
+          this.trainingPlan = this.router.getCurrentNavigation().extras.state.trainingPlan;
         }
       }
     });
@@ -47,25 +46,19 @@ export class ExerciseDetailPage implements OnInit {
 
   ngOnInit() {
     console.log(this.edit);
-    console.log(this.setArray);
+    console.log(this.addToPlan);
     console.log(this.id);
-    console.log(this.trainingPlanId);
     try {
-
       if (this.id === 'undefined' || this.id === null) {
         this.id = this.route.snapshot.paramMap.get('id'); //exerciseId setzten
-      }
-      //Falls ein Trainingsplan uebergeben wurde, diesen holen
-      if (this.trainingPlanId) {
-        this.database.getTrainingsPlanById(this.trainingPlanId).subscribe(res => {
-          this.trainingPlan = res;
-          console.log(this.trainingPlan);
-        });
       }
       this.getExercise();
     } catch
       (error) {
       console.log(error);
+    }
+    if(this.addToPlan){
+      this.setArray = [];
     }
   }
 
@@ -145,12 +138,5 @@ export class ExerciseDetailPage implements OnInit {
     await this.database.updateTrainingPlan(this.trainingPlan);
     //Modal schliessen
     await this.modalController.dismiss();
-  }
-
-  loadSets() {
-    console.log("Exercise");
-    console.log(this.exercise);
-    this.setArray = this.exercise.sets;
-    console.log(this.setArray);
   }
 }

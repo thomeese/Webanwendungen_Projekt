@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {
   BodyParts,
   BodyPartsToString, Equipment,
@@ -27,6 +27,10 @@ import {ExerciseDetailPage} from "./exercise-detail/exercise-detail.page";
 
 export class ExercisePage implements OnInit {
   @ViewChild(IonContent) content: IonContent;
+
+  @Input() trainingPlan;
+  @Input() addToPlan = false;
+
   backToTop = false;
 
   exercises = [];
@@ -47,7 +51,7 @@ export class ExercisePage implements OnInit {
   searchTypeSelected = null;
   targetSelected = null;
   exerciseID = null;
-  trainingPlanId;
+
   // wird fuer Infinite Scroll verwendet
   slice = 10;
 
@@ -71,8 +75,8 @@ export class ExercisePage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation() !== null) {
         if (this.router.getCurrentNavigation().extras.state) {
-          this.trainingPlanId = this.router.getCurrentNavigation().extras.state.trainingPlanId;
-          console.log(this.trainingPlanId);
+          this.trainingPlan = this.router.getCurrentNavigation().extras.state.trainingPlan;
+          console.log(this.trainingPlan);
         }
       }
     });
@@ -151,7 +155,7 @@ export class ExercisePage implements OnInit {
   async openDetails() {
     const modal = await this.modalCtrl.create({
       component: ExerciseDetailPage,
-      componentProps: {id: 1231, trainingPlanId: this.trainingPlanId},
+      componentProps: {id: 1231, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
       breakpoints: [0, 0.5 ,0.8, 1],
       initialBreakpoint: 0.5
     });
