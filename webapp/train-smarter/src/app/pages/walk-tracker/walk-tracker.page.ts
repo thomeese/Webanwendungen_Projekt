@@ -46,7 +46,7 @@ export class WalkTrackerPage implements OnInit {
   }
 
   startRun() {
-    this.startTimestamp = new DatePipe('de-De').transform(new Date(), 'HH:mm:ss');
+    this.startTimestamp = new Date();
     this.walkStartet = true;
     this.posSub = this.geolocation.watchPosition().subscribe(data => {
       setTimeout(() => {
@@ -78,11 +78,24 @@ export class WalkTrackerPage implements OnInit {
     }
   }
 
+  timeConvert(input: number): string {
+    const seconds = Math.floor(input / 1000);
+    let minutes = 0;
+    let hours = 0;
+    if(seconds > 60){
+      minutes = seconds % 60;
+    }
+    if(minutes > 60){
+      hours = seconds % 60;
+    }
+    return hours+':'+minutes+':' + seconds;
+  }
+
   persistRun() {
-    this.endTimetamp = new DatePipe('de-De').transform(new Date(), 'HH:mm:ss');
+    this.endTimetamp = new Date();
     this.routeData.push(this.trackedRoute);
-    const neededTime = this.endTimetamp - this.startTimestamp;
-    console.log(neededTime);
+    const neededTime = this.endTimetamp.valueOf() - this.startTimestamp.valueOf();
+    console.log(this.timeConvert(neededTime));
     this.walkStartet = false;
     this.posSub.unsubscribe();
     return null;
