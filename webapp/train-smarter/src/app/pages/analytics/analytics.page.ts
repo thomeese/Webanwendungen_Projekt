@@ -10,9 +10,41 @@ import {Router} from '@angular/router';
 export class AnalyticsPage implements OnInit {
   mostUsedPlan;
   leastUsedPlan;
-
+  exerciseWeightRecordMap = new Map ();
   constructor(private dataService: DatabaseService,
               private router: Router) {
+  }
+
+  getExercisePersonalRecord() {
+    const map = new Map ();
+    let setArray = [];
+    this.dataService.getAllSetLoggingByUid().subscribe( result => {
+      result.forEach( item => {
+        item.sets.forEach( concreteSet =>{
+          setArray.push(concreteSet.weight);
+        });
+        if(map.get(item.excerciseId)) {
+          for (const i of map.get(item.excerciseId)) {
+            setArray.push(i);
+          }
+        }
+        map.set(item.excerciseId,setArray);
+        setArray = [];
+      });
+      const secondMap = new Map ();
+      for( const k of map.keys()){
+        if(map.get(k)) {
+          secondMap.set(k, Math.max(...map.get(k)));
+        }
+      }
+      for(const j of secondMap.keys()){
+        if(secondMap.get(j)){
+          this.dataService.getExerciseByNumericId(j).subscribe(resultExercise => {
+            this.exerciseWeightRecordMap.set(resultExercise[0],secondMap.get(j));
+          });
+        }
+      }
+    });
   }
 
   getMostUsedTrainingsPlan() {
@@ -70,9 +102,10 @@ export class AnalyticsPage implements OnInit {
   ngOnInit() {
     this.getMostUsedTrainingsPlan();
     this.getLeastUsedTrainingsPlan();
+    this.getExercisePersonalRecord();
   }
 
   async redirect(trainingPlanId: string) {
-   await this.router.navigateByUrl(`/training-plan/${trainingPlanId}`, {replaceUrl: true});
+    await this.router.navigateByUrl(`/training-plan/${trainingPlanId}`, {replaceUrl: true});
   }
 }
