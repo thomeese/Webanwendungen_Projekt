@@ -1,4 +1,4 @@
-<ion-header [translucent]="false">
+<ion-header [translucent]="false" class="ion-no-border">
   <ion-toolbar class="toolbar transparent">
     <ion-title>Trainingspläne</ion-title>
     <ion-buttons slot="start">
@@ -8,16 +8,12 @@
 </ion-header>
 
 <ion-content fullscreen="true">
-  <ion-header collapse="condense">
+  <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar class="toolbar transparent">
       <ion-title size="large">Trainingspläne</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-list>
-    <ion-item *ngFor="let plan of trainingPlanList" lines="none">
-      <app-training-plan-card [trainingPlan]="plan" [showDescription]="true"></app-training-plan-card>
-    </ion-item>
-  </ion-list>
+      <app-training-plan-card *ngFor="let plan of trainingPlanList" [trainingPlan]="plan" [showDescription]="true"></app-training-plan-card>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button size="small" color="dark" id="trigger-btn-trainingModal" class="button-add"><ion-icon name="add-circle"></ion-icon></ion-fab-button>
   </ion-fab>
