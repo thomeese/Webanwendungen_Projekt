@@ -56,6 +56,15 @@ export interface SetLogging {
   sets: Array<any>;
 }
 
+export interface TrainingPlan{
+  trainingPlanId?: string;
+  uid: string;
+  name: string;
+  description: string;
+  period: string;
+  exercises: Array<any>;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -100,18 +109,19 @@ export class DatabaseService {
     return deleteDoc(userDocRef);
   }
 
-  addTrainingPlan(plan: any) {
+  addTrainingPlan(plan: TrainingPlan) {
     const trainingPlanRef = collection(this.firestore, 'trainingPlan');
     return addDoc(trainingPlanRef, plan);
   }
 
-  updateTrainingPlan(trainingPlanId: string, plan: any) {
+  updateTrainingPlan(trainingPlanId: string, plan: TrainingPlan) {
     const trainingPlanDocRef = doc(this.firestore, `trainingPlan/${trainingPlanId}`);
-    return updateDoc(trainingPlanDocRef, plan);
+    return updateDoc(trainingPlanDocRef, {uid: plan.uid, name: plan.name, description: plan.trainingPlanId
+      , period: plan.period, exercises: plan.exercises});
   }
 
-  deleteTrainingPlan(plan: any) {
-    const trainingPlanDocRef = doc(this.firestore, `trainingPlan/${plan.id}`);
+  deleteTrainingPlan(plan: TrainingPlan) {
+    const trainingPlanDocRef = doc(this.firestore, `trainingPlan/${plan.trainingPlanId}`);
     return deleteDoc(trainingPlanDocRef);
   }
 

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {trigger, transition, animate, style, state} from '@angular/animations';
 import {LoadingController, ModalController, NavController} from '@ionic/angular';
 import {Location} from '@angular/common';
-import {DatabaseService} from '../../../services/database.service';
+import {DatabaseService, TrainingPlan} from '../../../services/database.service';
 import {waitForAsync} from '@angular/core/testing';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -99,7 +99,7 @@ export class ExerciseDetailPage implements OnInit {
       sets: this.setArray
     });
     //Attribute im Plan setzten
-    const updatePlan = {
+    const updatePlan: TrainingPlan = {
       name: this.trainingPlan.name,
       description: this.trainingPlan.description,
       period: this.trainingPlan.period,

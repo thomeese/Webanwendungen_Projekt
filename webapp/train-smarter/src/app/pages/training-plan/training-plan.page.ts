@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonModal, LoadingController} from '@ionic/angular';
-import {DatabaseService, UserData} from '../../services/database.service';
+import {DatabaseService, TrainingPlan, UserData} from '../../services/database.service';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
@@ -53,11 +53,12 @@ export class TrainingPlanPage implements OnInit {
 
   async addTrainingsPlan() {
     const formData = this.trainingform.getRawValue();
-    const plan = {
+    const plan: TrainingPlan = {
       uid: this.authService.getUserId(),
       name: formData.name,
       description: formData.description,
-      period: formData.period
+      period: formData.period,
+      exercises: []
     };
     const loading = await this.loadingController.create();
     await loading.present();
