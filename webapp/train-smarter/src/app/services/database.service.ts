@@ -115,8 +115,9 @@ export class DatabaseService {
   }
 
   updateTrainingPlan(trainingPlanId: string, plan: TrainingPlan) {
+    console.log(plan.exercises);
     const trainingPlanDocRef = doc(this.firestore, `trainingPlan/${trainingPlanId}`);
-    return updateDoc(trainingPlanDocRef, {uid: plan.uid, name: plan.name, description: plan.trainingPlanId
+    return updateDoc(trainingPlanDocRef, {uid: plan.uid, name: plan.name, description: plan.description
       , period: plan.period, exercises: plan.exercises});
   }
 

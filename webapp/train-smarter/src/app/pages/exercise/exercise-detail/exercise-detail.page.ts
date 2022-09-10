@@ -106,6 +106,7 @@ export class ExerciseDetailPage implements OnInit {
       uid: this.trainingPlan.uid,
       exercises: array
     };
+    console.log(updatePlan.exercises);
     //Plan in der Datenbank updaten
     await this.database.updateTrainingPlan(this.trainingPlan.trainingPlanId, updatePlan);
     //Modal schliessen
