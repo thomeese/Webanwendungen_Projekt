@@ -14,6 +14,7 @@ import {pageAnimation} from './animations/nav-animation';
 import {Capacitor} from '@capacitor/core';
 import {indexedDBLocalPersistence} from '@firebase/auth';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {Calendar} from '@awesome-cordova-plugins/calendar/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,7 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, Geolocation],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, Geolocation, Calendar],
   bootstrap: [AppComponent]
 })
 export class AppModule {

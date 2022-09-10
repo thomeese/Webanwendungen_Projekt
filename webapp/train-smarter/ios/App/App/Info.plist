@@ -56,5 +56,7 @@
 	<string>Ihre Geodaten werden für das Aufnehmen eines Laufs benötigt.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Ihre Geodaten werden für das Aufnehmen eines Laufs benötigt.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Für Hinzufügen der Trainingstermine in ihren Kalender.</string>
 </dict>
 </plist>

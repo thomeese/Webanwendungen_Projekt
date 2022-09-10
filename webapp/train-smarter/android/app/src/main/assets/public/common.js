@@ -26,22 +26,36 @@ let SetCardComponent = class SetCardComponent {
         this.formbuilder = formbuilder;
         //Damit am Ende die Exercise und die Satzangaben im Trainingsplan gesetzt werden können
         this.newSetArray = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
+        this.displayEditForm = [];
+        this.editSet = false;
     }
-    ngOnInit() { }
+    ngOnInit() {
+        this.displayAddForm = false;
+        for (const index of this.setArray) {
+            this.displayEditForm.push(false);
+        }
+    }
     newSet() {
         this.generateSetFormgroup();
-        this.displayForm = true;
+        this.displayAddForm = true;
     }
     abbortSet() {
-        this.displayForm = false;
+        this.displayAddForm = false;
         this.newSetArray.emit(JSON.stringify(this.setArray));
         this.generateSetFormgroup();
     }
     generateSetFormgroup() {
-        this.setForm = this.setForm = this.formbuilder.group({
-            setnumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(`${this.setArray.length + 1}`, []),
+        this.setForm = this.formbuilder.group({
+            setnumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl({ value: `${this.setArray.length + 1}`, disabled: true }, []),
             repetition: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern('[0-9]{2}')]),
             weight: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl('', [])
+        });
+    }
+    generateEditSetFormgroup(index) {
+        this.setEditForm = this.formbuilder.group({
+            setnumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl({ value: `${this.setArray[index - 1].setnumber}`, disabled: true }, []),
+            repetition: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(`${this.setArray[index - 1].repetition}`, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern('[0-9]{2}')]),
+            weight: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(`${this.setArray[index - 1].weight}`, [])
         });
     }
     addSet() {
@@ -53,11 +67,25 @@ let SetCardComponent = class SetCardComponent {
         });
         this.abbortSet();
     }
-    deleteExerciseView() {
-        console.log("Delete gedrückt");
+    deleteSetClick(setNumber) {
+        this.setArray = this.setArray.filter(item => item.setnumber !== setNumber);
+        this.newSetArray.emit(JSON.stringify(this.setArray));
     }
-    editExercise() {
-        console.log("Edit gedrückt");
+    editSetClick(setNumber) {
+        this.generateEditSetFormgroup(setNumber);
+        this.displayEditForm[setNumber - 1] = true;
+        this.editSet = true;
+    }
+    safeChanges(setNumber) {
+        const data = this.setEditForm.getRawValue();
+        this.setArray[setNumber - 1] = data;
+        this.newSetArray.emit(JSON.stringify(this.setArray));
+        this.displayEditForm[setNumber - 1] = false;
+        this.editSet = false;
+    }
+    abortChanges(setNumber) {
+        this.displayEditForm[setNumber - 1] = false;
+        this.editSet = false;
     }
 };
 SetCardComponent.ctorParameters = () => [
@@ -425,7 +453,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "a": () => (/* binding */ attachComponent),
 /* harmony export */   "d": () => (/* binding */ detachComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var _helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-4d272360.js */ 9158);
 
 
@@ -435,7 +463,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const attachComponent = /*#__PURE__*/function () {
-  var _ref = (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (delegate, container, component, cssClasses, componentProps, inline) {
+  var _ref = (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (delegate, container, component, cssClasses, componentProps, inline) {
     var _a;
 
     if (delegate) {
@@ -484,7 +512,7 @@ const CoreDelegate = () => {
   let Reference;
 
   const attachViewToDom = /*#__PURE__*/function () {
-    var _ref2 = (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (parentElement, userComponent, userComponentProps = {}, cssClasses = []) {
+    var _ref2 = (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (parentElement, userComponent, userComponentProps = {}, cssClasses = []) {
       var _a, _b;
 
       BaseComponent = parentElement;
@@ -796,7 +824,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "r": () => (/* binding */ resetContentScrollY),
 /* harmony export */   "s": () => (/* binding */ scrollToTop)
 /* harmony export */ });
-/* harmony import */ var C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var _helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-4d272360.js */ 9158);
 /* harmony import */ var _index_c4b11676_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-c4b11676.js */ 9273);
 
@@ -833,7 +861,7 @@ const isIonContent = el => el && el.tagName === ION_CONTENT_TAG_NAME;
 
 
 const getScrollElement = /*#__PURE__*/function () {
-  var _ref = (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (el) {
+  var _ref = (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (el) {
     if (isIonContent(el)) {
       yield new Promise(resolve => (0,_helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__.c)(el, resolve));
       return el.getScrollElement();
@@ -1524,7 +1552,7 @@ const createSwipeBackGesture = (el, canStartHandler, onStartHandler, onMoveHandl
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "ion-item {\n  --padding-start: 0 !important;\n  --inner-padding-start: 0 !important;\n  --inner-padding-end: 0 !important;\n}\n\nion-card {\n  border-radius: 15px;\n  margin: 0 5px 0 5px;\n}\n\nion-card ion-card-header {\n  border-bottom: 1px solid grey;\n  padding-bottom: 10px;\n  padding-top: 10px;\n}\n\nion-card ion-card-header h4 {\n  font-weight: bold;\n  font-size: 18px;\n  color: #0d0d0d;\n}\n\nion-grid {\n  padding: 0 0 0 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNldC1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsNkJBQUE7RUFDQSxtQ0FBQTtFQUNBLGlDQUFBO0FBQ0Y7O0FBRUE7RUFDRSxtQkFBQTtFQUNBLG1CQUFBO0FBQ0Y7O0FBRUU7RUFDRSw2QkFBQTtFQUVBLG9CQUFBO0VBQ0EsaUJBQUE7QUFESjs7QUFHSTtFQUNFLGlCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7QUFETjs7QUFNQTtFQUNFLGdCQUFBO0FBSEYiLCJmaWxlIjoic2V0LWNhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taXRlbSB7XHJcbiAgLS1wYWRkaW5nLXN0YXJ0OiAwICFpbXBvcnRhbnQ7XHJcbiAgLS1pbm5lci1wYWRkaW5nLXN0YXJ0OiAwICFpbXBvcnRhbnQ7XHJcbiAgLS1pbm5lci1wYWRkaW5nLWVuZDogMCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG5pb24tY2FyZCB7XHJcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcclxuICBtYXJnaW46IDAgNXB4IDAgNXB4O1xyXG4gIC8vbWFyZ2luOiA1cHggNXB4IDE1cHggNXB4O1xyXG5cclxuICBpb24tY2FyZC1oZWFkZXIge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIGdyZXk7XHJcblxyXG4gICAgcGFkZGluZy1ib3R0b206IDEwcHg7XHJcbiAgICBwYWRkaW5nLXRvcDogMTBweDtcclxuXHJcbiAgICBoNCB7XHJcbiAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgICAgIGNvbG9yOiAjMGQwZDBkO1xyXG4gICAgfVxyXG4gIH1cclxufVxyXG5cclxuaW9uLWdyaWQge1xyXG4gIHBhZGRpbmc6IDAgMCAwIDA7XHJcbn1cclxuIl19 */";
+module.exports = "ion-item {\n  --padding-start: 0 !important;\n  --inner-padding-start: 0 !important;\n  --inner-padding-end: 0 !important;\n}\n\nion-card {\n  --color: var(--ion-text-color, #000000);\n  border-radius: 15px;\n  margin: 0 5px 0 5px;\n}\n\nion-card ion-card-header {\n  border-bottom: 1px solid grey;\n  padding-bottom: 10px;\n  padding-top: 10px;\n}\n\nion-card form {\n  font-size: 15px;\n}\n\nion-grid {\n  padding: 0 0 0 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNldC1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsNkJBQUE7RUFDQSxtQ0FBQTtFQUNBLGlDQUFBO0FBQ0Y7O0FBRUE7RUFDRSx1Q0FBQTtFQUNBLG1CQUFBO0VBQ0EsbUJBQUE7QUFDRjs7QUFHRTtFQUNFLDZCQUFBO0VBQ0Esb0JBQUE7RUFDQSxpQkFBQTtBQURKOztBQUlFO0VBQ0UsZUFBQTtBQUZKOztBQU1BO0VBQ0UsZ0JBQUE7QUFIRiIsImZpbGUiOiJzZXQtY2FyZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1pdGVtIHtcbiAgLS1wYWRkaW5nLXN0YXJ0OiAwICFpbXBvcnRhbnQ7XG4gIC0taW5uZXItcGFkZGluZy1zdGFydDogMCAhaW1wb3J0YW50O1xuICAtLWlubmVyLXBhZGRpbmctZW5kOiAwICFpbXBvcnRhbnQ7XG59XG5cbmlvbi1jYXJkIHtcbiAgLS1jb2xvcjogIHZhcigtLWlvbi10ZXh0LWNvbG9yLCAjMDAwMDAwKTtcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcbiAgbWFyZ2luOiAwIDVweCAwIDVweDtcblxuICAvL21hcmdpbjogNXB4IDVweCAxNXB4IDVweDtcblxuICBpb24tY2FyZC1oZWFkZXIge1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBncmV5O1xuICAgIHBhZGRpbmctYm90dG9tOiAxMHB4O1xuICAgIHBhZGRpbmctdG9wOiAxMHB4O1xuICB9XG5cbiAgZm9ybSB7XG4gICAgZm9udC1zaXplOiAxNXB4O1xuICB9XG59XG5cbmlvbi1ncmlkIHtcbiAgcGFkZGluZzogMCAwIDAgMDtcbn1cbiJdfQ== */";
 
 /***/ }),
 
@@ -1534,7 +1562,7 @@ module.exports = "ion-item {\n  --padding-start: 0 !important;\n  --inner-paddin
   \******************************************************************************/
 /***/ ((module) => {
 
-module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLWxvZ2dpbmcucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQUE7QUFDRjs7QUFFQTtFQUNFLGtDQUFBO0VBQ0Esb0NBQUE7QUFDRiIsImZpbGUiOiJleGVyY2lzZS1sb2dnaW5nLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50b29sYmFyIHtcclxuICBwYWRkaW5nLXRvcDogMCAhaW1wb3J0YW50O1xyXG59XHJcbi8vIEhlYWRlciBkdXJjaHNpY2h0aWdcclxuLnRyYW5zcGFyZW50IHtcclxuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xyXG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcclxufVxyXG4iXX0= */";
+module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n/*.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLWxvZ2dpbmcucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQUE7QUFDRjs7QUFFQTs7O0VBQUEiLCJmaWxlIjoiZXhlcmNpc2UtbG9nZ2luZy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudG9vbGJhciB7XG4gIHBhZGRpbmctdG9wOiAwICFpbXBvcnRhbnQ7XG59XG4vLyBIZWFkZXIgZHVyY2hzaWNodGlnXG4vKi50cmFuc3BhcmVudCB7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbn0qL1xuIl19 */";
 
 /***/ }),
 
@@ -1544,7 +1572,7 @@ module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n.transparent {\
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-card>\r\n  <ion-card-header>\r\n    <ion-row class=\"set-header ion-text-center ion-align-items-center ion-justify-content-center\">\r\n      <ion-col size=\"2\">Satz</ion-col>\r\n      <ion-col size=\"6\">Wiederholung</ion-col>\r\n      <ion-col>Gewicht (Optional)</ion-col>\r\n    </ion-row>\r\n  </ion-card-header>\r\n  <ion-card-content>\r\n    <ion-grid>\r\n\r\n      <div class=\"ion-text-center ion-justify-content-center\" *ngFor=\"let set of this.setArray\">\r\n        <ion-item-sliding>\r\n          <ion-item-options side=\"start\">\r\n            <ion-item-option (click)=\"this.editExercise()\">\r\n              <ion-icon name=\"pencil-sharp\"></ion-icon>\r\n            </ion-item-option>\r\n          </ion-item-options>\r\n          <ion-item class=\"ion-no-padding\" lines=\"none\">\r\n            <ion-grid>\r\n              <ion-row class=\"ion-text-center ion-justify-content-center\">\r\n                <ion-col size=\"2\">{{set.setnumber}}</ion-col>\r\n                <ion-col size=\"6\">{{set.repetition}}</ion-col>\r\n                <ion-col>{{set.weight}}</ion-col>\r\n              </ion-row>\r\n            </ion-grid>\r\n          </ion-item>\r\n          <ion-item-options slot=\"end\">\r\n            <ion-item-option color=\"danger\" (click)=\"this.deleteExerciseView()\">\r\n              <ion-icon name=\"trash-sharp\"></ion-icon>\r\n            </ion-item-option>\r\n          </ion-item-options>\r\n        </ion-item-sliding>\r\n      </div>\r\n\r\n    </ion-grid>\r\n    <ion-button *ngIf=\"!displayForm\" (click)=\"this.newSet()\">\r\n      <ion-icon name=\"add-circle\"></ion-icon>\r\n    </ion-button>\r\n    <form [formGroup]=\"this.setForm\" (submit)=\"this.addSet()\" *ngIf=\"this.displayForm\">\r\n      <ion-item>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"setnumber\"></ion-input>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"repetition\"></ion-input>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-input type=\"text\" formControlName=\"weight\"></ion-input>\r\n        </ion-col>\r\n      </ion-item>\r\n      <ion-button color=\"success\" type=\"submit\" [disabled]=\"setForm.invalid\">\r\n        <ion-icon name=\"checkmark-circle\"></ion-icon>\r\n      </ion-button>\r\n      <ion-button color=\"danger\" [disabled]=\"setArray.length === 0\" (click)=\"this.abbortSet()\">\r\n        <ion-icon name=\"close-circle\"></ion-icon>\r\n      </ion-button>\r\n    </form>\r\n  </ion-card-content>\r\n</ion-card>\r\n";
+module.exports = "<ion-card>\n  <ion-card-header>\n    <ion-row class=\"set-header ion-text-center ion-align-items-center ion-justify-content-center\">\n      <ion-col size=\"2\">Satz</ion-col>\n      <ion-col size=\"6\">Wiederholung</ion-col>\n      <ion-col>Gewicht (Optional)</ion-col>\n    </ion-row>\n  </ion-card-header>\n  <ion-card-content>\n      <!--Liste alle Sets auf-->\n      <div class=\"ion-text-center ion-justify-content-center\" *ngFor=\"let set of this.setArray\">\n        <ion-item-sliding *ngIf=\"!this.displayEditForm[set.setnumber-1]\">\n          <ion-item-options side=\"start\">\n            <ion-item-option (click)=\"this.editSetClick(set.setnumber)\">\n              <ion-icon name=\"pencil-sharp\"></ion-icon>\n            </ion-item-option>\n          </ion-item-options>\n          <ion-item class=\"ion-no-padding\" lines=\"none\">\n            <ion-grid>\n              <ion-row class=\"ion-text-center ion-justify-content-center\">\n                <ion-col size=\"2\">{{set.setnumber}}</ion-col>\n                <ion-col size=\"6\">{{set.repetition}}</ion-col>\n                <ion-col>{{set.weight}}</ion-col>\n              </ion-row>\n            </ion-grid>\n          </ion-item>\n          <ion-item-options slot=\"end\">\n            <ion-item-option color=\"danger\" (click)=\"this.deleteSetClick(set.setnumber)\">\n              <ion-icon name=\"trash-sharp\"></ion-icon>\n            </ion-item-option>\n          </ion-item-options>\n        </ion-item-sliding>\n        <form [formGroup]=\"this.setEditForm\" (submit)=\"this.safeChanges(set.setnumber)\" *ngIf=\"this.displayEditForm[set.setnumber-1] && this.editSet\">\n          <ion-grid>\n            <ion-row>\n              <ion-col size=\"2\">\n                <ion-input type=\"text\" formControlName=\"setnumber\" ></ion-input>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-input type=\"text\" formControlName=\"repetition\"></ion-input>\n              </ion-col>\n              <ion-col>\n                <ion-input type=\"text\" formControlName=\"weight\"></ion-input>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n          <ion-button color=\"success\" type=\"submit\" [disabled]=\"setEditForm.invalid\">\n            <ion-icon name=\"checkmark-circle\"></ion-icon>\n          </ion-button>\n          <ion-button color=\"danger\" [disabled]=\"setArray.length === 0\" (click)=\"this.abortChanges(set.setnumber)\">\n            <ion-icon name=\"close-circle\"></ion-icon>\n          </ion-button>\n        </form>\n      </div>\n\n    <!--Neuen Satz hinzufuegen-->\n    <ion-button *ngIf=\"!displayAddForm\" (click)=\"this.newSet()\">\n      <ion-icon name=\"add-circle\"></ion-icon>\n    </ion-button>\n    <form [formGroup]=\"this.setForm\" (submit)=\"this.addSet()\" *ngIf=\"this.displayAddForm\">\n      <ion-grid>\n        <ion-row class=\"ion-text-center ion-justify-content-center\">\n          <ion-col size=\"2\">\n            <ion-input type=\"text\" formControlName=\"setnumber\"></ion-input>\n          </ion-col>\n          <ion-col size=\"6\">\n            <ion-input type=\"text\" formControlName=\"repetition\"></ion-input>\n          </ion-col>\n          <ion-col>\n            <ion-input type=\"text\" formControlName=\"weight\"></ion-input>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n\n      <ion-button color=\"success\" type=\"submit\" [disabled]=\"setForm.invalid\">\n        <ion-icon name=\"checkmark-circle\"></ion-icon>\n      </ion-button>\n      <ion-button color=\"danger\" [disabled]=\"setArray.length === 0\" (click)=\"this.abbortSet()\">\n        <ion-icon name=\"close-circle\"></ion-icon>\n      </ion-button>\n    </form>\n  </ion-card-content>\n</ion-card>\n";
 
 /***/ }),
 
@@ -1554,7 +1582,7 @@ module.exports = "<ion-card>\r\n  <ion-card-header>\r\n    <ion-row class=\"set-
   \******************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar class=\"toolbar transparent\">\r\n    <ion-title>exercise-logging</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content fullscreen=\"true\">\r\n\r\n</ion-content>\r\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-title>exercise-logging</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n\n</ion-content>\n";
 
 /***/ })
 

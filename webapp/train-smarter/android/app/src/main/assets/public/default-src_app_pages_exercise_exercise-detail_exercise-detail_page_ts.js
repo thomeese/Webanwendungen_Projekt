@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ExerciseDetailPage": () => (/* binding */ ExerciseDetailPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _exercise_detail_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exercise-detail.page.html?ngResource */ 2670);
 /* harmony import */ var _exercise_detail_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exercise-detail.page.scss?ngResource */ 1927);
@@ -81,7 +81,7 @@ let ExerciseDetailPage = class ExerciseDetailPage {
   updateExerciseinTrainingPlan() {
     var _this = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const array = _this.trainingPlan.exercises;
       array.forEach(item => {
         //Exercise im Array finden
@@ -92,7 +92,6 @@ let ExerciseDetailPage = class ExerciseDetailPage {
       }); //Attribute im Plan setzten
 
       const updatePlan = {
-        id: _this.trainingPlan.trainingPlanId,
         name: _this.trainingPlan.name,
         description: _this.trainingPlan.description,
         period: _this.trainingPlan.period,
@@ -100,7 +99,7 @@ let ExerciseDetailPage = class ExerciseDetailPage {
         exercises: array
       }; //Plan in der Datenbank updaten
 
-      yield _this.database.updateTrainingPlan(updatePlan); //Modal schliessen
+      yield _this.database.updateTrainingPlan(_this.trainingPlan.trainingPlanId, updatePlan); //Modal schliessen
 
       yield _this.modalController.dismiss();
     })();
@@ -109,8 +108,9 @@ let ExerciseDetailPage = class ExerciseDetailPage {
   addToTrainingPlan() {
     var _this2 = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       console.log('Vorher');
+      console.log(_this2.trainingPlan);
       let array;
       array = _this2.trainingPlan.exercises;
 
@@ -126,15 +126,15 @@ let ExerciseDetailPage = class ExerciseDetailPage {
       }); //Attribute im Plan setzten
 
       const updatePlan = {
-        id: _this2.trainingPlan.trainingPlanId,
         name: _this2.trainingPlan.name,
         description: _this2.trainingPlan.description,
         period: _this2.trainingPlan.period,
         uid: _this2.trainingPlan.uid,
         exercises: array
-      }; //Plan in der Datenbank updaten
+      };
+      console.log(updatePlan.exercises); //Plan in der Datenbank updaten
 
-      yield _this2.database.updateTrainingPlan(updatePlan); //Modal schliessen
+      yield _this2.database.updateTrainingPlan(_this2.trainingPlan.trainingPlanId, updatePlan); //Modal schliessen
 
       yield _this2.modalController.dismiss();
     })();
@@ -143,7 +143,7 @@ let ExerciseDetailPage = class ExerciseDetailPage {
   getExercise() {
     var _this3 = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       //exercise-Daten laden
       yield _this3.database.getExerciseByNumericId(_this3.id).subscribe(result => {
         _this3.exercise = result[0];
@@ -160,7 +160,7 @@ let ExerciseDetailPage = class ExerciseDetailPage {
   saveChanges() {
     var _this4 = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       console.log('Vorher');
 
       for (const selectedExercise of _this4.trainingPlan.exercises) {
@@ -169,7 +169,7 @@ let ExerciseDetailPage = class ExerciseDetailPage {
         }
       }
 
-      yield _this4.database.updateTrainingPlan(_this4.trainingPlan); //Modal schliessen
+      yield _this4.database.updateTrainingPlan(_this4.trainingPlan.trainingPlanId, _this4.trainingPlan); //Modal schliessen
 
       yield _this4.modalController.dismiss();
     })();
@@ -392,7 +392,7 @@ let ExerciseDBService = class ExerciseDBService {
         this.loadingCtr = loadingCtr;
         this.url = 'https://exercisedb.p.rapidapi.com/exercises';
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders({
-            'x-rapidapi-key': 'faa32cc9f5msh7a6aced2f4a8cbcp110446jsn70a489d7ecbd',
+            'x-rapidapi-key': '[API-Key]',
             'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
         });
     }
@@ -426,7 +426,7 @@ ExerciseDBService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
   \*************************************************************************************/
 /***/ ((module) => {
 
-module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\nion-title {\n  padding-left: 0;\n  color: #0d0d0d;\n  font-size: 20px;\n}\n\nion-content ion-title {\n  padding-right: 0;\n}\n\nion-text {\n  color: #0d0d0d;\n  word-wrap: break-word;\n  font-weight: bold;\n  font-size: 14px;\n}\n\n.label {\n  padding-right: 5px;\n}\n\n.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLWRldGFpbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBQTtBQUNGOztBQUVBO0VBQ0UsZUFBQTtFQUNBLGNBQUE7RUFDQSxlQUFBO0FBQ0Y7O0FBR0U7RUFDRSxnQkFBQTtBQUFKOztBQUtBO0VBQ0UsY0FBQTtFQUNBLHFCQUFBO0VBQ0EsaUJBQUE7RUFDQSxlQUFBO0FBRkY7O0FBS0E7RUFDRSxrQkFBQTtBQUZGOztBQU1BO0VBQ0Usa0NBQUE7RUFDQSxvQ0FBQTtBQUhGIiwiZmlsZSI6ImV4ZXJjaXNlLWRldGFpbC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudG9vbGJhciB7XHJcbiAgcGFkZGluZy10b3A6IDAgIWltcG9ydGFudDtcclxufVxyXG5cclxuaW9uLXRpdGxle1xyXG4gIHBhZGRpbmctbGVmdDogMDtcclxuICBjb2xvcjogIzBkMGQwZDtcclxuICBmb250LXNpemU6IDIwcHg7XHJcbn1cclxuXHJcbmlvbi1jb250ZW50IHtcclxuICBpb24tdGl0bGUge1xyXG4gICAgcGFkZGluZy1yaWdodDogMDtcclxuICB9XHJcblxyXG59XHJcblxyXG5pb24tdGV4dCB7XHJcbiAgY29sb3I6ICMwZDBkMGQ7XHJcbiAgd29yZC13cmFwOiBicmVhay13b3JkO1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIGZvbnQtc2l6ZTogMTRweDtcclxufVxyXG5cclxuLmxhYmVsIHtcclxuICBwYWRkaW5nLXJpZ2h0OiA1cHg7XHJcbn1cclxuXHJcbi8vIEhlYWRlciBkdXJjaHNpY2h0aWdcclxuLnRyYW5zcGFyZW50IHtcclxuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xyXG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcclxufVxyXG4iXX0= */";
+module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\nion-title {\n  padding-left: 0;\n  color: #0d0d0d;\n  font-size: 20px;\n}\n\nion-content ion-title {\n  padding-right: 0;\n}\n\nion-text {\n  color: #0d0d0d;\n  word-wrap: break-word;\n  font-weight: bold;\n  font-size: 14px;\n}\n\n.label {\n  padding-right: 5px;\n}\n\n/*.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4ZXJjaXNlLWRldGFpbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBQTtBQUNGOztBQUVBO0VBQ0UsZUFBQTtFQUNBLGNBQUE7RUFDQSxlQUFBO0FBQ0Y7O0FBR0U7RUFDRSxnQkFBQTtBQUFKOztBQUtBO0VBQ0UsY0FBQTtFQUNBLHFCQUFBO0VBQ0EsaUJBQUE7RUFDQSxlQUFBO0FBRkY7O0FBS0E7RUFDRSxrQkFBQTtBQUZGOztBQU1BOzs7RUFBQSIsImZpbGUiOiJleGVyY2lzZS1kZXRhaWwucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRvb2xiYXIge1xuICBwYWRkaW5nLXRvcDogMCAhaW1wb3J0YW50O1xufVxuXG5pb24tdGl0bGV7XG4gIHBhZGRpbmctbGVmdDogMDtcbiAgY29sb3I6ICMwZDBkMGQ7XG4gIGZvbnQtc2l6ZTogMjBweDtcbn1cblxuaW9uLWNvbnRlbnQge1xuICBpb24tdGl0bGUge1xuICAgIHBhZGRpbmctcmlnaHQ6IDA7XG4gIH1cblxufVxuXG5pb24tdGV4dCB7XG4gIGNvbG9yOiAjMGQwZDBkO1xuICB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmb250LXNpemU6IDE0cHg7XG59XG5cbi5sYWJlbCB7XG4gIHBhZGRpbmctcmlnaHQ6IDVweDtcbn1cblxuLy8gSGVhZGVyIGR1cmNoc2ljaHRpZ1xuLyoudHJhbnNwYXJlbnQge1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xuICAtLWJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG59Ki9cbiJdfQ== */";
 
 /***/ }),
 
@@ -436,7 +436,7 @@ module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\nion-title {\n  
   \*************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"false\">\r\n  <ion-toolbar class=\"toolbar transparent\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>\r\n      <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content fullscreen=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar class=\"toolbar transparent\">\r\n      <ion-buttons slot=\"start\">\r\n        <ion-back-button></ion-back-button>\r\n      </ion-buttons>\r\n      <ion-title>\r\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\r\n      </ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-card>\r\n    <ion-card-content>\r\n      <ion-title>\r\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\r\n      </ion-title>\r\n    </ion-card-content>\r\n  </ion-card>\r\n  <div *ngIf=\"exercise\">\r\n    <img src=\"{{exercise.gifUrl}}\"/>\r\n    <ion-card>\r\n      <ion-card-content>\r\n        <ion-text class=\"label\">Muskelgruppe:</ion-text>\r\n        <ion-text>{{exercise.target}}</ion-text>\r\n      </ion-card-content>\r\n    </ion-card>\r\n    <ion-card>\r\n      <ion-card-content>\r\n        <ion-text class=\"label\">Benötigtes Equipment:</ion-text>\r\n        <ion-text>{{exercise.equipment}}</ion-text>\r\n      </ion-card-content>\r\n    </ion-card>\r\n    <app-set-card *ngIf=\"this.trainingPlan && (this.addToPlan || this.edit)\" (newSetArray)=\"updateSetArray($event)\" [setArray]=\"setArray\" ></app-set-card>\r\n\r\n    <ion-button *ngIf=\"this.trainingPlan && !this.edit && this.addToPlan\" [disabled]=\"this.setArray.length === 0\"\r\n                (click)=\"addToTrainingPlan()\">Zum Trainingsplan hinzufügen\r\n    </ion-button>\r\n    <ion-button *ngIf=\"this.trainingPlan && this.edit\" [disabled]=\"this.setArray.length === 0\"\r\n                (click)=\"saveChanges()\">Änderungen speichern\r\n    </ion-button>\r\n  </div>\r\n</ion-content>\r\n\r\n";
+module.exports = "<ion-header [translucent]=\"false\" class=\"ion-no-border\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\" class=\"ion-no-border\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n      <ion-title>\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n      </ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-card>\n    <ion-card-content>\n      <ion-title>\n        <div *ngIf=\"exercise\" class=\"ion-text-wrap ion-text-center\">{{exercise.name}}</div>\n      </ion-title>\n    </ion-card-content>\n  </ion-card>\n  <div *ngIf=\"exercise\">\n    <img src=\"{{exercise.gifUrl}}\"/>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Muskelgruppe:</ion-text>\n        <ion-text>{{exercise.target}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-content>\n        <ion-text class=\"label\">Benötigtes Equipment:</ion-text>\n        <ion-text>{{exercise.equipment}}</ion-text>\n      </ion-card-content>\n    </ion-card>\n    <app-set-card *ngIf=\"this.trainingPlan && (this.addToPlan || this.edit)\" (newSetArray)=\"updateSetArray($event)\" [setArray]=\"setArray\" ></app-set-card>\n\n    <ion-button *ngIf=\"this.trainingPlan && !this.edit && this.addToPlan\" [disabled]=\"this.setArray.length === 0\"\n                (click)=\"addToTrainingPlan()\">Zum Trainingsplan hinzufügen\n    </ion-button>\n    <ion-button *ngIf=\"this.trainingPlan && this.edit\" [disabled]=\"this.setArray.length === 0\"\n                (click)=\"saveChanges()\">Änderungen speichern\n    </ion-button>\n  </div>\n</ion-content>\n\n";
 
 /***/ })
 
