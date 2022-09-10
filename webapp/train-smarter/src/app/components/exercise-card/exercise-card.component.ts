@@ -82,6 +82,6 @@ export class ExerciseCardComponent implements OnInit {
 
   async deleteExercise(exerciseId) {
     this.trainingPlan.exercises =  this.trainingPlan.exercises.filter(item => item.exerciseId !== exerciseId);
-    await this.databaseService.updateTrainingPlan(this.trainingPlan);
+    await this.databaseService.updateTrainingPlan(this.trainingPlan.trainingPlanId, this.trainingPlan);
   }
 }

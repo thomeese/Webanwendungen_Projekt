@@ -105,8 +105,8 @@ export class DatabaseService {
     return addDoc(trainingPlanRef, plan);
   }
 
-  updateTrainingPlan(plan: any) {
-    const trainingPlanDocRef = doc(this.firestore, `trainingPlan/${plan.id}`);
+  updateTrainingPlan(trainingPlanId: string, plan: any) {
+    const trainingPlanDocRef = doc(this.firestore, `trainingPlan/${trainingPlanId}`);
     return updateDoc(trainingPlanDocRef, plan);
   }
 

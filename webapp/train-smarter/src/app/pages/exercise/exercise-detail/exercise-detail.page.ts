@@ -73,7 +73,6 @@ export class ExerciseDetailPage implements OnInit {
     });
     //Attribute im Plan setzten
     const updatePlan = {
-      id: this.trainingPlan.trainingPlanId,
       name: this.trainingPlan.name,
       description: this.trainingPlan.description,
       period: this.trainingPlan.period,
@@ -81,7 +80,7 @@ export class ExerciseDetailPage implements OnInit {
       exercises: array
     };
     //Plan in der Datenbank updaten
-    await this.database.updateTrainingPlan(updatePlan);
+    await this.database.updateTrainingPlan(this.trainingPlan.trainingPlanId, updatePlan);
     //Modal schliessen
     await this.modalController.dismiss();
   }
@@ -101,7 +100,6 @@ export class ExerciseDetailPage implements OnInit {
     });
     //Attribute im Plan setzten
     const updatePlan = {
-      id: this.trainingPlan.trainingPlanId,
       name: this.trainingPlan.name,
       description: this.trainingPlan.description,
       period: this.trainingPlan.period,
@@ -109,7 +107,7 @@ export class ExerciseDetailPage implements OnInit {
       exercises: array
     };
     //Plan in der Datenbank updaten
-    await this.database.updateTrainingPlan(updatePlan);
+    await this.database.updateTrainingPlan(this.trainingPlan.trainingPlanId, updatePlan);
     //Modal schliessen
     await this.modalController.dismiss();
   }
@@ -135,7 +133,7 @@ export class ExerciseDetailPage implements OnInit {
         selectedExercise.sets = this.setArray;
       }
     }
-    await this.database.updateTrainingPlan(this.trainingPlan);
+    await this.database.updateTrainingPlan(this.trainingPlan.trainingPlanId, this.trainingPlan);
     //Modal schliessen
     await this.modalController.dismiss();
   }
