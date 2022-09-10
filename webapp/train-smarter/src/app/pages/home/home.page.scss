@@ -40,7 +40,12 @@ h2 {
   .trainingPlan-card {
     ion-card {
       border-radius: 10px;
+
+      ion-card-title {
+      border-bottom: 0;
     }
+    }
+
   }
 }
 

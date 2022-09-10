@@ -18,12 +18,31 @@ app-exercise-card {
   background: transparent;
 }
 
+
+.exercise-background {
+  --background: url("/assets/images/unknown.png") no-repeat center center / cover;
+  --background-size: cover;
+}
+
+ion-title {
+  color: #ffffff;
+}
+
+ion-select {
+  background: #ffffff;
+  opacity: 0.4;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+ion-select::part(icon) {
+  opacity: 1;
+}
+
+
+
 // Header durchsichtig
-/*.transparent {
+.transparent {
   background: transparent !important;
   --background: transparent !important;
-}*/
-
-.search-btn {
-  margin-left: 15px;
 }

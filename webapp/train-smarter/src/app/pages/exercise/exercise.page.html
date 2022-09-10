@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true" [scrollEvents]="true" (ionScroll)="getScrollPos($event.detail.scrollTop)">
+<ion-content class="exercise-background" fullscreen="true" [scrollEvents]="true" (ionScroll)="getScrollPos($event.detail.scrollTop)">
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar class="toolbar transparent">
       <ion-title size="large">Exercise</ion-title>
@@ -16,7 +16,7 @@
   </ion-header>
   <ion-grid>
     <ion-row>
-      <ion-col>
+      <ion-col size="10">
         <ion-select interface="popover" placeholder="Wähle den Filter" [(ngModel)]="searchTypeSelected">
           <ion-select-option *ngFor="let search of enumSearchTypeKeys"
                              [value]="search">{{searchTypes[search]}}</ion-select-option>
@@ -24,7 +24,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
+      <ion-col size="10" *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
         <ion-select interface="popover" placeholder="Wähle aus." [(ngModel)]="targetSelected">
           <div *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
             <ion-select-option *ngFor="let part of enumBodyPartKeys; let i = index"
@@ -44,8 +44,12 @@
         <ion-input placeholder="Geben Sie die ID ein." [(ngModel)]="exerciseID"></ion-input>
       </ion-col>
     </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col >
+        <ion-button class="search-btn" type="button" (click)="loadData()"><ion-icon name="search"></ion-icon></ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
-  <ion-button class="search-btn" type="button" (click)="loadData()"><ion-icon name="search"></ion-icon></ion-button>
 
   <!--Search Results-->
   <ion-list class="background-transparent">
