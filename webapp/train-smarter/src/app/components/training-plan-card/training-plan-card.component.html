@@ -1,8 +1,19 @@
-<ion-card button *ngIf="trainingPlan" routerDirection="forward" [routerLink]="'/training-plan/' + trainingPlan.trainingPlanId" routerLinkActive="selected">
+<ion-card button *ngIf="trainingPlan" routerDirection="forward"
+          [routerLink]="'/training-plan/' + trainingPlan.trainingPlanId" routerLinkActive="selected">
   <ion-card-header>
     <ion-card-title>{{trainingPlan.name}}</ion-card-title>
   </ion-card-header>
-  <ion-card-content *ngIf="showDescription">
-    {{trainingPlan.description}}
-  </ion-card-content>
+  <ion-item-sliding *ngIf="showDescription">
+    <ion-item-options side="end">
+      <ion-item-option>
+        <ion-icon name="pencil-sharp"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+    <ion-item lines="none">
+      <ion-card-content *ngIf="showDescription">
+        {{trainingPlan.description}}
+      </ion-card-content>
+    </ion-item>
+  </ion-item-sliding>
 </ion-card>
+
