@@ -3,7 +3,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 import {Router} from '@angular/router';
-import {DatabaseService, UserData} from '../../services/database.service';
+import {DatabaseService} from '../../services/database.service';
+import {UserData} from "../../Interfaces/userData";
 
 @Component({
   selector: 'app-login',

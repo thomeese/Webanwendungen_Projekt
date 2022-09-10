@@ -21,13 +21,10 @@ export class SetCardComponent implements OnInit {
   constructor(private formbuilder: FormBuilder) {}
 
   ngOnInit() {
-    console.log("Sets: ");
-    console.log(this.setArray);
     this.displayAddForm = false;
     for(const index of this.setArray) {
       this.displayEditForm.push(false);
     }
-    console.log(this.displayEditForm);
   }
 
   newSet() {
@@ -68,33 +65,25 @@ export class SetCardComponent implements OnInit {
   }
 
   deleteSetClick(setNumber) {
-    console.log('Delete gedrückt');
     this.setArray = this.setArray.filter(item => item.setnumber !== setNumber);
     this.newSetArray.emit(JSON.stringify(this.setArray));
-    console.log(this.setArray);
   }
 
   editSetClick(setNumber) {
-    console.log('Edit gedrückt');
-    console.log(setNumber);
     this.generateEditSetFormgroup(setNumber);
     this.displayEditForm[setNumber-1] = true;
-    console.log(this.displayEditForm);
     this.editSet = true;
   }
 
   safeChanges(setNumber) {
     const data = this.setEditForm.getRawValue();
-    console.log('Neue Satzdaten');
     this.setArray[setNumber-1] = data;
-    console.log(this.setArray);
     this.newSetArray.emit(JSON.stringify(this.setArray));
     this.displayEditForm[setNumber-1] = false;
     this.editSet = false;
   }
 
   abortChanges(setNumber) {
-    console.log('Edit verworfen');
     this.displayEditForm[setNumber-1] = false;
     this.editSet = false;
   }

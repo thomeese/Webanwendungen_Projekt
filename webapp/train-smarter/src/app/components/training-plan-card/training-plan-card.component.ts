@@ -13,7 +13,6 @@ export class TrainingPlanCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("TrainingPlanCard erstellt");
   }
 
 }

@@ -40,14 +40,10 @@ export class ExerciseCardComponent implements OnInit {
         initialBreakpoint: 0.5
       });
     }
-
-    console.log(this.exercise);
     modal.present();
   }
 
   ngOnInit() {
-    console.log('Card');
-    console.log(this.exercise);
   }
 
   async editExercise() {
@@ -57,7 +53,6 @@ export class ExerciseCardComponent implements OnInit {
       breakpoints: [0,0.8, 1],
       initialBreakpoint: 0.8
     });
-    console.log(this.exercise.exerciseId);
     modal.present();
   }
 

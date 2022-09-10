@@ -4,9 +4,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {trigger, transition, animate, style, state} from '@angular/animations';
 import {LoadingController, ModalController, NavController} from '@ionic/angular';
 import {Location} from '@angular/common';
-import {DatabaseService, TrainingPlan} from '../../../services/database.service';
+import {DatabaseService} from '../../../services/database.service';
 import {waitForAsync} from '@angular/core/testing';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {TrainingPlan} from '../../../Interfaces/trainingPlan';
 
 @Component({
   selector: 'app-exercise-detail',
@@ -87,6 +88,7 @@ export class ExerciseDetailPage implements OnInit {
 
   async addToTrainingPlan() {
     console.log('Vorher');
+    console.log(this.trainingPlan);
     let array;
     array = this.trainingPlan.exercises;
     if (!array) {

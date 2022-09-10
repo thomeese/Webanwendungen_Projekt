@@ -14,6 +14,10 @@ import {
 import {Observable} from 'rxjs';
 import {traceUntilFirst} from '@angular/fire/performance';
 import {AuthenticationService} from './authentication.service';
+import {UserData} from '../Interfaces/userData';
+import {TrainingPlan} from '../Interfaces/trainingPlan';
+import {Excersise} from '../Interfaces/exercise';
+import {SetLogging} from '../Interfaces/setLogging';
 
 enum SearchTypes {
   exercise = '/exercise',
@@ -27,43 +31,6 @@ enum SearchTypes {
   equipmentList = '/equipmentList'
 }
 
-export interface UserData {
-  docId?: string;
-  uid: string;
-  firstname: string;
-  surname: string;
-  birthdate: string;
-  size: number;
-  email: string;
-}
-
-export interface Excersise {
-  exerciseId?: string;
-  name: string;
-  bodypart: string;
-  equipment: string;
-  gifUrl: string;
-  target: string;
-}
-
-export interface SetLogging {
-  id?: string;
-  excerciseId: string;
-  trainingPlanId: string;
-  uid: string;
-  date: string;
-  time: string;
-  sets: Array<any>;
-}
-
-export interface TrainingPlan{
-  trainingPlanId?: string;
-  uid: string;
-  name: string;
-  description: string;
-  period: string;
-  exercises: Array<any>;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -115,7 +82,6 @@ export class DatabaseService {
   }
 
   updateTrainingPlan(trainingPlanId: string, plan: TrainingPlan) {
-    console.log(plan.exercises);
     const trainingPlanDocRef = doc(this.firestore, `trainingPlan/${trainingPlanId}`);
     return updateDoc(trainingPlanDocRef, {uid: plan.uid, name: plan.name, description: plan.description
       , period: plan.period, exercises: plan.exercises});

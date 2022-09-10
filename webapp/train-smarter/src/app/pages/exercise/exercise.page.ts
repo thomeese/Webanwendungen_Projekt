@@ -15,9 +15,9 @@ import {
   ModalController,
   Platform
 } from '@ionic/angular';
-import {DatabaseService, Excersise} from '../../services/database.service';
+import {DatabaseService} from '../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {ExerciseDetailPage} from "./exercise-detail/exercise-detail.page";
+import {ExerciseDetailPage} from './exercise-detail/exercise-detail.page';
 
 @Component({
   selector: 'app-exercise',

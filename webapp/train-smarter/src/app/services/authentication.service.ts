@@ -24,7 +24,6 @@ export class AuthenticationService {
   checkAllreadyLockedIn(): boolean{
       this.auth.onAuthStateChanged( (user) => {
         if (user) {
-          console.log(user);
           console.log('Nutzer bereits eingeloggt!');
           this.user = user;
           this.isAuthetificated = true;
@@ -93,8 +92,6 @@ export class AuthenticationService {
   }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    console.log(this.router.url);
-    console.log(route);
     if (this.isAuthetificated) {
         return true;
       }

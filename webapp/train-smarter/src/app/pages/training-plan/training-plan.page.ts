@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonModal, LoadingController} from '@ionic/angular';
-import {DatabaseService, TrainingPlan, UserData} from '../../services/database.service';
+import {DatabaseService} from '../../services/database.service';
 import {OverlayEventDetail} from '@ionic/core/components';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Observable} from 'rxjs';
+import {TrainingPlan} from '../../Interfaces/trainingPlan';
 
 @Component({
   selector: 'app-training-plan',

@@ -37,7 +37,8 @@ export class TrainingPlanDetailPage implements OnInit {
     this.databaseService.getTrainingsPlanById(id).subscribe(res => {
       this.trainingPlan = res;
 
-      console.log("Trainingsplan Detailansicht: " + this.trainingPlan.id);
+      console.log("Trainingsplan Detailansicht: ");
+      console.log(this.trainingPlan);
     });
   }
 }

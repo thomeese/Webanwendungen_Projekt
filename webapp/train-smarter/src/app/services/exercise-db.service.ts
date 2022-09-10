@@ -171,7 +171,7 @@ export interface Exercise {
 export class ExerciseDBService {
   url = 'https://exercisedb.p.rapidapi.com/exercises';
   headers = new HttpHeaders({
-    'x-rapidapi-key': 'faa32cc9f5msh7a6aced2f4a8cbcp110446jsn70a489d7ecbd',
+    'x-rapidapi-key': '[API-Key]',
     'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
   });
   constructor(private http: HttpClient, private loadingCtr: LoadingController) {}

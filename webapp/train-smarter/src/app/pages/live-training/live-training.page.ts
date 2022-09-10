@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {LoadingController, ModalController} from '@ionic/angular';
-import {DatabaseService, SetLogging} from '../../services/database.service';
+import {DatabaseService} from '../../services/database.service';
 import {NavigationExtras, Router} from '@angular/router';
 import {LocalstorageService} from '../../services/localstorage.service';
 import {LiveTrainingLoggingPage} from './live-training-logging/live-training-logging.page';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
+import {SetLogging} from "../../Interfaces/setLogging";
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
