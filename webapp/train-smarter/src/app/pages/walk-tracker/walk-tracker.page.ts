@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {Platform} from '@ionic/angular';
+import { Platform} from '@ionic/angular';
 import {AuthenticationService} from '../../services/authentication.service';
 import {DatabaseService} from '../../services/database.service';
 

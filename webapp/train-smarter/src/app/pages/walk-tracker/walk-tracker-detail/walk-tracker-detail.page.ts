@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, Input, ViewChild} from '@angular/core';
 import {Geoposition} from '@ionic-native/geolocation';
 import {DatePipe, Location} from '@angular/common';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {Platform} from '@ionic/angular';
+import {AlertController, Platform} from '@ionic/angular';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {DatabaseService} from '../../../services/database.service';
 import {Subscription} from 'rxjs';
@@ -40,7 +40,8 @@ export class WalkTrackerDetailPage implements OnInit {
               private route: ActivatedRoute,
               private authService: AuthenticationService,
               private dataService: DatabaseService,
-              private location: Location) {
+              private location: Location,
+              private alertController: AlertController) {
   }
 
   ngOnInit() {
@@ -70,7 +71,7 @@ export class WalkTrackerDetailPage implements OnInit {
   startRun() {
     this.startTimestamp = new Date();
     this.walkStartet = true;
-    this.posSub = this.geolocation.watchPosition({enableHighAccuracy: true,maximumAge:1000}).subscribe((data) => {
+    this.posSub = this.geolocation.watchPosition({enableHighAccuracy: true, maximumAge: 1000}).subscribe((data) => {
       if (data as Geoposition && 'coords' in data) {
         this.trackedRoute.push({
           lat: data.coords.latitude,
@@ -120,15 +121,38 @@ export class WalkTrackerDetailPage implements OnInit {
     console.log(neededTime);
     console.log(this.timeConvert(neededTime));
     this.walkStartet = false;
-    const newWalkDoc = {
-      uid: this.authService.getUserId(),
-      neededTime: this.timeConvert(neededTime),
-      date: new DatePipe('de-DE').transform(new Date(), 'dd.MM.yyyy'),
-      time: new DatePipe('de-DE').transform(new Date(), 'HH:mm'),
-      route: this.trackedRoute
-    };
-    //this.userWalkData.push(newWalkDoc);
-    await this.dataService.addWalk(newWalkDoc);
-    this.location.back();
+    const alert = await this.alertController.create({
+      header: 'Lauf-Route speichern',
+      inputs: [{
+        name: 'routeName',
+        placeholder: 'Gibt es einen Namen für die Route?',
+        type: 'text'
+      }],
+      buttons: [
+        {
+          text: 'Route verwerfen',
+          handler: () => {
+            this.location.back();
+          }
+        },
+        {
+          text: 'Reoute speichern',
+          handler: (res) => {
+            const newWalkDoc = {
+              uid: this.authService.getUserId(),
+              name: res.routeName,
+              neededTime: this.timeConvert(neededTime),
+              date: new DatePipe('de-DE').transform(new Date(), 'dd.MM.yyyy'),
+              time: new DatePipe('de-DE').transform(new Date(), 'HH:mm'),
+              route: this.trackedRoute
+            };
+            //this.userWalkData.push(newWalkDoc);
+            this.dataService.addWalk(newWalkDoc);
+            this.location.back();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

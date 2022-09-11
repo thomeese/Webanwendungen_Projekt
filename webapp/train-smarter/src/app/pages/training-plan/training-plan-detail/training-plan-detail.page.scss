@@ -8,6 +8,9 @@
     color: var(--ion-text-color, #ffffff);
     border-bottom: 1px solid grey;
   }
+  ion-item-sliding{
+    --border-style: none;
+  }
 }
 .exercises-list {
   border-radius: 10px;
