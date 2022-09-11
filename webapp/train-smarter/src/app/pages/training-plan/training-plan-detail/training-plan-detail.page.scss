@@ -2,13 +2,11 @@
 //  background: rgb(0,0,0);
 //  background: linear-gradient(352deg, rgba(0,0,0,1) 46%, rgba(22,40,228,1) 83%, rgba(0,232,255,1) 100%);
 //}
-.plan-body{
-  border-radius: 10px;
-}
 .plan-tags{
   border-radius: 10px;
   ion-card-header {
     color: var(--ion-text-color, #ffffff);
+    border-bottom: 1px solid grey;
   }
 }
 .exercises-list {

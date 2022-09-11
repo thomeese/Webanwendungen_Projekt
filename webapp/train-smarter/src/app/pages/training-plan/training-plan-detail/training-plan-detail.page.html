@@ -21,7 +21,6 @@
       </div>
     </ion-toolbar>
   </ion-header>
-  <ion-card class="plan-body">
     <ion-card *ngIf="this.trainingPlan" class="plan-tags">
       <ion-card-header>Beschreibung:</ion-card-header>
       <ion-item-sliding *ngIf="!displayDescriptionForm">
@@ -91,5 +90,4 @@
                            [exercise]="exercise" [sets]="exercise.sets" [showGif]="true"></app-exercise-card>
       </ion-card-content>
     </ion-card>
-  </ion-card>
 </ion-content>
