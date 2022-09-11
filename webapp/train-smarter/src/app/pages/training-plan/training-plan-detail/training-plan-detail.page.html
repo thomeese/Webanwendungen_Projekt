@@ -9,7 +9,6 @@
     </div>
   </ion-toolbar>
 </ion-header>
-
 <ion-content fullscreen="true">
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar class="toolbar transparent">
@@ -22,21 +21,75 @@
       </div>
     </ion-toolbar>
   </ion-header>
-  <ion-label>Beschreibung:</ion-label>
-  <ion-item *ngIf="this.trainingPlan">{{this.trainingPlan.description}}</ion-item>
-  <ion-label>Häufigkeit des Trainings:</ion-label>
-  <ion-item *ngIf="this.trainingPlan">{{this.trainingPlan.period}}</ion-item>
-  <ion-card class="exercises-list">
-    <ion-card-header>
-      <ion-text><h3>Übungen:</h3></ion-text>
-      <ion-fab horizontal="end" vertical="top">
-        <ion-fab-button size="small" color="dark" class="button-add" (click)="addExerciseView()">
-          <ion-icon name="add-circle"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-    </ion-card-header>
-    <ion-card-content class="exercises-list-content" *ngIf="this.trainingPlan">
-      <app-exercise-card *ngFor="let exercise of this.trainingPlan.exercises" [trainingPlan]="this.trainingPlan" [exercise]="exercise" [sets]="exercise.sets" [showGif]="true"></app-exercise-card>
-    </ion-card-content>
+  <ion-card class="plan-body">
+    <ion-card *ngIf="this.trainingPlan" class="plan-tags">
+      <ion-card-header>Beschreibung:</ion-card-header>
+      <ion-item-sliding *ngIf="!displayDescriptionForm">
+        <ion-item-options>
+          <ion-item-option (click)="this.displayDescriptionForm = true">
+            <ion-icon name="pencil-sharp"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item *ngIf="!this.displayDescriptionForm">
+          <ion-card-content>{{this.trainingPlan.description}}</ion-card-content>
+        </ion-item>
+      </ion-item-sliding>
+      <ion-card-content *ngIf="displayDescriptionForm">
+        <ion-item *ngIf="this.displayDescriptionForm">
+          <form [formGroup]="this.descriptionForm" (submit)="this.editPlanTags()">
+            <ion-input type="text" formControlName="editDescription"></ion-input>
+            <ion-button type="submit" color="success">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="this.displayDescriptionForm = false">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </ion-button>
+          </form>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="this.trainingPlan" class="plan-tags">
+      <ion-card-header>Häufigkeit des Trainings:</ion-card-header>
+      <ion-item-sliding *ngIf="!this.displayPeriodForm">
+        <ion-item-options>
+          <ion-item-option (click)="this.displayPeriodForm = true">
+            <ion-icon name="pencil-sharp"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item *ngIf="!this.displayPeriodForm">
+          <ion-card-content>{{this.trainingPlan.period}}</ion-card-content>
+        </ion-item>
+      </ion-item-sliding>
+      <ion-card-content *ngIf="this.displayPeriodForm">
+        <ion-item>
+          <form [formGroup]="this.periodForm" (submit)="this.editPlanTags()">
+            <ion-select formControlName="editPeriod">
+              <ion-label position="stacked">Häufigkeit des Trainings:</ion-label>
+              <ion-select-option *ngFor="let option of this.weekdays">{{option}}</ion-select-option>
+            </ion-select>
+            <ion-button type="submit" color="success">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="this.displayPeriodForm = false">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </ion-button>
+          </form>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="exercises-list">
+      <ion-card-header>
+        <ion-text><h3>Übungen:</h3></ion-text>
+        <ion-fab horizontal="end" vertical="top">
+          <ion-fab-button size="small" color="dark" class="button-add" (click)="addExerciseView()">
+            <ion-icon name="add-circle"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-card-header>
+      <ion-card-content class="exercises-list-content" *ngIf="this.trainingPlan">
+        <app-exercise-card *ngFor="let exercise of this.trainingPlan.exercises" [trainingPlan]="this.trainingPlan"
+                           [exercise]="exercise" [sets]="exercise.sets" [showGif]="true"></app-exercise-card>
+      </ion-card-content>
+    </ion-card>
   </ion-card>
 </ion-content>

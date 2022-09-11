@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from '../../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import {AlertController} from '@ionic/angular';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {TrainingPlan} from '../../../Interfaces/trainingPlan';
 
 @Component({
   selector: 'app-training-plan-detail',
@@ -10,11 +12,28 @@ import { AlertController } from '@ionic/angular';
 })
 export class TrainingPlanDetailPage implements OnInit {
 
-  trainingPlan;
+  trainingPlan: TrainingPlan;
+  descriptionForm: FormGroup;
+  periodForm: FormGroup;
+  displayDescriptionForm = false;
+  displayPeriodForm = false;
+  weekdays= [
+    'Jeden Tag',
+    'alle zwei Tage',
+    'alle drei Tage',
+    'alle vier Tage',
+    'alle fünf Tage',
+    'alle sechs Tage',
+    'Jede Woche',
+    'alle zwei Wochen',
+    'alle drei Wochen',
+    'Jeden Monat',
+  ];
   constructor(private databaseService: DatabaseService,
               private route: ActivatedRoute,
               private router: Router,
-              private alertController: AlertController) {
+              private alertController: AlertController,
+              private formbuilder: FormBuilder) {
   }
 
   ngOnInit() {
@@ -36,9 +55,31 @@ export class TrainingPlanDetailPage implements OnInit {
   getPlan(id) {
     this.databaseService.getTrainingsPlanById(id).subscribe(res => {
       this.trainingPlan = res;
-
-      console.log("Trainingsplan Detailansicht: ");
+      this.descriptionForm = this.formbuilder.group({
+        editDescription: new FormControl(`${this.trainingPlan.description}`, [])
+      });
+      this.periodForm = this.formbuilder.group({
+        editPeriod: new FormControl(`${this.trainingPlan.period}`, [])
+      });
+      console.log('Trainingsplan Detailansicht: ');
       console.log(this.trainingPlan);
     });
+  }
+
+  async editPlanTags() {
+    const newPlan: TrainingPlan = {
+      uid: this.trainingPlan.uid,
+      name: this.trainingPlan.name,
+      description: this.descriptionForm.getRawValue().editDescription,
+      exercises: this.trainingPlan.exercises,
+      period: this.periodForm.getRawValue().editPeriod
+    };
+    await this.databaseService.updateTrainingPlan(this.trainingPlan.trainingPlanId, newPlan);
+    if(this.displayDescriptionForm === true){
+      this.displayDescriptionForm = false;
+    }
+    if(this.displayPeriodForm === true){
+      this.displayPeriodForm = false;
+    }
   }
 }
