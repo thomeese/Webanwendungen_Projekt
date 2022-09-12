@@ -42,14 +42,21 @@ export class HomePage implements OnInit {
   constructor(private dataServise: DatabaseService,
               private loadingCtr: LoadingController,
               private authService: AuthenticationService,
-              private calendarService: CalendarService) { }
+              private calendarService: CalendarService,
+              private calendar: Calendar,
+              private platform: Platform) {
+    this.platform.ready().then(() => {
+      this.calendar.listCalendars().then(calendars => {
+        this.calendars = calendars;
+      });
+    });
+  }
 
   ngOnInit() {
     this.getTrainingPlans();
     this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
       this.user = res[0];
     });
-    this.calendars = this.calendarService.getCalendar();
   }
 
   async getTrainingPlans() {
