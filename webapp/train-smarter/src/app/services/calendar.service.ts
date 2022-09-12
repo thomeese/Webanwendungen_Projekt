@@ -34,6 +34,7 @@ export class CalendarService {
       }
       this.calendars = calendars;
       console.log(calendars);
+      return calendars;
     });
   }
 

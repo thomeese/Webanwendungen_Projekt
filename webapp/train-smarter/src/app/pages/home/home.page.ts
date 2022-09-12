@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
     this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
       this.user = res[0];
     });
-    this.calendars = this.calendarService.calendars;
+    this.calendars = this.calendarService.getCalendar();
   }
 
   async getTrainingPlans() {
