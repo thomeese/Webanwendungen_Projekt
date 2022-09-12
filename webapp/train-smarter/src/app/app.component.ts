@@ -13,12 +13,12 @@ import {SettingsService} from './services/settings.service';
 
 export class AppComponent {
   public appPages = [
-    {title: 'home', url: 'home', icon: 'home'},
+    {title: 'Home', url: 'home', icon: 'home'},
     {title: 'live-training', url: 'live-training', icon: 'heart'},
-    {title: 'analytics', url: 'analytics', icon: 'analytics'},
+    {title: 'Trainingsanalyse', url: 'analytics', icon: 'analytics'},
     {title: 'Trainingspläne', url: 'training-plan', icon: 'file-tray-full'},
     {title: 'Übungen', url: 'exercise', icon: 'list'},
-    {title: 'Lauf', url: 'walk-tracker', icon: 'walk'}
+    {title: 'Lauf-Routen', url: 'walk-tracker', icon: 'walk'}
   ];
 
   constructor(
