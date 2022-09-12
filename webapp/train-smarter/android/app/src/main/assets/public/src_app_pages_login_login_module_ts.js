@@ -323,7 +323,7 @@ let DatabaseService = class DatabaseService {
     updateTrainingPlan(trainingPlanId, plan) {
         const trainingPlanDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `trainingPlan/${trainingPlanId}`);
         return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(trainingPlanDocRef, { uid: plan.uid, name: plan.name, description: plan.description,
-            period: plan.period, exercises: plan.exercises });
+            period: plan.period, periodInterval: plan.periodInterval, exercises: plan.exercises });
     }
     deleteTrainingPlan(plan) {
         const trainingPlanDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `trainingPlan/${plan.trainingPlanId}`);

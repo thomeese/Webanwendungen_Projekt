@@ -95,6 +95,7 @@ let ExerciseDetailPage = class ExerciseDetailPage {
         name: _this.trainingPlan.name,
         description: _this.trainingPlan.description,
         period: _this.trainingPlan.period,
+        periodInterval: _this.trainingPlan.periodInterval,
         uid: _this.trainingPlan.uid,
         exercises: array
       }; //Plan in der Datenbank updaten
@@ -129,6 +130,7 @@ let ExerciseDetailPage = class ExerciseDetailPage {
         name: _this2.trainingPlan.name,
         description: _this2.trainingPlan.description,
         period: _this2.trainingPlan.period,
+        periodInterval: _this2.trainingPlan.periodInterval,
         uid: _this2.trainingPlan.uid,
         exercises: array
       };
