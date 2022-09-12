@@ -9,7 +9,16 @@ ion-card {
     padding-top: 10px;
   }
 }
+.outerCard{
+  border-radius: 15px;
+  margin: 5px 5px 15px 5px;
+}
 
+.innerCard{
+  border-radius: 0;
+  margin: 0 0 0 0;
+  width: 100%;
+}
 .toolbar {
   padding-top: 0 !important;
 }

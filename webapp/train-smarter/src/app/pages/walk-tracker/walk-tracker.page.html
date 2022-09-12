@@ -13,18 +13,34 @@
       <ion-title size="large">Deine bisherigen Läufe</ion-title>
     </ion-toolbar>
   </ion-header>
-
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button size="small" color="dark" class="button-add" routerDirection="forward"
+                    [routerLink]="'/walk-tracker-detail'" routerLinkActive="selected">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div *ngIf="this.userWalkData">
-    <ion-card *ngFor="let walk of this.userWalkData" button="" routerDirection="forward" [routerLink]="'/walk-tracker/' + walk.walkId" routerLinkActive="selected">
-      <ion-card-header *ngIf="walk.name && walk.name !== ''">{{walk.name}}</ion-card-header>
-      <ion-card-header *ngIf="!walk.name || walk.name === ''">Lauf vom {{walk.date}} um {{walk.time}} Uhr</ion-card-header>
-      <ion-card-content>
-        <ion-label>Benötigte Zeit: </ion-label>
-        <ion-text>{{ walk.neededTime}}</ion-text>
-      </ion-card-content>
+    <ion-card *ngFor="let walk of this.userWalkData" class="outerCard">
+      <ion-item-sliding>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="this.deleteRoute(walk)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item>
+          <ion-card button="" class="innerCard" routerDirection="forward"
+                    [routerLink]="'/walk-tracker/' + walk.walkId" routerLinkActive="selected">
+
+            <ion-card-header *ngIf="walk.name && walk.name !== ''">{{walk.name}}</ion-card-header>
+            <ion-card-header *ngIf="!walk.name || walk.name === ''">Lauf vom {{walk.date}} um {{walk.time}}Uhr
+            </ion-card-header>
+            <ion-card-content>
+              <ion-label>Benötigte Zeit:</ion-label>
+              <ion-text>{{ walk.neededTime}}</ion-text>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+      </ion-item-sliding>
     </ion-card>
   </div>
-  <ion-fab-button size="small" color="dark" class="button-add" routerDirection="forward" [routerLink]="'/walk-tracker-detail'" routerLinkActive="selected">
-    <ion-icon name="add-circle"></ion-icon>
-  </ion-fab-button>
 </ion-content>
