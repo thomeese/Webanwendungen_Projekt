@@ -1,13 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
-<manifest package="capacitor.android.plugins"
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:amazon="http://schemas.amazon.com/apk/res/android">
-<application  >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:amazon="http://schemas.amazon.com/apk/res/android"
+  package="capacitor.android.plugins">
 
-</application>
-<uses-permission android:name="android.permission.READ_CALENDAR"/>
-<uses-permission android:name="android.permission.WRITE_CALENDAR"/>
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-<uses-feature android:name="android.hardware.location.gps" android:required="true"/>
+  <application>
+
+  </application>
+
+  <uses-permission android:name="android.permission.READ_CALENDAR" />
+  <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.INTERNET" />
+
+  <uses-feature
+    android:name="android.hardware.location.gps"
+    android:required="true" />
 </manifest>

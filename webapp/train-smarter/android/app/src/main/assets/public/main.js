@@ -171,7 +171,7 @@ let AppComponent = class AppComponent {
     this.authService = authService;
     this.settings = settings;
     this.appPages = [{
-      title: 'home',
+      title: 'Home',
       url: 'home',
       icon: 'home'
     }, {
@@ -179,7 +179,7 @@ let AppComponent = class AppComponent {
       url: 'live-training',
       icon: 'heart'
     }, {
-      title: 'analytics',
+      title: 'Trainingsanalyse',
       url: 'analytics',
       icon: 'analytics'
     }, {
@@ -191,7 +191,7 @@ let AppComponent = class AppComponent {
       url: 'exercise',
       icon: 'list'
     }, {
-      title: 'Lauf',
+      title: 'Lauf-Routen',
       url: 'walk-tracker',
       icon: 'walk'
     }];
