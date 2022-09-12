@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from '../../services/database.service';
 import {Router} from '@angular/router';
-import {SwiperOptions} from "swiper";
+import {SwiperOptions} from 'swiper';
 
 @Component({
   selector: 'app-analytics',
