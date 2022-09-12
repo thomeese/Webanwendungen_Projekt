@@ -58,21 +58,26 @@ export class LiveTrainingPage implements OnInit {
     });
     await loading.present();
     this.dataService.getTrainingsPlanById(this.trainingPlanId).subscribe(res => {
-      this.trainingPlan = res;
-      if (!res.exercises) {
-        this.exercises = [];
+      if (!res) {
+        this.finishTraining(); // Reset da TrainingPlan nicht gefunden wurde
       } else {
-        this.exercises = res.exercises;
-      }
-      console.log(this.trainingPlan);
-      this.localStorageCtrl.saveData('live-training-exercises', JSON.stringify(this.exercises));
-      if (this.exercisesState.length === 0) {
-        for (const exercise of this.exercises) {
-          this.exercisesState.push(false);
+        this.trainingPlan = res;
+        if (!res.exercises) {
+          this.exercises = [];
+        } else {
+          this.exercises = res.exercises;
         }
+        console.log(this.trainingPlan);
+        this.localStorageCtrl.saveData('live-training-exercises', JSON.stringify(this.exercises));
+        if (this.exercisesState.length === 0) {
+          for (const exercise of this.exercises) {
+            this.exercisesState.push(false);
+          }
+        }
+        console.log(this.exercisesState);
       }
-      console.log(this.exercisesState);
     });
+
     await loading.dismiss();
   }
 

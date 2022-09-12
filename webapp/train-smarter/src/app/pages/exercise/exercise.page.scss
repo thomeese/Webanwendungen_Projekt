@@ -21,7 +21,7 @@ app-exercise-card {
 }
 
 ion-title {
-  color: #ffffff;
+  color: var(--ion-text-color, #ffffff);
 }
 
 ion-select {

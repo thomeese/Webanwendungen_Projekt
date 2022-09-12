@@ -41,17 +41,19 @@ export class AnalyticsPage implements OnInit {
     this.dataService.getAllSetLoggingByUid().subscribe( result => {
       //Alle Gewichte fuer die jeweilige Exercise finden
       result.forEach( item => {
-        item.sets.forEach( concreteSet =>{
-          setArray.push(concreteSet.weight);
-        });
-        if(map.get(item.excerciseId)) {
-          for (const i of map.get(item.excerciseId)) {
-            setArray.push(i);
+        if(item.sets) {
+          item.sets.forEach(concreteSet => {
+            setArray.push(concreteSet.weight);
+          });
+          if (map.get(item.excerciseId)) {
+            for (const i of map.get(item.excerciseId)) {
+              setArray.push(i);
+            }
           }
+          //und zwischenspeichern
+          map.set(item.excerciseId, setArray);
+          setArray = [];
         }
-        //und zwischenspeichern
-        map.set(item.excerciseId,setArray);
-        setArray = [];
       });
       const secondMap = new Map ();
       //Maximalgewicht fuer die jeweilige Exercise finden

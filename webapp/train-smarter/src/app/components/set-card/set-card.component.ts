@@ -41,15 +41,15 @@ export class SetCardComponent implements OnInit {
   generateSetFormgroup() {
     this.setForm = this.formbuilder.group({
       setnumber: new FormControl({value: `${this.setArray.length + 1}`, disabled: true}, []),
-      repetition: new FormControl('', [Validators.required, Validators.pattern('[0-9]{2}')]),
-      weight: new FormControl('', [])
+      repetition: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+      weight: new FormControl('', [Validators.pattern('^[0-9]+$')])
     });
   }
 
   generateEditSetFormgroup(index) {
     this.setEditForm = this.formbuilder.group({
       setnumber: new FormControl({value: `${this.setArray[index-1].setnumber}`, disabled: true}, []),
-      repetition: new FormControl(`${this.setArray[index-1].repetition}`, [Validators.required, Validators.pattern('[0-9]{2}')]),
+      repetition: new FormControl(`${this.setArray[index-1].repetition}`, [Validators.required, Validators.pattern('^[0-9]+$')]),
       weight: new FormControl(`${this.setArray[index-1].weight}`, [])
     });
   }

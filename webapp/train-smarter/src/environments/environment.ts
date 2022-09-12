@@ -17,13 +17,20 @@ export const environment = {
 
 export const environment = {
   firebase: {
-  apiKey: 'AIzaSyCS0uJLY3sayEE5TM4NL9qswR9JdC8tJd0',
-  authDomain: 'backup-48ef0.firebaseapp.com',
-  projectId: 'backup-48ef0',
-  storageBucket: 'backup-48ef0.appspot.com',
-  messagingSenderId: '1058255734445',
-  appId: '1:1058255734445:web:4f1b4ecf6bbc953b81e824',
-  measurementId: 'G-0FHRT87WM2'
+    apiKey: 'AIzaSyDKhXnVSwxcop_hSy5-ywIZGPvHA_-x8yw',
+
+    authDomain: 'myproject-a8d7e.firebaseapp.com',
+
+    projectId: 'myproject-a8d7e',
+
+    storageBucket: 'myproject-a8d7e.appspot.com',
+
+    messagingSenderId: '340821609815',
+
+    appId: '1:340821609815:web:9e4b3aa1c7154c56fb8212',
+
+    measurementId: 'G-EY8H40FB5R'
+
   },
   production: false
 };

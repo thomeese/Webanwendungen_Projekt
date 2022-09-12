@@ -110,7 +110,6 @@ export class DatabaseService {
     return collectionData(trainQuery, {idField: 'trainingPlanId'});
   }
 
-  /*
   addExercise(exercise: Exercise) {
     const exerciseRef = collection(this.firestore, 'exercises');
     return addDoc(exerciseRef, exercise);
@@ -169,7 +168,7 @@ export class DatabaseService {
   deleteExercise(exercise: Exercise) {
     const exerciseDocRef = doc(this.firestore, `exercises/${exercise.exerciseId}`);
     return deleteDoc(exerciseDocRef);
-  } */
+  }
 
   getAllSetLoggingByUid(): Observable<SetLogging []> {
     const setLoggingRef = collection(this.firestore, 'setLogging');
