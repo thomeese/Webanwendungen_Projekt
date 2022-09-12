@@ -14,7 +14,7 @@ export class AnalyticsPage implements OnInit {
   exerciseWeightRecordMap;
   exerciseLookupMap;
   config: SwiperOptions = {
-    slidesPerView: 'auto',
+    slidesPerView: 1,
     spaceBetween: 10,
     centeredSlides: true,
     pagination: {
@@ -125,6 +125,10 @@ export class AnalyticsPage implements OnInit {
         }
       });
     });
+  }
+
+  openTrainingPlain(trainingPlanId) {
+    this.router.navigateByUrl('/training-plan/' + trainingPlanId);
   }
 
   ngOnInit() {

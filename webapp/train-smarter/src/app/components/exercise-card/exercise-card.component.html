@@ -5,7 +5,7 @@
   </ion-card-header>
     <ion-card-content>
 
-      <ion-img *ngIf="showGif" [src]="exercise.gifUrl"></ion-img>
+      <ion-img (click)="openDetails()" *ngIf="showGif" [src]="exercise.gifUrl"></ion-img>
 
 
     <!-- Wird in der Trainingsplan Detailansicht ausgegeben, zeigt die Basisdaten der Übung in dem Trainingsplan an.

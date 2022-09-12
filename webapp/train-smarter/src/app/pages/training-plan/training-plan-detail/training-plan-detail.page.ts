@@ -53,7 +53,7 @@ export class TrainingPlanDetailPage implements OnInit {
       });
       this.periodForm = this.formbuilder.group({
         editPeriod: new FormControl(`${this.trainingPlan.period}`, []),
-        editPeriodInterval: new FormControl('',[])
+        editPeriodInterval: new FormControl(`${this.trainingPlan.periodInterval}`,[])
       });
       console.log('Trainingsplan Detailansicht: ');
       console.log(this.trainingPlan);

@@ -2,23 +2,14 @@
   padding-top: 0 !important;
 }
 
-.exercises-card-list swiper .swiper-pagination{
-  .swiper-pagination-bullet-active {
-    background-color: var(--ion-color-primary-contrast, #ffffff);
-    opacity: 1;
-  }
-
-  .swiper-pagination-bullet {
-    background-color: var(--ion-color-primary-contrast, #ffffff) !important;
-    opacity: 0.5;
-  }
-}
-
 ion-card {
+  --background: rgba(183, 214, 227, 0.71);
   border-radius: 15px;
+  --color: var(--ion-text-color, #fffffff);
+  font-weight: bold;
+
   ion-card-header {
     border-bottom: 1px solid grey;
-    font-weight: bold;
   }
 
   ion-card-content {
@@ -30,13 +21,10 @@ ion-card {
   h1 {
     padding-top: 5px;
     font-size: 12px;
-    color: #0d0d0d;
+    //color: #0d0d0d;
   }
 }
-.swiper-pagination-bullet {
-  background-color: var(--ion-color-primary-contrast, #ffffff) !important;
-  opacity: 0.5;
-}
+
 
 // Header durchsichtig
 /*.transparent {
