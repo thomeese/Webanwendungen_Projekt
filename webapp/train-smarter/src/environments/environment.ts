@@ -1,7 +1,7 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+/*
 export const environment = {
   firebase: {
     projectId: 'train-smarter-7f991',
@@ -13,7 +13,21 @@ export const environment = {
     messagingSenderId: '104247468122',
   },
   production: false
+};*/
+
+export const environment = {
+  firebase: {
+  apiKey: 'AIzaSyCS0uJLY3sayEE5TM4NL9qswR9JdC8tJd0',
+  authDomain: 'backup-48ef0.firebaseapp.com',
+  projectId: 'backup-48ef0',
+  storageBucket: 'backup-48ef0.appspot.com',
+  messagingSenderId: '1058255734445',
+  appId: '1:1058255734445:web:4f1b4ecf6bbc953b81e824',
+  measurementId: 'G-0FHRT87WM2'
+  },
+  production: false
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

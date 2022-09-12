@@ -1,15 +1,14 @@
-.toolbar {
-  padding-top: 0 !important;
-}
+
 
 ion-card {
   --background: rgba(183, 214, 227, 0.71);
   border-radius: 15px;
   --color: var(--ion-text-color, #fffffff);
-  font-weight: bold;
+
 
   ion-card-header {
     border-bottom: 1px solid grey;
+    font-weight: bold;
   }
 
   ion-card-content {

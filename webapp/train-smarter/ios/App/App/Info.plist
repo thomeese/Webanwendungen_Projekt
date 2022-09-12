@@ -27,6 +27,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Für Hinzufügen der Trainingstermine in ihren Kalender.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Ihre Geodaten werden für das Aufnehmen eines Laufs benötigt.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Ihre Geodaten werden für das Aufnehmen eines Laufs benötigt.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Ihre Geodaten werden für das Aufnehmen eines Laufs benötigt.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -35,6 +43,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<false/>
+	<key>UIStatusBarHidden</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -50,13 +62,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Ihre Geodaten werden für das Aufnehmen eines Laufs benötigt.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Ihre Geodaten werden für das Aufnehmen eines Laufs benötigt.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Ihre Geodaten werden für das Aufnehmen eines Laufs benötigt.</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Für Hinzufügen der Trainingstermine in ihren Kalender.</string>
 </dict>
 </plist>

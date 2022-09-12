@@ -43,11 +43,14 @@ export class HomePage implements OnInit {
   constructor(private dataServise: DatabaseService,
               private loadingCtr: LoadingController,
               private authService: AuthenticationService,
-              private calendarService: CalendarService) {
+              private calendarService: CalendarService,
+              private paltform: Platform) {
 
   }
 
   ngOnInit() {
+    console.log(this.paltform.width());
+    console.log(this.paltform.height());
     this.getTrainingPlans();
     this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
       this.user = res[0];

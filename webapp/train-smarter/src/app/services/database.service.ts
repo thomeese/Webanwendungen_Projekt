@@ -16,7 +16,7 @@ import {traceUntilFirst} from '@angular/fire/performance';
 import {AuthenticationService} from './authentication.service';
 import {UserData} from '../Interfaces/userData';
 import {TrainingPlan} from '../Interfaces/trainingPlan';
-import {Excersise} from '../Interfaces/exercise';
+import {Exercise} from '../Interfaces/exercise';
 import {SetLogging} from '../Interfaces/setLogging';
 import {WalkData} from '../Interfaces/walkData';
 
@@ -78,6 +78,7 @@ export class DatabaseService {
   }
 
   addTrainingPlan(plan: TrainingPlan) {
+    console.log(plan);
     const trainingPlanRef = collection(this.firestore, 'trainingPlan');
     return addDoc(trainingPlanRef, plan);
   }
@@ -109,54 +110,54 @@ export class DatabaseService {
     return collectionData(trainQuery, {idField: 'trainingPlanId'});
   }
 
-  addExercise(exercise: Excersise) {
+  addExercise(exercise: Exercise) {
     const exerciseRef = collection(this.firestore, 'exercises');
     return addDoc(exerciseRef, exercise);
   }
 
-  getAllExercises(): Observable<Excersise[]> {
+  getAllExercises(): Observable<Exercise[]> {
     const exerciseRef = collection(this.firestore, 'exercises');
-    return collectionData(exerciseRef, {idField: 'exerciseId'}) as Observable<Excersise[]>;
+    return collectionData(exerciseRef, {idField: 'exerciseId'}) as Observable<Exercise[]>;
   }
 
-  getExercisesBySearch(type, target?): Observable<Excersise[]> {
+  getExercisesBySearch(type, target?): Observable<Exercise[]> {
     console.log('Hello');
     console.log(type);
-    console.log(SearchTypes.bodyPart);
+    console.log(target);
     const exerciseRef = collection(this.firestore, 'exercises');
     if (type === 'exercisesList') {
       console.log(SearchTypes.exercisesList);
       return this.getAllExercises();
     }
     if (type === 'bodyPart') {
-      console.log('bodypart');
+      console.log('bodypartTyp');
       const exerciseQuary = query(exerciseRef, where('bodypart', '==', target));
-      return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
+      return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Exercise []>;
     }
-    if (type === 'targetMuscle') {
+    if (type === 'targetMuscleTyp') {
       console.log(SearchTypes.targetMuscle);
       const exerciseQuary = query(exerciseRef, where('target', '==', target));
-      return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
+      return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Exercise []>;
     }
-    if (type === 'equipment') {
+    if (type === 'equipmentTyp') {
       console.log(SearchTypes.equipment);
       const exerciseQuary = query(exerciseRef, where('equipment', '==', target));
-      return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
+      return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Exercise []>;
     }
   }
 
-  getExerciseById(id: string): Observable<Excersise> {
+  getExerciseById(id: string): Observable<Exercise> {
     const exerciseRef = doc(this.firestore, `exercises/${id}`);
-    return docData(exerciseRef, {idField: 'exerciseId'}) as Observable<Excersise>;
+    return docData(exerciseRef, {idField: 'exerciseId'}) as Observable<Exercise>;
   }
 
   getExerciseByNumericId(id: string) {
     const exerciseRef = collection(this.firestore, 'exercises');
     const exerciseQuary = query(exerciseRef, where('numericId', '==', id));
-    return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Excersise []>;
+    return collectionData(exerciseQuary, {idField: 'exerciseId'}) as Observable<Exercise []>;
   }
 
-  updateExercise(exercise: Excersise) {
+  updateExercise(exercise: Exercise) {
     const exerciseDocRef = doc(this.firestore, `exercises/${exercise.exerciseId}`);
     return updateDoc(exerciseDocRef, {
       name: exercise.name, bodypart: exercise.bodypart,
@@ -164,7 +165,7 @@ export class DatabaseService {
     });
   }
 
-  deleteExercise(exercise: Excersise) {
+  deleteExercise(exercise: Exercise) {
     const exerciseDocRef = doc(this.firestore, `exercises/${exercise.exerciseId}`);
     return deleteDoc(exerciseDocRef);
   }

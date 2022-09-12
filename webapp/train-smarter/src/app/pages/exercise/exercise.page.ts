@@ -15,6 +15,7 @@ import {
   ModalController,
   Platform
 } from '@ionic/angular';
+import{Exercise} from '../../Interfaces/exercise';
 import {DatabaseService} from '../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ExerciseDetailPage} from './exercise-detail/exercise-detail.page';
@@ -90,6 +91,22 @@ export class ExercisePage implements OnInit {
 
   ionViewDidLeave(){
     this.menu.enable(true);
+  }
+
+  steel() {
+    this.exerciseDBService.getAll().subscribe(res => {
+      res.forEach(elem => {
+        const data: Exercise = {
+          bodypart: elem.bodyPart,
+          equipment: elem.equipment,
+          gifUrl: elem.gifUrl,
+          name: elem.name,
+          target: elem.target,
+          numericId: elem.id
+        };
+        this.database.addExercise(data);
+      });
+    });
   }
 
   async loadData() {

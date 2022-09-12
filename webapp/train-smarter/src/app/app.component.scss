@@ -119,9 +119,9 @@ ion-item.selected {
   --color: var(--ion-color-primary);
 }
 
-ion-app{
-  margin-top: env(safe-area-inset-top);
-  margin-bottom: env(safe-area-inset-bottom)
+ion-app{ // Sonst fehler in IOS Dopplter Safe-Area
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 ion-item.toggle {
