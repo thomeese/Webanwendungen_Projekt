@@ -1,4 +1,4 @@
-import {Injectable, Query} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   addDoc,
   collection,
@@ -9,7 +9,7 @@ import {
   Firestore,
   updateDoc,
   where,
-  query, collectionGroup
+  query, collectionGroup, QueryConstraint
 } from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {traceUntilFirst} from '@angular/fire/performance';
@@ -101,6 +101,12 @@ export class DatabaseService {
   getTrainingsPlanById(id: string): Observable<any> {
     const trainingPlanRef = doc(this.firestore, `trainingPlan/${id}`);
     return docData(trainingPlanRef, {idField: 'trainingPlanId'}) as Observable<any>;
+  }
+  getTrainingsPlanByUidAndName(name: string): Observable<any>{
+    const trainingPlanRef = collection(this.firestore, 'trainingPlan');
+    const queryConstraints: QueryConstraint[] = [where('name','==',name),where('uid', '==', this.authService.getUserId())];
+    const trainQuery = query(trainingPlanRef, ...queryConstraints);
+    return collectionData(trainQuery, {idField: 'trainingPlanId'});
   }
 
   getUserTrainingsPlan() {

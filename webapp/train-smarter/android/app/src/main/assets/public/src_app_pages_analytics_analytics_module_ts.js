@@ -96,13 +96,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AnalyticsPage": () => (/* binding */ AnalyticsPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _analytics_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./analytics.page.html?ngResource */ 9743);
 /* harmony import */ var _analytics_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./analytics.page.scss?ngResource */ 5215);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/database.service */ 4382);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _services_exercise_db_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/exercise-db.service */ 3597);
+
 
 
 
@@ -111,9 +113,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AnalyticsPage = class AnalyticsPage {
-  constructor(dataService, router) {
+  constructor(dataService, router, exerciseDB) {
     this.dataService = dataService;
     this.router = router;
+    this.exerciseDB = exerciseDB;
     this.config = {
       slidesPerView: 1,
       spaceBetween: 10,
@@ -140,19 +143,21 @@ let AnalyticsPage = class AnalyticsPage {
     this.dataService.getAllSetLoggingByUid().subscribe(result => {
       //Alle Gewichte fuer die jeweilige Exercise finden
       result.forEach(item => {
-        item.sets.forEach(concreteSet => {
-          setArray.push(concreteSet.weight);
-        });
+        if (item.sets) {
+          item.sets.forEach(concreteSet => {
+            setArray.push(concreteSet.weight);
+          });
 
-        if (map.get(item.excerciseId)) {
-          for (const i of map.get(item.excerciseId)) {
-            setArray.push(i);
-          }
-        } //und zwischenspeichern
+          if (map.get(item.excerciseId)) {
+            for (const i of map.get(item.excerciseId)) {
+              setArray.push(i);
+            }
+          } //und zwischenspeichern
 
 
-        map.set(item.excerciseId, setArray);
-        setArray = [];
+          map.set(item.excerciseId, setArray);
+          setArray = [];
+        }
       });
       const secondMap = new Map(); //Maximalgewicht fuer die jeweilige Exercise finden
 
@@ -169,8 +174,8 @@ let AnalyticsPage = class AnalyticsPage {
       for (const j of secondMap.keys()) {
         if (secondMap.get(j)) {
           //genaue Exercise-Daten holen und mit Maximalgewicht speichern
-          this.dataService.getExerciseByNumericId(j).subscribe(resultExercise => {
-            this.exerciseLookupMap.set(j, resultExercise[0]);
+          this.exerciseDB.getExerciseByID(j).subscribe(resultExercise => {
+            this.exerciseLookupMap.set(j, resultExercise);
             console.log(this.exerciseLookupMap);
           });
         }
@@ -245,7 +250,7 @@ let AnalyticsPage = class AnalyticsPage {
   redirect(trainingPlanId) {
     var _this = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _this.router.navigateByUrl(`/training-plan/${trainingPlanId}`, {
         replaceUrl: true
       });
@@ -257,10 +262,12 @@ let AnalyticsPage = class AnalyticsPage {
 AnalyticsPage.ctorParameters = () => [{
   type: _services_database_service__WEBPACK_IMPORTED_MODULE_3__.DatabaseService
 }, {
-  type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router
+}, {
+  type: _services_exercise_db_service__WEBPACK_IMPORTED_MODULE_4__.ExerciseDBService
 }];
 
-AnalyticsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+AnalyticsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
   selector: 'app-analytics',
   template: _analytics_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_analytics_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -275,7 +282,7 @@ AnalyticsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,_angular_c
   \****************************************************************/
 /***/ ((module) => {
 
-module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\nion-card {\n  --background: rgba(183, 214, 227, 0.71);\n  border-radius: 15px;\n  --color: var(--ion-text-color, #fffffff);\n  font-weight: bold;\n}\n\nion-card ion-card-header {\n  border-bottom: 1px solid grey;\n}\n\nion-card ion-card-content {\n  padding-bottom: 5px;\n  padding-top: 5px;\n}\n\nion-card h1 {\n  padding-top: 5px;\n  font-size: 12px;\n}\n\n/*.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFuYWx5dGljcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBQTtBQUNGOztBQUVBO0VBQ0UsdUNBQUE7RUFDQSxtQkFBQTtFQUNBLHdDQUFBO0VBQ0EsaUJBQUE7QUFDRjs7QUFDRTtFQUNFLDZCQUFBO0FBQ0o7O0FBRUU7RUFDRSxtQkFBQTtFQUNBLGdCQUFBO0FBQUo7O0FBSUU7RUFDRSxnQkFBQTtFQUNBLGVBQUE7QUFGSjs7QUFTQTs7O0VBQUEiLCJmaWxlIjoiYW5hbHl0aWNzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50b29sYmFyIHtcclxuICBwYWRkaW5nLXRvcDogMCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG5pb24tY2FyZCB7XHJcbiAgLS1iYWNrZ3JvdW5kOiByZ2JhKDE4MywgMjE0LCAyMjcsIDAuNzEpO1xyXG4gIGJvcmRlci1yYWRpdXM6IDE1cHg7XHJcbiAgLS1jb2xvcjogdmFyKC0taW9uLXRleHQtY29sb3IsICNmZmZmZmZmKTtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuXHJcbiAgaW9uLWNhcmQtaGVhZGVyIHtcclxuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBncmV5O1xyXG4gIH1cclxuXHJcbiAgaW9uLWNhcmQtY29udGVudCB7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xyXG4gICAgcGFkZGluZy10b3A6IDVweDtcclxuXHJcbiAgfVxyXG5cclxuICBoMSB7XHJcbiAgICBwYWRkaW5nLXRvcDogNXB4O1xyXG4gICAgZm9udC1zaXplOiAxMnB4O1xyXG4gICAgLy9jb2xvcjogIzBkMGQwZDtcclxuICB9XHJcbn1cclxuXHJcblxyXG4vLyBIZWFkZXIgZHVyY2hzaWNodGlnXHJcbi8qLnRyYW5zcGFyZW50IHtcclxuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xyXG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcclxufSovXHJcbiJdfQ== */";
+module.exports = "ion-card {\n  --background: rgba(183, 214, 227, 0.71);\n  border-radius: 15px;\n  --color: var(--ion-text-color, #fffffff);\n}\nion-card ion-card-header {\n  border-bottom: 1px solid grey;\n  font-weight: bold;\n}\nion-card ion-card-content {\n  padding-bottom: 5px;\n  padding-top: 5px;\n}\nion-card h1 {\n  padding-top: 5px;\n  font-size: 12px;\n}\n/*.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFuYWx5dGljcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDRSx1Q0FBQTtFQUNBLG1CQUFBO0VBQ0Esd0NBQUE7QUFERjtBQUlFO0VBQ0UsNkJBQUE7RUFDQSxpQkFBQTtBQUZKO0FBS0U7RUFDRSxtQkFBQTtFQUNBLGdCQUFBO0FBSEo7QUFPRTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtBQUxKO0FBWUE7OztFQUFBIiwiZmlsZSI6ImFuYWx5dGljcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcblxuaW9uLWNhcmQge1xuICAtLWJhY2tncm91bmQ6IHJnYmEoMTgzLCAyMTQsIDIyNywgMC43MSk7XG4gIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gIC0tY29sb3I6IHZhcigtLWlvbi10ZXh0LWNvbG9yLCAjZmZmZmZmZik7XG5cblxuICBpb24tY2FyZC1oZWFkZXIge1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBncmV5O1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICB9XG5cbiAgaW9uLWNhcmQtY29udGVudCB7XG4gICAgcGFkZGluZy1ib3R0b206IDVweDtcbiAgICBwYWRkaW5nLXRvcDogNXB4O1xuXG4gIH1cblxuICBoMSB7XG4gICAgcGFkZGluZy10b3A6IDVweDtcbiAgICBmb250LXNpemU6IDEycHg7XG4gICAgLy9jb2xvcjogIzBkMGQwZDtcbiAgfVxufVxuXG5cbi8vIEhlYWRlciBkdXJjaHNpY2h0aWdcbi8qLnRyYW5zcGFyZW50IHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xufSovXG4iXX0= */";
 
 /***/ }),
 
@@ -285,7 +292,7 @@ module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\nion-card {\n  -
   \****************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"false\" class=\"ion-no-border\">\r\n  <ion-toolbar class=\"toolbar transparent\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Analytics</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content fullscreen=\"true\">\r\n  <ion-header collapse=\"condense\" class=\"ion-no-border\">\r\n    <ion-toolbar class=\"toolbar transparent\">\r\n      <ion-title size=\"large\">Analytics</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-card>\r\n      <ion-card-header>Persönlicher Gewichtsrekord:</ion-card-header>\r\n    <ion-card-content>\r\n      <swiper  [config]=\"this.config\" *ngIf=\"this.exerciseLookupMap && this.exerciseWeightRecordMap\">\r\n        <ng-template swiperSlide *ngFor=\"let exercise of exerciseLookupMap.keys()\">\r\n          <app-exercise-card [exercise]=\"exerciseLookupMap.get(exercise)\"\r\n                             [maxWeight]=\"exerciseWeightRecordMap.get(exercise)\"></app-exercise-card>\r\n        </ng-template>\r\n      </swiper>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n    <ion-card *ngIf=\"mostUsedPlan\" (click)=\"openTrainingPlain(this.mostUsedPlan.trainingPlanId)\">\r\n      <ion-card-header>Am meisten absolvierter Trainingplan</ion-card-header>\r\n      <ion-card-content>\r\n        <ion-text><h1>Name: {{this.mostUsedPlan.name}}</h1></ion-text>\r\n      </ion-card-content>\r\n      <ion-card-content>\r\n        <ion-text><h1>Beschreibung: {{this.mostUsedPlan.description}}</h1></ion-text>\r\n      </ion-card-content>\r\n    </ion-card>\r\n    <ion-card *ngIf=\"leastUsedPlan\" (click)=\"openTrainingPlain(this.leastUsedPlan.trainingPlanId)\">\r\n      <ion-card-header>Am wenigsten absolvierter Trainingplan</ion-card-header>\r\n      <ion-card-content>\r\n        <ion-text><h1>Name: {{this.leastUsedPlan.name}}</h1></ion-text>\r\n      </ion-card-content>\r\n      <ion-card-content>\r\n        <ion-text><h1>Beschreibung: {{this.leastUsedPlan.description}}</h1></ion-text>\r\n      </ion-card-content>\r\n    </ion-card>\r\n\r\n</ion-content>\r\n";
+module.exports = "<ion-header [translucent]=\"false\" class=\"ion-no-border\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Analytics</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\" class=\"ion-no-border\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-title size=\"large\">Analytics</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <ion-card>\n      <ion-card-header>Persönlicher Gewichtsrekord:</ion-card-header>\n    <ion-card-content>\n      <swiper  [config]=\"this.config\" *ngIf=\"this.exerciseLookupMap && this.exerciseWeightRecordMap\">\n        <ng-template swiperSlide *ngFor=\"let exercise of exerciseLookupMap.keys()\">\n          <app-exercise-card [exercise]=\"exerciseLookupMap.get(exercise)\"\n                             [maxWeight]=\"exerciseWeightRecordMap.get(exercise)\"></app-exercise-card>\n        </ng-template>\n      </swiper>\n    </ion-card-content>\n  </ion-card>\n\n    <ion-card *ngIf=\"mostUsedPlan\" (click)=\"openTrainingPlain(this.mostUsedPlan.trainingPlanId)\">\n      <ion-card-header>Am meisten absolvierter Trainingplan</ion-card-header>\n      <ion-card-content>\n        <ion-text><h1>Name: {{this.mostUsedPlan.name}}</h1></ion-text>\n      </ion-card-content>\n      <ion-card-content>\n        <ion-text><h1>Beschreibung: {{this.mostUsedPlan.description}}</h1></ion-text>\n      </ion-card-content>\n    </ion-card>\n    <ion-card *ngIf=\"leastUsedPlan\" (click)=\"openTrainingPlain(this.leastUsedPlan.trainingPlanId)\">\n      <ion-card-header>Am wenigsten absolvierter Trainingplan</ion-card-header>\n      <ion-card-content>\n        <ion-text><h1>Name: {{this.leastUsedPlan.name}}</h1></ion-text>\n      </ion-card-content>\n      <ion-card-content>\n        <ion-text><h1>Beschreibung: {{this.leastUsedPlan.description}}</h1></ion-text>\n      </ion-card-content>\n    </ion-card>\n\n</ion-content>\n";
 
 /***/ })
 

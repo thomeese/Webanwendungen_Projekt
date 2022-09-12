@@ -20,13 +20,7 @@
       </ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card>
-    <ion-card-content>
-      <ion-title>
-        <div *ngIf="exercise" class="ion-text-wrap ion-text-center">{{exercise.name}}</div>
-      </ion-title>
-    </ion-card-content>
-  </ion-card>
+
   <div *ngIf="exercise">
     <img src="{{exercise.gifUrl}}"/>
     <ion-card>

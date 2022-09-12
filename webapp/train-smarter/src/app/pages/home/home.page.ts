@@ -40,19 +40,20 @@ export class HomePage implements OnInit {
   calendars;
   nextEvents;
 
-  constructor(private dataServise: DatabaseService,
+  constructor(private dataService: DatabaseService,
               private loadingCtr: LoadingController,
               private authService: AuthenticationService,
               private calendarService: CalendarService,
-              private paltform: Platform) {
+              private platform: Platform,
+              private router: Router) {
 
   }
 
   ngOnInit() {
-    console.log(this.paltform.width());
-    console.log(this.paltform.height());
+    console.log(this.platform.width());
+    console.log(this.platform.height());
     this.getTrainingPlans();
-    this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
+    this.dataService.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
       this.user = res[0];
     });
     this.calendarService.getNextEvents().then((r) => {
@@ -69,11 +70,21 @@ export class HomePage implements OnInit {
       spinner: 'bubbles',
     });
     await loading.present();
-    this.dataServise.getUserTrainingsPlan().subscribe(res => {
+    this.dataService.getUserTrainingsPlan().subscribe(res => {
       this.trainingPlanList = res;
     });
     await loading.dismiss();
   }
 
+  startTraining() {
+    console.log(this.nextEvents[0]);
+    if(this.nextEvents[0]) {
+      this.dataService.getTrainingsPlanByName(this.nextEvents[0].title).subscribe((result) => {
+        this.router.navigateByUrl('/live-training/' + result.trainingPlanId);
+      });
+    } else {
+      this.router.navigateByUrl('/live-training/');
+    }
+  }
 }
 

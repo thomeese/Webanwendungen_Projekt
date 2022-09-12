@@ -47,8 +47,18 @@ h2 {
       }
     }
   }
+}
 
-
+.startTraining{
+  padding: 40px 40px 40px 40px;
+  background: rgba(183, 214, 227, 0.71);
+  h3{
+    color: var(--ion-text-color, #ffffff);
+    font-weight: bold;
+  }
+  ion-card-title{
+    text-align: center;
+  }
 }
 
 span.swiper-pagination-bullet.swiper-pagination-bullet-active {

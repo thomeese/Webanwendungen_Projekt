@@ -1,12 +1,9 @@
 <ion-content fullscreen="true">
-  <div class="main">
+  <ion-grid>
     <ion-card class="content">
-      <div class="login ion-padding-top">
-        <div class="ion-text-center">
           <ion-text color="black">
             <h1>Willkommen bei Train-Smarter</h1>
           </ion-text>
-        </div>
         <form [formGroup]="userForm" (submit)="signIn()" *ngIf="!register">
           <ion-item>
             <ion-icon name="mail-outline"></ion-icon>
@@ -91,8 +88,7 @@
             <ion-button fill="clear" class="" slot="end" type="button" (click)="this.register=false">Abbrechen</ion-button>
           </ion-item>
         </form>
-      </div>
     </ion-card>
-  </div>
+  </ion-grid>
 </ion-content>
 

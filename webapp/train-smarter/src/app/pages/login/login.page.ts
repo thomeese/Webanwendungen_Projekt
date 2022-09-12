@@ -12,6 +12,9 @@ import {UserData} from '../../interfaces/userData';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+
+
   userForm: FormGroup;
   registerData: FormGroup;
   register = false;
@@ -25,6 +28,7 @@ export class LoginPage implements OnInit {
     private dataService: DatabaseService,
     private menu: MenuController
   ) {
+
   }
 
   async signIn() {
@@ -96,6 +100,8 @@ export class LoginPage implements OnInit {
       });
     this.menu.enable(false);
   }
+
+
 
   private isEquals(string1: any, string2: any) {
     return (checkForm: FormGroup) => {

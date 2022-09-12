@@ -11,12 +11,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LiveTrainingLoggingPage": () => (/* binding */ LiveTrainingLoggingPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _live_training_logging_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./live-training-logging.page.html?ngResource */ 5225);
 /* harmony import */ var _live_training_logging_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./live-training-logging.page.scss?ngResource */ 6133);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _services_localstorage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/localstorage.service */ 7675);
 /* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/database.service */ 4382);
+/* harmony import */ var _services_exercise_db_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/exercise-db.service */ 3597);
+
 
 
 
@@ -24,9 +26,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LiveTrainingLoggingPage = class LiveTrainingLoggingPage {
-    constructor(locaStorageServ, dataService) {
+    constructor(locaStorageServ, dataService, exerciseDBService) {
         this.locaStorageServ = locaStorageServ;
         this.dataService = dataService;
+        this.exerciseDBService = exerciseDBService;
         this.setLog = [];
     }
     ngOnInit() {
@@ -36,8 +39,9 @@ let LiveTrainingLoggingPage = class LiveTrainingLoggingPage {
             exercises.forEach(item => {
                 if (item.exerciseId === this.exerciseId) {
                     this.exercise = item;
-                    this.dataService.getExerciseByNumericId(this.exercise.exerciseId).subscribe(res => {
-                        this.gifUrl = res[0].gifUrl;
+                    console.log(this.exercise.exerciseId);
+                    this.exerciseDBService.getExerciseByID(this.exercise.exerciseId).subscribe(res => {
+                        this.gifUrl = res.gifUrl;
                     });
                 }
             });
@@ -54,14 +58,15 @@ let LiveTrainingLoggingPage = class LiveTrainingLoggingPage {
 };
 LiveTrainingLoggingPage.ctorParameters = () => [
     { type: _services_localstorage_service__WEBPACK_IMPORTED_MODULE_2__.LocalstorageService },
-    { type: _services_database_service__WEBPACK_IMPORTED_MODULE_3__.DatabaseService }
+    { type: _services_database_service__WEBPACK_IMPORTED_MODULE_3__.DatabaseService },
+    { type: _services_exercise_db_service__WEBPACK_IMPORTED_MODULE_4__.ExerciseDBService }
 ];
 LiveTrainingLoggingPage.propDecorators = {
-    trainingPlan: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
-    exerciseId: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }]
+    trainingPlan: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }],
+    exerciseId: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }]
 };
-LiveTrainingLoggingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+LiveTrainingLoggingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-live-training-logging',
         template: _live_training_logging_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_live_training_logging_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -97,7 +102,7 @@ const routes = [
     },
     {
         path: 'live-training-logging',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_exercise_exercise-detail_exercise-detail_page_ts"), __webpack_require__.e("default-src_app_pages_exercise_exercise-detail_exercise-detail_module_ts"), __webpack_require__.e("src_app_pages_live-training_live-training-logging_live-training-logging_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./live-training-logging/live-training-logging.module */ 875)).then(m => m.LiveTrainingLoggingPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_exercise_exercise-detail_exercise-detail_module_ts"), __webpack_require__.e("src_app_pages_live-training_live-training-logging_live-training-logging_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./live-training-logging/live-training-logging.module */ 875)).then(m => m.LiveTrainingLoggingPageModule)
     }
 ];
 let LiveTrainingPageRoutingModule = class LiveTrainingPageRoutingModule {
@@ -165,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LiveTrainingPage": () => (/* binding */ LiveTrainingPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var _Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _live_training_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./live-training.page.html?ngResource */ 92);
 /* harmony import */ var _live_training_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./live-training.page.scss?ngResource */ 1831);
@@ -228,7 +233,7 @@ let LiveTrainingPage = class LiveTrainingPage {
   getExercises() {
     var _this = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this.loadingCtr.create({
         message: 'Loading..',
         spinner: 'bubbles'
@@ -236,25 +241,30 @@ let LiveTrainingPage = class LiveTrainingPage {
       yield loading.present();
 
       _this.dataService.getTrainingsPlanById(_this.trainingPlanId).subscribe(res => {
-        _this.trainingPlan = res;
+        if (!res) {
+          _this.finishTraining(); // Reset da TrainingPlan nicht gefunden wurde
 
-        if (!res.exercises) {
-          _this.exercises = [];
         } else {
-          _this.exercises = res.exercises;
-        }
+          _this.trainingPlan = res;
 
-        console.log(_this.trainingPlan);
-
-        _this.localStorageCtrl.saveData('live-training-exercises', JSON.stringify(_this.exercises));
-
-        if (_this.exercisesState.length === 0) {
-          for (const exercise of _this.exercises) {
-            _this.exercisesState.push(false);
+          if (!res.exercises) {
+            _this.exercises = [];
+          } else {
+            _this.exercises = res.exercises;
           }
-        }
 
-        console.log(_this.exercisesState);
+          console.log(_this.trainingPlan);
+
+          _this.localStorageCtrl.saveData('live-training-exercises', JSON.stringify(_this.exercises));
+
+          if (_this.exercisesState.length === 0) {
+            for (const exercise of _this.exercises) {
+              _this.exercisesState.push(false);
+            }
+          }
+
+          console.log(_this.exercisesState);
+        }
       });
 
       yield loading.dismiss();
@@ -264,7 +274,7 @@ let LiveTrainingPage = class LiveTrainingPage {
   logTraining(_exerciseId) {
     var _this2 = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalCtrl.create({
         component: _live_training_logging_live_training_logging_page__WEBPACK_IMPORTED_MODULE_5__.LiveTrainingLoggingPage,
         componentProps: {
@@ -274,14 +284,14 @@ let LiveTrainingPage = class LiveTrainingPage {
         breakpoints: [0, 0.8, 1],
         initialBreakpoint: 0.8
       });
-      modal.present();
+      yield modal.present();
     })();
   }
 
   getTrainingPlans() {
     var _this3 = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this3.loadingCtr.create({
         message: 'Loading..',
         spinner: 'bubbles'
@@ -310,7 +320,7 @@ let LiveTrainingPage = class LiveTrainingPage {
   commitSetLog(_exerciseId) {
     var _this4 = this;
 
-    return (0,C_Users_tobeh_OneDrive_Desktop_Uni_Gitlab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,_Users_manuel_Desktop_GitLab_webanwendungen_projekt_webapp_train_smarter_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       console.log(_this4.trainingPlan);
       const set = {
         date: new _angular_common__WEBPACK_IMPORTED_MODULE_6__.DatePipe('de-DE').transform(new Date(), 'dd.MM.yyyy'),
@@ -354,200 +364,6 @@ LiveTrainingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__decorate)([(0,_angul
   template: _live_training_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_live_training_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
 })], LiveTrainingPage);
-
-
-/***/ }),
-
-/***/ 4382:
-/*!**********************************************!*\
-  !*** ./src/app/services/database.service.ts ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DatabaseService": () => (/* binding */ DatabaseService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/fire/firestore */ 6466);
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./authentication.service */ 7053);
-
-
-
-
-var SearchTypes;
-(function (SearchTypes) {
-    SearchTypes["exercise"] = "/exercise";
-    SearchTypes["exercisesList"] = "";
-    SearchTypes["bodyPart"] = "/bodyPart";
-    SearchTypes["bodyPartList"] = "/bodyPartList";
-    SearchTypes["exerciseByID"] = "/exercise";
-    SearchTypes["targetMuscle"] = "/target";
-    SearchTypes["targetMuscleList"] = "/targetList";
-    SearchTypes["equipment"] = "/equipment";
-    SearchTypes["equipmentList"] = "/equipmentList";
-})(SearchTypes || (SearchTypes = {}));
-let DatabaseService = class DatabaseService {
-    constructor(firestore, authService) {
-        this.firestore = firestore;
-        this.authService = authService;
-    }
-    getUserData() {
-        const userRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'userData');
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(userRef, { idField: 'userId' });
-    }
-    getUserDataById(id) {
-        const userDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `userData/${id}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.docData)(userDocRef, { idField: 'userId' });
-    }
-    getUserDataByUid(uid) {
-        const userRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'userData');
-        const userQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(userRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', uid));
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(userQuery, { idField: 'userId' });
-    }
-    addUser(user) {
-        const userRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'userData');
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(userRef, user);
-    }
-    updateUser(user) {
-        const userDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `userData/${user.docId}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(userDocRef, {
-            firstname: user.firstname, surname: user.surname,
-            birthdate: user.birthdate, size: user.size, email: user.email
-        });
-    }
-    deleteUser(user) {
-        const userDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `userData/${user.docId}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(userDocRef);
-    }
-    addTrainingPlan(plan) {
-        const trainingPlanRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'trainingPlan');
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(trainingPlanRef, plan);
-    }
-    updateTrainingPlan(trainingPlanId, plan) {
-        const trainingPlanDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `trainingPlan/${trainingPlanId}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(trainingPlanDocRef, { uid: plan.uid, name: plan.name, description: plan.description,
-            period: plan.period, periodInterval: plan.periodInterval, exercises: plan.exercises });
-    }
-    deleteTrainingPlan(plan) {
-        const trainingPlanDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `trainingPlan/${plan.trainingPlanId}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(trainingPlanDocRef);
-    }
-    getTrainingsPlan() {
-        const trainingPlanRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'trainingPlan');
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(trainingPlanRef, { idField: 'trainingPlanId' });
-    }
-    getTrainingsPlanById(id) {
-        const trainingPlanRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `trainingPlan/${id}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.docData)(trainingPlanRef, { idField: 'trainingPlanId' });
-    }
-    getUserTrainingsPlan() {
-        const trainingPlanRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'trainingPlan');
-        const trainQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(trainingPlanRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', this.authService.getUserId()));
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(trainQuery, { idField: 'trainingPlanId' });
-    }
-    addExercise(exercise) {
-        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'exercises');
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(exerciseRef, exercise);
-    }
-    getAllExercises() {
-        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'exercises');
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseRef, { idField: 'exerciseId' });
-    }
-    getExercisesBySearch(type, target) {
-        console.log('Hello');
-        console.log(type);
-        console.log(SearchTypes.bodyPart);
-        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'exercises');
-        if (type === 'exercisesList') {
-            console.log(SearchTypes.exercisesList);
-            return this.getAllExercises();
-        }
-        if (type === 'bodyPart') {
-            console.log('bodypart');
-            const exerciseQuary = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(exerciseRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('bodypart', '==', target));
-            return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseQuary, { idField: 'exerciseId' });
-        }
-        if (type === 'targetMuscle') {
-            console.log(SearchTypes.targetMuscle);
-            const exerciseQuary = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(exerciseRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('target', '==', target));
-            return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseQuary, { idField: 'exerciseId' });
-        }
-        if (type === 'equipment') {
-            console.log(SearchTypes.equipment);
-            const exerciseQuary = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(exerciseRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('equipment', '==', target));
-            return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseQuary, { idField: 'exerciseId' });
-        }
-    }
-    getExerciseById(id) {
-        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `exercises/${id}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.docData)(exerciseRef, { idField: 'exerciseId' });
-    }
-    getExerciseByNumericId(id) {
-        const exerciseRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'exercises');
-        const exerciseQuary = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(exerciseRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('numericId', '==', id));
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(exerciseQuary, { idField: 'exerciseId' });
-    }
-    updateExercise(exercise) {
-        const exerciseDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `exercises/${exercise.exerciseId}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(exerciseDocRef, {
-            name: exercise.name, bodypart: exercise.bodypart,
-            equipment: exercise.equipment, gifUrl: exercise.gifUrl, target: exercise.target
-        });
-    }
-    deleteExercise(exercise) {
-        const exerciseDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `exercises/${exercise.exerciseId}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(exerciseDocRef);
-    }
-    getAllSetLoggingByUid() {
-        const setLoggingRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'setLogging');
-        const setLogginQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(setLoggingRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', this.authService.getUserId()));
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(setLogginQuery, { idField: 'setLoggingId' });
-    }
-    addSetLogging(setLogging) {
-        const setLoggingRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'setLogging');
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(setLoggingRef, setLogging);
-    }
-    updateSetLogging(setLogging) {
-        const setLoggingDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `setLogging/${setLogging.id}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(setLoggingDocRef, {
-            exerciseId: setLogging.excerciseId, trainingPlanId: setLogging.trainingPlanId,
-            userId: setLogging.uid, date: setLogging.date, time: setLogging.time, sets: setLogging.sets,
-        });
-    }
-    deleteSetLogging(setLogging) {
-        const setLoggingDocRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `setLogging/${setLogging.id}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(setLoggingDocRef);
-    }
-    addWalk(walk) {
-        const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'walkData');
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)(walkRef, walk);
-    }
-    getWalkDataById(id) {
-        const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `walkData/${id}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.docData)(walkRef, { idField: 'walkId' });
-    }
-    getWalkDataByUid() {
-        const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(this.firestore, 'walkData');
-        const walkQuery = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.query)(walkRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('uid', '==', this.authService.getUserId()));
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.collectionData)(walkQuery, { idField: 'walkId' });
-    }
-    deleteWalk(walk) {
-        const walkRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.firestore, `walkData/${walk.walkId}`);
-        return (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)(walkRef);
-    }
-};
-DatabaseService.ctorParameters = () => [
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__.Firestore },
-    { type: _authentication_service__WEBPACK_IMPORTED_MODULE_0__.AuthenticationService }
-];
-DatabaseService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
-        providedIn: 'root'
-    })
-], DatabaseService);
-
 
 
 /***/ }),
@@ -598,7 +414,7 @@ LocalstorageService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
   \******************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n/*.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtdHJhaW5pbmctbG9nZ2luZy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBQTtBQUNGOztBQUVBOzs7RUFBQSIsImZpbGUiOiJsaXZlLXRyYWluaW5nLWxvZ2dpbmcucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRvb2xiYXJ7XHJcbiAgcGFkZGluZy10b3A6IDAgIWltcG9ydGFudDtcclxufVxyXG4vLyBIZWFkZXIgZHVyY2hzaWNodGlnXHJcbi8qLnRyYW5zcGFyZW50IHtcclxuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xyXG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcclxufSovXHJcbiJdfQ== */";
+module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n/*.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtdHJhaW5pbmctbG9nZ2luZy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBQTtBQUNGOztBQUVBOzs7RUFBQSIsImZpbGUiOiJsaXZlLXRyYWluaW5nLWxvZ2dpbmcucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRvb2xiYXJ7XG4gIHBhZGRpbmctdG9wOiAwICFpbXBvcnRhbnQ7XG59XG4vLyBIZWFkZXIgZHVyY2hzaWNodGlnXG4vKi50cmFuc3BhcmVudCB7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG4gIC0tYmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbn0qL1xuIl19 */";
 
 /***/ }),
 
@@ -608,7 +424,7 @@ module.exports = ".toolbar {\n  padding-top: 0 !important;\n}\n\n/*.transparent 
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "ion-fab ion-text {\n  padding-right: 10px;\n}\n\nion-col {\n  padding-right: 0;\n  padding-left: 0;\n}\n\n.toolbar {\n  padding-top: 0 !important;\n}\n\n/*.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtdHJhaW5pbmcucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNFO0VBQ0UsbUJBQUE7QUFBSjs7QUFJQTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtBQURGOztBQUlBO0VBQ0UseUJBQUE7QUFERjs7QUFJQTs7O0VBQUEiLCJmaWxlIjoibGl2ZS10cmFpbmluZy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tZmFie1xyXG4gIGlvbi10ZXh0e1xyXG4gICAgcGFkZGluZy1yaWdodDogMTBweDtcclxuICB9XHJcbn1cclxuXHJcbmlvbi1jb2wge1xyXG4gIHBhZGRpbmctcmlnaHQ6IDA7XHJcbiAgcGFkZGluZy1sZWZ0OiAwO1xyXG59XHJcblxyXG4udG9vbGJhcntcclxuICBwYWRkaW5nLXRvcDogMCAhaW1wb3J0YW50O1xyXG59XHJcbi8vIEhlYWRlciBkdXJjaHNpY2h0aWdcclxuLyoudHJhbnNwYXJlbnQge1xyXG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XHJcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xyXG59Ki9cclxuIl19 */";
+module.exports = "ion-fab ion-text {\n  padding-right: 10px;\n}\n\nion-col {\n  padding-right: 0;\n  padding-left: 0;\n}\n\n.toolbar {\n  padding-top: 0 !important;\n}\n\n/*.transparent {\n  background: transparent !important;\n  --background: transparent !important;\n}*/\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtdHJhaW5pbmcucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNFO0VBQ0UsbUJBQUE7QUFBSjs7QUFJQTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtBQURGOztBQUlBO0VBQ0UseUJBQUE7QUFERjs7QUFJQTs7O0VBQUEiLCJmaWxlIjoibGl2ZS10cmFpbmluZy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tZmFie1xuICBpb24tdGV4dHtcbiAgICBwYWRkaW5nLXJpZ2h0OiAxMHB4O1xuICB9XG59XG5cbmlvbi1jb2wge1xuICBwYWRkaW5nLXJpZ2h0OiAwO1xuICBwYWRkaW5nLWxlZnQ6IDA7XG59XG5cbi50b29sYmFye1xuICBwYWRkaW5nLXRvcDogMCAhaW1wb3J0YW50O1xufVxuLy8gSGVhZGVyIGR1cmNoc2ljaHRpZ1xuLyoudHJhbnNwYXJlbnQge1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xuICAtLWJhY2tncm91bmQ6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG59Ki9cbiJdfQ== */";
 
 /***/ }),
 
@@ -618,7 +434,7 @@ module.exports = "ion-fab ion-text {\n  padding-right: 10px;\n}\n\nion-col {\n  
   \******************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"false\">\r\n  <ion-toolbar class=\"toolbar transparent\">\r\n    <ion-title>live-training-logging</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content fullscreen=\"true\">\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar class=\"toolbar transparent\">\r\n      <ion-title size=\"large\">live-training-logging</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <div *ngIf=\"this.exercise\">\r\n    <ion-header>{{this.exercise.name}}</ion-header>\r\n    <div>\r\n      <img src=\"{{gifUrl}}\"/>\r\n    </div>\r\n    <app-set-card *ngIf=\"this.exercise\" (newSetArray)=\"updateSetLogArray($event)\" [setArray]=\"setLog\"></app-set-card>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-header [translucent]=\"false\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-title>live-training-logging</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-title size=\"large\">live-training-logging</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <div *ngIf=\"this.exercise\">\n    <ion-header>{{this.exercise.name}}</ion-header>\n    <div>\n      <img src=\"{{gifUrl}}\"/>\n    </div>\n    <app-set-card *ngIf=\"this.exercise\" (newSetArray)=\"updateSetLogArray($event)\" [setArray]=\"setLog\"></app-set-card>\n  </div>\n</ion-content>\n";
 
 /***/ }),
 
@@ -628,7 +444,7 @@ module.exports = "<ion-header [translucent]=\"false\">\r\n  <ion-toolbar class=\
   \************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header [translucent]=\"false\" class=\"ion-no-border\">\r\n  <ion-toolbar class=\"toolbar transparent\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>LiveTraining</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content fullscreen=\"true\">\r\n  <ion-header collapse=\"condense\" class=\"ion-no-border\">\r\n    <ion-toolbar class=\"toolbar transparent\">\r\n      <ion-title size=\"large\">LiveTraining</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <div *ngIf=\"trainingPlanList && !trainingPlanId\">\r\n    <ion-text>Wähle einen Trainingsplan:</ion-text>\r\n    <ion-list>\r\n      <ion-item Button=\"\" (click)=\"startLiveTraining(plan.trainingPlanId)\" *ngFor=\"let plan of this.trainingPlanList\">\r\n        <ion-text>{{plan.name}}</ion-text>\r\n      </ion-item>\r\n    </ion-list>\r\n  </div>\r\n\r\n  <div *ngIf=\"trainingPlanId && exercises\">\r\n    <ion-list>\r\n      <ion-item>\r\n        <ion-col>Todo</ion-col>\r\n        <ion-col>Done</ion-col>\r\n      </ion-item>\r\n      <ion-item *ngFor=\"let exercise of exercises; let i=index\" button=\"\">\r\n        <ion-col (click)=\"this.logTraining(exercise.exerciseId)\">{{exercise.name}}</ion-col>\r\n        <ion-col>\r\n          <ion-button shape=\"round\" fill=\"clear\" [class.button-disabled]=\"exercisesState[i]\" (click)=\"setChecked(i, exercise.exerciseId)\">\r\n            <ion-icon size=\"large\"\r\n                      [attr.color]=\" exercisesState[i] ? 'success' : 'danger'\"\r\n                       name=\"checkmark-done-circle\"></ion-icon>\r\n        </ion-button>\r\n        </ion-col>\r\n      </ion-item>\r\n    </ion-list>\r\n\r\n\r\n    <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\">\r\n      <!--<ion-grid>\r\n        <ion-row>\r\n          <ion-button class=\" ion-align-self-center ion-text-right\"><ion-text>Training beenden</ion-text></ion-button>\r\n          <ion-col size=\"3\"><ion-fab-button size=\"small\" (click)=\"this.finishTraining()\"><ion-icon name=\"cloud-done\"></ion-icon></ion-fab-button></ion-col>\r\n        </ion-row>\r\n      </ion-grid>-->\r\n      <ion-button color=\"success\" (click)=\"this.finishTraining()\"><ion-text>beenden</ion-text><ion-icon name=\"cloud-done\"></ion-icon></ion-button>\r\n    </ion-fab>\r\n\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-header [translucent]=\"false\" class=\"ion-no-border\">\n  <ion-toolbar class=\"toolbar transparent\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>LiveTraining</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\" class=\"ion-no-border\">\n    <ion-toolbar class=\"toolbar transparent\">\n      <ion-title size=\"large\">LiveTraining</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  <div *ngIf=\"trainingPlanList && !trainingPlanId\">\n    <ion-text>Wähle einen Trainingsplan:</ion-text>\n    <ion-list>\n      <ion-item Button=\"\" (click)=\"startLiveTraining(plan.trainingPlanId)\" *ngFor=\"let plan of this.trainingPlanList\">\n        <ion-text>{{plan.name}}</ion-text>\n      </ion-item>\n    </ion-list>\n  </div>\n\n  <div *ngIf=\"trainingPlanId && exercises\">\n    <ion-list>\n      <ion-item>\n        <ion-col>Todo</ion-col>\n        <ion-col>Done</ion-col>\n      </ion-item>\n      <ion-item *ngFor=\"let exercise of exercises; let i=index\" button=\"\">\n        <ion-col (click)=\"this.logTraining(exercise.exerciseId)\">{{exercise.name}}</ion-col>\n        <ion-col>\n          <ion-button shape=\"round\" fill=\"clear\" [class.button-disabled]=\"exercisesState[i]\" (click)=\"setChecked(i, exercise.exerciseId)\">\n            <ion-icon size=\"large\"\n                      [attr.color]=\" exercisesState[i] ? 'success' : 'danger'\"\n                       name=\"checkmark-done-circle\"></ion-icon>\n        </ion-button>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n\n\n    <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\">\n      <!--<ion-grid>\n        <ion-row>\n          <ion-button class=\" ion-align-self-center ion-text-right\"><ion-text>Training beenden</ion-text></ion-button>\n          <ion-col size=\"3\"><ion-fab-button size=\"small\" (click)=\"this.finishTraining()\"><ion-icon name=\"cloud-done\"></ion-icon></ion-fab-button></ion-col>\n        </ion-row>\n      </ion-grid>-->\n      <ion-button color=\"success\" (click)=\"this.finishTraining()\"><ion-text>beenden</ion-text><ion-icon name=\"cloud-done\"></ion-icon></ion-button>\n    </ion-fab>\n\n  </div>\n</ion-content>\n";
 
 /***/ }),
 
