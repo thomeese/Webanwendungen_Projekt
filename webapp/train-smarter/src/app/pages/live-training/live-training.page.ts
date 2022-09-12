@@ -7,7 +7,7 @@ import {LiveTrainingLoggingPage} from './live-training-logging/live-training-log
 import {DatePipe, registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
-import {SetLogging} from '../../Interfaces/setLogging';
+import {SetLogging} from '../../interfaces/setLogging';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 

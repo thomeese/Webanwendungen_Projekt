@@ -3,7 +3,7 @@ import {DatabaseService} from '../../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {TrainingPlan} from '../../../Interfaces/trainingPlan';
+import {TrainingPlan} from '../../../interfaces/trainingPlan';
 
 @Component({
   selector: 'app-training-plan-detail',

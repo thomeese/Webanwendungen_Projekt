@@ -14,11 +14,11 @@ import {
 import {Observable} from 'rxjs';
 import {traceUntilFirst} from '@angular/fire/performance';
 import {AuthenticationService} from './authentication.service';
-import {UserData} from '../Interfaces/userData';
-import {TrainingPlan} from '../Interfaces/trainingPlan';
-import {Exercise} from '../Interfaces/exercise';
-import {SetLogging} from '../Interfaces/setLogging';
-import {WalkData} from '../Interfaces/walkData';
+import {UserData} from '../interfaces/userData';
+import {TrainingPlan} from '../interfaces/trainingPlan';
+import {Exercise} from '../interfaces/exercise';
+import {SetLogging} from '../interfaces/setLogging';
+import {WalkData} from '../interfaces/walkData';
 
 enum SearchTypes {
   exercise = '/exercise',

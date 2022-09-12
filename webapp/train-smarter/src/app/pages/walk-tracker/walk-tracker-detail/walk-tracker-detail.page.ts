@@ -7,7 +7,7 @@ import {AuthenticationService} from '../../../services/authentication.service';
 import {DatabaseService} from '../../../services/database.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {WalkData} from '../../../Interfaces/walkData';
+import {WalkData} from '../../../interfaces/walkData';
 
 declare const google;
 

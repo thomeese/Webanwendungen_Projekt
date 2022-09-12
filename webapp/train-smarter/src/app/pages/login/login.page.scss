@@ -1,9 +1,10 @@
-ion-content {
-  // https://unsplash.com/photos/WvDYdXDzkhs
+/*ion-content {
   --background: url("/assets/images/victor-freitas-unsplash.jpg") no-repeat center center / cover;
   display: flex;
   position: fixed;
-}
+}*/
+
+ion-datetime { color: var(--ion-text-color, rgba(255, 255, 255, 0.16)) !important; }
 
 ion-label {
   padding-left: 5px;
@@ -32,7 +33,7 @@ ion-col  {
   --background: transparent !important;
 }*/
 
-/*
+
 ion-content {
   --background: url("/assets/victor-freitas-unsplash.jpg") no-repeat center center / cover;
   display: flex;
@@ -48,6 +49,6 @@ ion-content {
   padding-right: 5px;
   border-radius: 15px;
 }
- */
+
 
 

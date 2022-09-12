@@ -5,7 +5,7 @@ import {OverlayEventDetail} from '@ionic/core/components';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Observable} from 'rxjs';
-import {TrainingPlan} from '../../Interfaces/trainingPlan';
+import {TrainingPlan} from '../../interfaces/trainingPlan';
 import {Calendar} from '@awesome-cordova-plugins/calendar/ngx';
 import {CalendarService} from '../../services/calendar.service';
 

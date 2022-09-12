@@ -7,7 +7,7 @@ import {Location} from '@angular/common';
 import {DatabaseService} from '../../../services/database.service';
 import {waitForAsync} from '@angular/core/testing';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {TrainingPlan} from '../../../Interfaces/trainingPlan';
+import {TrainingPlan} from '../../../interfaces/trainingPlan';
 
 @Component({
   selector: 'app-exercise-detail',

@@ -4,7 +4,7 @@ import {AuthenticationService} from '../../services/authentication.service';
 import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {DatabaseService} from '../../services/database.service';
-import {UserData} from "../../Interfaces/userData";
+import {UserData} from '../../interfaces/userData';
 
 @Component({
   selector: 'app-login',
@@ -46,8 +46,9 @@ export class LoginPage implements OnInit {
     await loading.present();
     const data = this.registerData.getRawValue();
     const loggedInUser = await this.authService.signUp(data.email, data.password);
+    console.log(loggedInUser);
     const newUser: UserData = {
-      uid: loggedInUser.user.uid,
+      uid: loggedInUser.uid,
       firstname: data.firstname,
       surname: data.surname,
       birthdate: data.birthdate,

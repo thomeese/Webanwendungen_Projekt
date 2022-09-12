@@ -3,7 +3,7 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {AlertController, Platform} from '@ionic/angular';
 import {AuthenticationService} from '../../services/authentication.service';
 import {DatabaseService} from '../../services/database.service';
-import {WalkData} from '../../Interfaces/walkData';
+import {WalkData} from '../../interfaces/walkData';
 
 declare let google;
 
