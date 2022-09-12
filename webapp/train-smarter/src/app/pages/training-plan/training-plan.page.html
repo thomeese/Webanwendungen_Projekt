@@ -38,20 +38,21 @@
         <form [formGroup]="trainingform" (submit)="addTrainingsPlan()">
           <ion-grid>
             <ion-label position="stacked">Name des Plans</ion-label>
-
-
             <ion-row>
-              <ion-col>
-                <ion-input type="text" formControlName="name"></ion-input>
-                <ion-note slot="error" *ngIf="trainingform.dirty">Feld Name darf nicht leer sein.</ion-note>
+              <ion-col size="12" size-md="">
+                <ion-item>
+                  <ion-input type="text" formControlName="name"></ion-input>
+                  <ion-note slot="error" *ngIf="trainingform.dirty">Feld Name darf nicht leer sein.</ion-note>
+                </ion-item>
               </ion-col>
             </ion-row>
             <ion-label position="stacked">Was bewirkt der Plan</ion-label>
-
             <ion-row>
-              <ion-col>
-                <ion-input type="text" formControlName="description"></ion-input>
-                <ion-note slot="error" *ngIf="trainingform.dirty">Feld Beschreibung darf nicht leer sein.</ion-note>
+              <ion-col size="12" size-md="">
+                <ion-item>
+                  <ion-input type="text" formControlName="description"></ion-input>
+                  <ion-note slot="error" *ngIf="trainingform.dirty">Feld Beschreibung darf nicht leer sein.</ion-note>
+                </ion-item>
               </ion-col>
               <ion-col>
               </ion-col>
