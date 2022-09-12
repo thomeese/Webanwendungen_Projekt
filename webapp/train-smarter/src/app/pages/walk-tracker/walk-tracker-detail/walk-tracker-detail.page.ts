@@ -7,6 +7,7 @@ import {AuthenticationService} from '../../../services/authentication.service';
 import {DatabaseService} from '../../../services/database.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import {WalkData} from '../../../Interfaces/walkData';
 
 declare const google;
 
@@ -23,7 +24,7 @@ export class WalkTrackerDetailPage implements OnInit {
   map: any;
   startTimestamp;
   endTimetamp;
-  specificWalkData;
+  specificWalkData: WalkData;
   displayedTrack = null;
   trackedRoute = [];
   posSub: Subscription;
@@ -138,7 +139,7 @@ export class WalkTrackerDetailPage implements OnInit {
         {
           text: 'Reoute speichern',
           handler: (res) => {
-            const newWalkDoc = {
+            const newWalkDoc: WalkData = {
               uid: this.authService.getUserId(),
               name: res.routeName,
               neededTime: this.timeConvert(neededTime),
