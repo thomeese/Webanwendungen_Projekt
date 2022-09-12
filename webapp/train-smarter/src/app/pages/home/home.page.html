@@ -36,6 +36,22 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="12" size-lg="">
+        <ion-card class="nextEvents">
+        <ion-card-header >
+          <ion-text><h2>Nächste Trainingstermine</h2></ion-text>
+        </ion-card-header>
+        <ion-card-content>
+          <swiper #swiper [config]="config">
+            <ng-template swiperSlide *ngFor="let nextEvent of nextEvents">
+              <app-calendar-event-card [calendarEvent]="nextEvent"></app-calendar-event-card>
+            </ng-template>
+          </swiper>
+        </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </ion-grid>
     <ion-list *ngIf="this.calendars">
       <ion-item *ngFor="let calender of calendars">

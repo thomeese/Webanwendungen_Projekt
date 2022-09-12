@@ -8,7 +8,8 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { SwiperModule} from 'swiper/angular';
-import {TrainingPlanPageModule} from "../training-plan/training-plan.module";
+import {TrainingPlanPageModule} from '../training-plan/training-plan.module';
+import {CalendarEventCardComponent} from '../../components/calendar-event-card/calendar-event-card.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import {TrainingPlanPageModule} from "../training-plan/training-plan.module";
     SwiperModule,
     TrainingPlanPageModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, CalendarEventCardComponent]
 })
 export class HomePageModule {}

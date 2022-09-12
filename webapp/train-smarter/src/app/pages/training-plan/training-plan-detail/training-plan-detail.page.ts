@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from '../../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TrainingPlan} from '../../../Interfaces/trainingPlan';
 
 @Component({
@@ -17,17 +17,10 @@ export class TrainingPlanDetailPage implements OnInit {
   periodForm: FormGroup;
   displayDescriptionForm = false;
   displayPeriodForm = false;
-  weekdays= [
-    'Jeden Tag',
-    'alle zwei Tage',
-    'alle drei Tage',
-    'alle vier Tage',
-    'alle fünf Tage',
-    'alle sechs Tage',
-    'Jede Woche',
-    'alle zwei Wochen',
-    'alle drei Wochen',
-    'Jeden Monat',
+  recurrence= [
+    'Tage',
+    'Wochen',
+    'Monate',
   ];
   constructor(private databaseService: DatabaseService,
               private route: ActivatedRoute,
@@ -59,7 +52,8 @@ export class TrainingPlanDetailPage implements OnInit {
         editDescription: new FormControl(`${this.trainingPlan.description}`, [])
       });
       this.periodForm = this.formbuilder.group({
-        editPeriod: new FormControl(`${this.trainingPlan.period}`, [])
+        editPeriod: new FormControl(`${this.trainingPlan.period}`, []),
+        editPeriodInterval: new FormControl('',[])
       });
       console.log('Trainingsplan Detailansicht: ');
       console.log(this.trainingPlan);

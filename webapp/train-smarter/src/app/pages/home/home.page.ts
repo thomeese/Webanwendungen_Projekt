@@ -5,7 +5,7 @@ import {LoadingController, Platform} from '@ionic/angular';
 import SwiperCore, {Navigation, Pagination, EffectCoverflow} from 'swiper';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Calendar} from '@awesome-cordova-plugins/calendar/ngx';
-import {CalendarService} from "../../services/calendar.service";
+import {CalendarService} from '../../services/calendar.service';
 
 SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 
@@ -38,24 +38,25 @@ export class HomePage implements OnInit {
   trainingPlanList = [];
   user;
   calendars;
+  nextEvents;
 
   constructor(private dataServise: DatabaseService,
               private loadingCtr: LoadingController,
               private authService: AuthenticationService,
-              private calendarService: CalendarService,
-              private calendar: Calendar,
-              private platform: Platform) {
-    this.platform.ready().then(() => {
-      this.calendar.listCalendars().then(calendars => {
-        this.calendars = calendars;
-      });
-    });
+              private calendarService: CalendarService) {
+
   }
 
   ngOnInit() {
     this.getTrainingPlans();
     this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
       this.user = res[0];
+    });
+    this.calendarService.getNextEvents().then((r) => {
+      if(r !== 'error') {
+        this.nextEvents = r;
+      }
+
     });
   }
 
@@ -72,3 +73,4 @@ export class HomePage implements OnInit {
   }
 
 }
+

@@ -3,9 +3,25 @@ app-training-plan-card {
   max-width: 350px;
 }
 
-.toolbar{
+.toolbar {
   padding-top: 0 !important;
 }
+
+.selectInterval {
+  margin-left: 5px;
+  width: 50px;
+}
+
+.selectPeriod {
+  margin-left: 5px;
+  width: 150px;
+}
+
+.period {
+  --inner-padding-start: 0px;
+  --padding-start: 0px !important;
+}
+
 
 //--inner-padding-start: 0px;
 //--padding-start: 0px !important;

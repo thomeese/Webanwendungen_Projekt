@@ -24,19 +24,21 @@
     <ion-card *ngIf="this.trainingPlan" class="plan-tags">
       <ion-card-header>Beschreibung:</ion-card-header>
       <ion-item-sliding *ngIf="!displayDescriptionForm">
-        <ion-item-options>
+        <ion-item-options side="start">
           <ion-item-option (click)="this.displayDescriptionForm = true">
             <ion-icon name="pencil-sharp"></ion-icon>
           </ion-item-option>
         </ion-item-options>
-        <ion-item *ngIf="!this.displayDescriptionForm">
+        <ion-item lines="none" *ngIf="!this.displayDescriptionForm">
           <ion-card-content>{{this.trainingPlan.description}}</ion-card-content>
         </ion-item>
       </ion-item-sliding>
       <ion-card-content *ngIf="displayDescriptionForm">
-        <ion-item *ngIf="this.displayDescriptionForm">
+        <ion-item lines="none" *ngIf="this.displayDescriptionForm">
           <form [formGroup]="this.descriptionForm" (submit)="this.editPlanTags()">
-            <ion-input type="text" formControlName="editDescription"></ion-input>
+           <ion-item class=" edit-description no-inner-padding" lines="none">
+            <ion-input slot="start" type="text" formControlName="editDescription"></ion-input>
+           </ion-item>
             <ion-button type="submit" color="success">
               <ion-icon name="checkmark-circle-outline"></ion-icon>
             </ion-button>
@@ -50,28 +52,36 @@
     <ion-card *ngIf="this.trainingPlan" class="plan-tags">
       <ion-card-header>Häufigkeit des Trainings:</ion-card-header>
       <ion-item-sliding *ngIf="!this.displayPeriodForm">
-        <ion-item-options>
+        <ion-item-options side="start">
           <ion-item-option (click)="this.displayPeriodForm = true">
             <ion-icon name="pencil-sharp"></ion-icon>
           </ion-item-option>
         </ion-item-options>
-        <ion-item *ngIf="!this.displayPeriodForm">
+        <ion-item lines="none" *ngIf="!this.displayPeriodForm">
           <ion-card-content>{{this.trainingPlan.period}}</ion-card-content>
         </ion-item>
       </ion-item-sliding>
       <ion-card-content *ngIf="this.displayPeriodForm">
-        <ion-item>
+        <ion-item lines="none">
           <form [formGroup]="this.periodForm" (submit)="this.editPlanTags()">
-            <ion-select formControlName="editPeriod">
-              <ion-label position="stacked">Häufigkeit des Trainings:</ion-label>
-              <ion-select-option *ngFor="let option of this.weekdays">{{option}}</ion-select-option>
-            </ion-select>
-            <ion-button type="submit" color="success">
-              <ion-icon name="checkmark-circle-outline"></ion-icon>
-            </ion-button>
-            <ion-button color="danger" (click)="this.displayPeriodForm = false">
-              <ion-icon name="close-circle-outline"></ion-icon>
-            </ion-button>
+            <ion-item class="no-inner-padding" lines="none">
+                <ion-text  slot="start">Alle </ion-text>
+                <ion-select slot="end" class="selectInterval" formControlName="editPeriodInterval">
+                  <ion-select-option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]">
+                    {{i}}
+                  </ion-select-option>
+                </ion-select>
+                <ion-select  slot="end" class="selectPeriod" formControlName="editPeriod">
+                  <ion-select-option *ngFor="let option of this.recurrence">{{option}}</ion-select-option>
+                </ion-select>
+              <ion-button slot="end" type="submit" color="success">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+              </ion-button>
+              <ion-button slot="end" color="danger" (click)="this.displayPeriodForm = false">
+                <ion-icon name="close-circle-outline"></ion-icon>
+              </ion-button>
+              </ion-item>
+
           </form>
         </ion-item>
       </ion-card-content>

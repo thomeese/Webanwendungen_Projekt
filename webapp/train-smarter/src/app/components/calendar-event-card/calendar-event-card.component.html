@@ -1,0 +1,11 @@
+<ion-card class="card" >
+  <ion-card-header>
+    <ion-card-title *ngIf="this.calendarEvent" class="ion-text-center">{{calendarEvent.title}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-text *ngIf="this.calendarEvent"><h4>{{this.startDate | date:'d. MMMM y'}}</h4></ion-text>
+    <ion-text *ngIf="this.calendarEvent"><h4>{{calendarEvent.message}}</h4></ion-text>
+  </ion-card-content>
+</ion-card>
+
+
