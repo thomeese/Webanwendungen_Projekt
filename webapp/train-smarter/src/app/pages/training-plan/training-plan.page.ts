@@ -6,6 +6,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Observable} from 'rxjs';
 import {TrainingPlan} from '../../Interfaces/trainingPlan';
+import {Calendar} from "@awesome-cordova-plugins/calendar/ngx";
+import {CalendarService} from "../../services/calendar.service";
 
 @Component({
   selector: 'app-training-plan',
@@ -26,13 +28,14 @@ export class TrainingPlanPage implements OnInit {
     'Jede Woche',
     'alle zwei Wochen',
     'alle drei Wochen',
-    'Jeden Monat',
+    'Jeden Monat'
   ];
   constructor(
     private dataServise: DatabaseService,
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private calendarService: CalendarService
   ) {
   }
 
@@ -40,16 +43,13 @@ export class TrainingPlanPage implements OnInit {
     this.trainingform = this.formbuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       description: new FormControl('', [Validators.required, Validators.minLength(15)]),
-      period: new FormControl('Auswahl',[])
+      period: new FormControl('Auswahl',[]),
+      addToCalendar: ['false']
     });
 
     this.dataServise.getUserTrainingsPlan().subscribe(res => {
       this.trainingPlanList = res;
     });
-    /*
-    this.dataServise.getTrainingsPlan().subscribe(res => {
-      this.trainingPlanList = res;
-    });*/
   }
 
   async addTrainingsPlan() {
@@ -64,6 +64,8 @@ export class TrainingPlanPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
     await this.dataServise.addTrainingPlan(plan);
+    console.log(formData.addToCalendar);
+    this.calendarService.addToCalendar(formData);
     await loading.dismiss();
   }
 

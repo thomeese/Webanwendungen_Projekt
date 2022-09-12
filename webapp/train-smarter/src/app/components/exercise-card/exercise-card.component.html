@@ -1,9 +1,11 @@
 <!--<ion-card (click)="openDetails()">-->
-  <ion-card button>
+  <ion-card class="card" button>
   <ion-card-header (click)="openDetails()">
-    <ion-img *ngIf="showGif" [src]="exercise.gifUrl"></ion-img>
     <ion-card-title *ngIf="this.exercise" class="ion-text-center">{{exercise.name}}</ion-card-title>
   </ion-card-header>
+    <ion-card-content>
+
+      <ion-img *ngIf="showGif" [src]="exercise.gifUrl"></ion-img>
 
 
     <!-- Wird in der Trainingsplan Detailansicht ausgegeben, zeigt die Basisdaten der Übung in dem Trainingsplan an.
@@ -31,9 +33,8 @@
     </ion-item-options>
   </ion-item-sliding>
 
-  <ion-card-content (click)="openDetails()" *ngIf="maxWeight">
-    <ion-text><h4>Gewicht: {{this.maxWeight}}Kg</h4></ion-text>
-  </ion-card-content>
+    <ion-text (click)="openDetails()" *ngIf="maxWeight"><h4>Gewicht: {{this.maxWeight}}Kg</h4></ion-text>
+    </ion-card-content>
 </ion-card>
 
 

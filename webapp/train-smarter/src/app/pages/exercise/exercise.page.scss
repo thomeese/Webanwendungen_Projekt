@@ -1,6 +1,6 @@
 app-exercise-card {
   width: 100%;
-  max-width: 258px;
+  max-width: 360px;
 }
 
 .can-go-back {
@@ -20,7 +20,7 @@ app-exercise-card {
 
 
 .exercise-background {
-  --background: url("/assets/images/unknown.png") no-repeat center center / cover;
+  --background: url("/assets/images/gym-objects.jpg") no-repeat center center / cover;
   --background-size: cover;
 }
 
@@ -33,6 +33,10 @@ ion-select {
   opacity: 0.4;
   border-radius: 15px;
   font-weight: bold;
+}
+
+ion-select::part(text) {
+  color: #000000;
 }
 
 ion-select::part(icon) {

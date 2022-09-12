@@ -50,6 +50,10 @@
             </ion-select>
           </ion-item>
           <ion-item>
+            <ion-checkbox formControlName="addToCalendar" slot="start"></ion-checkbox>
+            <ion-label>Zum Kalender hinzufügen</ion-label>
+          </ion-item>
+          <ion-item>
             <ion-button type="submit" (click)="confirm()" [disabled]="this.trainingform.invalid">Trainingsplan
               Speichern
             </ion-button>

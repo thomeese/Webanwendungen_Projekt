@@ -5,6 +5,7 @@ import {LoadingController, Platform} from '@ionic/angular';
 import SwiperCore, {Navigation, Pagination, EffectCoverflow} from 'swiper';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Calendar} from '@awesome-cordova-plugins/calendar/ngx';
+import {CalendarService} from "../../services/calendar.service";
 
 SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 
@@ -34,32 +35,20 @@ export class HomePage implements OnInit {
     effect: 'coverflow',
     //navigation: true,
   };
-  calenders = [];
   trainingPlanList = [];
   user;
 
   constructor(private dataServise: DatabaseService,
               private loadingCtr: LoadingController,
               private authService: AuthenticationService,
-              private calendar: Calendar,
-              private platform: Platform) {
-    this.platform.ready().then(() => {
-      this.calendar.listCalendars().then(data => {
-        console.log(data);
-      });
-    });
-  }
-
-  addEvent(calender){
-    let date = new Date();
-    let options = {calenderId: calender.id}
-  }
+              private calendarService: CalendarService) { }
 
   ngOnInit() {
     this.getTrainingPlans();
     this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
       this.user = res[0];
     });
+    //this.calendarService.calenders;
   }
 
   async getTrainingPlans() {
