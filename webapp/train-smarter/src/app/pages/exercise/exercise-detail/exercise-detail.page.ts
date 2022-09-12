@@ -77,6 +77,7 @@ export class ExerciseDetailPage implements OnInit {
       name: this.trainingPlan.name,
       description: this.trainingPlan.description,
       period: this.trainingPlan.period,
+      periodInterval: this.trainingPlan.periodInterval,
       uid: this.trainingPlan.uid,
       exercises: array
     };
@@ -105,6 +106,7 @@ export class ExerciseDetailPage implements OnInit {
       name: this.trainingPlan.name,
       description: this.trainingPlan.description,
       period: this.trainingPlan.period,
+      periodInterval: this.trainingPlan.periodInterval,
       uid: this.trainingPlan.uid,
       exercises: array
     };

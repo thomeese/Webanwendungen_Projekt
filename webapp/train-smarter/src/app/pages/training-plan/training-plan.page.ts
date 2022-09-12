@@ -53,6 +53,7 @@ export class TrainingPlanPage implements OnInit {
       name: formData.name,
       description: formData.description,
       period: formData.period,
+      periodInterval: formData.periodInterval,
       exercises: []
     };
     this.trainingform.reset();

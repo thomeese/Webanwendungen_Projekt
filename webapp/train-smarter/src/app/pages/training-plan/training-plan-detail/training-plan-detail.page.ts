@@ -66,7 +66,8 @@ export class TrainingPlanDetailPage implements OnInit {
       name: this.trainingPlan.name,
       description: this.descriptionForm.getRawValue().editDescription,
       exercises: this.trainingPlan.exercises,
-      period: this.periodForm.getRawValue().editPeriod
+      period: this.periodForm.getRawValue().editPeriod,
+      periodInterval: this.periodForm.getRawValue().editPeriodInterval
     };
     await this.databaseService.updateTrainingPlan(this.trainingPlan.trainingPlanId, newPlan);
     if(this.displayDescriptionForm === true){

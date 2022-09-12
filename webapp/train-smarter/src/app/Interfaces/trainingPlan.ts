@@ -4,5 +4,6 @@ export interface TrainingPlan{
   name: string;
   description: string;
   period: string;
+  periodInterval: number;
   exercises: Array<any>;
 }
