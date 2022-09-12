@@ -24,22 +24,12 @@ export class ExerciseCardComponent implements OnInit {
               private databaseService: DatabaseService) {}
 
   async openDetails() {
-    let modal;
-    if(this.exercise.numericId) {
-      modal = await this.modalCtrl.create({
+      const modal = await this.modalCtrl.create({
         component: ExerciseDetailPage,
-        componentProps: {id: this.exercise.numericId, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
+        componentProps: {id: this.exercise.id, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
         breakpoints: [0, 0.5 ,0.8, 1],
         initialBreakpoint: 0.5
       });
-    } else {
-      modal = await this.modalCtrl.create({
-        component: ExerciseDetailPage,
-        componentProps: {id: this.exercise.exerciseId, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
-        breakpoints: [0, 0.5 ,0.8, 1],
-        initialBreakpoint: 0.5
-      });
-    }
     modal.present();
   }
 

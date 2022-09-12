@@ -46,9 +46,6 @@ export class ExerciseDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.edit);
-    console.log(this.addToPlan);
-    console.log(this.id);
     try {
       if (this.id === 'undefined' || this.id === null) {
         this.id = this.route.snapshot.paramMap.get('id'); //exerciseId setzten
@@ -120,8 +117,10 @@ export class ExerciseDetailPage implements OnInit {
 
   async getExercise() {
     //exercise-Daten laden
-    await this.database.getExerciseByNumericId(this.id).subscribe(result => {
-      this.exercise = result[0];
+    await this.exerciseDBService.getExerciseByID(this.id).subscribe(result => {
+      console.log(this.id);
+      console.log(result);
+      this.exercise = result;
       console.log(this.exercise);
     });
   }

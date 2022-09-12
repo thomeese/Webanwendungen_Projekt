@@ -7,7 +7,7 @@ import {LiveTrainingLoggingPage} from './live-training-logging/live-training-log
 import {DatePipe, registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
-import {SetLogging} from "../../Interfaces/setLogging";
+import {SetLogging} from '../../Interfaces/setLogging';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -91,7 +91,7 @@ export class LiveTrainingPage implements OnInit {
       breakpoints: [0, 0.8, 1],
       initialBreakpoint: 0.8
     });
-    modal.present();
+    await modal.present();
   }
 
   async getTrainingPlans() {
