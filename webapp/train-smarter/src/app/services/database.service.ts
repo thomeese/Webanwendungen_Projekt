@@ -18,6 +18,7 @@ import {UserData} from '../Interfaces/userData';
 import {TrainingPlan} from '../Interfaces/trainingPlan';
 import {Excersise} from '../Interfaces/exercise';
 import {SetLogging} from '../Interfaces/setLogging';
+import {WalkData} from '../Interfaces/walkData';
 
 enum SearchTypes {
   exercise = '/exercise',
@@ -192,7 +193,7 @@ export class DatabaseService {
     return deleteDoc(setLoggingDocRef);
   }
 
-  addWalk(walk: any) {
+  addWalk(walk: WalkData) {
     const walkRef = collection(this.firestore, 'walkData');
     return addDoc(walkRef, walk);
   }
@@ -208,7 +209,7 @@ export class DatabaseService {
     return collectionData(walkQuery, {idField: 'walkId'}) as Observable<any []>;
   }
 
-  deleteWalk(walk: any) {
+  deleteWalk(walk: WalkData) {
     const walkRef = doc(this.firestore, `walkData/${walk.walkId}`);
     return deleteDoc(walkRef);
   }

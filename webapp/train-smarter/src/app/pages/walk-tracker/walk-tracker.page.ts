@@ -3,6 +3,7 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {AlertController, Platform} from '@ionic/angular';
 import {AuthenticationService} from '../../services/authentication.service';
 import {DatabaseService} from '../../services/database.service';
+import {WalkData} from '../../Interfaces/walkData';
 
 declare let google;
 
@@ -12,7 +13,7 @@ declare let google;
   styleUrls: ['./walk-tracker.page.scss'],
 })
 export class WalkTrackerPage implements OnInit {
-  userWalkData;
+  userWalkData: Array<WalkData>;
 
   constructor(private geolocation: Geolocation,
               private platform: Platform,
