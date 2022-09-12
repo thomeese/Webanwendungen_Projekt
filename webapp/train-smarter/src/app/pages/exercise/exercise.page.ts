@@ -93,22 +93,6 @@ export class ExercisePage implements OnInit {
     this.menu.enable(true);
   }
 
-  steel() {
-    this.exerciseDBService.getAll().subscribe(res => {
-      res.forEach(elem => {
-        const data: Exercise = {
-          bodypart: elem.bodyPart,
-          equipment: elem.equipment,
-          gifUrl: elem.gifUrl,
-          name: elem.name,
-          target: elem.target,
-          numericId: elem.id
-        };
-        this.database.addExercise(data);
-      });
-    });
-  }
-
   async loadData() {
     console.log('LoadData gestartet');
     console.log(this.searchTypeSelected);
@@ -121,26 +105,16 @@ export class ExercisePage implements OnInit {
 
     if (this.searchTypeSelected === this.enumSearchTypeKeys[3]) { // with ID
       console.log(this.exerciseID.length);
-      if (this.exerciseID.length === 4) {
-        this.database.getExerciseByNumericId(this.exerciseID).subscribe(result => {
-          console.log(result);
-          this.exercises = result;
-        });
-      } else {
-        console.log(this.exerciseID);
-        this.database.getExerciseById(this.exerciseID).subscribe(result => {
-          console.log(result);
-          this.exercises = [];
-          this.exercises.push(result);
-        });
-      }
+      this.exerciseDBService.getExerciseByID(this.exerciseID).subscribe(result =>{
+        this.exercises = result;
+      });
     } else if (this.searchTypeSelected === this.enumSearchTypeKeys[0]) { // All Exercises
-      this.database.getAllExercises().subscribe(result => {
+      this.exerciseDBService.getAll().subscribe(result => {
         console.log(result);
         this.exercises = result;
       });
     } else { // with Target
-      this.database.getExercisesBySearch(this.searchTypeSelected, this.targetSelected).subscribe(result => {
+      this.exerciseDBService.getData(this.searchTypeSelected, this.targetSelected).subscribe(result => {
         console.log(result);
         this.exercises = result;
       });

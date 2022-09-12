@@ -59,8 +59,8 @@ export class TrainingPlanPage implements OnInit {
     this.trainingform.reset();
     const loading = await this.loadingController.create();
     await loading.present();
+    await this.dataServise.addTrainingPlan(plan);
     console.log(formData);
-    this.dataServise.addTrainingPlan(plan);
     this.calendarService.addToCalendar(formData);
     await loading.dismiss();
   }
