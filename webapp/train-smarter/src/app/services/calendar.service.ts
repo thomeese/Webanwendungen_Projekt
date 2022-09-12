@@ -8,7 +8,8 @@ import {Platform} from '@ionic/angular';
 export class CalendarService {
 
   calendarId;
-  trainSmarterCalendar;
+  calendars;
+  public trainSmarterCalendar;
 
   constructor(private calendar: Calendar,
               private platform: Platform) {
@@ -31,6 +32,8 @@ export class CalendarService {
           console.log(this.trainSmarterCalendar);
         }
       }
+      this.calendars = calendars;
+      console.log(calendars);
     });
   }
 

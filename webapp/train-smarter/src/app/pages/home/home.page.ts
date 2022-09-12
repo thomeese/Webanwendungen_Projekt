@@ -37,6 +37,7 @@ export class HomePage implements OnInit {
   };
   trainingPlanList = [];
   user;
+  calendars;
 
   constructor(private dataServise: DatabaseService,
               private loadingCtr: LoadingController,
@@ -48,7 +49,7 @@ export class HomePage implements OnInit {
     this.dataServise.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
       this.user = res[0];
     });
-    //this.calendarService.calenders;
+    this.calendars = this.calendarService.calendars;
   }
 
   async getTrainingPlans() {
