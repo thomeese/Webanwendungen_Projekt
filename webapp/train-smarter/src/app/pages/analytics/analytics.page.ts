@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from '../../services/database.service';
 import {Router} from '@angular/router';
 import {SwiperOptions} from 'swiper';
-import {ExerciseDBService} from "../../services/exercise-db.service";
+import {ExerciseDBService} from '../../services/exercise-db.service';
 
 @Component({
   selector: 'app-analytics',
@@ -34,7 +34,7 @@ export class AnalyticsPage implements OnInit {
   };
   constructor(private dataService: DatabaseService,
               private router: Router,
-              private exerciseDB : ExerciseDBService) {
+              private exerciseDB: ExerciseDBService) {
   }
 
   getExercisePersonalRecord() {
@@ -71,7 +71,7 @@ export class AnalyticsPage implements OnInit {
         if(secondMap.get(j)){
           //genaue Exercise-Daten holen und mit Maximalgewicht speichern
           this.exerciseDB.getExerciseByID(j).subscribe(resultExercise => {
-            this.exerciseLookupMap.set(j,resultExercise[0]);
+            this.exerciseLookupMap.set(j,resultExercise);
             console.log(this.exerciseLookupMap);
           });
         }
