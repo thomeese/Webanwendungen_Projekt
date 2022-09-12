@@ -71,7 +71,7 @@ export class AnalyticsPage implements OnInit {
         if(secondMap.get(j)){
           //genaue Exercise-Daten holen und mit Maximalgewicht speichern
           this.exerciseDB.getExerciseByID(j).subscribe(resultExercise => {
-            this.exerciseLookupMap.set(j,resultExercise[0]);
+            this.exerciseLookupMap.set(j,resultExercise);
             console.log(this.exerciseLookupMap);
           });
         }
