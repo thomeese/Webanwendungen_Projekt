@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from '../../services/database.service';
 import {Router} from '@angular/router';
 import {SwiperOptions} from 'swiper';
-import {ExerciseDBService} from "../../services/exercise-db.service";
+import {ExerciseDBService} from '../../services/exercise-db.service';
 
 @Component({
   selector: 'app-analytics',
@@ -34,7 +34,7 @@ export class AnalyticsPage implements OnInit {
   };
   constructor(private dataService: DatabaseService,
               private router: Router,
-              private exerciseDB : ExerciseDBService) {
+              private exerciseDB: ExerciseDBService) {
   }
 
   getExercisePersonalRecord() {
