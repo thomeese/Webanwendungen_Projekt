@@ -86,7 +86,7 @@ export class HomePage implements OnInit {
   }
 
   startTraining() {
-    if (this.nextEvents) {
+    if (this.nextEvents && this.nextEvents[0]) {
       for (const trainingPlan of this.trainingPlanList) {
         if (trainingPlan.name === this.nextEvents[0].title) {
           this.localStorageCtrl.saveData('live-training-trainingPlanId', trainingPlan.trainingPlanId);
