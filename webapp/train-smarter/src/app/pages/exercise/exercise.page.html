@@ -57,11 +57,11 @@
 
   <!--Search Results-->
   <ion-list class="background-transparent">
-    <ion-item lines="none" color="none" position="floating" button
+    <ion-item lines="none" color="none" class="ion-justify-content-center"
               *ngFor="let exercise of exercises | slice:0 :slice; let i=index">
       <app-exercise-card [exercise]="exercise" [trainingPlan]="trainingPlan" [addToPlan]="true"
                          [showGif]="true"></app-exercise-card>
-    </ion-item>
+      </ion-item>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"

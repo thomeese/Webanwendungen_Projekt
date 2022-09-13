@@ -58,6 +58,7 @@ export class HomePage implements OnInit {
     this.getTrainingPlans();
     this.dataService.getUserDataByUid(this.authService.getUserId()).subscribe(res => {
       this.user = res[0];
+      console.log(res);
     });
     this.calendarService.getNextEvents().then((r) => {
       this.nextEvents = [];

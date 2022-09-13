@@ -49,7 +49,6 @@ export class LoginPage implements OnInit {
     await loading.present();
     const data = this.registerData.getRawValue();
     const loggedInUser = await this.authService.signUp(data.email, data.password);
-    console.log(loggedInUser);
     const newUser: UserData = {
       uid: loggedInUser.uid,
       firstname: data.firstname,
