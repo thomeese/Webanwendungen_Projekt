@@ -6,6 +6,8 @@ import SwiperCore, {Navigation, Pagination, EffectCoverflow} from 'swiper';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Calendar} from '@awesome-cordova-plugins/calendar/ngx';
 import {CalendarService} from '../../services/calendar.service';
+import {LocalstorageService} from "../../services/localstorage.service";
+import {Router} from "@angular/router";
 
 SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 
@@ -45,7 +47,8 @@ export class HomePage implements OnInit {
               private authService: AuthenticationService,
               private calendarService: CalendarService,
               private platform: Platform,
-              private router: Router) {
+              private router: Router,
+              private localStorageCtrl: LocalstorageService) {
 
   }
 
@@ -57,8 +60,13 @@ export class HomePage implements OnInit {
       this.user = res[0];
     });
     this.calendarService.getNextEvents().then((r) => {
+      this.nextEvents = [];
       if(r !== 'error') {
-        this.nextEvents = r;
+        for(const event of r) {
+          if(event.calendar === 'Train-Smarter'){
+            this.nextEvents.push(event);
+          }
+        }
       }
 
     });
@@ -77,13 +85,15 @@ export class HomePage implements OnInit {
   }
 
   startTraining() {
-    console.log(this.nextEvents[0]);
-    if(this.nextEvents[0]) {
-      this.dataService.getTrainingsPlanByName(this.nextEvents[0].title).subscribe((result) => {
-        this.router.navigateByUrl('/live-training/' + result.trainingPlanId);
-      });
+    if(this.nextEvents) {
+      for(const trainingPlan of this.trainingPlanList){
+        if(trainingPlan.name === this.nextEvents[0].title) {
+          this.localStorageCtrl.saveData('live-training-trainingPlanId', trainingPlan.trainingPlanId);
+          this.router.navigateByUrl('/live-training');
+        }
+      }
     } else {
-      this.router.navigateByUrl('/live-training/');
+      this.router.navigateByUrl('/live-training');
     }
   }
 }

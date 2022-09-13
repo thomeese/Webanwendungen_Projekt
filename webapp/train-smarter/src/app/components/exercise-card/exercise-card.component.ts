@@ -24,9 +24,16 @@ export class ExerciseCardComponent implements OnInit {
               private databaseService: DatabaseService) {}
 
   async openDetails() {
+    console.log(this.exercise);
+    let exerciseId;
+    if(this.exercise.id){
+      exerciseId = this.exercise.id;
+    } else {
+      exerciseId = this.exercise.exerciseId;
+    }
       const modal = await this.modalCtrl.create({
         component: ExerciseDetailPage,
-        componentProps: {id: this.exercise.id, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
+        componentProps: {id: exerciseId, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
         breakpoints: [0, 0.5 ,0.8, 1],
         initialBreakpoint: 0.5
       });
