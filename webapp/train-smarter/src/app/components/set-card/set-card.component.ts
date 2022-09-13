@@ -18,11 +18,12 @@ export class SetCardComponent implements OnInit {
   displayEditForm = [];
   editSet = false;
 
-  constructor(private formbuilder: FormBuilder) {}
+  constructor(private formbuilder: FormBuilder) {
+  }
 
   ngOnInit() {
     this.displayAddForm = false;
-    for(const index of this.setArray) {
+    for (const index of this.setArray) {
       this.displayEditForm.push(false);
     }
   }
@@ -48,9 +49,9 @@ export class SetCardComponent implements OnInit {
 
   generateEditSetFormgroup(index) {
     this.setEditForm = this.formbuilder.group({
-      setnumber: new FormControl({value: `${this.setArray[index-1].setnumber}`, disabled: true}, []),
-      repetition: new FormControl(`${this.setArray[index-1].repetition}`, [Validators.required, Validators.pattern('^[0-9]+$')]),
-      weight: new FormControl(`${this.setArray[index-1].weight}`, [])
+      setnumber: new FormControl({value: `${this.setArray[index - 1].setnumber}`, disabled: true}, []),
+      repetition: new FormControl(`${this.setArray[index - 1].repetition}`, [Validators.required, Validators.pattern('^[0-9]+$')]),
+      weight: new FormControl(`${this.setArray[index - 1].weight}`, [])
     });
   }
 
@@ -71,20 +72,20 @@ export class SetCardComponent implements OnInit {
 
   editSetClick(setNumber) {
     this.generateEditSetFormgroup(setNumber);
-    this.displayEditForm[setNumber-1] = true;
+    this.displayEditForm[setNumber - 1] = true;
     this.editSet = true;
   }
 
   safeChanges(setNumber) {
     const data = this.setEditForm.getRawValue();
-    this.setArray[setNumber-1] = data;
+    this.setArray[setNumber - 1] = data;
     this.newSetArray.emit(JSON.stringify(this.setArray));
-    this.displayEditForm[setNumber-1] = false;
+    this.displayEditForm[setNumber - 1] = false;
     this.editSet = false;
   }
 
   abortChanges(setNumber) {
-    this.displayEditForm[setNumber-1] = false;
+    this.displayEditForm[setNumber - 1] = false;
     this.editSet = false;
   }
 }

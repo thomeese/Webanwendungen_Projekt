@@ -25,7 +25,7 @@
     <ion-card-header>Beschreibung:</ion-card-header>
     <ion-item-sliding *ngIf="!displayDescriptionForm">
       <ion-item-options side="start">
-        <ion-item-option (click)="this.displayDescriptionForm = true">
+        <ion-item-option class="edit" (click)="this.displayDescriptionForm = true">
           <ion-icon name="pencil-sharp"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -57,7 +57,7 @@
     <ion-card-header>Häufigkeit des Trainings:</ion-card-header>
     <ion-item-sliding *ngIf="!this.displayPeriodForm">
       <ion-item-options side="start">
-        <ion-item-option (click)="this.displayPeriodForm = true">
+        <ion-item-option class="edit" (click)="this.displayPeriodForm = true">
           <ion-icon name="pencil-sharp"></ion-icon>
         </ion-item-option>
       </ion-item-options>

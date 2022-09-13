@@ -17,11 +17,12 @@ export class TrainingPlanDetailPage implements OnInit {
   periodForm: FormGroup;
   displayDescriptionForm = false;
   displayPeriodForm = false;
-  recurrence= [
+  recurrence = [
     'Tage',
     'Wochen',
     'Monate',
   ];
+
   constructor(private databaseService: DatabaseService,
               private route: ActivatedRoute,
               private router: Router,
@@ -53,7 +54,7 @@ export class TrainingPlanDetailPage implements OnInit {
       });
       this.periodForm = this.formbuilder.group({
         editPeriod: new FormControl(`${this.trainingPlan.period}`, []),
-        editPeriodInterval: new FormControl(`${this.trainingPlan.periodInterval}`,[])
+        editPeriodInterval: new FormControl(`${this.trainingPlan.periodInterval}`, [])
       });
       console.log('Trainingsplan Detailansicht: ');
       console.log(this.trainingPlan);
@@ -70,10 +71,10 @@ export class TrainingPlanDetailPage implements OnInit {
       periodInterval: this.periodForm.getRawValue().editPeriodInterval
     };
     await this.databaseService.updateTrainingPlan(this.trainingPlan.trainingPlanId, newPlan);
-    if(this.displayDescriptionForm === true){
+    if (this.displayDescriptionForm === true) {
       this.displayDescriptionForm = false;
     }
-    if(this.displayPeriodForm === true){
+    if (this.displayPeriodForm === true) {
       this.displayPeriodForm = false;
     }
   }

@@ -1,8 +1,7 @@
 
-
-ion-title{
+ion-title {
   padding-left: 0;
-  color: #0d0d0d;
+  color: var(--ion-text-color, #ffffff);
   font-size: 20px;
 }
 
@@ -14,7 +13,7 @@ ion-content {
 }
 
 ion-text {
-  color: #0d0d0d;
+  color: var(--ion-text-color, #ffffff);
   word-wrap: break-word;
   font-weight: bold;
   font-size: 14px;

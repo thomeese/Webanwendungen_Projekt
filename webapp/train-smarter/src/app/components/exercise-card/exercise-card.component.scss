@@ -18,13 +18,17 @@ ion-card {
     padding: 0 0 0 0;
   }
 
-  ion-card-content{
+  ion-card-content {
     padding: 0 0 0 0;
   }
 
   .set-header {
     border-bottom: 1px dashed grey;
   }
+}
+
+.edit {
+  --background: #3a7be0;
 }
 
 .item {

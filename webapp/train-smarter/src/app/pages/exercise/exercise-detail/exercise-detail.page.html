@@ -22,7 +22,7 @@
   </ion-header>
 
   <div *ngIf="exercise">
-    <img src="{{exercise.gifUrl}}"/>
+    <ion-img src="{{exercise.gifUrl}}"></ion-img>
     <ion-card>
       <ion-card-content>
         <ion-text class="label">Muskelgruppe:</ion-text>
@@ -35,7 +35,8 @@
         <ion-text>{{exercise.equipment}}</ion-text>
       </ion-card-content>
     </ion-card>
-    <app-set-card *ngIf="this.trainingPlan && (this.addToPlan || this.edit)" (newSetArray)="updateSetArray($event)" [setArray]="setArray" ></app-set-card>
+    <app-set-card *ngIf="this.trainingPlan && (this.addToPlan || this.edit)" (newSetArray)="updateSetArray($event)"
+                  [setArray]="setArray"></app-set-card>
 
     <ion-button *ngIf="this.trainingPlan && !this.edit && this.addToPlan" [disabled]="this.setArray.length === 0"
                 (click)="addToTrainingPlan()">Zum Trainingsplan hinzufügen

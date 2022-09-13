@@ -8,7 +8,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="exercise-background" fullscreen="true" [scrollEvents]="true" (ionScroll)="getScrollPos($event.detail.scrollTop)">
+<ion-content class="exercise-background" fullscreen="true" [scrollEvents]="true"
+             (ionScroll)="getScrollPos($event.detail.scrollTop)">
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar class="toolbar transparent">
       <ion-title size="large">Exercise</ion-title>
@@ -24,7 +25,8 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="10" *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
+      <ion-col size="10"
+               *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
         <ion-select interface="popover" placeholder="Wähle aus." [(ngModel)]="targetSelected">
           <div *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
             <ion-select-option *ngFor="let part of enumBodyPartKeys; let i = index"
@@ -45,16 +47,20 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center">
-      <ion-col >
-        <ion-button class="search-btn" type="button" (click)="loadData()"><ion-icon name="search"></ion-icon></ion-button>
+      <ion-col>
+        <ion-button class="search-btn" type="button" (click)="loadData()">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <!--Search Results-->
   <ion-list class="background-transparent">
-    <ion-item lines="none" color="none" position="floating" button *ngFor="let exercise of exercises | slice:0 :slice; let i=index">
-      <app-exercise-card [exercise]="exercise" [trainingPlan]="trainingPlan" [addToPlan]="true" [showGif]="true"></app-exercise-card>
+    <ion-item lines="none" color="none" position="floating" button
+              *ngFor="let exercise of exercises | slice:0 :slice; let i=index">
+      <app-exercise-card [exercise]="exercise" [trainingPlan]="trainingPlan" [addToPlan]="true"
+                         [showGif]="true"></app-exercise-card>
     </ion-item>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content
@@ -65,6 +71,8 @@
     </ion-infinite-scroll>
   </ion-list>
   <ion-fab *ngIf="backToTop" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button size="small" color="dark" (click)="scrollToTop()"><ion-icon name="arrow-up-circle-outline"></ion-icon></ion-fab-button>
+    <ion-fab-button size="small" color="dark" (click)="scrollToTop()">
+      <ion-icon name="arrow-up-circle-outline"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 </ion-content>

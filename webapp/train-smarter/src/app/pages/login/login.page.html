@@ -1,93 +1,94 @@
 <ion-content fullscreen="true">
   <ion-grid>
     <ion-card class="content">
-          <ion-text color="black">
-            <h1>Willkommen bei Train-Smarter</h1>
-          </ion-text>
-        <form [formGroup]="userForm" (submit)="signIn()" *ngIf="!register">
-          <ion-item>
-            <ion-icon name="mail-outline"></ion-icon>
-            <ion-label>Email:</ion-label>
-            <ion-input type="email" formControlName="email"></ion-input>
-            <ion-note slot="error" *ngIf="userForm.dirty">Geben sie ein gültige Email-Adresse ein.</ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="lock-closed-outline"></ion-icon>
-            <ion-label>Passwort:</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
-          </ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col></ion-col>
-              <ion-col>
-                <ion-button type="submit" [disabled]="!userForm.valid">Anmelden</ion-button>
-              </ion-col>
-              <ion-col></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-              </ion-col>
-              <ion-col>
-                <ion-button fill="clear" *ngIf="!register" (click)="this.register=true">Registrieren</ion-button>
-              </ion-col>
-              <ion-col>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </form>
-        <form [formGroup]="registerData" (submit)="signUp()" *ngIf="register">
-          <ion-item>
-            <ion-label>Vorname:</ion-label>
-            <ion-input type="text" formControlName="firstname"></ion-input>
-            <ion-note slot="error" *ngIf="registerData.dirty">Feld Vorname darf nicht leer sein. z.B. Max</ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>Nachname:</ion-label>
-            <ion-input type="text" formControlName="surname"></ion-input>
-            <ion-note slot="error" *ngIf="registerData.dirty">Feld Nachname darf nicht leer sein. z.B. Mustermann
-            </ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>Geburtsdatum:</ion-label>
-            <ion-datetime-button displayFormat="MM-DD-YYYY" datetime="datetime"></ion-datetime-button>
-            <ion-modal [keepContentsMounted]="true">
-              <ng-template>
-                <ion-datetime displayFormat="DD.MM.YYYY"
-                              presentation="date"
-                              id="datetime"
-                              formControlName="birthdate"
-                              show-default-buttons="true"
-                >
-                </ion-datetime>
-              </ng-template>
-            </ion-modal>
-          </ion-item>
-          <ion-item>
-            <ion-label>Körpergröße:</ion-label>
-            <ion-input type="text" formControlName="size"></ion-input>
-            <ion-note slot="error" *ngIf="registerData.dirty">Feld Körpergröße darf nicht leer sein. z.B. 1.80
-            </ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>Email:</ion-label>
-            <ion-input type="email" formControlName="email"></ion-input>
-            <ion-note slot="error" *ngIf="registerData.dirty">Geben sie eine gültige Email-Adresse ein</ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>Password:</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
-            <ion-note slot="error" *ngIf="registerData.dirty">Geben Sie bitte ein gültiges Passwort ein</ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>Password wiederholen:</ion-label>
-            <ion-input type="password" formControlName="password2"></ion-input>
-            <ion-note slot="error" *ngIf="registerData.dirty">Passwörter Stimmen nicht überein</ion-note>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-button type="submit" [disabled]="!registerData.valid">Registrieren</ion-button>
-            <ion-button fill="clear" class="" slot="end" type="button" (click)="this.register=false">Abbrechen</ion-button>
-          </ion-item>
-        </form>
+      <ion-text color="black">
+        <h1>Willkommen bei Train-Smarter</h1>
+      </ion-text>
+      <form [formGroup]="userForm" (submit)="signIn()" *ngIf="!register">
+        <ion-item>
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-label>Email:</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+          <ion-note slot="error" *ngIf="userForm.dirty">Geben sie ein gültige Email-Adresse ein.</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-label>Passwort:</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col>
+              <ion-button type="submit" [disabled]="!userForm.valid">Anmelden</ion-button>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+            </ion-col>
+            <ion-col>
+              <ion-button fill="clear" *ngIf="!register" (click)="this.register=true">Registrieren</ion-button>
+            </ion-col>
+            <ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+      <form [formGroup]="registerData" (submit)="signUp()" *ngIf="register">
+        <ion-item>
+          <ion-label>Vorname:</ion-label>
+          <ion-input type="text" formControlName="firstname"></ion-input>
+          <ion-note slot="error" *ngIf="registerData.dirty">Feld Vorname darf nicht leer sein. z.B. Max</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nachname:</ion-label>
+          <ion-input type="text" formControlName="surname"></ion-input>
+          <ion-note slot="error" *ngIf="registerData.dirty">Feld Nachname darf nicht leer sein. z.B. Mustermann
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Geburtsdatum:</ion-label>
+          <ion-datetime-button displayFormat="MM-DD-YYYY" datetime="datetime"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime displayFormat="DD.MM.YYYY"
+                            presentation="date"
+                            id="datetime"
+                            formControlName="birthdate"
+                            show-default-buttons="true"
+              >
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+        <ion-item>
+          <ion-label>Körpergröße:</ion-label>
+          <ion-input type="text" formControlName="size"></ion-input>
+          <ion-note slot="error" *ngIf="registerData.dirty">Feld Körpergröße darf nicht leer sein. z.B. 1.80
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email:</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+          <ion-note slot="error" *ngIf="registerData.dirty">Geben sie eine gültige Email-Adresse ein</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password:</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+          <ion-note slot="error" *ngIf="registerData.dirty">Geben Sie bitte ein gültiges Passwort ein</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password wiederholen:</ion-label>
+          <ion-input type="password" formControlName="password2"></ion-input>
+          <ion-note slot="error" *ngIf="registerData.dirty">Passwörter Stimmen nicht überein</ion-note>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-button type="submit" [disabled]="!registerData.valid">Registrieren</ion-button>
+          <ion-button fill="clear" class="" slot="end" type="button" (click)="this.register=false">Abbrechen
+          </ion-button>
+        </ion-item>
+      </form>
     </ion-card>
   </ion-grid>
 </ion-content>

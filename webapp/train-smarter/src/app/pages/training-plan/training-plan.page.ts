@@ -18,11 +18,12 @@ export class TrainingPlanPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   trainingform: FormGroup;
   trainingPlanList = [];
-  recurrence= [
+  recurrence = [
     'Tage',
     'Wochen',
     'Monate',
   ];
+
   constructor(
     private dataServise: DatabaseService,
     private formbuilder: FormBuilder,
@@ -36,7 +37,7 @@ export class TrainingPlanPage implements OnInit {
     this.trainingform = this.formbuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       description: new FormControl('', [Validators.required, Validators.minLength(15)]),
-      period: new FormControl('Auswahl',[]),
+      period: new FormControl('Auswahl', []),
       periodInterval: new FormControl('', []),
       addToCalendar: ['false']
     });

@@ -14,9 +14,9 @@
     </ion-toolbar>
   </ion-header>
   <ion-card>
-      <ion-card-header>Persönlicher Gewichtsrekord:</ion-card-header>
+    <ion-card-header>Persönlicher Gewichtsrekord:</ion-card-header>
     <ion-card-content>
-      <swiper  [config]="this.config" *ngIf="this.exerciseLookupMap && this.exerciseWeightRecordMap">
+      <swiper [config]="this.config" *ngIf="this.exerciseLookupMap && this.exerciseWeightRecordMap">
         <ng-template swiperSlide *ngFor="let exercise of exerciseLookupMap.keys()">
           <app-exercise-card [exercise]="exerciseLookupMap.get(exercise)"
                              [maxWeight]="exerciseWeightRecordMap.get(exercise)"></app-exercise-card>
@@ -25,23 +25,23 @@
     </ion-card-content>
   </ion-card>
 
-    <ion-card *ngIf="mostUsedPlan" (click)="openTrainingPlain(this.mostUsedPlan.trainingPlanId)">
-      <ion-card-header>Am meisten absolvierter Trainingplan</ion-card-header>
-      <ion-card-content>
-        <ion-text><h1>Name: {{this.mostUsedPlan.name}}</h1></ion-text>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-text><h1>Beschreibung: {{this.mostUsedPlan.description}}</h1></ion-text>
-      </ion-card-content>
-    </ion-card>
-    <ion-card *ngIf="leastUsedPlan" (click)="openTrainingPlain(this.leastUsedPlan.trainingPlanId)">
-      <ion-card-header>Am wenigsten absolvierter Trainingplan</ion-card-header>
-      <ion-card-content>
-        <ion-text><h1>Name: {{this.leastUsedPlan.name}}</h1></ion-text>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-text><h1>Beschreibung: {{this.leastUsedPlan.description}}</h1></ion-text>
-      </ion-card-content>
-    </ion-card>
+  <ion-card *ngIf="mostUsedPlan" (click)="openTrainingPlain(this.mostUsedPlan.trainingPlanId)">
+    <ion-card-header>Am meisten absolvierter Trainingplan</ion-card-header>
+    <ion-card-content>
+      <ion-text><h1>Name: {{this.mostUsedPlan.name}}</h1></ion-text>
+    </ion-card-content>
+    <ion-card-content>
+      <ion-text><h1>Beschreibung: {{this.mostUsedPlan.description}}</h1></ion-text>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="leastUsedPlan" (click)="openTrainingPlain(this.leastUsedPlan.trainingPlanId)">
+    <ion-card-header>Am wenigsten absolvierter Trainingplan</ion-card-header>
+    <ion-card-content>
+      <ion-text><h1>Name: {{this.leastUsedPlan.name}}</h1></ion-text>
+    </ion-card-content>
+    <ion-card-content>
+      <ion-text><h1>Beschreibung: {{this.leastUsedPlan.description}}</h1></ion-text>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

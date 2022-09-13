@@ -1,12 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ExerciseDBService} from '../../../services/exercise-db.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {trigger, transition, animate, style, state} from '@angular/animations';
 import {LoadingController, ModalController, NavController} from '@ionic/angular';
 import {Location} from '@angular/common';
 import {DatabaseService} from '../../../services/database.service';
-import {waitForAsync} from '@angular/core/testing';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {TrainingPlan} from '../../../interfaces/trainingPlan';
 
 @Component({
@@ -14,7 +12,7 @@ import {TrainingPlan} from '../../../interfaces/trainingPlan';
   templateUrl: './exercise-detail.page.html',
   styleUrls: ['./exercise-detail.page.scss'],
 })
-//getExercise momentan nicht eingebunden
+
 export class ExerciseDetailPage implements OnInit {
 
   id; //exerciseId
@@ -55,7 +53,7 @@ export class ExerciseDetailPage implements OnInit {
       (error) {
       console.log(error);
     }
-    if(this.addToPlan){
+    if (this.addToPlan) {
       this.setArray = [];
     }
   }

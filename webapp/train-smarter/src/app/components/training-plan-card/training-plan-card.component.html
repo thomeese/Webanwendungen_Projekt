@@ -1,4 +1,4 @@
-<ion-card class="outerCard" button *ngIf="trainingPlan" >
+<ion-card class="outerCard" button *ngIf="trainingPlan">
   <ion-item-sliding *ngIf="showDescription">
     <ion-item-options side="end">
       <ion-item-option color="danger" (click)="this.deleteView()">
@@ -10,7 +10,7 @@
         <ion-card-header routerDirection="forward"
                          [routerLink]="'/training-plan/' + trainingPlan.trainingPlanId" routerLinkActive="selected">
           <ion-card-title>{{trainingPlan.name}}</ion-card-title>
-        </ion-card-header >
+        </ion-card-header>
         <ion-card-content *ngIf="showDescription" routerDirection="forward"
                           [routerLink]="'/training-plan/' + trainingPlan.trainingPlanId" routerLinkActive="selected">
           {{trainingPlan.description}}

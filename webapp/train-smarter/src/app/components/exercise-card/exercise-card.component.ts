@@ -21,22 +21,23 @@ export class ExerciseCardComponent implements OnInit {
   constructor(private router: Router,
               private modalCtrl: ModalController,
               private alertController: AlertController,
-              private databaseService: DatabaseService) {}
+              private databaseService: DatabaseService) {
+  }
 
   async openDetails() {
     console.log(this.exercise);
     let exerciseId;
-    if(this.exercise.id){
+    if (this.exercise.id) {
       exerciseId = this.exercise.id;
     } else {
       exerciseId = this.exercise.exerciseId;
     }
-      const modal = await this.modalCtrl.create({
-        component: ExerciseDetailPage,
-        componentProps: {id: exerciseId, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
-        breakpoints: [0, 0.5 ,0.8, 1],
-        initialBreakpoint: 0.5
-      });
+    const modal = await this.modalCtrl.create({
+      component: ExerciseDetailPage,
+      componentProps: {id: exerciseId, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
+      breakpoints: [0, 0.5, 0.8, 1],
+      initialBreakpoint: 0.5
+    });
     modal.present();
   }
 
@@ -47,7 +48,7 @@ export class ExerciseCardComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ExerciseDetailPage,
       componentProps: {id: this.exercise.exerciseId, trainingPlan: this.trainingPlan, edit: true, setArray: this.sets},
-      breakpoints: [0,0.8, 1],
+      breakpoints: [0, 0.8, 1],
       initialBreakpoint: 0.8
     });
     modal.present();
@@ -73,7 +74,7 @@ export class ExerciseCardComponent implements OnInit {
   }
 
   async deleteExercise(exerciseId) {
-    this.trainingPlan.exercises =  this.trainingPlan.exercises.filter(item => item.exerciseId !== exerciseId);
+    this.trainingPlan.exercises = this.trainingPlan.exercises.filter(item => item.exerciseId !== exerciseId);
     await this.databaseService.updateTrainingPlan(this.trainingPlan.trainingPlanId, this.trainingPlan);
   }
 }

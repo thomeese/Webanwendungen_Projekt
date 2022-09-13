@@ -64,6 +64,7 @@ export class ExercisePage implements OnInit {
               private menu: MenuController,
               private platform: Platform,
               private modalCtrl: ModalController) {
+    // Helper Variables for SearchType and Targets
     this.enumSearchTypeKeys = Object.keys(this.searchTypes);
     this.enumMuscleKeys = Object.keys(this.muscles);
     this.enumBodyPartKeys = Object.keys(this.bodyparts);
@@ -72,6 +73,7 @@ export class ExercisePage implements OnInit {
     this.enumBodyPartValues = Object.values(BodyParts);
     this.enumEquipmentValues = Object.values(Equipment);
     this.searchTypeSelected = this.enumSearchTypeKeys[0];
+
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation() !== null) {
         if (this.router.getCurrentNavigation().extras.state) {
@@ -88,7 +90,7 @@ export class ExercisePage implements OnInit {
     }
   }
 
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     this.menu.enable(true);
   }
 
@@ -104,7 +106,7 @@ export class ExercisePage implements OnInit {
 
     if (this.searchTypeSelected === this.enumSearchTypeKeys[3]) { // with ID
       console.log(this.exerciseID.length);
-      this.exerciseDBService.getExerciseByID(this.exerciseID).subscribe(result =>{
+      this.exerciseDBService.getExerciseByID(this.exerciseID).subscribe(result => {
         this.exercises = result;
       });
     } else if (this.searchTypeSelected === this.enumSearchTypeKeys[0]) { // All Exercises
@@ -135,7 +137,7 @@ export class ExercisePage implements OnInit {
   }
 
   getScrollPos(scrollTop: number) {
-    if(scrollTop > this.platform.height()) {
+    if (scrollTop > this.platform.height()) {
       this.backToTop = true;
     } else {
       this.backToTop = false;
@@ -146,7 +148,7 @@ export class ExercisePage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ExerciseDetailPage,
       componentProps: {id: 1231, trainingPlan: this.trainingPlan, addToPlan: this.addToPlan},
-      breakpoints: [0, 0.5 ,0.8, 1],
+      breakpoints: [0, 0.5, 0.8, 1],
       initialBreakpoint: 0.5
     });
     modal.present();

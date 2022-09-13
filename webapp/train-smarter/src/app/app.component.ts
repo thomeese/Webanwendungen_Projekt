@@ -1,11 +1,8 @@
 import {Component} from '@angular/core';
-import { Capacitor } from '@capacitor/core';
+import {Capacitor} from '@capacitor/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from './services/authentication.service';
 import {SettingsService} from './services/settings.service';
-import { SplashScreen } from '@capacitor/splash-screen';
-import {addWarning} from "@angular-devkit/build-angular/src/utils/webpack-diagnostics";
-import {from} from "rxjs";
 
 @Component({
   selector: 'app-root',

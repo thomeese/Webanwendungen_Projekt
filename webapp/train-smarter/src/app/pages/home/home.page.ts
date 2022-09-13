@@ -61,9 +61,9 @@ export class HomePage implements OnInit {
     });
     this.calendarService.getNextEvents().then((r) => {
       this.nextEvents = [];
-      if(r !== 'error') {
-        for(const event of r) {
-          if(event.calendar === 'Train-Smarter'){
+      if (r !== 'error') {
+        for (const event of r) {
+          if (event.calendar === 'Train-Smarter') {
             this.nextEvents.push(event);
           }
         }
@@ -85,9 +85,9 @@ export class HomePage implements OnInit {
   }
 
   startTraining() {
-    if(this.nextEvents) {
-      for(const trainingPlan of this.trainingPlanList){
-        if(trainingPlan.name === this.nextEvents[0].title) {
+    if (this.nextEvents) {
+      for (const trainingPlan of this.trainingPlanList) {
+        if (trainingPlan.name === this.nextEvents[0].title) {
           this.localStorageCtrl.saveData('live-training-trainingPlanId', trainingPlan.trainingPlanId);
           this.router.navigateByUrl('/live-training');
         }

@@ -32,18 +32,19 @@ export class AnalyticsPage implements OnInit {
     effect: 'coverflow',
     //navigation: true,
   };
+
   constructor(private dataService: DatabaseService,
               private router: Router,
               private exerciseDB: ExerciseDBService) {
   }
 
   getExercisePersonalRecord() {
-    const map = new Map ();
+    const map = new Map();
     let setArray = [];
-    this.dataService.getAllSetLoggingByUid().subscribe( result => {
+    this.dataService.getAllSetLoggingByUid().subscribe(result => {
       //Alle Gewichte fuer die jeweilige Exercise finden
-      result.forEach( item => {
-        if(item.sets) {
+      result.forEach(item => {
+        if (item.sets) {
           item.sets.forEach(concreteSet => {
             setArray.push(concreteSet.weight);
           });
@@ -57,21 +58,21 @@ export class AnalyticsPage implements OnInit {
           setArray = [];
         }
       });
-      const secondMap = new Map ();
+      const secondMap = new Map();
       //Maximalgewicht fuer die jeweilige Exercise finden
-      for( const k of map.keys()){
-        if(map.get(k)) {
+      for (const k of map.keys()) {
+        if (map.get(k)) {
           //und zwischen speichern
           secondMap.set(k, Math.max(...map.get(k)));
         }
       }
       this.exerciseWeightRecordMap = secondMap;
       this.exerciseLookupMap = new Map();
-      for(const j of secondMap.keys()){
-        if(secondMap.get(j)){
+      for (const j of secondMap.keys()) {
+        if (secondMap.get(j)) {
           //genaue Exercise-Daten holen und mit Maximalgewicht speichern
           this.exerciseDB.getExerciseByID(j).subscribe(resultExercise => {
-            this.exerciseLookupMap.set(j,resultExercise);
+            this.exerciseLookupMap.set(j, resultExercise);
             console.log(this.exerciseLookupMap);
           });
         }

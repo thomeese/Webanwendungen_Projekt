@@ -19,20 +19,20 @@
               <ion-icon name="log-out-outline"></ion-icon>
             </ion-button>
           </ion-item>
-            <ion-fab vertical="bottom" horizontal="start">
-              <ion-fab-button color="dark">
-                <ion-icon name="settings"></ion-icon>
-              </ion-fab-button>
-              <ion-fab-list side="end">
-                <ion-item class="toggle" lines="none">
-                  <ion-label>Darkmode</ion-label>
-                  <ion-toggle slot="start" *ngIf="settings.settings.darkModeOn" checked={true}
-                              (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>
-                  <ion-toggle slot="start" *ngIf="!settings.settings.darkModeOn"
-                              (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>
-                </ion-item>
-              </ion-fab-list>
-            </ion-fab>
+          <ion-fab vertical="bottom" horizontal="start">
+            <ion-fab-button color="dark">
+              <ion-icon name="settings"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="end">
+              <ion-item class="toggle" lines="none">
+                <ion-label>Darkmode</ion-label>
+                <ion-toggle slot="start" *ngIf="settings.settings.darkModeOn" checked={true}
+                            (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>
+                <ion-toggle slot="start" *ngIf="!settings.settings.darkModeOn"
+                            (ionChange)='settings.toggleDarkmode($event)'></ion-toggle>
+              </ion-item>
+            </ion-fab-list>
+          </ion-fab>
         </div>
       </ion-content>
     </ion-menu>

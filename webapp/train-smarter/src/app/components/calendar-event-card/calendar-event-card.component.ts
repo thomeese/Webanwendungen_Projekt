@@ -9,6 +9,7 @@ export class CalendarEventCardComponent implements OnInit {
 
   @Input() calendarEvent;
   startDate;
+
   constructor() {
 
   }

@@ -14,7 +14,6 @@ import {UserData} from '../../interfaces/userData';
 export class LoginPage implements OnInit {
 
 
-
   userForm: FormGroup;
   registerData: FormGroup;
   register = false;
@@ -100,7 +99,6 @@ export class LoginPage implements OnInit {
       });
     this.menu.enable(false);
   }
-
 
 
   private isEquals(string1: any, string2: any) {
