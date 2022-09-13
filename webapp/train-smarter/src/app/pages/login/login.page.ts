@@ -49,6 +49,7 @@ export class LoginPage implements OnInit {
     await loading.present();
     const data = this.registerData.getRawValue();
     const loggedInUser = await this.authService.signUp(data.email, data.password);
+    if(loggedInUser) {
     const newUser: UserData = {
       uid: loggedInUser.uid,
       firstname: data.firstname,
@@ -59,10 +60,10 @@ export class LoginPage implements OnInit {
     };
     this.dataService.addUser(newUser);
     await loading.dismiss();
-    if (loggedInUser) {
       await this.router.navigateByUrl('/home', {replaceUrl: true});
       await this.menu.enable(true);
     } else {
+      await loading.dismiss();
       await this.displayAlert('Registrierung fehlgeschlagen', 'Bitte versuchen sie es Erneut');
     }
   }
