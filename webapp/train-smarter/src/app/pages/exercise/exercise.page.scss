@@ -27,6 +27,7 @@ ion-title {
 ion-select {
   background: #ffffff;
   opacity: 0.4;
+  margin: 5px 0 5px 0;
   border-radius: 15px;
   font-weight: bold;
 }
@@ -39,6 +40,15 @@ ion-select::part(icon) {
   opacity: 1;
 }
 
+ion-searchbar {
+  --background: #ffffff;
+  opacity: 0.4;
+  --placeholder-opacity: 0.4;
+  padding: 0 0 0 0;
+  --border-radius: 15px;
+  --placeholder-font-weight: bold;
+  --color: #000000;
+}
 
 // Header durchsichtig
 .transparent {

@@ -16,18 +16,13 @@
     </ion-toolbar>
   </ion-header>
   <ion-grid>
-    <ion-row>
-      <ion-col size="10">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="9">
         <ion-select interface="popover" placeholder="Wähle den Filter" [(ngModel)]="searchTypeSelected">
           <ion-select-option *ngFor="let search of enumSearchTypeKeys"
                              [value]="search">{{searchTypes[search]}}</ion-select-option>
         </ion-select>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="10"
-               *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
-        <ion-select interface="popover" placeholder="Wähle aus." [(ngModel)]="targetSelected">
+        <ion-select interface="popover" placeholder="Wähle aus." [(ngModel)]="targetSelected" *ngIf="(searchTypeSelected !== enumSearchTypeKeys[0] && searchTypeSelected !== enumSearchTypeKeys[3])">
           <div *ngIf="searchTypeSelected === enumSearchTypeKeys[1]"> <!-- By BodyPart selected -->
             <ion-select-option *ngFor="let part of enumBodyPartKeys; let i = index"
                                [value]=this.enumBodyPartValues[i]>{{bodyparts[part]}}</ion-select-option>
@@ -41,24 +36,25 @@
                                [value]="this.enumEquipmentValues[i]">{{equipment[equip]}}</ion-select-option>
           </div>
         </ion-select>
+        <ion-input *ngIf="searchTypeSelected === enumSearchTypeKeys[3]" placeholder="Geben Sie die ID ein." [(ngModel)]="exerciseID"></ion-input>
       </ion-col>
-      <ion-col *ngIf="searchTypeSelected === enumSearchTypeKeys[3]">
-        <ion-input placeholder="Geben Sie die ID ein." [(ngModel)]="exerciseID"></ion-input>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col>
+      <ion-col size="3" class="ion-justify-content-center">
         <ion-button class="search-btn" type="button" (click)="loadData()">
           <ion-icon name="search"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="searchTypeSelected">
+      <ion-col>
+        <ion-searchbar [(ngModel)]="searchFilter" animated="true" placeholder="Suche nach"></ion-searchbar>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
   <!--Search Results-->
-  <ion-list class="background-transparent">
+  <ion-list *ngIf="exercises" class="background-transparent">
     <ion-item lines="none" color="none" class="ion-justify-content-center"
-              *ngFor="let exercise of exercises | slice:0 :slice; let i=index">
+              *ngFor="let exercise of filterSearchResult() | slice:0 :slice; let i=index">
       <app-exercise-card [exercise]="exercise" [trainingPlan]="trainingPlan" [addToPlan]="true"
                          [showGif]="true"></app-exercise-card>
       </ion-item>

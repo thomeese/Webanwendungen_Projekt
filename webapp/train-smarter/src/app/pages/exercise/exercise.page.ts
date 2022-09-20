@@ -18,6 +18,7 @@ import {
 import {DatabaseService} from '../../services/database.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ExerciseDetailPage} from './exercise-detail/exercise-detail.page';
+import {ExerciseDB} from '../../interfaces/exerciseDB';
 
 @Component({
   selector: 'app-exercise',
@@ -33,7 +34,7 @@ export class ExercisePage implements OnInit {
 
   backToTop = false;
 
-  exercises = [];
+  exercises: ExerciseDB[];
 
   searchTypes = SearchTypesToString;
   muscles = MusclesToString;
@@ -47,7 +48,7 @@ export class ExercisePage implements OnInit {
   enumBodyPartValues = [];
   enumEquipmentValues = [];
 
-
+  searchFilter = '';
   searchTypeSelected = null;
   targetSelected = null;
   exerciseID = null;
@@ -110,10 +111,15 @@ export class ExercisePage implements OnInit {
         this.exercises = result;
       });
     } else if (this.searchTypeSelected === this.enumSearchTypeKeys[0]) { // All Exercises
-      this.exerciseDBService.getAll().subscribe(result => {
-        console.log(result);
-        this.exercises = result;
-      });
+      if (localStorage.getItem('exercises')) {
+        this.exercises = JSON.parse(localStorage.getItem('exercises'));
+      } else {
+        this.exerciseDBService.getAll().subscribe(result => {
+          console.log(result);
+          this.exercises = result;
+          localStorage.setItem('exercises', JSON.stringify(this.exercises));
+        });
+      }
     } else { // with Target
       this.exerciseDBService.getData(this.searchTypeSelected, this.targetSelected).subscribe(result => {
         console.log(result);
@@ -152,5 +158,13 @@ export class ExercisePage implements OnInit {
       initialBreakpoint: 0.5
     });
     modal.present();
+  }
+
+  filterSearchResult() {
+    return this.exercises.filter(exercise => exercise.name.toLowerCase().includes(this.searchFilter.toLowerCase())
+        || exercise.id.toLowerCase().includes(this.searchFilter.toLowerCase())
+        || exercise.equipment.toLowerCase().includes(this.searchFilter.toLowerCase())
+        || exercise.target.toLowerCase().includes(this.searchFilter.toLowerCase())
+        || exercise.bodyPart.toLowerCase().includes(this.searchFilter.toLowerCase()));
   }
 }

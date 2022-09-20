@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoadingController} from '@ionic/angular';
 import {Observable} from 'rxjs';
+import {ExerciseDB} from "../interfaces/exerciseDB";
 
 //Exercise Enum
 export enum SearchTypesToString {
@@ -163,12 +164,12 @@ export enum Equipment {
 export class ExerciseDBService {
   url = 'https://exercisedb.p.rapidapi.com/exercises';
   headers = new HttpHeaders({
-    'x-rapidapi-key': 'faa32cc9f5msh7a6aced2f4a8cbcp110446jsn70a489d7ecbd',
+    'x-rapidapi-key': '3e53c4455amsh3b7ab4f9e79b302p1a95f4jsn6fd84fe17977',
     'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
   });
   constructor(private http: HttpClient, private loadingCtr: LoadingController) {}
 
-  getData(type, target?): Observable<any> {
+  getData(type, target?): Observable<ExerciseDB[]> {
     if(typeof target === 'undefined') {
       return this.http.get<any>(`${this.url}${SearchTypes[type]}`, {headers: this.headers});
     }
@@ -177,7 +178,7 @@ export class ExerciseDBService {
   getExerciseByID(id): Observable<any> {
     return this.http.get<any>(`${this.url}/exercise/${id}`, {headers: this.headers});
   }
-  getAll(): Observable<any> {
+  getAll(): Observable<ExerciseDB[]> {
     return this.http.get<any>('https://exercisedb.p.rapidapi.com/exercises', {headers: this.headers});
   }
 }

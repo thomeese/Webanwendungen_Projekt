@@ -27,3 +27,12 @@
 
 @import '~swiper/swiper-bundle.css';
 
+
+// Bold Font vor Searchbars
+ion-searchbar {
+  .searchbar-input-container {
+    input{
+      font-weight: bold !important;
+    }
+  }
+}
